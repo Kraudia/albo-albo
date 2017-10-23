@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { LoginComponent } from './components/login/login.component';
-
 const appRoutes: Routes = [
   {
     path: 'logowanie',
-    component: LoginComponent
+    loadChildren: './components/login/login.module#LoginModule'
+  },
+  {
+    path: 'rejestracja',
+    loadChildren: './components/register/register.module#RegisterModule'
   },
   {
     path: '**',
@@ -23,8 +25,6 @@ const appRoutes: Routes = [
   exports: [
     RouterModule
   ],
-  declarations: [
-    LoginComponent
-  ]
+  declarations: []
 })
 export class AppRoutingModule { }
