@@ -1,5 +1,6 @@
 import { TestBed, async } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from '@angular/http';
 import { APP_BASE_HREF } from '@angular/common';
 
 import { AppComponent } from './app.component';
@@ -13,7 +14,8 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         AppRoutingModule,
-        BrowserModule
+        BrowserModule,
+        HttpModule
       ],
       declarations: [
         AppComponent,

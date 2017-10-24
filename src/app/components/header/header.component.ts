@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AuthService } from '../../services/auth.service';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -8,11 +10,18 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
   private collapsed: boolean;
 
-  constructor() {
+  constructor(
+    public authService: AuthService
+  ) {
     this.collapsed = false;
   }
 
   ngOnInit() {
+  }
+
+  logout() {
+    this.authService.logout();
+    // this.router.navigate(['/']);
   }
 
   public isCollapsed(): boolean {

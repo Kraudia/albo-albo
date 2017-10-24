@@ -12,12 +12,18 @@
 
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-          <input type="text" class="form-control" placeholder="Login" aria-label="Login" autofocus required/>
+          <input #loginInput type="text" class="form-control" placeholder="Login" aria-label="Login" autofocus required/>
         </div>
 
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-          <input type="password" class="form-control" placeholder="Hasło" aria-label="Hasło" required />
+          <input #passwordInput type="password" class="form-control" placeholder="Hasło" aria-label="Hasło" required />
+        </div>
+
+        <div class="row" *ngIf="errorMessage">
+          <div class="col">
+            <p class="text-danger text-center">{{ errorMessage }}</p>
+          </div>
         </div>
 
         <div class="row">
@@ -33,7 +39,7 @@
           </div>
         </div>
 
-        <button class="btn btn-primary btn-block btn-signin" type="submit">Zaloguj się</button>
+        <button class="btn btn-primary btn-block btn-signin" (click)="login(loginInput.value, passwordInput.value)" type="button">Zaloguj się</button>
 
         <div class="text-center">
           <a [routerLink]="['/rejestracja']" class="btn btn-link" aria-label="Zarejestruj się">Nie masz jeszcze konta? <strong>Załóż konto</strong></a>
