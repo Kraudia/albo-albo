@@ -49,5 +49,5 @@ describe('OnlyNotLoggedInUsersGuard', () => {
 
   afterEach(() => {
     localStorage.clear();
-  })
+  });
 });

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { PasswordValidation } from './PasswordValidation';
+import { validationErrors } from './validationMessages';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -9,6 +11,7 @@ import { PasswordValidation } from './PasswordValidation';
 export class RegisterComponent implements OnInit {
   private validated: boolean;
   public registerForm: FormGroup;
+  public validationMessages = validationErrors;
 
   constructor(private formBuilder: FormBuilder) {
     this.validated = false;
@@ -20,31 +23,31 @@ export class RegisterComponent implements OnInit {
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(30),
-        Validators.pattern("[a-zA-Z0-9]+")
+        Validators.pattern('[a-zA-Z0-9]+')
       ]
       ],
       inputEmail: [null, [
         Validators.required,
         Validators.minLength(7),
         Validators.maxLength(30),
-        Validators.pattern("^[A-Za-z!#$%&'*+/=?^_`{|}~(),:;<>]{1}[A-Za-z0-9_!#$%&'*+.-/=?^_`{|}~(),:;<>]+@((?:[\\w]+\\.)+)([a-zA-Z]{2,4})$")
+        Validators.pattern('^[A-Za-z!#$%&\'*+/=?^_`{|}~(),:;<>]{1}[A-Za-z0-9_!#$%&\'*+.-/=?^_`{|}~(),:;<>]+@((?:[\\w]+\\.)+)([a-zA-Z]{2,4})$')
       ]],
       inputPassword: [null, [
         Validators.required,
         Validators.minLength(8),
         Validators.maxLength(30),
-        Validators.pattern("^(([A-Za-z0-9]*[0-9][A-Za-z0-9]*[A-Z][A-Za-z0-9]*)|([A-Za-z0-9]*[A-Z][A-Za-z0-9]*[0-9][A-Za-z0-9]*))$")
+        Validators.pattern('^(([A-Za-z0-9]*[0-9][A-Za-z0-9]*[A-Z][A-Za-z0-9]*)|([A-Za-z0-9]*[A-Z][A-Za-z0-9]*[0-9][A-Za-z0-9]*))$')
       ]],
       inputConfirmPassword: [null, [
         Validators.required,
         Validators.minLength(8),
         Validators.maxLength(30),
-        Validators.pattern("^(([A-Za-z0-9]*[0-9][A-Za-z0-9]*[A-Z][A-Za-z0-9]*)|([A-Za-z0-9]*[A-Z][A-Za-z0-9]*[0-9][A-Za-z0-9]*))$"),
+        Validators.pattern('^(([A-Za-z0-9]*[0-9][A-Za-z0-9]*[A-Z][A-Za-z0-9]*)|([A-Za-z0-9]*[A-Z][A-Za-z0-9]*[0-9][A-Za-z0-9]*))$'),
         PasswordValidation.MatchPassword
       ]],
       inputDate: [null, [
         Validators.required,
-        Validators.pattern("^((19[2-9][0-9])|(20[0-1][0-9])|(201[0-7]))-((0[1-9])|(1[0-2]))-(([0][1-9])|([1-2][0-9])|(3[0-1]))$")
+        Validators.pattern('^((19[2-9][0-9])|(20[0-1][0-9])|(201[0-7]))-((0[1-9])|(1[0-2]))-(([0][1-9])|([1-2][0-9])|(3[0-1]))$')
       ]]
     });
   }
@@ -65,8 +68,11 @@ export class RegisterComponent implements OnInit {
   }
 
   getKeysOfObject(object: Object) {
-    if (object) return Object.keys(object);
-    else return null;
+    if (object) {
+      return Object.keys(object);
+    } else {
+      return null;
+    }
   }
 
   onSubmit() {
@@ -91,39 +97,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  reset(){
+  reset() {
     this.registerForm.reset();
   }
-
-  validationMessages = {
-    inputLogin: {
-      required: 'To pole jest wymagane. ',
-      minlength: 'To pole musi zawierać minimum 3 znaki. ',
-      maxlength: 'To pole musi zawierać nie więcej niż 30 znaków. ',
-      pattern: 'Tylko litery i cyfry są dozwolone. '
-    },
-    inputEmail: {
-      required: 'To pole jest wymagane. ',
-      minlength: 'To pole musi zawierać minimum 7 znaków. ',
-      maxlength: 'To pole musi zawierać nie więcej niż 30 znaków. ',
-      pattern: 'Tylko poprawne adresy są dozwolone.'
-    },
-    inputPassword: {
-      required: 'To pole jest wymagane. ',
-      minlength: 'To pole musi zawierać minimum 8 znaków. ',
-      maxlength: 'To pole musi zawierać nie więcej niż 30 znaków. ',
-      pattern: 'Tylko litery i cyfry są dozwolone. Wymagana jest przynajmniej jedna duża litera i przynajmniej jedna cyfra. '
-    },
-    inputConfirmPassword: {
-      required: 'To pole jest wymagane. ',
-      minlength: 'To pole musi zawierać minimum 8 znaków. ',
-      maxlength: 'To pole musi zawierać nie więcej niż 30 znaków. ',
-      pattern: 'Tylko litery i cyfry są dozwolone. Wymagana jest przynajmniej jedna duża litera i przynajmniej jedna cyfra. ',
-      matchPassword: 'Źle powtórzone hasło. '
-    },
-    inputDate: {
-      required: 'To pole jest wymagane. ',
-      pattern: 'Wymagany poprawna data. '
-    }
-  };
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions, Response }  from '@angular/http';
+import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { User } from '../models/user';
 import { Stats } from '../models/stats';
 import { Observable } from 'rxjs/Observable';
@@ -40,15 +40,15 @@ export class AuthService {
   }
 
   getHeaders() {
-    let headers = new Headers({
+    const headers = new Headers({
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     });
 
-    let currentUser = localStorage.getItem('currentUser');
+    const currentUser = localStorage.getItem('currentUser');
     if (currentUser) {
-      let username = JSON.parse(currentUser).username;
-      let password = JSON.parse(currentUser).password;
+      const username = JSON.parse(currentUser).username;
+      const password = JSON.parse(currentUser).password;
       headers.append('Authorization', 'Basic ' + btoa(username + ':' + password));
     }
     return headers;
@@ -58,19 +58,19 @@ export class AuthService {
     return new RequestOptions({headers: this.getHeaders()});
   }
 
-  login(username: String, password : String){
-    let headers = new Headers({
+  login(username: String, password: String) {
+    const headers = new Headers({
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     });
-    headers.append("Authorization", "Basic " + btoa(username + ":" + password));
+    headers.append('Authorization', 'Basic ' + btoa(username + ':' + password));
 
-    let options = new RequestOptions({ headers: headers });
+    const options = new RequestOptions({ headers: headers });
 
-    let url = this.host + this.url.login;
+    const url = this.host + this.url.login;
     return this.http.get(url, options)
       .map((res) => {
-        let response  = res.json();
+        const response  = res.json();
 
         if (response) {
           localStorage.setItem('currentUser', JSON.stringify({
@@ -90,35 +90,35 @@ export class AuthService {
   }
 
   getUser(): Observable<User> {
-    let url = this.host + this.url.users;
+    const url = this.host + this.url.users;
     return this.http.get(url, this.getOptions())
       .map((res) => res.json());
   }
 
   getUserStats(login: string): Observable<Stats> {
-    let url = this.host + this.url.stats;
+    const url = this.host + this.url.stats;
     return this.http.get(url + login, this.getOptions())
       .map((res) => res.json());
   }
 
   changePassword(oldPassword: string, newPassword: string) {
-    let headers = new Headers({
+    const headers = new Headers({
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     });
     headers.append('Authorization', 'Basic ' + btoa(JSON.parse(localStorage.getItem('currentUser')).username + ':' + oldPassword));
 
-    let options = new RequestOptions({ headers: headers });
+    const options = new RequestOptions({ headers: headers });
 
-    let password = newPassword;
-    let url = this.host + this.url.pass;
+    const password = newPassword;
+    const url = this.host + this.url.pass;
     return this.http.put(url, JSON.stringify({ password }), options)
       .map(this.extractData)
       .catch(this.handleError);
   }
 
   private extractData(res: Response) {
-    let body = res.json();
+    const body = res.json();
     return body.data || { };
   }
 

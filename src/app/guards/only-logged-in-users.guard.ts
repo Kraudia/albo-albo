@@ -11,18 +11,18 @@ export class OnlyLoggedInUsersGuard implements CanActivate, CanLoad {
   ) { }
 
   canActivate(): Observable<boolean> | Promise<boolean> | boolean {
-    if (this.authService.isLoggedIn())
+    if (this.authService.isLoggedIn()) {
       return true;
-    else {
+    } else {
       this.router.navigate(['logowanie']);
       return false;
     }
   }
 
   canLoad(): Observable<boolean>|Promise<boolean>|boolean {
-    if (this.authService.isLoggedIn())
+    if (this.authService.isLoggedIn()) {
       return true;
-    else {
+    } else {
       this.router.navigate(['logowanie']);
       return false;
     }
