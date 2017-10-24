@@ -10,11 +10,13 @@ import { validationErrors } from './validationMessages';
 })
 export class RegisterComponent implements OnInit {
   private validated: boolean;
+  private checked: boolean;
   public registerForm: FormGroup;
   public validationMessages = validationErrors;
 
   constructor(private formBuilder: FormBuilder) {
     this.validated = false;
+    this.checked = false;
   }
 
   ngOnInit() {
@@ -57,7 +59,22 @@ export class RegisterComponent implements OnInit {
       'is-invalid': this.validated && !this.isFieldValid(field),
       'is-valid': this.validated && this.isFieldValid(field)
     };
-}
+  }
+
+  displayCheckboxCss() {
+    return {
+      'text-danger': this.validated && !this.checked,
+      'text-success': this.validated && this.checked
+    };
+  }
+
+  clickCheckbox() {
+    this.checked = !this.checked;
+  }
+
+  isChecked() {
+    return this.checked;
+  }
 
   isFieldValid(field: string) {
     return this.registerForm.get(field).valid;
@@ -77,8 +94,7 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     this.validated = true;
-    console.log(this.registerForm);
-    if (this.registerForm.valid) {
+    if (this.registerForm.valid && this.checked) {
       console.log('form submitted');
     } else {
       console.log('form invalid');
@@ -99,5 +115,7 @@ export class RegisterComponent implements OnInit {
 
   reset() {
     this.registerForm.reset();
+    this.validated = false;
+    this.checked = false;
   }
 }

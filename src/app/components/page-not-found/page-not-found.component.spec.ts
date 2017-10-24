@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { PageNotFoundComponent } from './page-not-found.component';
 
@@ -8,7 +9,12 @@ describe('PageNotFoundComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PageNotFoundComponent ]
+      imports: [
+        RouterTestingModule
+      ],
+      declarations: [
+        PageNotFoundComponent
+      ]
     })
     .compileComponents();
   }));
@@ -19,7 +25,7 @@ describe('PageNotFoundComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should be created', () => {
     expect(component).toBeTruthy();
   });
 });
