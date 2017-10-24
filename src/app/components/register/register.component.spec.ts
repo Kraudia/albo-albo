@@ -1,4 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { RegisterComponent } from './register.component';
 
@@ -8,7 +10,16 @@ describe('RegisterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RegisterComponent ]
+      imports: [
+        ReactiveFormsModule,
+        RouterTestingModule
+      ],
+      declarations: [
+        RegisterComponent
+      ],
+      providers: [
+        FormBuilder
+      ]
     })
     .compileComponents();
   }));
@@ -19,7 +30,7 @@ describe('RegisterComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should be created', () => {
     expect(component).toBeTruthy();
   });
 });
