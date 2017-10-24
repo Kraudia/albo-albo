@@ -1,14 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { OnlyLoggedInUsersGuard } from './guards/only-logged-in-users.guard';
+import { OnlyNotLoggedInUsersGuard } from './guards/only-not-logged-in-users.guard';
+import { AuthService } from './services/auth.service';
+
 const appRoutes: Routes = [
   {
     path: 'logowanie',
-    loadChildren: './components/login/login.module#LoginModule'
+    loadChildren: 'app/components/login/login.module#LoginModule',
+    canLoad: [ OnlyNotLoggedInUsersGuard ]
   },
   {
     path: 'rejestracja',
-    loadChildren: './components/register/register.module#RegisterModule'
+    loadChildren: 'app/components/register/register.module#RegisterModule',
+    canLoad: [ OnlyNotLoggedInUsersGuard ]
   },
   {
     path: '**',
@@ -25,6 +31,11 @@ const appRoutes: Routes = [
   exports: [
     RouterModule
   ],
-  declarations: []
+  providers: [
+    OnlyLoggedInUsersGuard,
+    OnlyNotLoggedInUsersGuard,
+    AuthService
+  ],
+  declarations: [],
 })
 export class AppRoutingModule { }
