@@ -7,6 +7,10 @@ import { AuthService } from './services/auth.service';
 
 const appRoutes: Routes = [
   {
+    path: '',
+    loadChildren: 'app/components/random/random.module#RandomModule'
+  },
+  {
     path: 'logowanie',
     loadChildren: 'app/components/login/login.module#LoginModule',
     canLoad: [ OnlyNotLoggedInUsersGuard ]
@@ -18,7 +22,11 @@ const appRoutes: Routes = [
   },
   {
     path: '**',
-    redirectTo: ''
+    redirectTo: '404'
+  },
+  {
+    path: '404',
+    loadChildren: 'app/components/page-not-found/page-not-found.module#PageNotFoundModule'
   }
 ];
 
