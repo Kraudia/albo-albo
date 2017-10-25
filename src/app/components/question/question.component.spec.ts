@@ -1,13 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpModule } from '@angular/http';
 
-import { RandomComponent } from './random.component';
-import { QuestionComponent } from '../question/question.component';
+import { QuestionComponent } from './question.component';
 import { QuestionService } from '../../services/question.service';
 
-describe('RandomComponent', () => {
-  let component: RandomComponent;
-  let fixture: ComponentFixture<RandomComponent>;
+describe('QuestionComponent', () => {
+  let component: QuestionComponent;
+  let fixture: ComponentFixture<QuestionComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -15,7 +14,6 @@ describe('RandomComponent', () => {
         HttpModule
       ],
       declarations: [
-        RandomComponent,
         QuestionComponent
       ],
       providers: [
@@ -26,12 +24,12 @@ describe('RandomComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RandomComponent);
+    fixture = TestBed.createComponent(QuestionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should be created', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

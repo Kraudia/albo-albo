@@ -6,6 +6,7 @@ import { OnlyNotLoggedInUsersGuard } from './guards/only-not-logged-in-users.gua
 
 import { AuthService } from './services/auth.service';
 import { RegisterService } from './services/register.service';
+import { QuestionService } from './services/question.service';
 
 const appRoutes: Routes = [
   {
@@ -45,7 +46,8 @@ const appRoutes: Routes = [
     OnlyLoggedInUsersGuard,
     OnlyNotLoggedInUsersGuard,
     AuthService,
-    RegisterService
+    RegisterService,
+    QuestionService
   ],
   declarations: [],
 })
