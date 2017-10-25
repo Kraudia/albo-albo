@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import * as moment from 'moment';
+
 import { QuestionService } from '../../services/question.service';
 import { Question } from '../../models/question';
 
@@ -32,3 +34,4 @@ export class QuestionComponent implements OnInit {
     }
   }
 }
+moment.locale('pl');

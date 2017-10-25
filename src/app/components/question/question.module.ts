@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MomentModule } from 'angular2-moment';
 
 import { QuestionComponent } from './question.component';
 
@@ -11,7 +12,8 @@ import { QuestionComponent } from './question.component';
     QuestionComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MomentModule
   ]
 })
 

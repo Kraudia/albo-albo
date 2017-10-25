@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpModule } from '@angular/http';
+import { MomentModule } from 'angular2-moment';
+
 
 import { QuestionComponent } from './question.component';
 import { QuestionService } from '../../services/question.service';
@@ -11,7 +13,8 @@ describe('QuestionComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        HttpModule
+        HttpModule,
+        MomentModule
       ],
       declarations: [
         QuestionComponent

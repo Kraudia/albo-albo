@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-lg-2 text-center text-lg-left text-muted">#{{ question.id }}</div>
       <div class="col-lg-8"><h4 class="card-title text-center">{{ question.value }}</h4></div>
-      <div class="col-lg-2 text-center text-lg-right text-muted">{{ question.createdDate }}</div>
+      <div class="col-lg-2 text-center text-lg-right text-muted">{{ question.createdDate | amTimeAgo }}</div>
     </div>
 
     <div class="row">
