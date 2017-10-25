@@ -13,7 +13,7 @@
         <div class="form-group row">
           <label for="inputLogin" class="col-sm-2 col-form-label text-left">Login</label>
           <div class="col-sm-10">
-            <input id="inputLogin" type="text" class="form-control" [ngClass]="displayFieldCss('inputLogin')" placeholder="Login" formControlName="inputLogin" required />
+            <input #inputLogin id="inputLogin" type="text" class="form-control" [ngClass]="displayFieldCss('inputLogin')" placeholder="Login" formControlName="inputLogin" required />
             <small class="invalid-feedback" *ngFor="let field of getKeysOfObject(registerForm.get('inputLogin').errors)">
               {{ validationMessages.inputLogin[field] }}
             </small>
@@ -23,7 +23,7 @@
         <div class="form-group row">
           <label for="inputEmail" class="col-sm-2 col-form-label text-left">E-mail</label>
           <div class="col-sm-10">
-            <input id="inputEmail" formControlName="inputEmail" type="email" class="form-control" [ngClass]="displayFieldCss('inputEmail')" placeholder="E-mail" required />
+            <input #inputEmail id="inputEmail" formControlName="inputEmail" type="email" class="form-control" [ngClass]="displayFieldCss('inputEmail')" placeholder="E-mail" required />
             <small class="invalid-feedback">
               <span *ngFor="let field of getKeysOfObject(registerForm.get('inputEmail').errors)">{{ validationMessages.inputEmail[field] }}</span>
             </small>
@@ -33,7 +33,7 @@
         <div class="form-group row">
           <label for="inputPassword" class="col-sm-2 col-form-label text-left">Hasło</label>
           <div class="col-sm-10">
-            <input id="inputPassword" formControlName="inputPassword" type="password" class="form-control" [ngClass]="displayFieldCss('inputPassword')" placeholder="Hasło" required />
+            <input #inputPassword id="inputPassword" formControlName="inputPassword" type="password" class="form-control" [ngClass]="displayFieldCss('inputPassword')" placeholder="Hasło" required />
             <small class="invalid-feedback">
               <span *ngFor="let field of getKeysOfObject(registerForm.get('inputPassword').errors)">{{ validationMessages.inputPassword[field] }}</span>
             </small>
@@ -43,7 +43,7 @@
         <div class="form-group row">
           <label for="inputConfirmPassword" class="col-sm-2 col-form-label text-left">Powtórz hasło</label>
           <div class="col-sm-10">
-            <input id="inputConfirmPassword" formControlName="inputConfirmPassword" type="password" class="form-control" [ngClass]="displayFieldCss('inputConfirmPassword')" placeholder="Powtórz hasło" required />
+            <input #inputConfirmPassword id="inputConfirmPassword" formControlName="inputConfirmPassword" type="password" class="form-control" [ngClass]="displayFieldCss('inputConfirmPassword')" placeholder="Powtórz hasło" required />
             <small class="invalid-feedback">
               <span *ngFor="let field of getKeysOfObject(registerForm.get('inputConfirmPassword').errors)">{{ validationMessages.inputConfirmPassword[field] }}</span>
             </small>
@@ -53,7 +53,7 @@
         <div class="form-group row">
           <label for="inputDate" class="col-sm-2 col-form-label text-left">Data urodzenia</label>
           <div class="col-sm-10">
-            <input id="inputDate" formControlName="inputDate" type="date" class="form-control" [ngClass]="displayFieldCss('inputDate')" placeholder="Data urodzenia" required />
+            <input #inputDate id="inputDate" formControlName="inputDate" type="date" class="form-control" [ngClass]="displayFieldCss('inputDate')" placeholder="Data urodzenia" required />
             <small class="invalid-feedback">
               <span *ngFor="let field of getKeysOfObject(registerForm.get('inputDate').errors)">{{ validationMessages.inputDate[field] }}</span>
             </small>
@@ -72,7 +72,11 @@
         </div>
         <button class="btn brn-secondary btn-block btn-register" type="reset" (click)="reset()">Anuluj</button>
 
-        <button class="btn btn-primary btn-block btn-register" type="submit" (click)="onSubmit()">Zarejestruj się</button>
+        <button class="btn btn-primary btn-block btn-register" type="button" (click)="register(inputLogin.value, inputEmail.value, inputPassword.value, inputDate.value)">Zarejestruj się</button>
+
+        <p class="text-center text-danger" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </p>
 
         <div class="text-center">
           <a [routerLink]="['/logowanie']" class="btn btn-link" aria-label="Zaloguj się">Masz już konto? <strong>Zaloguj się</strong></a>

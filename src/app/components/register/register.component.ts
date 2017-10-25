@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { PasswordValidation } from './PasswordValidation';
 import { validationErrors } from './validationMessages';
+
+import { RegisterService } from '../../services/register.service';
 
 @Component({
   selector: 'app-register',
@@ -11,10 +14,15 @@ import { validationErrors } from './validationMessages';
 export class RegisterComponent implements OnInit {
   private validated: boolean;
   private checked: boolean;
+  public errorMessage: String;
   public registerForm: FormGroup;
   public validationMessages = validationErrors;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private registerService: RegisterService,
+    private router: Router
+  ) {
     this.validated = false;
     this.checked = false;
   }
@@ -92,13 +100,13 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  onSubmit() {
+  validateForm() {
     this.validated = true;
     if (this.registerForm.valid && this.checked) {
-      console.log('form submitted');
+      return true;
     } else {
-      console.log('form invalid');
       this.validateAllFormFields(this.registerForm);
+      return false;
     }
   }
 
@@ -111,6 +119,26 @@ export class RegisterComponent implements OnInit {
         this.validateAllFormFields(control);
       }
     });
+  }
+
+  register(login: string, email: string, password: string, birthDate: string) {
+    this.validateForm();
+
+    if (this.validateForm()) {
+      this.registerService.register(login, email, password, birthDate)
+          .subscribe(
+            res => {
+              console.log('res = ', res);
+              this.router.navigate(['/logowanie']);
+            },
+            error => {
+              if (error === '409 - OK Conflict') {
+                this.errorMessage = 'Zajęty login lub mail.';
+              } else {
+                this.errorMessage = 'Twoja rejestracja sie nie udała.';
+              }
+            });
+    }
   }
 
   reset() {

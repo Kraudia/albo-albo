@@ -3,7 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { OnlyLoggedInUsersGuard } from './guards/only-logged-in-users.guard';
 import { OnlyNotLoggedInUsersGuard } from './guards/only-not-logged-in-users.guard';
+
 import { AuthService } from './services/auth.service';
+import { RegisterService } from './services/register.service';
 
 const appRoutes: Routes = [
   {
@@ -42,7 +44,8 @@ const appRoutes: Routes = [
   providers: [
     OnlyLoggedInUsersGuard,
     OnlyNotLoggedInUsersGuard,
-    AuthService
+    AuthService,
+    RegisterService
   ],
   declarations: [],
 })
