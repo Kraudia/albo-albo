@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {QuestionService} from '../../services/question.service';
-import {Question} from '../../models/question';
+import { Component, OnInit, Input } from '@angular/core';
+import { QuestionService } from '../../services/question.service';
+import { Question } from '../../models/question';
 
 @Component({
   selector: 'app-question',
@@ -8,23 +8,27 @@ import {Question} from '../../models/question';
   styleUrls: ['./question.component.scss']
 })
 export class QuestionComponent implements OnInit {
+  @Input('idQuestion') idQuestion: string;
+  @Input('btnFirst') btnFirst = 'btn-success';
+  @Input('btnSecond') btnSecond = 'btn-info';
   public question: Question;
 
   constructor(
     private questionService: QuestionService
-  ) {
+  ) { }
+
+  ngOnInit() {
     this.getOneQuestion();
   }
 
-  ngOnInit() {
-  }
-
   getOneQuestion() {
-    this.questionService.getOneQuestion(62)
-      .subscribe(
-        question => {
-          this.question = question;
-        },
-        error => console.error(error));
+    if (this.idQuestion) {
+      this.questionService.getOneQuestion(this.idQuestion)
+        .subscribe(
+          question => {
+            this.question = question;
+          },
+          error => console.error(error));
+    }
   }
 }

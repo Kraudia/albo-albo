@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { randomRouter } from './random-routing.module';
-import { RandomComponent } from './random.component';
+import { pendingRouter } from './pending-routing.module';
+import { PendingComponent } from './pending.component';
 import { QuestionModule } from '../question/question.module';
 
 @NgModule({
   declarations: [
-    RandomComponent
+    PendingComponent
   ],
   imports: [
     CommonModule,
-    randomRouter,
-    QuestionModule
+    QuestionModule,
+    pendingRouter
   ]
 })
 
-export class RandomModule {}
+export class PendingModule {}

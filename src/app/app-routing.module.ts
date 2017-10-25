@@ -14,6 +14,10 @@ const appRoutes: Routes = [
     loadChildren: 'app/components/random/random.module#RandomModule'
   },
   {
+    path: 'poczekalnia',
+    loadChildren: 'app/components/pending/pending.module#PendingModule'
+  },
+  {
     path: 'logowanie',
     loadChildren: 'app/components/login/login.module#LoginModule',
     canLoad: [ OnlyNotLoggedInUsersGuard ]

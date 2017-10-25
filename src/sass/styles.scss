@@ -16,10 +16,19 @@ body {
 
 .btn-google {
   color: #fff;
-  background-color: #d62d20;
+  background-color: $color-google;
 }
 
 .btn-facebook {
   color: #fff;
-  background-color: #3b5998;
+  background-color: $color-facebook;
+}
+
+.btn-pendingFirst {
+  color: #000;
+  background-color: $orange-lighter;
+}
+
+.btn-pendingSecond {
+  background-color: $orange-light;
 }

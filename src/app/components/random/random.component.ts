@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./random.component.scss']
 })
 export class RandomComponent implements OnInit {
+  question = '2';
 
   constructor() { }
 

@@ -17,7 +17,7 @@ export class QuestionService {
     private http: Http
   ) { }
 
-  getOneQuestion(id: number): Observable<Question> {
+  getOneQuestion(id: string): Observable<Question> {
     const url = this.host + this.questionsUrl + '/' + id;
 
     return this.http.get(url, options)
