@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { randomRouter } from './random-routing.module';
 import { RandomComponent } from './random.component';
-import { QuestionModule } from '../question/question.module';
+import { QuestionModule } from '../../shared/question/question.module';
 
 @NgModule({
   declarations: [

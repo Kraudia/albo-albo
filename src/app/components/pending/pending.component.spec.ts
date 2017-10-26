@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpModule } from '@angular/http';
 
-import { QuestionModule } from '../question/question.module';
+import { QuestionModule } from '../../shared/question/question.module';
 import { PendingComponent } from './pending.component';
 import { QuestionService } from '../../services/question.service';
 
