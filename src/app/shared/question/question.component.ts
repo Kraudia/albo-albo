@@ -14,6 +14,7 @@ export class QuestionComponent implements OnInit {
   @Input('btnFirst') btnFirst = 'btn-success';
   @Input('btnSecond') btnSecond = 'btn-info';
   public question: Question;
+  private voteSum;
 
   constructor(
     private questionService: QuestionService
@@ -21,6 +22,7 @@ export class QuestionComponent implements OnInit {
 
   ngOnInit() {
     this.getOneQuestion();
+    this.voteSum = true;
   }
 
   getOneQuestion() {
@@ -32,6 +34,39 @@ export class QuestionComponent implements OnInit {
           },
           error => console.error(error));
     }
+  }
+
+  getVoteSum() {
+    return this.voteSum;
+  }
+
+  toggleVoteSum() {
+    this.voteSum = !this.voteSum;
+    return this.voteSum;
+  }
+
+  comment() {
+    // TODO: comment
+  }
+
+  goToQuestionPage() {
+    // TODO: go to question page
+  }
+
+  goToUserPage() {
+    // TODO: go to user page
+  }
+
+  addToFavorites() {
+    // TODO: add to favorites
+  }
+
+  removeFromFavorites() {
+    // TODO: remove from favorites
+  }
+
+  vote() {
+    // TODO: vote
   }
 }
 moment.locale('pl');

@@ -1,4 +1,4 @@
-export interface Question {
+export class Question {
   acceptedDate: string;
   adultRated: boolean;
   answeredDate: string;

@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 
 import { Question } from '../models/question';
-import { options } from '../common/options';
+import { options } from './options';
 
 @Injectable()
 export class QuestionService {
