@@ -1,5 +1,5 @@
 <div class="card bg-light card-question" *ngIf="question">
-  <div class="card-body">
+  <div class="card-header bg-light">
     <div class="row align-items-center">
       <div class="col-lg-2 text-center text-lg-left">
         <button type="button" class="btn btn-light" (click)="goToQuestionPage()"><i class="fa fa-hashtag" aria-hidden="true"></i>{{ question.id }}</button>
@@ -7,46 +7,56 @@
       <div class="col-lg-8"><h4 class="card-title text-center">{{ question.value }}</h4></div>
       <div class="col-lg-2 text-center text-lg-right text-muted">{{ question.createdDate | amTimeAgo }}</div>
     </div>
+  </div>
 
+  <div class="card-body">
     <div class="row">
-      <div class="col-lg-6 col-question">
+      <div class="col-md-6 col-question">
         <button type="button" class="btn btn-lg btn-block btn-question" [ngClass]="[btnFirst]">{{ question.firstAnswer }}</button>
       </div>
-      <div class="col-lg-6 col-question">
+      <div class="col-md-6 col-question">
         <button type="button" class="btn btn-lg btn-block btn-question" [ngClass]="[btnSecond]">{{ question.secondAnswer }}</button>
       </div>
     </div>
 
     <div class="row align-items-center">
-      <div class="col-md-6 col-lg-3 text-center text-lg-left text-muted">
-        <button type="button" class="btn btn-light" (click)="goToUserPage()"><i class="fa fa-user" aria-hidden="true"></i> {{ question.userLogin }}</button>
+      <div class="col-lg-12 text-center">
+        <button *ngFor="let tag of question.tags" class="btn btn-sm btn-light"><i class="fa fa-tag" aria-hidden="true"></i> {{ tag.name }}</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-footer bg-light">
+    <div class="row align-items-center">
+      <div class="col-lg-3 text-center text-lg-left text-muted">
+        <button type="button" class="btn btn-sm btn-light" (click)="goToUserPage()"><i class="fa fa-user" aria-hidden="true"></i> {{ question.userLogin }}</button>
       </div>
 
-      <div class="col-md-6 col-lg-6 text-center">
-        <button *ngIf="!question.myFavourite" type="button" class="btn btn-light" (click)="addToFavorites()"><i class="fa fa-heart text-danger" aria-hidden="true"></i> Dodaj do ulubionych</button>
+      <div class="col-lg-6 text-center">
+        <button *ngIf="!question.myFavourite && authService.isLoggedIn()" type="button" class="btn btn-sm btn-light" (click)="addToFavorites()"><i class="fa fa-heart" aria-hidden="true"></i> Dodaj do ulubionych</button>
 
-        <button *ngIf="question.myFavourite" type="button" class="btn btn-light" (click)="removeFromFavorites()"><i class="fa fa-heart text-danger" aria-hidden="true"></i> Usuń z ulubionych</button>
+        <button *ngIf="question.myFavourite && authService.isLoggedIn()" type="button" class="btn btn-sm btn-light" (click)="removeFromFavorites()"><i class="fa fa-heart text-danger" aria-hidden="true"></i> Usuń z ulubionych</button>
 
-        <button type="button" class="btn btn-light" (click)="goToQuestionPage()"><i class="fa fa-link text-info" aria-hidden="true"></i> Skopiuj link</button>
+        <button type="button" class="btn btn-sm btn-light" (click)="goToQuestionPage()"><i class="fa fa-link" aria-hidden="true"></i> Skopiuj link</button>
 
-        <button type="button" class="btn btn-light" (click)="comment()"><i class="fa fa-comments text-primary" aria-hidden="true"></i> Skomentuj</button>
+        <button type="button" class="btn btn-sm btn-light" (click)="comment()"><i class="fa fa-comments text-primary" aria-hidden="true"></i> Skomentuj ({{ question.commentsCount }})</button>
       </div>
 
-      <div class="col-md-6 col-lg-3 text-center text-lg-right text-muted">
-        <button *ngIf="!question.myVote" type="button" class="btn btn-sm btn-light" (click)="vote()"><i class="fa fa-minus text-danger" aria-hidden="true"></i></button>
-        <button *ngIf="question.myVote == -1" type="button" class="btn btn-sm" disabled><i class="fa fa-minus text-danger" aria-hidden="true"></i></button>
-        <button *ngIf="question.myVote == 1" type="button" class="btn btn-sm btn-light" disabled><i class="fa fa-minus text-muted" aria-hidden="true"></i></button>
+      <div class="col-lg-3 text-center text-lg-right text-muted">
+        <button *ngIf="!question.myVote && authService.isLoggedIn()" type="button" class="btn btn-sm btn-light" (click)="vote()"><i class="fa fa-minus text-danger" aria-hidden="true"></i></button>
+        <button *ngIf="question.myVote == -1 && authService.isLoggedIn()" type="button" class="btn btn-sm" disabled><i class="fa fa-minus text-danger" aria-hidden="true"></i></button>
+        <button *ngIf="question.myVote == 1 && authService.isLoggedIn()" type="button" class="btn btn-sm btn-light" disabled><i class="fa fa-minus text-muted" aria-hidden="true"></i></button>
 
-        <button *ngIf="getVoteSum()" (click)="toggleVoteSum()" type="button" class="btn  btn-light"><span class="text-success
+        <button *ngIf="getVoteSum()" (click)="toggleVoteSum()" type="button" class="btn btn-sm btn-light"><span class="text-success
 " *ngIf="question.plusCount - question.minusCount > 0">{{ question.plusCount - question.minusCount }}</span><span *ngIf="question.plusCount - question.minusCount == 0">{{ question.plusCount - question.minusCount }}</span><span class="text-danger
 " *ngIf="question.plusCount - question.minusCount < 0">{{ question.plusCount - question.minusCount }}</span> ({{ question.vote_count }})</button>
-        <button *ngIf="!getVoteSum()" (click)="toggleVoteSum()" type="button" class="btn  btn-light"><span class="text-danger" aria-hidden="true">-{{ question.minusCount }}</span> <span class="text-success" aria-hidden="true">+{{ question.plusCount }}</span></button>
+        <button *ngIf="!getVoteSum()" (click)="toggleVoteSum()" type="button" class="btn btn-sm btn-light"><span class="text-danger" aria-hidden="true">-{{ question.minusCount }}</span> <span class="text-success" aria-hidden="true">+{{ question.plusCount }}</span></button>
 
-        <button *ngIf="!question.myVote"  type="button" class="btn btn-sm btn-light" (click)="vote()"><i class="fa fa-plus text-success" aria-hidden="true"></i></button>
-        <button *ngIf="question.myVote == 1" type="button" class="btn btn-sm" disabled><i class="fa fa-plus text-success" aria-hidden="true"></i></button>
-        <button *ngIf="question.myVote == -1" type="button" class="btn btn-sm btn-light" disabled><i class="fa fa-plus text-muted" aria-hidden="true"></i></button>
-
+        <button *ngIf="!question.myVote && authService.isLoggedIn()"  type="button" class="btn btn-sm btn-light" (click)="vote()"><i class="fa fa-plus text-success" aria-hidden="true"></i></button>
+        <button *ngIf="question.myVote == 1 && authService.isLoggedIn()" type="button" class="btn btn-sm" disabled><i class="fa fa-plus text-success" aria-hidden="true"></i></button>
+        <button *ngIf="question.myVote == -1 && authService.isLoggedIn()" type="button" class="btn btn-sm btn-light" disabled><i class="fa fa-plus text-muted" aria-hidden="true"></i></button>
       </div>
     </div>
   </div>
 </div>
+

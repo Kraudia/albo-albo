@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpModule } from '@angular/http';
 
+import { AuthService } from '../../services/auth.service';
 import { RandomComponent } from './random.component';
 import { QuestionModule } from '../../shared/question/question.module';
 import { QuestionService } from '../../services/question.service';
@@ -19,6 +20,7 @@ describe('RandomComponent', () => {
         RandomComponent
       ],
       providers: [
+        AuthService,
         QuestionService
       ]
     })
