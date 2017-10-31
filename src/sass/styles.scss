@@ -10,6 +10,10 @@ body {
   margin-bottom: 60px;
 }
 
+.btn:focus {
+  box-shadow: none;
+}
+
 .btn {
   white-space: pre-wrap;
 }
@@ -24,11 +28,40 @@ body {
   background-color: $color-facebook;
 }
 
-.btn-pendingFirst {
+.btn-pending-first {
   color: #000;
   background-color: $orange-lighter;
+
+  &:hover {
+    background-color: $orange-light;
+  }
 }
 
-.btn-pendingSecond {
-  background-color: $orange-light;
+.btn-pending-second {
+  color: #000;
+  background-color: $orange-dark;
+
+  &:hover {
+    background-color: $orange-darker;
+  }
 }
+
+.btn-default-first {
+  color: #000;
+  background-color: $green-lighter;
+
+  &:hover {
+    background-color: $green-light;
+  }
+}
+
+.btn-default-second {
+  color: #000;
+  background-color: $turquise-lighter;
+
+  &:hover {
+    background-color: $turquise-light;
+  }
+}
+
+

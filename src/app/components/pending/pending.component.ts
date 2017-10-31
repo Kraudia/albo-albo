@@ -10,8 +10,8 @@ import { Tag } from '../../models/tag';
 })
 export class PendingComponent implements OnInit {
   public question = '2';
-  public btnFirst = 'btn-pendingFirst';
-  public btnSecond = 'btn-pendingSecond';
+  public btnFirst = 'btn-pending-first';
+  public btnSecond = 'btn-pending-second';
   public tags: Tag[];
 
   constructor(

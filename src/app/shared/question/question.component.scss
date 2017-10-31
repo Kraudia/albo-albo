@@ -2,6 +2,51 @@
   margin: 10px 0;
   height: 100%;
   min-height: 120px;
+  position: relative;
+}
+
+
+.btn-first--checked {
+  &::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    border-radius: 0.3rem;
+
+    border: 1.4em solid rgba(40, 167, 69, 0.8);
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+  }
+  &::after {
+    font-family: 'FontAwesome', serif;
+    content: '\f00c';
+    position: absolute;
+    padding: 0.3em;
+    top: 0;
+    right: 0;
+  }
+}
+
+.btn-second--checked {
+  &::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    border-radius: 0.3rem;
+    border: 1.4em solid rgba(40, 167, 69, 0.8);
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+  }
+  &::after {
+    font-family: 'FontAwesome', serif;
+    content: '\f00c';
+    position: absolute;
+    padding: 0.3em;
+    top: 0;
+    left: 0;
+  }
 }
 
 .card-question {
@@ -10,4 +55,14 @@
 
 .col-question {
   padding: 0 20px  20px 20px;
+}
+
+.progress {
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+.progress-bar {
+  -webkit-transition: width 2.5s ease;
+  transition: width 2.5s ease;
 }

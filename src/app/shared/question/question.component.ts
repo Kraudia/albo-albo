@@ -12,10 +12,13 @@ import { Question } from '../../models/question';
 })
 export class QuestionComponent implements OnInit {
   @Input('idQuestion') idQuestion: string;
-  @Input('btnFirst') btnFirst = 'btn-success';
-  @Input('btnSecond') btnSecond = 'btn-info';
+  @Input('btnFirst') btnFirst = 'btn-default-first';
+  @Input('btnSecond') btnSecond = 'btn-default-second';
   public question: Question;
   private voteSum;
+
+  public progressBarFirst = 0;
+  public progressBarSecond = 0;
 
   constructor(
     private questionService: QuestionService,
@@ -27,12 +30,33 @@ export class QuestionComponent implements OnInit {
     this.voteSum = true;
   }
 
+  answer(id: number) {
+    if (! this.question.myAnswer) {
+      this.question.myAnswer = id;
+      if (id === 1) {
+        this.question.firstCount += 1;
+      } else {
+        this.question.secondCount += 1;
+      }
+      this.loadProgress();
+    }
+  }
+
+  loadProgress() {
+    this.progressBarFirst = this.question.firstCount / (this.question.firstCount + this.question.secondCount) * 100;
+    this.progressBarSecond = this.question.secondCount / (this.question.firstCount + this.question.secondCount) * 100;
+  }
+
   getOneQuestion() {
     if (this.idQuestion) {
       this.questionService.getOneQuestion(this.idQuestion)
         .subscribe(
           question => {
             this.question = question;
+
+            if (this.question.myAnswer) {
+              this.loadProgress();
+            }
           },
           error => console.error(error));
     }
