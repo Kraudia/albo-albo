@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { trigger, style, transition, animate, keyframes } from '@angular/animations';
 import * as moment from 'moment';
 
 import { AuthService } from '../../services/auth.service';
@@ -9,7 +10,25 @@ import { Comment } from '../../models/comment';
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
-  styleUrls: ['./question.component.scss']
+  styleUrls: ['./question.component.scss'],
+  animations: [
+    trigger('answerAnimation', [
+      transition('unanswered => answered', animate('200ms ease-in', keyframes([
+        style({transform: 'scale3d(1, 1, 1)'}),
+        style({transform: 'scale3d(1.05, 1.05, 1.05)'}),
+        style({transform: 'scale3d(1, 1, 1)'})
+      ]))),
+    ]),
+    trigger('fadeInOut', [
+      transition(':enter', [  // :enter is alias to 'void => *'
+        style({opacity: 0}),
+        animate(500, style({opacity: 1}))
+      ]),
+      transition(':leave', [  // :leave is alias to '* => void'
+        animate(500, style({ opacity: 0}))
+      ])
+    ])
+  ]
 })
 export class QuestionComponent implements OnInit {
   @Input('btnFirst') btnFirst = 'btn-default-first';
@@ -17,12 +36,15 @@ export class QuestionComponent implements OnInit {
   @Input('idQuestion') idQuestion: string;
 
   public comments: Comment[];
-  public commentsShow;
+  public commentsShow = false;
   public progressBarFirst = 0;
   public progressBarSecond = 0;
   public question: Question;
+  public stateFirst = 'unanswered';
+  public stateSecond = 'unanswered';
 
   private voteSum;
+
 
   constructor(
     private questionService: QuestionService,
@@ -38,8 +60,10 @@ export class QuestionComponent implements OnInit {
     if (! this.question.myAnswer) {
       this.question.myAnswer = id;
       if (id === 1) {
+        this.stateFirst = 'answered';
         this.question.firstCount += 1;
       } else {
+        this.stateSecond = 'answered';
         this.question.secondCount += 1;
       }
       this.loadProgress();
@@ -67,17 +91,18 @@ export class QuestionComponent implements OnInit {
   }
 
   getComments() {
-    this.questionService.getComments(this.idQuestion)
-      .subscribe(
-        response => {
-          this.comments = response;
-        },
-        error => {
-          console.error(error);
-        },
-        () => {
-          this.commentsShow = true;
-        });
+    this.commentsShow = (this.commentsShow === false);
+
+    if (this.commentsShow) {
+      this.questionService.getComments(this.idQuestion)
+        .subscribe(
+          response => {
+            this.comments = response;
+          },
+          error => {
+            console.error(error);
+          });
+    }
   }
 
   getVoteSum() {
