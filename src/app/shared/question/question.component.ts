@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import { AuthService } from '../../services/auth.service';
 import { QuestionService } from '../../services/question.service';
 import { Question } from '../../models/question';
+import { Comment } from '../../models/comment';
 
 @Component({
   selector: 'app-question',
@@ -11,14 +12,17 @@ import { Question } from '../../models/question';
   styleUrls: ['./question.component.scss']
 })
 export class QuestionComponent implements OnInit {
-  @Input('idQuestion') idQuestion: string;
   @Input('btnFirst') btnFirst = 'btn-default-first';
   @Input('btnSecond') btnSecond = 'btn-default-second';
-  public question: Question;
-  private voteSum;
+  @Input('idQuestion') idQuestion: string;
 
+  public comments: Comment[];
+  public commentsShow;
   public progressBarFirst = 0;
   public progressBarSecond = 0;
+  public question: Question;
+
+  private voteSum;
 
   constructor(
     private questionService: QuestionService,
@@ -51,8 +55,8 @@ export class QuestionComponent implements OnInit {
     if (this.idQuestion) {
       this.questionService.getOneQuestion(this.idQuestion)
         .subscribe(
-          question => {
-            this.question = question;
+          response => {
+            this.question = response;
 
             if (this.question.myAnswer) {
               this.loadProgress();
@@ -60,6 +64,20 @@ export class QuestionComponent implements OnInit {
           },
           error => console.error(error));
     }
+  }
+
+  getComments() {
+    this.questionService.getComments(this.idQuestion)
+      .subscribe(
+        response => {
+          this.comments = response;
+        },
+        error => {
+          console.error(error);
+        },
+        () => {
+          this.commentsShow = true;
+        });
   }
 
   getVoteSum() {
@@ -73,6 +91,7 @@ export class QuestionComponent implements OnInit {
 
   comment() {
     // TODO: comment
+    this.getComments();
   }
 
   goToQuestionPage() {

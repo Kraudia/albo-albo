@@ -1,0 +1,13 @@
+<div class="comment mb-2 row" *ngIf="comment">
+  <div class="comment-avatar col-md-1 col-sm-2 text-center pr-1">
+    <a href=""><img class="mx-auto img-fluid" [src]="comment.userAvatar" alt="avatar"></a>
+  </div>
+  <div class="comment-content col-md-11 col-sm-10">
+    <h6 class="small comment-meta"><a href="#">{{ comment.userLogin }}</a> {{ comment.createdDate | amTimeAgo }}</h6>
+    <div class="comment-body">
+      <p>
+        {{ comment.value }}
+      </p>
+    </div>
+  </div>
+</div>

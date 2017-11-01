@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/finally';
 
+import { Comment } from '../models/comment';
 import { Question } from '../models/question';
 import { Tag } from '../models/tag';
 import { options } from './options';
@@ -19,6 +20,13 @@ export class QuestionService {
   constructor(
     private http: Http
   ) { }
+
+  getComments(id: string): Observable<Comment[]> {
+    const url = this.host + this.questionsUrl + '/' + id + '/comments';
+
+    return this.http.get(url, options)
+      .map((res) => res.json());
+  }
 
   getOneQuestion(id: string): Observable<Question> {
     const url = this.host + this.questionsUrl + '/' + id;
