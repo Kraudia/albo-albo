@@ -6,6 +6,7 @@ import { AuthService } from '../../services/auth.service';
 import { CommentComponent } from './comment/comment.component';
 import { QuestionComponent } from './question.component';
 import { QuestionService } from '../../services/question.service';
+import { VotesPipe } from '../../pipes/votes.pipe';
 
 describe('QuestionComponent', () => {
   let component: QuestionComponent;
@@ -19,7 +20,8 @@ describe('QuestionComponent', () => {
       ],
       declarations: [
         CommentComponent,
-        QuestionComponent
+        QuestionComponent,
+        VotesPipe
       ],
       providers: [
         AuthService,

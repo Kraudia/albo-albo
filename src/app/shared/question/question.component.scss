@@ -1,3 +1,7 @@
+.btn {
+  cursor: pointer;
+}
+
 .btn-question {
   margin: 10px 0;
   height: 100%;
@@ -70,4 +74,13 @@
 
 .row-tags {
   margin-top: 5px;
+}
+
+.voteNumber {
+  display: block;
+  font-size: small;
+}
+
+.firstVoteNumber, .secondVoteNumber {
+  font-size: larger;
 }

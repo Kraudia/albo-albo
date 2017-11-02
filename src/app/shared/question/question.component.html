@@ -12,20 +12,20 @@
   <div class="card-body">
     <div class="row">
       <div class="col-md-6 col-question">
-        <button [@pulse]="stateFirst" type="button" (click)="answer(1)" class="btn btn-lg btn-block btn-question" [class.btn-first--checked]="question.myAnswer == 1" [ngClass]="[btnFirst]">{{ question.firstAnswer }}</button>
+        <button [@pulse]="stateFirst" type="button" (click)="answer(1)" class="btn btn-lg btn-block btn-question" [class.btn-first--checked]="question.myAnswer == 1" [ngClass]="[btnFirst]"><p>{{ question.firstAnswer }}</p><span class="firstVoteNumber"><span *ngIf="question.myAnswer"> {{ firstCountPercentage }} %</span></span><span class="voteNumber" *ngIf="question.myAnswer">{{ question.firstCount | votes }}</span></button>
 
         <div class="progress">
-          <div [@easeLeft]="state" class="progress-bar bg-white" role="progressbar" [style.width]="100 - progressBarFirst + '%'" [attr.aria-valuenow]="100 - progressBarFirst" aria-valuemin="0" aria-valuemax="100"></div>
-          <div [@easeRight]="state" class="progress-bar" [class.bg-light]="!question.myAnswer" [class.bg-success]="question.myAnswer == 1" [class.bg-danger]="question.myAnswer == 2" role="progressbar" [style.width]="progressBarFirst + '%'" [attr.aria-valuenow]="progressBarFirst"  aria-valuemin="0" aria-valuemax="100"></div>
+          <div [@easeLeft]="state" class="progress-bar bg-white" role="progressbar" [style.width]="100 - firstCountPercentage + '%'" [attr.aria-valuenow]="100 - firstCountPercentage" aria-valuemin="0" aria-valuemax="100"></div>
+          <div [@easeRight]="state" class="progress-bar" [class.bg-light]="!question.myAnswer" [class.bg-success]="question.myAnswer == 1" [class.bg-danger]="question.myAnswer == 2" role="progressbar" [style.width]="firstCountPercentage + '%'" [attr.aria-valuenow]="firstCountPercentage"  aria-valuemin="0" aria-valuemax="100"></div>
         </div>
       </div>
 
       <div class="col-md-6 col-question">
-        <button [@pulse]="stateSecond" type="button" (click)="answer(2)" class="btn btn-lg btn-block btn-question" [class.btn-second--checked]="question.myAnswer == 2" [ngClass]="[btnSecond]">{{ question.secondAnswer }}</button>
+        <button [@pulse]="stateSecond" type="button" (click)="answer(2)" class="btn btn-lg btn-block btn-question" [class.btn-second--checked]="question.myAnswer == 2" [ngClass]="[btnSecond]"><p>{{ question.secondAnswer }}</p><span class="secondVoteNumber"><span *ngIf="question.myAnswer">{{ secondCountPercentage }} %</span></span><span class="voteNumber" *ngIf="question.myAnswer">{{ question.secondCount | votes }}</span></button>
 
         <div class="progress">
-          <div [@easeRight]="state" class="progress-bar" [class.bg-light]="!question.myAnswer" [class.bg-danger]="question.myAnswer == 1" [class.bg-success]="question.myAnswer == 2" role="progressbar" [style.width]="progressBarSecond + '%'" [attr.aria-valuenow]="progressBarSecond"  aria-valuemin="0" aria-valuemax="100"></div>
-          <div [@easeLeft]="state" class="progress-bar bg-white" role="progressbar" [style.width]="100 - progressBarSecond + '%'" [attr.aria-valuenow]="100 - progressBarSecond" aria-valuemin="0" aria-valuemax="100"></div>
+          <div [@easeRight]="state" class="progress-bar" [class.bg-light]="!question.myAnswer" [class.bg-danger]="question.myAnswer == 1" [class.bg-success]="question.myAnswer == 2" role="progressbar" [style.width]="secondCountPercentage + '%'" [attr.aria-valuenow]="secondCountPercentage"  aria-valuemin="0" aria-valuemax="100"></div>
+          <div [@easeLeft]="state" class="progress-bar bg-white" role="progressbar" [style.width]="100 - secondCountPercentage + '%'" [attr.aria-valuenow]="100 - secondCountPercentage" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
       </div>
     </div>

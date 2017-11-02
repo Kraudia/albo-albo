@@ -4,11 +4,13 @@ import { MomentModule } from 'angular2-moment';
 
 import { QuestionComponent } from './question.component';
 import { CommentComponent } from './comment/comment.component';
+import { VotesPipe } from '../../pipes/votes.pipe';
 
 @NgModule({
   declarations: [
     QuestionComponent,
-    CommentComponent
+    CommentComponent,
+    VotesPipe
   ],
   exports: [
     QuestionComponent

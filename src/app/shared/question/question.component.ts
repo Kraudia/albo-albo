@@ -1,11 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import { trigger, style, transition, animate, keyframes } from '@angular/animations';
 import * as moment from 'moment';
+declare const $: any;
 
 import { AuthService } from '../../services/auth.service';
 import { QuestionService } from '../../services/question.service';
 import { Question } from '../../models/question';
 import { Comment } from '../../models/comment';
+import { animateNumber } from './animateNumber';
 
 @Component({
   selector: 'app-question',
@@ -48,8 +50,8 @@ export class QuestionComponent implements OnInit {
   @Input('idQuestion') idQuestion: string;
 
   public comments: Comment[];
-  public progressBarFirst = 0;
-  public progressBarSecond = 0;
+  public firstCountPercentage = 0;
+  public secondCountPercentage = 0;
   public question: Question;
   public state = false;
   public stateFirst = 'unanswered';
@@ -59,6 +61,7 @@ export class QuestionComponent implements OnInit {
 
   constructor(
     private questionService: QuestionService,
+    private elementRef: ElementRef,
     public authService: AuthService
   ) { }
 
@@ -79,12 +82,33 @@ export class QuestionComponent implements OnInit {
         this.question.secondCount += 1;
       }
       this.loadProgress();
+      this.animateVoteNumber();
     }
   }
 
   loadProgress() {
-    this.progressBarFirst = this.question.firstCount / (this.question.firstCount + this.question.secondCount) * 100;
-    this.progressBarSecond = this.question.secondCount / (this.question.firstCount + this.question.secondCount) * 100;
+    this.firstCountPercentage = Math.round(this.question.firstCount / (this.question.firstCount + this.question.secondCount) * 100);
+    this.secondCountPercentage = Math.round(this.question.secondCount / (this.question.firstCount + this.question.secondCount) * 100);
+  }
+
+  animateVoteNumber() {
+    animateNumber();
+    const percent_number_step = $.animateNumber.numberStepFactories.append(' %');
+    $(this.elementRef.nativeElement).find('.firstVoteNumber').animateNumber(
+      {
+        number: this.firstCountPercentage,
+        easing: 'easeInQuad',
+        numberStep: percent_number_step
+      }, 2000
+    );
+
+    $(this.elementRef.nativeElement).find('.secondVoteNumber').animateNumber(
+      {
+        number: this.secondCountPercentage,
+        easing: 'easeInQuad',
+        numberStep: percent_number_step
+      }, 2000
+    );
   }
 
   getOneQuestion() {
@@ -93,7 +117,6 @@ export class QuestionComponent implements OnInit {
         .subscribe(
           response => {
             this.question = response;
-
             if (this.question.myAnswer) {
               this.loadProgress();
             }
