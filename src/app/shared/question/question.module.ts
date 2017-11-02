@@ -5,12 +5,14 @@ import { MomentModule } from 'angular2-moment';
 import { QuestionComponent } from './question.component';
 import { CommentComponent } from './comment/comment.component';
 import { VotesPipe } from '../../pipes/votes.pipe';
+import { AddCommentComponent } from './add-comment/add-comment.component';
 
 @NgModule({
   declarations: [
     QuestionComponent,
     CommentComponent,
-    VotesPipe
+    VotesPipe,
+    AddCommentComponent
   ],
   exports: [
     QuestionComponent
