@@ -1,6 +1,6 @@
 <div class="row justify-content-md-center">
   <div class="col-md-8 col-lg-6">
-    <form>
+    <form (keyup.enter)="login(loginInput.value, passwordInput.value)">
       <h5 class="text-center">Zaloguj się</h5>
       <div class="container">
         <button class="btn btn-facebook btn-block" type="button">Zaloguj się przez <strong>Facebook</strong></button>

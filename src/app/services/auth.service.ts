@@ -17,6 +17,7 @@ export class AuthService {
   };
   private currentUser;
   private isLogged: boolean;
+  private user: User;
 
   constructor(
     private http: Http
@@ -27,16 +28,19 @@ export class AuthService {
   private getCurrentUser() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.isLogged = !!this.currentUser;
+    return this.isLogged;
+  }
+
+  public getUser(): User {
+    return this.user;
   }
 
   public isNotLoggedIn() {
-    this.getCurrentUser();
-    return !this.isLogged;
+    return !this.getCurrentUser();
   }
 
   public isLoggedIn() {
-    this.getCurrentUser();
-    return this.isLogged;
+    return this.getCurrentUser();
   }
 
   getHeaders() {
@@ -56,6 +60,19 @@ export class AuthService {
 
   getOptions() {
     return new RequestOptions({headers: this.getHeaders()});
+  }
+
+  getUserInfo() {
+    if (this.getCurrentUser()) {
+      const url = this.host + this.url.users;
+      this.http.get(url, this.getOptions())
+        .map((res) => res.json())
+        .subscribe(
+          response => {
+            this.user = response;
+          }
+        );
+    }
   }
 
   login(username: String, password: String) {
@@ -80,6 +97,7 @@ export class AuthService {
           }));
           this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
           this.isLogged = true;
+          this.getUserInfo();
         }
       });
   }
@@ -87,12 +105,6 @@ export class AuthService {
   logout() {
     localStorage.removeItem('currentUser');
     this.isLogged = false;
-  }
-
-  getUser(): Observable<User> {
-    const url = this.host + this.url.users;
-    return this.http.get(url, this.getOptions())
-      .map((res) => res.json());
   }
 
   getUserStats(login: string): Observable<Stats> {

@@ -1,6 +1,6 @@
 <div class="row justify-content-md-center">
   <div class="col-lg-10">
-    <form id="needs-validation" [formGroup]="registerForm" novalidate>
+    <form id="needs-validation" [formGroup]="registerForm" novalidate (keyup.enter)="register(inputLogin.value, inputEmail.value, inputPassword.value, inputDate.value)">
       <div class="container"  [ngClass]="{'was-validated': isFormValid()}">
         <h5 class="text-center">Zarejestruj się</h5>
         <button class="btn btn-facebook btn-block" type="button">Zarejestruj się przez <strong>Facebook</strong></button>
