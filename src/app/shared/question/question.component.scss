@@ -5,31 +5,17 @@
   position: relative;
 }
 
-@keyframes pulse {
-  from {
-    transform: scale3d(1, 1, 1);
-  }
-
-  50% {
-    transform: scale3d(1.05, 1.05, 1.05);
-  }
-
-  to {
-    transform: scale3d(1, 1, 1);
-  }
-}
-
 .btn-first--checked {
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: -1px;
     right: -1px;
     border-radius: 0.3rem;
-
     border: 1.4em solid rgba(40, 167, 69, 0.8);
     border-left-color: transparent;
     border-bottom-color: transparent;
+    height: 20px;
   }
   &::after {
     font-family: 'FontAwesome', serif;
@@ -51,6 +37,7 @@
     border: 1.4em solid rgba(40, 167, 69, 0.8);
     border-right-color: transparent;
     border-bottom-color: transparent;
+    height: 20px;
   }
   &::after {
     font-family: 'FontAwesome', serif;
@@ -73,9 +60,14 @@
 .progress {
   margin-top: -10px;
   margin-bottom: 10px;
+  height: 10px;
 }
 
 .progress-bar {
   -webkit-transition: width 2.5s ease;
   transition: width 2.5s ease;
+}
+
+.row-tags {
+  margin-top: 5px;
 }

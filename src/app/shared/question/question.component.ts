@@ -12,12 +12,12 @@ import { Comment } from '../../models/comment';
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.scss'],
   animations: [
-    trigger('answerAnimation', [
+    trigger('pulse', [
       transition('unanswered => answered', animate('200ms ease-in', keyframes([
         style({transform: 'scale3d(1, 1, 1)'}),
         style({transform: 'scale3d(1.05, 1.05, 1.05)'}),
         style({transform: 'scale3d(1, 1, 1)'})
-      ]))),
+      ])))
     ]),
     trigger('fadeInOut', [
       transition(':enter', [  // :enter is alias to 'void => *'
@@ -27,6 +27,18 @@ import { Comment } from '../../models/comment';
       transition(':leave', [  // :leave is alias to '* => void'
         animate(500, style({ opacity: 0}))
       ])
+    ]),
+    trigger('easeLeft', [
+      transition('0 => 1', animate('400ms ease', keyframes([
+        style({width: '100%'}),
+        style({width: '*'})
+      ])))
+    ]),
+    trigger('easeRight', [
+      transition('true => false', animate('400ms ease', keyframes([
+        style({width: 0}),
+        style({width: '*'})
+      ])))
     ])
   ]
 })
@@ -36,15 +48,14 @@ export class QuestionComponent implements OnInit {
   @Input('idQuestion') idQuestion: string;
 
   public comments: Comment[];
-  public commentsShow = false;
   public progressBarFirst = 0;
   public progressBarSecond = 0;
   public question: Question;
+  public state = false;
   public stateFirst = 'unanswered';
   public stateSecond = 'unanswered';
 
   private voteSum;
-
 
   constructor(
     private questionService: QuestionService,
@@ -57,7 +68,8 @@ export class QuestionComponent implements OnInit {
   }
 
   answer(id: number) {
-    if (! this.question.myAnswer) {
+    if (!this.question.myAnswer) {
+      this.state = true;
       this.question.myAnswer = id;
       if (id === 1) {
         this.stateFirst = 'answered';
@@ -91,9 +103,9 @@ export class QuestionComponent implements OnInit {
   }
 
   getComments() {
-    this.commentsShow = (this.commentsShow === false);
-
-    if (this.commentsShow) {
+    if (this.comments) {
+      this.comments = null;
+    } else {
       this.questionService.getComments(this.idQuestion)
         .subscribe(
           response => {

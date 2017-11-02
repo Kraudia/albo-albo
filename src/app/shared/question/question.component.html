@@ -12,25 +12,25 @@
   <div class="card-body">
     <div class="row">
       <div class="col-md-6 col-question">
-        <button [@answerAnimation]='stateFirst' type="button" (click)="answer(1)" class="btn btn-lg btn-block btn-question" [class.btn-first--checked]="question.myAnswer == 1" [ngClass]="[btnFirst]">{{ question.firstAnswer }}</button>
+        <button [@pulse]="stateFirst" type="button" (click)="answer(1)" class="btn btn-lg btn-block btn-question" [class.btn-first--checked]="question.myAnswer == 1" [ngClass]="[btnFirst]">{{ question.firstAnswer }}</button>
 
-        <div class="progress" style="height: 10px;">
-          <div class="progress-bar bg-white" role="progressbar" [style.width]="100 - progressBarFirst + '%'" [attr.aria-valuenow]="100 - progressBarFirst" aria-valuemin="0" aria-valuemax="100"></div>
-          <div class="progress-bar" [class.bg-white]="!question.myAnswer" [class.bg-success]="question.myAnswer == 1" [class.bg-danger]="question.myAnswer == 2" role="progressbar" [style.width]="progressBarFirst + '%'" [attr.aria-valuenow]="progressBarFirst"  aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="progress">
+          <div [@easeLeft]="state" class="progress-bar bg-white" role="progressbar" [style.width]="100 - progressBarFirst + '%'" [attr.aria-valuenow]="100 - progressBarFirst" aria-valuemin="0" aria-valuemax="100"></div>
+          <div [@easeRight]="state" class="progress-bar" [class.bg-light]="!question.myAnswer" [class.bg-success]="question.myAnswer == 1" [class.bg-danger]="question.myAnswer == 2" role="progressbar" [style.width]="progressBarFirst + '%'" [attr.aria-valuenow]="progressBarFirst"  aria-valuemin="0" aria-valuemax="100"></div>
         </div>
       </div>
 
       <div class="col-md-6 col-question">
-        <button [@answerAnimation]='stateSecond' type="button" (click)="answer(2)" class="btn btn-lg btn-block btn-question" [class.btn-second--checked]="question.myAnswer == 2" [ngClass]="[btnSecond]">{{ question.secondAnswer }}</button>
+        <button [@pulse]="stateSecond" type="button" (click)="answer(2)" class="btn btn-lg btn-block btn-question" [class.btn-second--checked]="question.myAnswer == 2" [ngClass]="[btnSecond]">{{ question.secondAnswer }}</button>
 
-        <div class="progress" style="height: 10px;">
-          <div class="progress-bar" [class.bg-white]="!question.myAnswer" [class.bg-danger]="question.myAnswer == 1" [class.bg-success]="question.myAnswer == 2" role="progressbar" [style.width]="progressBarSecond + '%'" [attr.aria-valuenow]="progressBarSecond"  aria-valuemin="0" aria-valuemax="100"></div>
-          <div class="progress-bar bg-white" role="progressbar" [style.width]="100 - progressBarSecond + '%'" [attr.aria-valuenow]="100 - progressBarSecond" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="progress">
+          <div [@easeRight]="state" class="progress-bar" [class.bg-light]="!question.myAnswer" [class.bg-danger]="question.myAnswer == 1" [class.bg-success]="question.myAnswer == 2" role="progressbar" [style.width]="progressBarSecond + '%'" [attr.aria-valuenow]="progressBarSecond"  aria-valuemin="0" aria-valuemax="100"></div>
+          <div [@easeLeft]="state" class="progress-bar bg-white" role="progressbar" [style.width]="100 - progressBarSecond + '%'" [attr.aria-valuenow]="100 - progressBarSecond" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
       </div>
     </div>
 
-    <div class="row align-items-center">
+    <div class="row align-items-center row-tags">
       <div class="col-lg-12 text-center">
         <button *ngFor="let tag of question.tags" class="btn btn-sm btn-light"><i class="fa fa-tag" aria-hidden="true"></i> {{ tag.name }}</button>
       </div>
@@ -71,7 +71,7 @@
   </div>
 </div>
 
-<div class="container" *ngIf="commentsShow" [@fadeInOut]>
+<div class="container" *ngIf="comments" [@fadeInOut]>
   <app-comment *ngFor="let comment of comments" [comment]="comment"></app-comment>
   <p *ngIf="comments.length == 0">Brak komentarzy.</p>
 </div>
