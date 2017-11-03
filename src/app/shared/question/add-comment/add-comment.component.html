@@ -1,3 +1,21 @@
-<p>
-  add-comment works!
-</p>
+<div class="row mb-2">
+  <div class="card-body" *ngIf="authService.isNotLoggedIn()">
+    No dobrze, chcesz sobie skomentować? W takim razie <a [routerLink]="['/logowanie']"><strong>zaloguj się</strong></a> lub <a [routerLink]="['/rejestracja']"><strong>zarejestruj się</strong></a>.
+  </div>
+
+  <div class="card-body" *ngIf="authService.isLoggedIn()">
+    <form id="needs-validation" novalidate>
+      <div class="form-group row">
+        <textarea #commentInput rows="3" class="form-control" [class.is-valid]="isValid" [class.is-invalid]="isInvalid" placeholder="Napisz komentarz..." [(ngModel)]="commentValue" required [ngModelOptions]="{standalone: true}"></textarea>
+        <small class="invalid-feedback">
+          Pole nie może być puste.
+        </small>
+        <small class="valid-feedback">
+          Dodano komentarz.
+        </small>
+      </div>
+
+      <button type="button" class="btn btn-success float-right" (click)="comment(commentInput.value)">Dodaj komentarz</button>
+    </form>
+  </div>
+</div>

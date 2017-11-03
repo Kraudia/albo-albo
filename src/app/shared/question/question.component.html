@@ -50,7 +50,9 @@
 
         <button type="button" class="btn btn-sm btn-light" (click)="goToQuestionPage()"><i class="fa fa-link" aria-hidden="true"></i> Skopiuj link</button>
 
-        <button type="button" class="btn btn-sm btn-light" (click)="comment()"><i class="fa fa-comments text-primary" aria-hidden="true"></i> Skomentuj ({{ question.commentsCount }})</button>
+        <button type="button" class="btn btn-sm btn-light" (click)="getComments()" *ngIf="!comments"><i class="fa fa-comments text-primary" aria-hidden="true"></i> Skomentuj ({{ question.commentsCount }})</button>
+
+        <button type="button" class="btn btn-sm btn-light" (click)="hideComments()" *ngIf="comments"><i class="fa fa-comments text-primary" aria-hidden="true"></i> Ukryj komentarze ({{ question.commentsCount }})</button>
       </div>
 
       <div class="col-lg-3 text-center text-lg-right text-muted">
@@ -74,4 +76,5 @@
 <div class="container" *ngIf="comments" [@fadeInOut]>
   <app-comment *ngFor="let comment of comments" [comment]="comment"></app-comment>
   <p *ngIf="comments.length == 0">Brak komentarzy.</p>
+  <app-add-comment [idQuestion]="question.id" (refresh)="getComments()"></app-add-comment>
 </div>

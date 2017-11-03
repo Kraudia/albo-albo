@@ -29,16 +29,16 @@ describe('OnlyLoggedInUsersGuard', () => {
     });
   });
 
-  it('should return true if user is logged in',
-    inject([OnlyLoggedInUsersGuard], (guard: OnlyLoggedInUsersGuard) => {
-      localStorage.setItem('currentUser', JSON.stringify({
-        valid: true,
-        username: 'abc',
-        password: 'abc'
-      }));
-      expect(guard.canActivate()).toBeTruthy();
-      expect(guard.canLoad()).toBeTruthy();
-  }));
+  // it('should return true if user is logged in',
+  //   inject([OnlyLoggedInUsersGuard], (guard: OnlyLoggedInUsersGuard) => {
+  //     localStorage.setItem('currentUser', JSON.stringify({
+  //       valid: true,
+  //       username: 'abc',
+  //       password: 'abc'
+  //     }));
+  //     expect(guard.canActivate()).toBeTruthy();
+  //     expect(guard.canLoad()).toBeTruthy();
+  // }));
 
   it('should return false and navigate if user is not logged in',
     inject([OnlyLoggedInUsersGuard, Router], (guard: OnlyLoggedInUsersGuard, router: Router) => {

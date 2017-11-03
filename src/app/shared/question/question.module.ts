@@ -6,6 +6,8 @@ import { QuestionComponent } from './question.component';
 import { CommentComponent } from './comment/comment.component';
 import { VotesPipe } from '../../pipes/votes.pipe';
 import { AddCommentComponent } from './add-comment/add-comment.component';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { AddCommentComponent } from './add-comment/add-comment.component';
   ],
   imports: [
     CommonModule,
-    MomentModule
+    FormsModule,
+    MomentModule,
+    RouterModule
   ]
 })
 

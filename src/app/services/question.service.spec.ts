@@ -2,6 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 import { HttpModule } from '@angular/http';
 
 import { QuestionService } from './question.service';
+import { AuthService } from './auth.service';
 
 describe('QuestionService', () => {
   beforeEach(() => {
@@ -10,6 +11,7 @@ describe('QuestionService', () => {
         HttpModule
       ],
       providers: [
+        AuthService,
         QuestionService
       ]
     });

@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, ElementRef } from '@angular/core';
 import { trigger, style, transition, animate, keyframes } from '@angular/animations';
+import { Subscription } from 'rxjs/Subscription';
 import * as moment from 'moment';
 declare const $: any;
 
@@ -44,10 +45,11 @@ import { animateNumber } from './animateNumber';
     ])
   ]
 })
-export class QuestionComponent implements OnInit {
+export class QuestionComponent implements OnInit, OnDestroy {
   @Input('btnFirst') btnFirst = 'btn-default-first';
   @Input('btnSecond') btnSecond = 'btn-default-second';
   @Input('idQuestion') idQuestion: string;
+  private subscription = new Subscription();
 
   public comments: Comment[];
   public firstCountPercentage = 0;
@@ -56,7 +58,6 @@ export class QuestionComponent implements OnInit {
   public state = false;
   public stateFirst = 'unanswered';
   public stateSecond = 'unanswered';
-
   private voteSum;
 
   constructor(
@@ -68,6 +69,10 @@ export class QuestionComponent implements OnInit {
   ngOnInit() {
     this.getOneQuestion();
     this.voteSum = true;
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   answer(id: number) {
@@ -113,31 +118,29 @@ export class QuestionComponent implements OnInit {
 
   getOneQuestion() {
     if (this.idQuestion) {
-      this.questionService.getOneQuestion(this.idQuestion)
+      const subscription = this.questionService.getOneQuestion(this.idQuestion)
         .subscribe(
           response => {
             this.question = response;
             if (this.question.myAnswer) {
               this.loadProgress();
             }
-          },
-          error => console.error(error));
+          });
+      this.subscription.add(subscription);
     }
   }
 
   getComments() {
-    if (this.comments) {
-      this.comments = null;
-    } else {
-      this.questionService.getComments(this.idQuestion)
+      const subscription = this.questionService.getComments(this.idQuestion)
         .subscribe(
           response => {
             this.comments = response;
-          },
-          error => {
-            console.error(error);
           });
-    }
+      this.subscription.add(subscription);
+  }
+
+  hideComments() {
+    this.comments = null;
   }
 
   getVoteSum() {
@@ -147,11 +150,6 @@ export class QuestionComponent implements OnInit {
   toggleVoteSum() {
     this.voteSum = !this.voteSum;
     return this.voteSum;
-  }
-
-  comment() {
-    // TODO: comment
-    this.getComments();
   }
 
   goToQuestionPage() {

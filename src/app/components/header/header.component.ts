@@ -7,17 +7,13 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   private collapsed: boolean;
 
   constructor(
     public authService: AuthService
   ) {
     this.collapsed = false;
-  }
-
-  ngOnInit() {
-    this.authService.getUserInfo();
   }
 
   logout() {

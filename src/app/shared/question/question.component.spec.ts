@@ -1,11 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MomentModule } from 'angular2-moment';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { AuthService } from '../../services/auth.service';
+import { QuestionService } from '../../services/question.service';
+import { AddCommentComponent } from './add-comment/add-comment.component';
 import { CommentComponent } from './comment/comment.component';
 import { QuestionComponent } from './question.component';
-import { QuestionService } from '../../services/question.service';
 import { VotesPipe } from '../../pipes/votes.pipe';
 
 describe('QuestionComponent', () => {
@@ -15,10 +18,13 @@ describe('QuestionComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
+        FormsModule,
         HttpModule,
-        MomentModule
+        MomentModule,
+        RouterTestingModule
       ],
       declarations: [
+        AddCommentComponent,
         CommentComponent,
         QuestionComponent,
         VotesPipe
