@@ -26,8 +26,17 @@ export class CommentService {
       .map((res) => res.json());
   }
 
-  postComment(value: string, idQuestion: number) {
+  postComment(idQuestion: number, value: string) {
     const url = this.host + 'questions/' + idQuestion + '/comments';
+    const options = this.authService.getOptions();
+
+    return this.http.post(url, JSON.stringify({ value }), options)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  voteComment(idQuestion: number, idComment: number, value: number) {
+    const url = this.host + 'questions/' + idQuestion + '/comments/' + idComment + '/rank';
     const options = this.authService.getOptions();
 
     return this.http.post(url, JSON.stringify({ value }), options)

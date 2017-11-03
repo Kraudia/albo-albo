@@ -8,7 +8,7 @@ import { CommentService } from '../../../services/comment.service';
   styleUrls: ['./add-comment.component.scss']
 })
 export class AddCommentComponent implements OnInit {
-  @Input('idQuestion') idQuestion;
+  @Input('idQuestion') idQuestion: number;
   @Output() refresh = new EventEmitter();
 
   public commentValue = '';
@@ -29,7 +29,7 @@ export class AddCommentComponent implements OnInit {
     this.isValid = false;
 
     if (!reg.test(value) && value !== '') {
-      this.commentService.postComment(value, this.idQuestion)
+      this.commentService.postComment(this.idQuestion, value)
         .subscribe(
           res => {
             this.isValid = true;

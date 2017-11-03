@@ -66,11 +66,12 @@ export class QuestionComponent implements OnInit, OnDestroy {
     private commentService: CommentService,
     private questionService: QuestionService,
     private elementRef: ElementRef
-  ) { }
+  ) {
+    this.voteSum = true;
+  }
 
   ngOnInit() {
     this.getOneQuestion();
-    this.voteSum = true;
   }
 
   ngOnDestroy() {
@@ -170,8 +171,20 @@ export class QuestionComponent implements OnInit, OnDestroy {
     // TODO: remove from favorites
   }
 
-  vote() {
-    // TODO: vote
+  vote(value: number) {
+    this.question.myVote = value;
+    if (value === -1) {
+      this.question.minusCount += 1;
+    } else {
+      this.question.plusCount += 1;
+    }
+
+    const subscription = this.questionService.voteQuestion(this.question.id, value).subscribe(
+      res => {
+        this.question.myAnswer = value;
+      }
+    );
+    this.subscription.add(subscription);
   }
 }
 moment.locale('pl');

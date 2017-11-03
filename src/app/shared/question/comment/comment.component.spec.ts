@@ -1,7 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpModule } from '@angular/http';
 import { MomentModule } from 'angular2-moment';
-
 import { CommentComponent } from './comment.component';
+import { AuthService } from '../../../services/auth.service';
+import { CommentService } from '../../../services/comment.service';
 
 describe('CommentComponent', () => {
   let component: CommentComponent;
@@ -10,7 +12,14 @@ describe('CommentComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ CommentComponent ],
-      imports: [ MomentModule ]
+      imports: [
+        HttpModule,
+        MomentModule
+      ],
+      providers: [
+        AuthService,
+        CommentService
+      ]
     })
     .compileComponents();
   }));
