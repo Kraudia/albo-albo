@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
-import { QuestionService } from '../../../services/question.service';
+import { CommentService } from '../../../services/comment.service';
 
 @Component({
   selector: 'app-add-comment',
@@ -16,8 +16,8 @@ export class AddCommentComponent implements OnInit {
   public isValid = false;
 
   constructor(
-    private authService: AuthService,
-    private questionService: QuestionService
+    public authService: AuthService,
+    private commentService: CommentService
   ) { }
 
   ngOnInit() {
@@ -29,7 +29,7 @@ export class AddCommentComponent implements OnInit {
     this.isValid = false;
 
     if (!reg.test(value) && value !== '') {
-      this.questionService.postComment(value, this.idQuestion)
+      this.commentService.postComment(value, this.idQuestion)
         .subscribe(
           res => {
             this.isValid = true;

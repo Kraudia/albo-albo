@@ -5,6 +5,7 @@ import { MomentModule } from 'angular2-moment';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { AuthService } from '../../services/auth.service';
+import { CommentService } from '../../services/comment.service';
 import { QuestionService } from '../../services/question.service';
 import { AddCommentComponent } from './add-comment/add-comment.component';
 import { CommentComponent } from './comment/comment.component';
@@ -31,6 +32,7 @@ describe('QuestionComponent', () => {
       ],
       providers: [
         AuthService,
+        CommentService,
         QuestionService
       ]
     })

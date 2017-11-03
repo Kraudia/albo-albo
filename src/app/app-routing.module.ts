@@ -5,8 +5,9 @@ import { OnlyLoggedInUsersGuard } from './guards/only-logged-in-users.guard';
 import { OnlyNotLoggedInUsersGuard } from './guards/only-not-logged-in-users.guard';
 
 import { AuthService } from './services/auth.service';
-import { RegisterService } from './services/register.service';
+import { CommentService } from './services/comment.service';
 import { QuestionService } from './services/question.service';
+import { RegisterService } from './services/register.service';
 
 const appRoutes: Routes = [
   {
@@ -50,8 +51,9 @@ const appRoutes: Routes = [
     OnlyLoggedInUsersGuard,
     OnlyNotLoggedInUsersGuard,
     AuthService,
-    RegisterService,
-    QuestionService
+    CommentService,
+    QuestionService,
+    RegisterService
   ],
   declarations: [],
 })

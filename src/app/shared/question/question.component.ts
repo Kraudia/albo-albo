@@ -5,6 +5,7 @@ import * as moment from 'moment';
 declare const $: any;
 
 import { AuthService } from '../../services/auth.service';
+import { CommentService } from '../../services/comment.service';
 import { QuestionService } from '../../services/question.service';
 import { Question } from '../../models/question';
 import { Comment } from '../../models/comment';
@@ -61,9 +62,10 @@ export class QuestionComponent implements OnInit, OnDestroy {
   private voteSum;
 
   constructor(
+    public authService: AuthService,
+    private commentService: CommentService,
     private questionService: QuestionService,
-    private elementRef: ElementRef,
-    public authService: AuthService
+    private elementRef: ElementRef
   ) { }
 
   ngOnInit() {
@@ -131,7 +133,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
   }
 
   getComments() {
-      const subscription = this.questionService.getComments(this.idQuestion)
+      const subscription = this.commentService.getComments(this.idQuestion)
         .subscribe(
           response => {
             this.comments = response;

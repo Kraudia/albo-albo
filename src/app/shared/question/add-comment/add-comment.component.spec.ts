@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AuthService } from '../../../services/auth.service';
-import { QuestionService } from '../../../services/question.service';
+import { CommentService } from '../../../services/comment.service';
 import { AddCommentComponent } from './add-comment.component';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -20,7 +20,7 @@ describe('AddCommentComponent', () => {
       ],
       providers: [
         AuthService,
-        QuestionService
+        CommentService
       ]
     })
     .compileComponents();
