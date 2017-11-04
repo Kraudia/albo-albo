@@ -39,13 +39,4 @@ export class CommentComponent implements OnDestroy {
     );
     this.subscription.add(subscription);
   }
-
-  getVoteSum() {
-    return this.voteSum;
-  }
-
-  toggleVoteSum() {
-    this.voteSum = !this.voteSum;
-    return this.voteSum;
-  }
 }

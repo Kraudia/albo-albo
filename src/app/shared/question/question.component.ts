@@ -146,15 +146,6 @@ export class QuestionComponent implements OnInit, OnDestroy {
     this.comments = null;
   }
 
-  getVoteSum() {
-    return this.voteSum;
-  }
-
-  toggleVoteSum() {
-    this.voteSum = !this.voteSum;
-    return this.voteSum;
-  }
-
   goToQuestionPage() {
     // TODO: go to question page
   }

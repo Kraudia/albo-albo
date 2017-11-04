@@ -4,6 +4,7 @@ import { MomentModule } from 'angular2-moment';
 import { CommentComponent } from './comment.component';
 import { AuthService } from '../../../services/auth.service';
 import { CommentService } from '../../../services/comment.service';
+import { VoteButtonModule } from '../../vote-button/vote-button.module';
 
 describe('CommentComponent', () => {
   let component: CommentComponent;
@@ -14,7 +15,8 @@ describe('CommentComponent', () => {
       declarations: [ CommentComponent ],
       imports: [
         HttpModule,
-        MomentModule
+        MomentModule,
+        VoteButtonModule
       ],
       providers: [
         AuthService,

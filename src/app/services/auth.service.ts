@@ -21,7 +21,9 @@ export class AuthService {
 
   constructor(
     private http: Http
-  ) { }
+  ) {
+    this.loginCurrentUser();
+  }
 
   isLoggedIn() {
     return !!this.currentUser;
@@ -77,7 +79,9 @@ export class AuthService {
       const password = JSON.parse(currentUser).password;
       this.login(username, password)
         .subscribe(
-          () => {},
+          () => {
+            this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+          },
           () => {
             this.logout();
           }
@@ -121,6 +125,11 @@ export class AuthService {
     if (this.currentUser) {
       const username = this.currentUser.username;
       const password = this.currentUser.password;
+      headers.append('Authorization', 'Basic ' + btoa(username + ':' + password));
+    } else if (localStorage.getItem('currentUser')) {
+      const currentUser = localStorage.getItem('currentUser');
+      const username = JSON.parse(currentUser).username;
+      const password = JSON.parse(currentUser).password;
       headers.append('Authorization', 'Basic ' + btoa(username + ':' + password));
     }
     return headers;

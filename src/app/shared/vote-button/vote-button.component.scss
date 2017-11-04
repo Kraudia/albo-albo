@@ -1,0 +1,14 @@
+.btn-vote {
+  background-color: transparent;
+  &:hover, &:focus {
+    background-color: rgba(190, 214, 222, 0.7);
+  }
+}
+
+.btn-vote--disabled {
+  background-color: transparent;
+}
+
+.btn-vote--voted {
+  background-color: rgba(190, 214, 222, 0.7);
+}

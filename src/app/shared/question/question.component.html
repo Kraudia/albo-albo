@@ -56,18 +56,7 @@
       </div>
 
       <div class="col-lg-3 text-center text-lg-right text-muted">
-        <button *ngIf="!question.myVote && authService.isLoggedIn()" type="button" class="btn btn-sm btn-light" (click)="vote(-1)"><i class="fa fa-minus text-danger" aria-hidden="true"></i></button>
-        <button *ngIf="question.myVote == -1 && authService.isLoggedIn()" type="button" class="btn btn-sm" disabled><i class="fa fa-minus text-danger" aria-hidden="true"></i></button>
-        <button *ngIf="question.myVote == 1 && authService.isLoggedIn()" type="button" class="btn btn-sm btn-light" disabled><i class="fa fa-minus text-muted" aria-hidden="true"></i></button>
-
-        <button *ngIf="getVoteSum()" (click)="toggleVoteSum()" type="button" class="btn btn-sm btn-light"><span class="text-success
-" *ngIf="question.plusCount - question.minusCount > 0">{{ question.plusCount - question.minusCount }}</span><span *ngIf="question.plusCount - question.minusCount == 0">{{ question.plusCount - question.minusCount }}</span><span class="text-danger
-" *ngIf="question.plusCount - question.minusCount < 0">{{ question.plusCount - question.minusCount }}</span> ({{ question.vote_count }})</button>
-        <button *ngIf="!getVoteSum()" (click)="toggleVoteSum()" type="button" class="btn btn-sm btn-light"><span class="text-danger" aria-hidden="true">-{{ question.minusCount }}</span> <span class="text-success" aria-hidden="true">+{{ question.plusCount }}</span></button>
-
-        <button *ngIf="!question.myVote && authService.isLoggedIn()"  type="button" class="btn btn-sm btn-light" (click)="vote(1)"><i class="fa fa-plus text-success" aria-hidden="true"></i></button>
-        <button *ngIf="question.myVote == 1 && authService.isLoggedIn()" type="button" class="btn btn-sm" disabled><i class="fa fa-plus text-success" aria-hidden="true"></i></button>
-        <button *ngIf="question.myVote == -1 && authService.isLoggedIn()" type="button" class="btn btn-sm btn-light" disabled><i class="fa fa-plus text-muted" aria-hidden="true"></i></button>
+        <app-vote-button [myVote]="question.myVote" [minusCount]="question.minusCount" [plusCount]="question.plusCount" (onVoted)="vote($event)"></app-vote-button>
       </div>
     </div>
   </div>

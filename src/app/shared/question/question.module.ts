@@ -8,6 +8,7 @@ import { VotesPipe } from '../../pipes/votes.pipe';
 import { AddCommentComponent } from './add-comment/add-comment.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { VoteButtonModule } from '../vote-button/vote-button.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     FormsModule,
     MomentModule,
-    RouterModule
+    RouterModule,
+    VoteButtonModule
   ]
 })
 
