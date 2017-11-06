@@ -8,6 +8,7 @@ import { AuthService } from './services/auth.service';
 import { CommentService } from './services/comment.service';
 import { QuestionService } from './services/question.service';
 import { RegisterService } from './services/register.service';
+import { StatsService } from './services/stats.service';
 
 const appRoutes: Routes = [
   {
@@ -53,7 +54,8 @@ const appRoutes: Routes = [
     AuthService,
     CommentService,
     QuestionService,
-    RegisterService
+    RegisterService,
+    StatsService
   ],
   declarations: [],
 })

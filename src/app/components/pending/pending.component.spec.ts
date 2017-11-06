@@ -7,6 +7,8 @@ import { PendingComponent } from './pending.component';
 import { AuthService } from '../../services/auth.service';
 import { CommentService } from '../../services/comment.service';
 import { QuestionService } from '../../services/question.service';
+import { StatsService } from '../../services/stats.service';
+import { StatsModule } from '../../shared/stats/stats.module';
 
 describe('PendingComponent', () => {
   let component: PendingComponent;
@@ -20,12 +22,14 @@ describe('PendingComponent', () => {
       imports: [
         HttpModule,
         CloudModule,
-        QuestionModule
+        QuestionModule,
+        StatsModule
       ],
       providers: [
         AuthService,
         CommentService,
-        QuestionService
+        QuestionService,
+        StatsService
       ]
     })
     .compileComponents();

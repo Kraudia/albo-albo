@@ -1,10 +1,8 @@
 export interface Stats {
+  answers: number;
   comments: number;
-  questions: number;
   nonpublicQuestions: number;
   publicQuestions: number;
-  favouriteQuestions: number;
-  answers: number;
+  questions: number;
   users: number;
-  votes: number;
 }
