@@ -4,81 +4,63 @@ span {
   line-height: 1.0;
 }
 
-.col-stats {
-  margin: 10px 0;
-}
-
 .stats-number {
   font-size: 30px;
   font-weight: 700;
 }
 
 .stats-description {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 500;
+}
+
+.stats-icon {
+  margin: 10px 0;
+  &:before {
+    font-family: 'FontAwesome', serif;
+    font-size: 40px;
+    position: absolute;
+    top: 0;
+    opacity: 0.1;
+    @media (max-width: 768px) {
+      left: 10%;
+    }
+    @media (min-width: 768px) {
+      left: 35%;
+    }
+  }
+  &:hover:before {
+    opacity: 0.25;
+  }
 }
 
 .stats-questions {
   color: #730046;
   &:before {
-    font-family: 'FontAwesome', serif;
-    font-size: 40px;
     content: '\f128';
-    position: absolute;
-    left: 30px;
-    top: 0;
-    opacity: 0.1;
-  }
-  &:hover:before {
-    opacity: 0.25;
   }
 }
 
 .stats-answers {
   color: #FF3800;
   &:before {
-    font-family: 'FontAwesome', serif;
-    font-size: 40px;
     content: '\f0e0';
-    position: absolute;
-    left: 30px;
-    top: 0;
-    opacity: 0.1;
-  }
-  &:hover:before {
-    opacity: 0.25;
   }
 }
 
 .stats-users {
   color: #167F39;
   &:before {
-    font-family: 'FontAwesome', serif;
-    font-size: 40px;
     content: '\f0c0';
-    position: absolute;
-    left: 30px;
-    top: 0;
-    opacity: 0.1;
-  }
-  &:hover:before {
-    opacity: 0.25;
   }
 }
 
 .stats-comments {
   color: #3498DB;
   &:before {
-    font-family: 'FontAwesome', serif;
-    font-size: 40px;
     content: '\f086';
-    position: absolute;
-    left: 30px;
-    top: 0;
-    opacity: 0.1;
-  }
-  &:hover:before {
-    opacity: 0.25;
   }
 }
+
+
 

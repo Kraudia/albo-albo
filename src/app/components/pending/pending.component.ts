@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { QuestionService } from '../../services/question.service';
 import { Tag } from '../../models/tag';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-pending',
@@ -14,7 +15,11 @@ export class PendingComponent implements OnInit {
   public btnSecond = 'btn-pending-second';
   public tags: Tag[];
 
+  public status = 'PENDING';
+  public answered = 'true';
+
   constructor(
+    public authService: AuthService,
     private questionService: QuestionService
 ) { }
 

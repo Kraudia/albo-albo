@@ -6,6 +6,7 @@ import { PendingComponent } from './pending.component';
 import { CloudModule } from '../../shared/cloud/cloud.module';
 import { QuestionModule } from '../../shared/question/question.module';
 import { StatsModule } from '../../shared/stats/stats.module';
+import { SimpleListModule } from '../../shared/simple-list/simple-list.module';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { StatsModule } from '../../shared/stats/stats.module';
     CloudModule,
     QuestionModule,
     StatsModule,
+    SimpleListModule,
     pendingRouter
   ]
 })

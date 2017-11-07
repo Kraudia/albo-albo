@@ -9,6 +9,7 @@ import { CommentService } from '../../services/comment.service';
 import { QuestionService } from '../../services/question.service';
 import { StatsService } from '../../services/stats.service';
 import { StatsModule } from '../../shared/stats/stats.module';
+import { SimpleListModule } from '../../shared/simple-list/simple-list.module';
 
 describe('PendingComponent', () => {
   let component: PendingComponent;
@@ -23,6 +24,7 @@ describe('PendingComponent', () => {
         HttpModule,
         CloudModule,
         QuestionModule,
+        SimpleListModule,
         StatsModule
       ],
       providers: [
