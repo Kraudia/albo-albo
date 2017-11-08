@@ -16,7 +16,7 @@ export class CloudComponent implements OnChanges {
   @Input('sizeStart') sizeStart = 10;
   @Input('sizeEnd') sizeEnd = 16;
 
-  @Output('selected') selected = new EventEmitter<Tag>();
+  @Output('selected') selected = new EventEmitter<number>();
   public idSelected: number;
 
   constructor(
@@ -42,7 +42,12 @@ export class CloudComponent implements OnChanges {
   }
 
   select(tag: Tag) {
-    this.idSelected = tag.id;
-    this.selected.emit(tag);
+    if (this.idSelected === tag.id) {
+      this.idSelected = null;
+      this.selected.emit(0);
+    } else {
+      this.idSelected = tag.id;
+      this.selected.emit(tag.id);
+    }
   }
 }

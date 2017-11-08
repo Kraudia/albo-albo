@@ -1,11 +1,29 @@
 <div class="row flex-column-reverse flex-md-row">
   <div class="col-md-9">
-    <app-scrollable-list [btnFirst]="btnFirst" [btnSecond]="btnSecond" [status]="status" [order]="sort"></app-scrollable-list>
+    <app-scrollable-list [btnFirst]="btnFirst" [btnSecond]="btnSecond" [status]="status" [order]="sort" [tag]="tag"></app-scrollable-list>
   </div>
 
   <div class="col-md-3">
     <h6>Tagi</h6>
-    <app-cloud [tags]="tags" (selected)="tag()"></app-cloud>
+    <app-cloud [tags]="tags" (selected)="selectTag($event)"></app-cloud>
+
+    <h6>Sortuj wg</h6>
+    <button type="button"
+            [class.btn-sort-selected]="sort == 'created_date DESC' || sort == 'created_date ASC'"
+            class="btn btn-sm btn-sort text-left"
+            (click)="sortBy('created_date DESC')"><i class="fa fa-calendar" aria-hidden="true"></i> daty dodania</button>
+    <button type="button"
+            [class.btn-sort-selected]="sort == 'comments_count DESC' || sort == 'comments_count ASC'"
+            class="btn btn-sm btn-sort text-left"
+            (click)="sortBy('comments_count DESC')"><i class="fa fa-comments-o" aria-hidden="true"></i> komentarzy</button>
+    <button type="button"
+            [class.btn-sort-selected]="sort == 'answer_count DESC' || sort == 'answer_count ASC'"
+            class="btn btn-sm btn-sort text-left"
+            (click)="sortBy('answer_count DESC')"><i class="fa fa-envelope-open-o" aria-hidden="true"></i> odpowiedzi</button>
+    <button type="button"
+            [class.btn-sort-selected]="sort == 'vote_count DESC' || sort == 'vote_count ASC'"
+            class="btn btn-sm btn-sort text-left"
+            (click)="sortBy('vote_count DESC')"><i class="fa fa-check-square-o" aria-hidden="true"></i> głosów</button>
 
     <h6 *ngIf="authService.isLoggedIn()">Historia</h6>
     <app-simple-list *ngIf="authService.isLoggedIn()" [status]="status" [answered]="answered" [order]="order"></app-simple-list>

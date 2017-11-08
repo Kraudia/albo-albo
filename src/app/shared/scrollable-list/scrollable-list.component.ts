@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChange } from '@angular/core';
 import { Question } from '../../models/question';
 import { QuestionService } from '../../services/question.service';
 import { Subscription } from 'rxjs/Subscription';
@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs/Subscription';
   templateUrl: './scrollable-list.component.html',
   styleUrls: ['./scrollable-list.component.scss']
 })
-export class ScrollableListComponent implements OnInit, OnDestroy {
+export class ScrollableListComponent implements OnInit, OnChanges, OnDestroy {
   @Input('btnFirst') btnFirst: string;
   @Input('btnSecond') btnSecond: string;
   @Input('adult') adult: string;
@@ -31,6 +31,15 @@ export class ScrollableListComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.subscription = new Subscription();
+    this.getQuestions();
+  }
+
+  ngOnChanges(changes: {[propertyName: string]: SimpleChange}) {
+    this.subscription.unsubscribe();
+    this.subscription = new Subscription();
+    this.index = null;
+    this.questions = null;
     this.getQuestions();
   }
 
@@ -43,7 +52,9 @@ export class ScrollableListComponent implements OnInit, OnDestroy {
       .subscribe(
         response => {
           this.questions = response;
-          this.index = this.questions[this.questions.length - 1].createdDate;
+          if (this.questions.length > 0) {
+            this.index = this.questions[this.questions.length - 1].createdDate;
+          }
           this.disableScroll = false;
         });
     this.subscription.add(subscription);

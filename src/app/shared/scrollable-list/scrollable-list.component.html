@@ -1,3 +1,9 @@
-<div style="height: 100%" infiniteScroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="throttle"  [infiniteScrollDisabled]="disableScroll" (scrolled)="onScrollDown()">
+<div *ngIf="questions != null && questions.length > 0" style="height: 100%" infiniteScroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="throttle"  [infiniteScrollDisabled]="disableScroll" (scrolled)="onScrollDown()">
     <app-question *ngFor="let question of questions" [oneQuestion]="question" [btnFirst]="btnFirst" [btnSecond]="btnSecond"></app-question>
+</div>
+
+<div class="card bg-light" *ngIf="questions != null && questions.length == 0">
+  <div class="card-body">
+    Brak pytań.
+  </div>
 </div>
