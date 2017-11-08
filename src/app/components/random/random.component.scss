@@ -1,7 +1,14 @@
 .btn-link {
-  color: black;
+  color: #007a00;
 
   &:hover, &:focus {
-    color: green;
+    color: #00a800;
+  }
+
+  &.disabled {
+    color: #e4ffe8;
+    &:hover, &:focus {
+      color: #e4ffe8;
+    }
   }
 }

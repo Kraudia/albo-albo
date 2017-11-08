@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, OnChanges, OnDestroy, SimpleChange, Input, ElementRef } from '@angular/core';
 import { trigger, style, transition, animate, keyframes } from '@angular/animations';
 import { Subscription } from 'rxjs/Subscription';
 import * as moment from 'moment';
@@ -46,7 +46,7 @@ import { animateNumber } from './animateNumber';
     ])
   ]
 })
-export class QuestionComponent implements OnInit, OnDestroy {
+export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
   @Input('btnFirst') btnFirst = 'btn-default-first';
   @Input('btnSecond') btnSecond = 'btn-default-second';
   @Input('idQuestion') idQuestion: string;
@@ -72,6 +72,16 @@ export class QuestionComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    if (!this.oneQuestion) {
+      this.getOneQuestion();
+    } else {
+      this.question = this.oneQuestion;
+    }
+  }
+
+  ngOnChanges(changes: {[propertyName: string]: SimpleChange}) {
+    this.subscription.unsubscribe();
+    this.subscription = new Subscription();
     if (!this.oneQuestion) {
       this.getOneQuestion();
     } else {
@@ -143,7 +153,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
   }
 
   getComments() {
-      const subscription = this.commentService.getComments(this.idQuestion)
+      const subscription = this.commentService.getComments(this.question.id)
         .subscribe(
           response => {
             this.comments = response;

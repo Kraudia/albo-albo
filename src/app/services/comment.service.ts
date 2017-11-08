@@ -18,7 +18,7 @@ export class CommentService {
     private authService: AuthService
   ) { }
 
-  getComments(idQuestion: string): Observable<Comment[]> {
+  getComments(idQuestion: number): Observable<Comment[]> {
     const url = this.host + 'questions/' + idQuestion + '/comments';
     const options = this.authService.getOptions();
 
