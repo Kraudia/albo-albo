@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Location } from '@angular/common';
 import { Question } from '../../models/question';
 import { QuestionService } from '../../services/question.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-random',
@@ -10,8 +11,6 @@ import { QuestionService } from '../../services/question.service';
   styleUrls: ['./random.component.scss']
 })
 export class RandomComponent implements OnInit, OnDestroy {
-  private back: Question[] = [];
-  private forward: Question[] = [];
   public question: Question;
   public btnFirst = 'btn-random-first';
   public btnSecond = 'btn-random-second';
@@ -20,19 +19,41 @@ export class RandomComponent implements OnInit, OnDestroy {
 
   constructor(
     private location: Location,
-    private questionService: QuestionService
+    private questionService: QuestionService,
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    this.getRandomQuestion();
+    this.route.params.subscribe(
+      params => {
+        console.log(params);
+        console.log('route =', this.route);
+        console.log('route.url =', this.route.url);
+        console.log('router =',  this.router);
+        console.log('router.url =',  this.router.url);
+        if (params['id']) {
+          this.getOneQuestion(params['id']);
+        } else {
+          this.getRandomQuestion();
+        }
+      });
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 
-  changeLocation() {
-    this.location.replaceState('/' + this.question.id + '/' + this.question.shortLink);
+  getOneQuestion(id: string) {
+      const subscription = this.questionService.getOneQuestion(id)
+        .subscribe(
+          response => {
+            this.question = response;
+            if (this.question) {
+              this.router.navigate(['pytanie', this.question.id, this.question.shortLink], {replaceUrl: true});
+            }
+          });
+      this.subscription.add(subscription);
   }
 
   getRandomQuestion() {
@@ -41,30 +62,21 @@ export class RandomComponent implements OnInit, OnDestroy {
         response => {
             this.question = response.shift();
             if (this.question) {
-              this.changeLocation();
+              if (this.router.url === '/pytanie') {
+                this.router.navigate(['pytanie', this.question.id, this.question.shortLink], {replaceUrl: true});
+              } else {
+                this.router.navigate(['pytanie', this.question.id, this.question.shortLink], {replaceUrl: false});
+              }
             }
         });
     this.subscription.add(subscription);
   }
 
   goBack() {
-    if (this.back.length > 0) {
-      this.forward = [this.question, ...this.forward];
-      this.question = this.back.pop();
-      this.changeLocation();
-    }
+    this.location.back();
   }
 
   goForward() {
-    if (this.forward.length > 0) {
-      this.back[this.back.length] = this.question;
-      this.question = this.forward.shift();
-      this.changeLocation();
-    } else {
-      this.back[this.back.length] = this.question;
-      this.subscription.unsubscribe();
-      this.subscription = new Subscription();
       this.getRandomQuestion();
-    }
   }
 }
