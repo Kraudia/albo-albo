@@ -2,9 +2,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpModule } from '@angular/http';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
+import { AcceptedComponent } from './accepted.component';
 import { CloudModule } from '../../shared/cloud/cloud.module';
 import { QuestionModule } from '../../shared/question/question.module';
-import { PendingComponent } from './pending.component';
 import { AuthService } from '../../services/auth.service';
 import { CommentService } from '../../services/comment.service';
 import { QuestionService } from '../../services/question.service';
@@ -12,23 +12,21 @@ import { StatsService } from '../../services/stats.service';
 import { StatsModule } from '../../shared/stats/stats.module';
 import { SimpleListModule } from '../../shared/simple-list/simple-list.module';
 import { ScrollableListModule } from '../../shared/scrollable-list/scrollable-list.module';
-import { RouterTestingModule } from '@angular/router/testing';
 
-describe('PendingComponent', () => {
-  let component: PendingComponent;
-  let fixture: ComponentFixture<PendingComponent>;
+describe('AcceptedComponent', () => {
+  let component: AcceptedComponent;
+  let fixture: ComponentFixture<AcceptedComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        PendingComponent
+        AcceptedComponent
       ],
       imports: [
         HttpModule,
         InfiniteScrollModule,
         CloudModule,
         QuestionModule,
-        RouterTestingModule,
         ScrollableListModule,
         SimpleListModule,
         StatsModule
@@ -40,11 +38,11 @@ describe('PendingComponent', () => {
         StatsService
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PendingComponent);
+    fixture = TestBed.createComponent(AcceptedComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

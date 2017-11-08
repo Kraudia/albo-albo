@@ -1,0 +1,7 @@
+.btn-link {
+  color: black;
+
+  &:hover, &:focus {
+    color: green;
+  }
+}

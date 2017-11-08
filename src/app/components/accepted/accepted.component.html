@@ -4,18 +4,14 @@
   </div>
 
   <div class="col-md-3">
-    <h6>Poczekalnia</h6>
-      <p class="p-info">Tutaj trafiają wszystkie pytania dodane przez użytkowników. Od was zależy, które z nich zostaną przeniesione do <a [routerLink]="['/najnowsze']">najnowszych</a>. Ostateczny wybór należy do moderacji.</p>
-
-
     <h6>Tagi</h6>
     <app-cloud [tags]="tags" (selected)="selectTag($event)"></app-cloud>
 
     <h6>Sortuj wg</h6>
     <button type="button"
-            [class.btn-sort-selected]="sort == 'created_date DESC' || sort == 'created_date ASC'"
+            [class.btn-sort-selected]="sort == 'accepted_date DESC' || sort == 'accepted_date ASC'"
             class="btn btn-sm btn-sort text-left"
-            (click)="sortBy('created_date DESC')"><i class="fa fa-calendar" aria-hidden="true"></i> daty dodania</button>
+            (click)="sortBy('accepted_date DESC')"><i class="fa fa-calendar" aria-hidden="true"></i> daty akceptacji</button>
     <button type="button"
             [class.btn-sort-selected]="sort == 'comments_count DESC' || sort == 'comments_count ASC'"
             class="btn btn-sm btn-sort text-left"

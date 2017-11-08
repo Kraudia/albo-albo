@@ -1,1 +1,11 @@
-<app-question [idQuestion]="question"></app-question>
+<div class="row align-items-center">
+  <div class="order-md-1 col-md-1 col-6">
+    <button class="btn btn-block btn-link align-self-stretch" (click)="goBack()"><i class="fa fa-chevron-left fa-2x" aria-hidden="true"></i></button>
+  </div>
+  <div class="order-md-3 col-md-1 col-6">
+    <button class="btn btn-block btn-link align-self-stretch" (click)="goForward()"><i class="fa fa-chevron-right fa-2x" aria-hidden="true"></i></button>
+  </div>
+  <div class="order-md-2 col-md-10 col-12">
+    <app-question [idQuestion]="question" [btnFirst]="btnFirst" [btnSecond]="btnSecond"></app-question>
+  </div>
+</div>

@@ -28,6 +28,24 @@ body {
   background-color: $color-facebook;
 }
 
+.btn-accepted-first {
+  color: #000;
+  background-color: $green-lighter;
+
+  &:hover {
+    background-color: $green-light;
+  }
+}
+
+.btn-accepted-second {
+  color: #000;
+  background-color: $turquise-lighter;
+
+  &:hover {
+    background-color: $turquise-light;
+  }
+}
+
 .btn-pending-first {
   color: #000;
   background-color: $orange-lighter;
@@ -43,6 +61,24 @@ body {
 
   &:hover {
     background-color: $orange-darker;
+  }
+}
+
+.btn-random-first {
+  color: #000;
+  background-color: $pink-lighter;
+
+  &:hover {
+    background-color: $pink-light;
+  }
+}
+
+.btn-random-second {
+  color: #000;
+  background-color: $yellow-lighter;
+
+  &:hover {
+    background-color: $yellow-light;
   }
 }
 

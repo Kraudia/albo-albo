@@ -16,6 +16,10 @@ const appRoutes: Routes = [
     loadChildren: 'app/components/random/random.module#RandomModule'
   },
   {
+    path: 'najnowsze',
+    loadChildren: 'app/components/accepted/accepted.module#AcceptedModule'
+  },
+  {
     path: 'poczekalnia',
     loadChildren: 'app/components/pending/pending.module#PendingModule'
   },

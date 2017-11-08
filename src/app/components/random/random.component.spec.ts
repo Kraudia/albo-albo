@@ -6,6 +6,7 @@ import { QuestionModule } from '../../shared/question/question.module';
 import { AuthService } from '../../services/auth.service';
 import { CommentService } from '../../services/comment.service';
 import { QuestionService } from '../../services/question.service';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('RandomComponent', () => {
   let component: RandomComponent;
@@ -15,7 +16,8 @@ describe('RandomComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         HttpModule,
-        QuestionModule
+        QuestionModule,
+        RouterTestingModule
       ],
       declarations: [
         RandomComponent
