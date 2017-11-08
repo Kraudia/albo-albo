@@ -21,6 +21,16 @@ export class QuestionService {
     private authService: AuthService
   ) { }
 
+
+  answerQuestion(question: number, answer: number) {
+    const url = this.host + 'answers';
+    const options = this.authService.getOptions();
+
+    return this.http.post(url, JSON.stringify({question, answer}), options)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
   getOneQuestion(id: string): Observable<Question> {
     const url = this.host + this.questionsUrl + '/' + id;
     const options = this.authService.getOptions();
@@ -29,26 +39,29 @@ export class QuestionService {
       .map((res) => res.json());
   }
 
-  getQuestions(adult: string, answered: string, status: string, limit: number, page: number, order: string) {
-    // order = (random|((created|accepted|answered)_date|(answer|vote|favourite|comments)_count) (ASC|DESC))
+  getQuestions(adult: string, answered: string, index: string, limit: number, order: string, status: string, tag: number) {
     let url = this.host + 'questions?';
-    if (order) {
-      url += `&order=${ order }`;
-    }
     if (adult) {
       url += `&adult=${ adult }`;
     }
     if (answered) {
       url += `&answered=${ answered }`;
     }
-    if (status) {
-      url += `&status=${ status }`;
+    if (index) {
+      url += `&index=${ index }`;
     }
     if (limit) {
       url += `&limit=${ limit }`;
     }
-    if (page) {
-      url += `&page=${ page }`;
+    if (order) {
+      // order = (random|((created|accepted|answered)_date|(answer|vote|favourite|comments)_count) (ASC|DESC))
+      url += `&order=${ order }`;
+    }
+    if (status) {
+      url += `&status=${ status }`;
+    }
+    if (tag) {
+      url += `&tag=${ tag }`;
     }
 
     const options = this.authService.getOptions();

@@ -11,10 +11,11 @@ import { Subscription } from 'rxjs/Subscription';
 export class SimpleListComponent implements OnInit, OnDestroy {
   @Input('adult') adult: string;
   @Input('answered') answered: string;
-  @Input('status') status: string;
+  @Input('index') index: string;
   @Input('limit') limit = 5;
-  @Input('page') page: number;
   @Input('order') order: string;
+  @Input('status') status: string;
+  @Input('tag') tag: number;
 
   private subscription = new Subscription();
   public questions: Question[];
@@ -32,7 +33,7 @@ export class SimpleListComponent implements OnInit, OnDestroy {
   }
 
   getQuestions() {
-    const subscription = this.questionService.getQuestions(this.adult, this.answered, this.status, this.limit, this.page, this.order)
+    const subscription = this.questionService.getQuestions(this.adult, this.answered, this.index, this.limit, this.order, this.status, this.tag)
         .subscribe(
           response => {
             this.questions = response;

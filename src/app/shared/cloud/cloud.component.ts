@@ -1,5 +1,6 @@
-import {Component, OnInit, Input, SimpleChanges, SimpleChange, OnChanges} from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, SimpleChange, OnChanges, Output, EventEmitter } from '@angular/core';
 import { tagCloud } from './tagcloud';
+import { Tag } from '../../models/tag';
 declare const $: any;
 
 @Component({
@@ -14,6 +15,9 @@ export class CloudComponent implements OnChanges {
   @Input('colorEnd') colorEnd = '#000000';
   @Input('sizeStart') sizeStart = 10;
   @Input('sizeEnd') sizeEnd = 16;
+
+  @Output('selected') selected = new EventEmitter<Tag>();
+  public idSelected: number;
 
   constructor(
   ) { }
@@ -33,7 +37,12 @@ export class CloudComponent implements OnChanges {
     };
 
     $(function () {
-      $('#whatever button').tagcloud();
+      $('#tagCloud button').tagcloud();
     });
+  }
+
+  select(tag: Tag) {
+    this.idSelected = tag.id;
+    this.selected.emit(tag);
   }
 }

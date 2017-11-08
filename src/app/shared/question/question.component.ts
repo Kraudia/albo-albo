@@ -50,6 +50,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
   @Input('btnFirst') btnFirst = 'btn-default-first';
   @Input('btnSecond') btnSecond = 'btn-default-second';
   @Input('idQuestion') idQuestion: string;
+  @Input('oneQuestion') oneQuestion: Question;
   private subscription = new Subscription();
 
   public comments: Comment[];
@@ -71,18 +72,22 @@ export class QuestionComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.getOneQuestion();
+    if (!this.oneQuestion) {
+      this.getOneQuestion();
+    } else {
+      this.question = this.oneQuestion;
+    }
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 
-  answer(id: number) {
+  answer(answer: number) {
     if (!this.question.myAnswer) {
       this.state = true;
-      this.question.myAnswer = id;
-      if (id === 1) {
+      this.question.myAnswer = answer;
+      if (answer === 1) {
         this.stateFirst = 'answered';
         this.question.firstCount += 1;
       } else {
@@ -91,6 +96,10 @@ export class QuestionComponent implements OnInit, OnDestroy {
       }
       this.loadProgress();
       this.animateVoteNumber();
+
+      const subscription = this.questionService.answerQuestion(this.question.id, answer)
+        .subscribe();
+      this.subscription.add(subscription);
     }
   }
 
@@ -172,7 +181,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
 
     const subscription = this.questionService.voteQuestion(this.question.id, value).subscribe(
       res => {
-        this.question.myAnswer = value;
+        this.question.myVote = value;
       }
     );
     this.subscription.add(subscription);

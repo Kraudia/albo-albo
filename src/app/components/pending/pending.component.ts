@@ -10,13 +10,15 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./pending.component.scss']
 })
 export class PendingComponent implements OnInit {
-  public question = '2';
+  public answered = 'true';
   public btnFirst = 'btn-pending-first';
   public btnSecond = 'btn-pending-second';
-  public tags: Tag[];
 
+  public sort = 'created_date DESC';
+
+  public order = 'answered_date DESC';
   public status = 'PENDING';
-  public answered = 'true';
+  public tags: Tag[];
 
   constructor(
     public authService: AuthService,

@@ -1,3 +1,5 @@
-<div id="whatever">
-  <button type="button" class="btn btn-sm btn-link" *ngFor="let tag of tags" [attr.rel]="tag.questionsCount">{{ tag.name }}</button>
+<div id="tagCloud">
+  <ng-container *ngFor="let tag of tags">
+    <button type="button" class="btn btn-sm" [class.btn-link]="tag.id != idSelected" [class.btn-light]="tag.id == idSelected" [attr.rel]="tag.questionsCount" (click)="select(tag)">{{ tag.name }}</button>
+  </ng-container>
 </div>
