@@ -81,13 +81,21 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: {[propertyName: string]: SimpleChange}) {
-    this.subscription.unsubscribe();
-    this.subscription = new Subscription();
+    this.clear();
     if (!this.oneQuestion) {
       this.getOneQuestion();
     } else {
       this.question = this.oneQuestion;
+      this.loadProgress();
     }
+  }
+
+  clear() {
+    this.subscription.unsubscribe();
+    this.subscription = new Subscription();
+    this.firstCountPercentage = 0;
+    this.secondCountPercentage = 0;
+    this.question = null;
   }
 
   ngOnDestroy() {
@@ -106,7 +114,6 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
         this.question.secondCount += 1;
       }
       this.loadProgress();
-
       const subscription = this.questionService.answerQuestion(this.question.id, answer)
         .subscribe();
       this.subscription.add(subscription);
@@ -114,29 +121,33 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   loadProgress() {
-    this.firstCountPercentage = Math.round(this.question.firstCount / (this.question.firstCount + this.question.secondCount) * 100);
-    this.secondCountPercentage = Math.round(this.question.secondCount / (this.question.firstCount + this.question.secondCount) * 100);
-    this.animateVoteNumber();
+    if (this.question.myAnswer) {
+      this.firstCountPercentage = Math.round(this.question.firstCount / (this.question.firstCount + this.question.secondCount) * 100);
+      this.secondCountPercentage = Math.round(this.question.secondCount / (this.question.firstCount + this.question.secondCount) * 100);
+      this.animateVoteNumber();
+    }
   }
 
   animateVoteNumber() {
-    animateNumber();
-    const percent_number_step = $.animateNumber.numberStepFactories.append(' %');
-    $(this.elementRef.nativeElement).find('.firstVoteNumber').animateNumber(
-      {
-        number: this.firstCountPercentage,
-        easing: 'easeInQuad',
-        numberStep: percent_number_step
-      }, 2000
-    );
+    if (this.question.myAnswer) {
+      animateNumber();
+      const percent_number_step = $.animateNumber.numberStepFactories.append(' %');
+      $(this.elementRef.nativeElement).find('.firstVoteNumber').animateNumber(
+        {
+          number: this.firstCountPercentage,
+          easing: 'easeInQuad',
+          numberStep: percent_number_step
+        }
+      );
 
-    $(this.elementRef.nativeElement).find('.secondVoteNumber').animateNumber(
-      {
-        number: this.secondCountPercentage,
-        easing: 'easeInQuad',
-        numberStep: percent_number_step
-      }, 2000
-    );
+      $(this.elementRef.nativeElement).find('.secondVoteNumber').animateNumber(
+        {
+          number: this.secondCountPercentage,
+          easing: 'easeInQuad',
+          numberStep: percent_number_step
+        }
+      );
+    }
   }
 
   getOneQuestion() {
@@ -145,9 +156,7 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
         .subscribe(
           response => {
             this.question = response;
-            if (this.question.myAnswer) {
-              this.loadProgress();
-            }
+            this.loadProgress();
           });
       this.subscription.add(subscription);
     }

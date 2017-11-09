@@ -52,7 +52,7 @@ export class RandomComponent implements OnInit, OnDestroy {
   }
 
   getRandomQuestion() {
-    const subscription = this.questionService.getQuestions(null, null, null, 1, 'random', null, null)
+    const subscription = this.questionService.getQuestions(null, 'false', null, 1, 'random', null, null)
       .subscribe(
         response => {
             this.question = response.shift();
