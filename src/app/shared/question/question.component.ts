@@ -76,6 +76,7 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
       this.getOneQuestion();
     } else {
       this.question = this.oneQuestion;
+      this.loadProgress();
     }
   }
 
@@ -105,7 +106,6 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
         this.question.secondCount += 1;
       }
       this.loadProgress();
-      this.animateVoteNumber();
 
       const subscription = this.questionService.answerQuestion(this.question.id, answer)
         .subscribe();
@@ -116,6 +116,7 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
   loadProgress() {
     this.firstCountPercentage = Math.round(this.question.firstCount / (this.question.firstCount + this.question.secondCount) * 100);
     this.secondCountPercentage = Math.round(this.question.secondCount / (this.question.firstCount + this.question.secondCount) * 100);
+    this.animateVoteNumber();
   }
 
   animateVoteNumber() {
@@ -163,10 +164,6 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
 
   hideComments() {
     this.comments = null;
-  }
-
-  goToQuestionPage() {
-    // TODO: go to question page
   }
 
   goToUserPage() {

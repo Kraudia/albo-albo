@@ -2,7 +2,7 @@
   <div class="card-header bg-light">
     <div class="row align-items-center">
       <div class="col-lg-2 text-center text-lg-left">
-        <button type="button" class="btn btn-light" (click)="goToQuestionPage()"><i class="fa fa-hashtag" aria-hidden="true"></i>{{ question.id }}</button>
+        <a class="btn btn-light" [routerLink]="['/pytanie', question.id, question.shortLink]" aria-label="Przejdź do strony pytania"><i class="fa fa-hashtag" aria-hidden="true"></i>{{ question.id }}</a>
       </div>
       <div class="col-lg-8"><h4 class="card-title text-center">{{ question.value }}</h4></div>
       <div class="col-lg-2 text-center text-lg-right text-muted">{{ question.createdDate | amTimeAgo }}</div>
