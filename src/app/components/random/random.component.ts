@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { Location } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 import { Question } from '../../models/question';
 import { QuestionService } from '../../services/question.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -21,7 +22,8 @@ export class RandomComponent implements OnInit, OnDestroy {
     private location: Location,
     private questionService: QuestionService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private titleService: Title
   ) { }
 
   ngOnInit() {
@@ -44,9 +46,7 @@ export class RandomComponent implements OnInit, OnDestroy {
         .subscribe(
           response => {
             this.question = response;
-            if (this.question) {
-              this.router.navigate(['pytanie', this.question.id, this.question.shortLink], {replaceUrl: true});
-            }
+            this.setTitle();
           });
       this.subscription.add(subscription);
   }
@@ -56,15 +56,22 @@ export class RandomComponent implements OnInit, OnDestroy {
       .subscribe(
         response => {
             this.question = response.shift();
-            if (this.question) {
-              if (this.router.url === '/pytanie') {
-                this.router.navigate(['pytanie', this.question.id, this.question.shortLink], {replaceUrl: true});
-              } else {
-                this.router.navigate(['pytanie', this.question.id, this.question.shortLink], {replaceUrl: false});
-              }
-            }
+            this.setTitle();
         });
     this.subscription.add(subscription);
+  }
+
+  setTitle() {
+    if (this.question) {
+      if (this.router.url === '/pytanie') {
+        this.router.navigate(['pytanie', this.question.id, this.question.shortLink], {replaceUrl: true});
+      } else {
+        this.router.navigate(['pytanie', this.question.id, this.question.shortLink], {replaceUrl: false});
+      }
+
+      const title = `#${this.question.id} - ${this.question.value} - Albo Albo`;
+      this.titleService.setTitle(title);
+    }
   }
 
   goBack() {

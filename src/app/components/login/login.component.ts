@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 import { AuthService } from '../../services/auth.service';
 
@@ -13,10 +14,17 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private titleService: Title
   ) { }
 
   ngOnInit() {
+    this.setTitle();
+  }
+
+  setTitle() {
+    const title = `Zaloguj się - Albo Albo`;
+    this.titleService.setTitle(title);
   }
 
   login(username: string, password: string) {

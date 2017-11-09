@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 import { QuestionService } from '../../services/question.service';
 import { Tag } from '../../models/tag';
@@ -23,11 +24,18 @@ export class PendingComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
-    private questionService: QuestionService
+    private questionService: QuestionService,
+    private titleService: Title
 ) { }
 
   ngOnInit() {
+    this.setTitle();
     this.getTags();
+  }
+
+  setTitle() {
+    const title = `Poczekalnia - Albo Albo`;
+    this.titleService.setTitle(title);
   }
 
   getTags() {

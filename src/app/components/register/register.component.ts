@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 import { PasswordValidation } from './PasswordValidation';
 import { validationErrors } from './validationMessages';
 
@@ -21,13 +22,24 @@ export class RegisterComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private registerService: RegisterService,
-    private router: Router
+    private router: Router,
+    private titleService: Title
   ) {
     this.validated = false;
     this.checked = false;
   }
 
   ngOnInit() {
+    this.setTitle();
+    this.buildForm();
+  }
+
+  setTitle() {
+    const title = `Zarejestruj się - Albo Albo`;
+    this.titleService.setTitle(title);
+  }
+
+  buildForm() {
     this.registerForm = this.formBuilder.group({
       inputLogin: [null, [
         Validators.required,

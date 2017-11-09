@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-page-not-found',
@@ -8,9 +9,18 @@ import { Location } from '@angular/common';
 })
 export class PageNotFoundComponent implements OnInit {
 
-  constructor(private location: Location) { }
+  constructor(
+    private location: Location,
+    private titleService: Title
+  ) { }
 
   ngOnInit() {
+    this.setTitle();
+  }
+
+  setTitle() {
+    const title = `Nie ma takiej strony - Albo Albo`;
+    this.titleService.setTitle(title);
   }
 
   backLocation() {
