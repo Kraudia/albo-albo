@@ -13,6 +13,11 @@ import { StatsService } from './services/stats.service';
 const appRoutes: Routes = [
   {
     path: '',
+    redirectTo: 'pytanie',
+    pathMatch: 'full'
+  },
+  {
+    path: 'pytanie',
     loadChildren: 'app/components/random/random.module#RandomModule'
   },
   {

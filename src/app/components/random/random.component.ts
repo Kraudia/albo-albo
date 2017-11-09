@@ -27,11 +27,6 @@ export class RandomComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.route.params.subscribe(
       params => {
-        console.log(params);
-        console.log('route =', this.route);
-        console.log('route.url =', this.route.url);
-        console.log('router =',  this.router);
-        console.log('router.url =',  this.router.url);
         if (params['id']) {
           this.getOneQuestion(params['id']);
         } else {

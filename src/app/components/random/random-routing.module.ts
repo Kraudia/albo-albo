@@ -4,19 +4,14 @@ import { RandomComponent } from './random.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'pytanie',
-    pathMatch: 'full'
-  },
-  {
-    path: 'pytanie',
     component: RandomComponent
   },
   {
-    path: 'pytanie/:id',
+    path: ':id',
     component: RandomComponent
   },
   {
-    path: 'pytanie/:id/:short',
+    path: ':id/:short',
     component: RandomComponent
   }
 ];
