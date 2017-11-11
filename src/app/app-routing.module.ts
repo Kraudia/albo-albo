@@ -10,6 +10,7 @@ import { CommentService } from './services/comment.service';
 import { QuestionService } from './services/question.service';
 import { RegisterService } from './services/register.service';
 import { StatsService } from './services/stats.service';
+import { ModGuard } from './guards/mod.guard';
 
 const appRoutes: Routes = [
   {
@@ -45,8 +46,9 @@ const appRoutes: Routes = [
     canLoad: [ OnlyNotLoggedInUsersGuard ]
   },
   {
-    path: 'profil',
-    loadChildren: 'app/components/profile/profile.module#ProfileModule'
+    path: 'moderacja',
+    loadChildren: 'app/components/mod/mod.module#ModModule',
+    canLoad: [ ModGuard, OnlyLoggedInUsersGuard ]
   },
   {
     path: '**',
@@ -68,6 +70,7 @@ const appRoutes: Routes = [
     RouterModule
   ],
   providers: [
+    ModGuard,
     OnlyLoggedInUsersGuard,
     OnlyNotLoggedInUsersGuard,
     AddQuestionService,
