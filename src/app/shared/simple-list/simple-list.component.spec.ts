@@ -4,6 +4,7 @@ import { HttpModule } from '@angular/http';
 import { SimpleListComponent } from './simple-list.component';
 import { QuestionService } from '../../services/question.service';
 import { AuthService } from '../../services/auth.service';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('SimpleListComponent', () => {
   let component: SimpleListComponent;
@@ -15,7 +16,8 @@ describe('SimpleListComponent', () => {
         SimpleListComponent
       ],
       imports: [
-        HttpModule
+        HttpModule,
+        RouterTestingModule
       ],
       providers: [
         AuthService,
