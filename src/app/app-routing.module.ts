@@ -17,6 +17,11 @@ const appRoutes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'dodaj',
+    loadChildren: 'app/components/add-question/add-question.module#AddQuestionModule',
+    canLoad: [ OnlyLoggedInUsersGuard ]
+  },
+  {
     path: 'pytanie',
     loadChildren: 'app/components/random/random.module#RandomModule'
   },

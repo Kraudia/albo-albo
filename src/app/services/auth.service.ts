@@ -26,7 +26,11 @@ export class AuthService {
   }
 
   isLoggedIn() {
-    return !!this.currentUser;
+    if (this.currentUser) {
+      return true;
+    } else {
+      return !!localStorage.getItem('currentUser');
+    }
   }
 
   isNotLoggedIn() {
