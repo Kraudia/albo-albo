@@ -1,3 +1,58 @@
-<p>
-  add-question works!
-</p>
+<div class="row justify-content-md-center">
+  <div class="col-lg-10">
+    <form id="needs-validation" [formGroup]="addQuestionForm" novalidate (keyup.enter)="addQuestion(inputValue.value, inputFirstAnswer.value, inputSecondAnswer.value)">
+      <div class="container"  [ngClass]="{'was-validated': isFormValid()}">
+
+        <h1>Dodaj pytanie</h1>
+
+        <div class="form-group row">
+          <label for="inputValue" class="col-sm-2 col-form-label text-left">Pytanie</label>
+          <div class="col-sm-10">
+            <input #inputValue id="inputValue" type="text" class="form-control" [ngClass]="displayFieldCss('inputValue')" placeholder="Co wolisz" formControlName="inputValue" required />
+            <small class="invalid-feedback" *ngFor="let field of getKeysOfObject(addQuestionForm.get('inputValue').errors)">
+              {{ validationMessages.inputValue[field] }}
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="inputFirstAnswer" class="col-sm-2 col-form-label text-left">Odpowiedź A</label>
+          <div class="col-sm-10">
+            <input #inputFirstAnswer id="inputFirstAnswer" formControlName="inputFirstAnswer" type="text" class="form-control" [ngClass]="displayFieldCss('inputFirstAnswer')" placeholder="Wpisz odpowiedź, która będzie po lewej" required />
+            <small class="invalid-feedback">
+              <span *ngFor="let field of getKeysOfObject(addQuestionForm.get('inputFirstAnswer').errors)">{{ validationMessages.inputFirstAnswer[field] }}</span>
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="inputSecondAnswer" class="col-sm-2 col-form-label text-left">Odpowiedź B</label>
+          <div class="col-sm-10">
+            <input #inputSecondAnswer id="inputSecondAnswer" formControlName="inputSecondAnswer" type="text" class="form-control" [ngClass]="displayFieldCss('inputSecondAnswer')" placeholder="Wpisz odpowiedź, która będzie po lewej" required />
+            <small class="invalid-feedback">
+              <span *ngFor="let field of getKeysOfObject(addQuestionForm.get('inputSecondAnswer').errors)">{{ validationMessages.inputSecondAnswer[field] }}</span>
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="form-check">
+            <div class="col">
+              <label class="form-check-label" (change)="clickCheckbox()">
+                <input class="form-check-input" type="checkbox" [checked]="isChecked()" id="inputCheckbox">
+                Pytanie zawiera treść nieodpowiednią dla osób poniżej 18 roku życia.
+              </label>
+            </div>
+          </div>
+        </div>
+        <button class="btn brn-secondary btn-block" type="reset" (click)="reset()">Anuluj</button>
+
+        <button class="btn btn-primary btn-block" type="button" (click)="addQuestion(inputValue.value, inputFirstAnswer.value, inputSecondAnswer.value)">Dodaj pytanie</button>
+
+        <p class="text-center text-danger" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </p>
+      </div>
+    </form>
+  </div>
+</div>

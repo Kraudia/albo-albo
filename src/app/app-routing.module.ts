@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { OnlyLoggedInUsersGuard } from './guards/only-logged-in-users.guard';
 import { OnlyNotLoggedInUsersGuard } from './guards/only-not-logged-in-users.guard';
 
+import { AddQuestionService } from './services/add-question.service';
 import { AuthService } from './services/auth.service';
 import { CommentService } from './services/comment.service';
 import { QuestionService } from './services/question.service';
@@ -65,6 +66,7 @@ const appRoutes: Routes = [
   providers: [
     OnlyLoggedInUsersGuard,
     OnlyNotLoggedInUsersGuard,
+    AddQuestionService,
     AuthService,
     CommentService,
     QuestionService,
