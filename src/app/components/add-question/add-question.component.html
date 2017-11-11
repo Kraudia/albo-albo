@@ -45,9 +45,11 @@
             </div>
           </div>
         </div>
-        <button class="btn brn-secondary btn-block" type="reset" (click)="reset()">Anuluj</button>
+        <button class="btn btn-secondary btn-block" type="reset" (click)="reset()">Anuluj</button>
 
-        <button class="btn btn-primary btn-block" type="button" (click)="addQuestion(inputValue.value, inputFirstAnswer.value, inputSecondAnswer.value)">Dodaj pytanie</button>
+        <button class="btn btn-primary btn-block btn-add" type="button" (click)="addQuestion(inputValue.value, inputFirstAnswer.value, inputSecondAnswer.value)">Dodaj pytanie</button>
+
+        <p class="text-muted text-justify">Bądź Polakiem, pisz poprawną polszczyzną. Wszystkie pytania będą moderowane w celu uniknięcia duplikatów, wulgaryzmów lub przejawów lenistwa.</p>
 
         <p class="text-center text-danger" *ngIf="errorMessage">
           {{ errorMessage }}

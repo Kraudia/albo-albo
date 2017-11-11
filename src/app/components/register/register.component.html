@@ -2,13 +2,7 @@
   <div class="col-lg-10">
     <form id="needs-validation" [formGroup]="registerForm" novalidate (keyup.enter)="register(inputLogin.value, inputEmail.value, inputPassword.value, inputDate.value)">
       <div class="container"  [ngClass]="{'was-validated': isFormValid()}">
-        <h5 class="text-center">Zarejestruj się</h5>
-        <button class="btn btn-facebook btn-block" type="button">Zarejestruj się przez <strong>Facebook</strong></button>
-        <button class="btn btn-google btn-block" type="button">Zarejestruj się przez <strong>Google</strong></button>
-
-        <p class="text-center">
-          lub
-        </p>
+        <h1 class="text-center">Zarejestruj się</h1>
 
         <div class="form-group row">
           <label for="inputLogin" class="col-sm-2 col-form-label text-left">Login</label>
@@ -70,7 +64,7 @@
             </div>
           </div>
         </div>
-        <button class="btn brn-secondary btn-block btn-register" type="reset" (click)="reset()">Anuluj</button>
+        <button class="btn btn-secondary btn-block btn-register" type="reset" (click)="reset()">Anuluj</button>
 
         <button class="btn btn-primary btn-block btn-register" type="button" (click)="register(inputLogin.value, inputEmail.value, inputPassword.value, inputDate.value)">Zarejestruj się</button>
 
