@@ -45,6 +45,10 @@ const appRoutes: Routes = [
     canLoad: [ OnlyNotLoggedInUsersGuard ]
   },
   {
+    path: 'profil',
+    loadChildren: 'app/components/profile/profile.module#ProfileModule'
+  },
+  {
     path: '**',
     redirectTo: '404'
   },
