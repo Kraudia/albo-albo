@@ -1,3 +1,3 @@
-<ul class="list-group" *ngIf="questions">
-  <li *ngFor="let question of questions" class="list-group-item list-group-item-action">Wolisz <strong>{{ question.myAnswer ? (question.myAnswer == 1 ? question.firstAnswer : question.secondAnswer) : question.firstAnswer }}</strong> niż {{ question.myAnswer ? (question.myAnswer == 1 ? question.secondAnswer : question.firstAnswer) : question.secondAnswer }}.</li>
-</ul>
+<div class="list-group" *ngIf="questions">
+  <a *ngFor="let question of questions" [routerLink]="['/pytanie', question.id, question.shortLink]" class="list-group-item list-group-item-action">Wolisz <strong>{{ question.myAnswer ? (question.myAnswer == 1 ? question.firstAnswer : question.secondAnswer) : question.firstAnswer }}</strong> niż {{ question.myAnswer ? (question.myAnswer == 1 ? question.secondAnswer : question.firstAnswer) : question.secondAnswer }}.</a>
+</div >
