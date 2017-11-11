@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { Stats } from '../../models/stats';
 import { StatsService } from '../../services/stats.service';
@@ -9,6 +9,7 @@ import { StatsService } from '../../services/stats.service';
   styleUrls: ['stats.component.scss']
 })
 export class StatsComponent implements OnInit, OnDestroy {
+  @Input('status') status: string;
   private subscription = new Subscription();
   public stats: Stats;
 
@@ -29,7 +30,6 @@ export class StatsComponent implements OnInit, OnDestroy {
       .subscribe(
         response => {
           this.stats = response;
-          this.stats.questions = this.stats.nonpublicQuestions + this.stats.publicQuestions;
         });
     this.subscription.add(subscription);
   }

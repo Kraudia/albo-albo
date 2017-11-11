@@ -29,6 +29,6 @@
     <app-simple-list *ngIf="authService.isLoggedIn()" [status]="status" [answered]="answered" [order]="order"></app-simple-list>
 
     <h6>Statystyki</h6>
-    <app-stats></app-stats>
+    <app-stats [status]="status"></app-stats>
   </div>
 </div>

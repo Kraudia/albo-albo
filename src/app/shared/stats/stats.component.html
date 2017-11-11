@@ -1,23 +1,29 @@
 <div class="row" *ngIf="stats">
-  <div class="col-6 text-center stats-icon stats-questions">
-    <span class="stats-number">{{ stats.questions }}</span>
+  <div class="col-6 text-center stats-icon stats-questions" [ngSwitch]="status">
+    <span class="stats-number" *ngSwitchCase="'ACCEPTED'">{{ stats.questions.accepted }}</span>
+    <span class="stats-number" *ngSwitchCase="'PENDING'">{{ stats.questions.pending }}</span>
+    <span class="stats-number" *ngSwitchDefault>{{ stats.questions.accepted + stats.questions.pending }}</span>
     <span class="stats-description">pytań</span>
   </div>
 
-  <div class="col-6 text-center stats-icon stats-answers">
-    <span class="stats-number">{{ stats.answers }}</span>
+  <div class="col-6 text-center stats-icon stats-answers" [ngSwitch]="status">
+    <span class="stats-number" *ngSwitchCase="'ACCEPTED'">{{ stats.answers.acceptedQuestions }}</span>
+    <span class="stats-number" *ngSwitchCase="'PENDING'">{{ stats.answers.pendingQuestions }}</span>
+    <span class="stats-number" *ngSwitchDefault>{{ stats.answers.acceptedQuestions + stats.answers.pendingQuestions }}</span>
     <span class="stats-description">odpowiedzi</span>
   </div>
 </div>
 
 <div class="row" *ngIf="stats">
-  <div class="col-6 text-center stats-icon stats-comments">
-    <span class="stats-number">{{ stats.comments }}</span>
+  <div class="col-6 text-center stats-icon stats-comments" [ngSwitch]="status">
+    <span class="stats-number" *ngSwitchCase="'ACCEPTED'">{{ stats.comments.acceptedQuestions }}</span>
+    <span class="stats-number" *ngSwitchCase="'PENDING'">{{ stats.comments.pendingQuestions }}</span>
+    <span class="stats-number" *ngSwitchDefault>{{ stats.comments.acceptedQuestions + stats.comments.pendingQuestions }}</span>
     <span class="stats-description">komentarzy</span>
   </div>
 
   <div class="col-6 text-center stats-icon stats-users">
-    <span class="stats-number">{{ stats.users }}</span>
+    <span class="stats-number">{{ stats.users.active }}</span>
     <span class="stats-description">osób</span>
   </div>
 </div>
