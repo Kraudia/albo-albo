@@ -1,5 +1,8 @@
 <div id="tagCloud">
-  <ng-container *ngFor="let tag of tags">
-    <button type="button" class="btn btn-sm btn-tag" [class.btn-tag-selected]="tag.id == idSelected" [attr.rel]="tag.questionsCount" (click)="select(tag)">{{ tag.name }}</button>
+  <ng-container *ngFor="let tag of tags" [ngSwitch]="status">
+    <button *ngSwitchCase="'ACCEPTED'" type="button" class="btn btn-sm btn-tag" [class.btn-tag-selected]="tag.id == idSelected" [attr.rel]="tag.questions.accepted" (click)="select(tag)" >{{ tag.name }}</button>
+    <button *ngSwitchCase="'PENDING'" type="button" class="btn btn-sm btn-tag" [class.btn-tag-selected]="tag.id == idSelected" [attr.rel]="tag.questions.pending" (click)="select(tag)">{{ tag.name }}</button>
+    <button *ngSwitchCase="'REJECTED'" type="button" class="btn btn-sm btn-tag" [class.btn-tag-selected]="tag.id == idSelected" [attr.rel]="tag.questions.rejected" (click)="select(tag)">{{ tag.name }}</button>
+    <button *ngSwitchDefault type="button" class="btn btn-sm btn-tag" [class.btn-tag-selected]="tag.id == idSelected" [attr.rel]="tag.questions.accepted" (click)="select(tag)">{{ tag.name }}</button>
   </ng-container>
 </div>

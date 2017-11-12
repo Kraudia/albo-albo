@@ -1,6 +1,11 @@
 export interface Tag {
   id: number;
   name: string;
-  createdDate: string;
+  created_date: string;
+  questions: {
+    accepted: number;
+    pending: number;
+    rejected: number;
+  };
   questionsCount: number;
 }

@@ -37,6 +37,17 @@ export class AuthService {
     return !this.currentUser;
   }
 
+  isMod() {
+    if (this.user) {
+      for (let i = 0; i < this.user.roles.length; i++) {
+        if (this.user.roles[i].name === 'MOD') {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
   getUserInfo(): Observable<User> {
     const url = this.host + this.url.users;
     return this.http.get(url, this.getOptions())

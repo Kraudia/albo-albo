@@ -11,6 +11,7 @@ declare const $: any;
 
 export class CloudComponent implements OnChanges {
   @Input('tags') tags;
+  @Input('status') status;
   @Input('colorStart') colorStart = '#2DD655';
   @Input('colorEnd') colorEnd = '#000000';
   @Input('sizeStart') sizeStart = 10;
