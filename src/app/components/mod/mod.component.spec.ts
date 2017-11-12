@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpModule } from '@angular/http';
 
+import { CloudModule } from '../../shared/cloud/cloud.module';
 import { ModComponent } from './mod.component';
 import { ModDataTableModule } from '../../shared/mod-data-table/mod-data-table.module';
 import { AuthService } from '../../services/auth.service';
@@ -17,6 +18,7 @@ describe('ModComponent', () => {
       ],
       imports: [
         HttpModule,
+        CloudModule,
         ModDataTableModule
       ],
       providers: [

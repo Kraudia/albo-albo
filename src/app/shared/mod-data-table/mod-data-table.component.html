@@ -9,8 +9,17 @@
     [indexColumn]="false"
     [selectColumn]="false"
     [multiSelect]="false"
+    [rowColors]="rowColors"
   >
-    <data-table-column property="id" header="#" [width]="50">
+    <data-table-column property="id" header="#" [sortable]="true" [width]="50">
+    </data-table-column>
+
+    <data-table-column property="createdDate" header="Data utworzenia" [resizable]="true" [sortable]="true" [visible]="false">
+      <ng-template #dataTableCell let-item="item">
+                <span style="color: grey">
+                {{ item.createdDate | date:'yyyy-MM-dd HH:mm' }}
+                </span>
+      </ng-template>
     </data-table-column>
 
     <data-table-column property="value" header="Pytanie" [resizable]="true" [sortable]="true">
@@ -20,6 +29,58 @@
     </data-table-column>
 
     <data-table-column property="secondAnswer" header="Odpowiedź B" [resizable]="true" [sortable]="true">
+    </data-table-column>
+
+    <data-table-column property="adultRated" header="+18" [width]="70" [sortable]="true">
+      <ng-template #dataTableCell let-item="item">
+        <span class="text-danger" *ngIf="item.adultRated">+18</span>
+      </ng-template>
+    </data-table-column>
+
+    <data-table-column header="Tagi" [resizable]="true" [sortable]="false">
+      <ng-template #dataTableCell let-item="item">
+        <span *ngFor="let tag of item.tags">{{ tag.name }} </span>
+        <button *ngIf="item.status === 'PENDING'" (click)="editTags(item)" class="btn btn-sm btn-light float-right"><i class="fa fa-edit" aria-hidden="true"></i> <span class="d-none d-lg-inline-block">Edytuj tagi</span></button>
+      </ng-template>
+    </data-table-column>
+
+    <data-table-column property="firstCount" header="Liczba odp. A" [resizable]="true" [sortable]="true" [visible]="false">
+    </data-table-column>
+
+    <data-table-column property="secondCount" header="Liczba odp. B" [resizable]="true" [sortable]="true" [visible]="false">
+    </data-table-column>
+
+    <data-table-column [property]="firstCount + secondCount" header="Łączna liczba odpowiedzi" [resizable]="true" [sortable]="true" [visible]="false">
+      <ng-template #dataTableHeader>
+        Odpowiedzi
+      </ng-template>
+    </data-table-column>
+
+    <data-table-column property="commentsCount" header="Komentarzy" [resizable]="true" [sortable]="true" [visible]="false">
+    </data-table-column>
+
+    <data-table-column property="plusCount" header="Plusów" [resizable]="true" [sortable]="true" [visible]="false">
+      <ng-template #dataTableCell let-item="item">
+        <span class="text-success">+{{ item.plusCount }}</span>
+      </ng-template>
+    </data-table-column>
+
+    <data-table-column property="minusCount" header="Minusów" [resizable]="true" [sortable]="true" [visible]="false">
+      <ng-template #dataTableCell let-item="item">
+        <span class="text-danger">-{{ item.minusCount }}</span>
+      </ng-template>
+    </data-table-column>
+
+    <data-table-column header="Ocena" [resizable]="true" [visible]="false">
+      <ng-template #dataTableCell let-item="item">
+        <span [ngClass]="{ 'text-success': item.plusCount - item.minusCount > 0, 'text-danger': item.plusCount - item.minusCount < 0 }" >{{ item.plusCount - item.minusCount }}</span>
+      </ng-template>
+    </data-table-column>
+
+    <data-table-column property="vote_count" header="Głosów" [resizable]="true" [sortable]="true" [visible]="false">
+    </data-table-column>
+
+    <data-table-column property="userLogin" header="Autor" [resizable]="true" [sortable]="true" [visible]="false">
     </data-table-column>
 
     <data-table-column property="status" header="Status" [resizable]="true" [sortable]="true" [visible]="false">
@@ -33,19 +94,11 @@
       </ng-template>
     </data-table-column>
 
-    <data-table-column property="createdDate" header="Data utworzenia" [resizable]="true" [sortable]="true" [visible]="false">
+    <data-table-column header="Działania" [resizable]="true">
       <ng-template #dataTableCell let-item="item">
-                <span style="color: grey">
-                {{ item.createdDate | date:'yyyy-MM-dd HH:mm' }}
-                </span>
+        <button *ngIf="item.status === 'PENDING'" (click)="accept(item)" class="btn btn-sm btn-success"><i class="fa fa-check" aria-hidden="true"></i> <span class="d-none d-lg-inline-block">Zatwierdź</span></button>
+        <button *ngIf="item.status === 'PENDING'" (click)="reject(item)" class="btn btn-sm btn-danger"><i class="fa fa-ban" aria-hidden="true"></i> <span class="d-none d-lg-inline-block">Odrzuć</span></button>
       </ng-template>
-    </data-table-column>
-
-    <data-table-column>
-      <template #dataTableCell let-item="item">
-        <button (click)="accept(item)" class="btn btn-sm btn-success"><i class="fa fa-check" aria-hidden="true"></i> <span class="d-none d-lg-inline-block">Zatwierdź</span></button>
-        <button (click)="reject(item)" class="btn btn-sm btn-danger"><i class="fa fa-ban" aria-hidden="true"></i> <span class="d-none d-lg-inline-block">Odrzuć</span></button>
-      </template>
     </data-table-column>
   </data-table>
 </div>

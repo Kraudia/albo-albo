@@ -1,1 +1,48 @@
-<app-mod-data-table></app-mod-data-table>
+<h1 class="text-success">Panel moderatora</h1>
+
+<div class="container-fluid mb-5">
+  <div class="row">
+    <div class="col-md-4 col-lg-3">
+      <h2>Pobierz wg</h2>
+      <button type="button"
+              [class.btn-sort-selected]="order == 'created_date DESC' || order == 'created_date ASC'"
+              class="btn btn-sm btn-sort text-left"
+              (click)="sortBy('created_date DESC')"><i class="fa fa-calendar" aria-hidden="true"></i> daty dodania</button>
+      <button type="button"
+              [class.btn-sort-selected]="order == 'comments_count DESC' || order == 'comments_count ASC'"
+              class="btn btn-sm btn-sort text-left"
+              (click)="sortBy('comments_count DESC')"><i class="fa fa-comments-o" aria-hidden="true"></i> komentarzy</button>
+      <button type="button"
+              [class.btn-sort-selected]="order == 'answer_count DESC' || order == 'answer_count ASC'"
+              class="btn btn-sm btn-sort text-left"
+              (click)="sortBy('answer_count DESC')"><i class="fa fa-envelope-open-o" aria-hidden="true"></i> odpowiedzi</button>
+      <button type="button"
+              [class.btn-sort-selected]="order == 'vote_count DESC' || order == 'vote_count ASC'"
+              class="btn btn-sm btn-sort text-left"
+              (click)="sortBy('vote_count DESC')"><i class="fa fa-check-square-o" aria-hidden="true"></i> głosów</button>
+    </div>
+
+    <div class="col-md-4 col-lg-2">
+      <h2>Pytania +18</h2>
+      <button class="btn btn-sm btn-sort" [class.btn-sort-selected]="adult === null" (click)="sortByAdultRated(null)">wszystkie</button>
+      <button class="btn btn-sm btn-sort" [class.btn-sort-selected]="adult === 'true'" (click)="sortByAdultRated('true')">tylko +18</button>
+      <button class="btn btn-sm btn-sort" [class.btn-sort-selected]="adult === 'false'" (click)="sortByAdultRated('false')">bez +18</button>
+    </div>
+
+    <div class="col-md-4 col-lg-2">
+      <h2>Limit pytań</h2>
+      <div class="form-group row">
+        <div class="col-12">
+          <input class="form-control" type="number" (change)="changeLimit($event)" value="10" id="example-number-input" max="100" min="1">
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12 col-lg-5">
+      <h2>Tagi</h2>
+      <app-cloud [tags]="tags" [status]="status" (selected)="selectTag($event)"></app-cloud>
+    </div>
+  </div>
+</div>
+
+<app-mod-data-table [adult]="adult" [order]="order" [tag]="tag" [limit]="limit"></app-mod-data-table>
