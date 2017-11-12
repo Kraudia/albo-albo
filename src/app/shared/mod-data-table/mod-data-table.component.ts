@@ -4,6 +4,7 @@ import { DataTableResource } from 'angular-4-data-table-bootstrap-4';
 import { Question } from '../../models/question';
 import { QuestionService } from '../../services/question.service';
 import { Subscription } from 'rxjs/Subscription';
+import { ModService } from '../../services/mod.service';
 
 @Component({
   selector: 'app-mod-data-table',
@@ -23,6 +24,7 @@ export class ModDataTableComponent implements OnInit, OnChanges, OnDestroy {
   private status = 'PENDING';
 
   constructor(
+    private modService: ModService,
     private questionService: QuestionService
   ) { }
 
@@ -37,7 +39,6 @@ export class ModDataTableComponent implements OnInit, OnChanges, OnDestroy {
     this.questions = null;
     this.getQuestions();
   }
-
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
@@ -59,8 +60,15 @@ export class ModDataTableComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   accept(question: Question) {
-    question.status = 'ACCEPTED';
     console.log('zaakceptowano', question);
+    this.modService.accept(question)
+      .subscribe(
+        res => {
+          question.status = 'ACCEPTED';
+        },
+      error => {
+          console.log('error = ', error);
+      });
   }
 
   editTags(question: Question) {
@@ -68,8 +76,15 @@ export class ModDataTableComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   reject(question: Question) {
-    question.status = 'REJECTED';
     console.log('odrzucono', question);
+    this.modService.reject(question)
+      .subscribe(
+        res => {
+          question.status = 'REJECTED';
+        },
+        error => {
+          console.log('error = ', error);
+        });
   }
 
   rowColors(question) {

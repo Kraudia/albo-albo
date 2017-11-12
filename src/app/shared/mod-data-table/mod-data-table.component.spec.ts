@@ -5,6 +5,7 @@ import { DataTableModule } from 'angular-4-data-table-bootstrap-4';
 import { ModDataTableComponent } from './mod-data-table.component';
 import { QuestionService } from '../../services/question.service';
 import { AuthService } from '../../services/auth.service';
+import { ModService } from '../../services/mod.service';
 
 describe('ModDataTableComponent', () => {
   let component: ModDataTableComponent;
@@ -21,6 +22,7 @@ describe('ModDataTableComponent', () => {
       ],
       providers: [
         AuthService,
+        ModService,
         QuestionService
       ]
     })

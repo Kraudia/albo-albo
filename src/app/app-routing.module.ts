@@ -11,6 +11,7 @@ import { QuestionService } from './services/question.service';
 import { RegisterService } from './services/register.service';
 import { StatsService } from './services/stats.service';
 import { ModGuard } from './guards/mod.guard';
+import { ModService } from './services/mod.service';
 
 const appRoutes: Routes = [
   {
@@ -76,6 +77,7 @@ const appRoutes: Routes = [
     AddQuestionService,
     AuthService,
     CommentService,
+    ModService,
     QuestionService,
     RegisterService,
     StatsService

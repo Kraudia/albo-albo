@@ -32,7 +32,7 @@ export class QuestionService {
   }
 
   getOneQuestion(id: string): Observable<Question> {
-    const url = this.host + this.questionsUrl + '/' + id;
+    const url = this.host + 'questions/' + id;
     const options = this.authService.getOptions();
 
     return this.http.get(url, options)
