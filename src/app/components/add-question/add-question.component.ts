@@ -5,6 +5,8 @@ import { Title } from '@angular/platform-browser';
 import { validationErrors } from './validationErrors';
 
 import { AddQuestionService } from '../../services/add-question.service';
+import { Tag } from '../../models/tag';
+import { QuestionService } from '../../services/question.service';
 
 @Component({
   selector: 'app-add-question',
@@ -18,9 +20,13 @@ export class AddQuestionComponent implements OnInit {
   public addQuestionForm: FormGroup;
   public validationMessages = validationErrors;
 
+  public tags: Tag[] = [];
+  public userTags: number[] = [];
+
   constructor(
     private formBuilder: FormBuilder,
     private addQuestionService: AddQuestionService,
+    private questionService: QuestionService,
     private router: Router,
     private titleService: Title
   ) {
@@ -31,6 +37,7 @@ export class AddQuestionComponent implements OnInit {
   ngOnInit() {
     this.setTitle();
     this.buildForm();
+    this.getTags();
   }
 
   setTitle() {
@@ -57,6 +64,31 @@ export class AddQuestionComponent implements OnInit {
         Validators.maxLength(150)
       ]]
     });
+  }
+
+  getTags() {
+    this.questionService.getTags()
+      .subscribe(
+        res => {
+          this.tags = res;
+        });
+  }
+
+  isInUserTags(tag: Tag) {
+    for (const id of this.userTags) {
+      if (id === tag.id) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  selectTag(tag: Tag) {
+    if (this.isInUserTags(tag)) {
+      this.userTags.splice(this.userTags.indexOf(tag.id, 0), 1);
+    } else if (this.userTags.length < 3) {
+        this.userTags.push(tag.id);
+    }
   }
 
   displayFieldCss(field: string) {
@@ -115,7 +147,7 @@ export class AddQuestionComponent implements OnInit {
     this.validateForm();
 
     if (this.validateForm()) {
-      this.addQuestionService.postQuestion(value, firstAnswer, secondAnswer, [], this.isChecked())
+      this.addQuestionService.postQuestion(value, firstAnswer, secondAnswer, this.userTags, this.isChecked())
         .subscribe(
           res => {
             // TODO: success alert

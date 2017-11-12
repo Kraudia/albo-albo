@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AddQuestionComponent } from './add-question.component';
 import { AddQuestionService } from '../../services/add-question.service';
 import { AuthService } from '../../services/auth.service';
+import { QuestionService } from '../../services/question.service';
 
 describe('AddQuestionComponent', () => {
   let component: AddQuestionComponent;
@@ -24,7 +25,8 @@ describe('AddQuestionComponent', () => {
       providers: [
         FormBuilder,
         AddQuestionService,
-        AuthService
+        AuthService,
+        QuestionService
       ]
     })
     .compileComponents();
