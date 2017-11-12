@@ -100,4 +100,26 @@ body {
   }
 }
 
+.refresh-button {
+  display: none;
+  visibility: hidden;
+}
 
+.button-panel {
+  .column-selector-button {
+    cursor: pointer;
+    position: relative;
+    top: 0;
+    height: 35px;
+
+    &:hover, &:focus {
+      background-color: #e4eaef;
+    }
+
+    .fa-list {
+      position: relative;
+      top: -35px;
+      display: block;
+    }
+  }
+}

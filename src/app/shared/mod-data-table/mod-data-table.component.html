@@ -1,0 +1,51 @@
+<div>
+  <data-table
+    headerTitle="Pytania oczekujące na akceptację"
+    [items]="questions"
+    [itemCount]="questionCount"
+    (reload)="reload($event)"
+
+    [pagination]="false"
+    [indexColumn]="false"
+    [selectColumn]="false"
+    [multiSelect]="false"
+  >
+    <data-table-column property="id" header="#" [width]="50">
+    </data-table-column>
+
+    <data-table-column property="value" header="Pytanie" [resizable]="true" [sortable]="true">
+    </data-table-column>
+
+    <data-table-column property="firstAnswer" header="Odpowiedź A" [resizable]="true" [sortable]="true">
+    </data-table-column>
+
+    <data-table-column property="secondAnswer" header="Odpowiedź B" [resizable]="true" [sortable]="true">
+    </data-table-column>
+
+    <data-table-column property="status" header="Status" [resizable]="true" [sortable]="true" [visible]="false">
+      <ng-template #dataTableCell let-item="item">
+        <ng-container [ngSwitch]="item.status">
+          <span class="text-success" *ngSwitchCase="'ACCEPTED'">Zatwierdzone</span>
+          <span class="text-warning" *ngSwitchCase="'PENDING'">Oczekujące</span>
+          <span class="text-danger" *ngSwitchCase="'REJECTED'">Odrzucone</span>
+          <span class="text-muted" *ngSwitchDefault>brak statusu</span>
+        </ng-container>
+      </ng-template>
+    </data-table-column>
+
+    <data-table-column property="createdDate" header="Data utworzenia" [resizable]="true" [sortable]="true" [visible]="false">
+      <ng-template #dataTableCell let-item="item">
+                <span style="color: grey">
+                {{ item.createdDate | date:'yyyy-MM-dd HH:mm' }}
+                </span>
+      </ng-template>
+    </data-table-column>
+
+    <data-table-column>
+      <template #dataTableCell let-item="item">
+        <button (click)="accept(item)" class="btn btn-sm btn-success"><i class="fa fa-check" aria-hidden="true"></i> <span class="d-none d-lg-inline-block">Zatwierdź</span></button>
+        <button (click)="reject(item)" class="btn btn-sm btn-danger"><i class="fa fa-ban" aria-hidden="true"></i> <span class="d-none d-lg-inline-block">Odrzuć</span></button>
+      </template>
+    </data-table-column>
+  </data-table>
+</div>

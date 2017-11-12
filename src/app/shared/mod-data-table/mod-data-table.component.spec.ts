@@ -1,23 +1,23 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpModule } from '@angular/http';
+import { DataTableModule } from 'angular-4-data-table-bootstrap-4';
 
-import { ModComponent } from './mod.component';
-import { ModDataTableModule } from '../../shared/mod-data-table/mod-data-table.module';
-import { AuthService } from '../../services/auth.service';
+import { ModDataTableComponent } from './mod-data-table.component';
 import { QuestionService } from '../../services/question.service';
+import { AuthService } from '../../services/auth.service';
 
-describe('ModComponent', () => {
-  let component: ModComponent;
-  let fixture: ComponentFixture<ModComponent>;
+describe('ModDataTableComponent', () => {
+  let component: ModDataTableComponent;
+  let fixture: ComponentFixture<ModDataTableComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        ModComponent
+        ModDataTableComponent
       ],
       imports: [
         HttpModule,
-        ModDataTableModule
+        DataTableModule
       ],
       providers: [
         AuthService,
@@ -28,7 +28,7 @@ describe('ModComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ModComponent);
+    fixture = TestBed.createComponent(ModDataTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

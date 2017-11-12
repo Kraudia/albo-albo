@@ -11,12 +11,15 @@ export class ModGuard implements CanLoad {
 
   canLoad(): Observable<boolean>|Promise<boolean>|boolean|any {
     const user = this.authService.getUser();
-    const roles = user.roles;
-    for (let i = 0; i < roles.length; i++) {
-      if (roles[i].name === 'MOD') {
-        return true;
+    if (user) {
+      const roles = user.roles;
+      for (let i = 0; i < roles.length; i++) {
+        if (roles[i].name === 'MOD') {
+          return true;
+        }
       }
     }
+
     return false;
   }
 }
