@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/catch';
@@ -24,6 +24,29 @@ export class ModService {
 
     return this.http.patch(url, JSON.stringify({}), options)
       .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  addTag(question: number, id: number) {
+    const url = this.host + 'questions/' + question + '/tags';
+    const options = this.authService.getOptions();
+
+    return this.http.post(url, JSON.stringify({ id }), options)
+      .map((result: Response) => result)
+      .catch(this.handleError);
+  }
+
+  deleteTag(question: number, id: number) {
+    const url = this.host + 'questions/' + question + '/tags';
+    const headers = this.authService.getHeaders();
+    const body = JSON.stringify({id });
+    const options = new RequestOptions({
+      headers: headers,
+      body : body
+    });
+
+    return this.http.delete(url, options)
+      .map((result: Response) => result)
       .catch(this.handleError);
   }
 

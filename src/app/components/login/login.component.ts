@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
           }
         );
       } else {
-        this.forgottenPasswordError = 'Pole nie może być puste.'
+        this.forgottenPasswordError = 'Pole nie może być puste.';
       }
     }
 }

@@ -13,8 +13,6 @@ import { Tag } from '../models/tag';
 @Injectable()
 export class QuestionService {
   private host = environment.API_URL;
-  private questionsUrl = '/questions';
-  private tagsUrl = '/tags';
 
   constructor(
     private http: Http,
@@ -71,7 +69,7 @@ export class QuestionService {
   }
 
   getTags(): Observable<Tag[]> {
-    const url = this.host + this.tagsUrl;
+    const url = this.host + 'tags';
     const options = this.authService.getOptions();
 
     return this.http.get(url, options)
@@ -79,7 +77,7 @@ export class QuestionService {
   }
 
   voteQuestion(question: number, vote: number) {
-    const url = this.host + '/votes';
+    const url = this.host + 'votes';
     const options = this.authService.getOptions();
 
     return this.http.post(url, JSON.stringify({ question, vote }), options)

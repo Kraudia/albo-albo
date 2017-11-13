@@ -142,7 +142,7 @@ export class AuthService {
       .catch(this.handleError);
   }
 
-  private getHeaders() {
+  getHeaders() {
     const headers = new Headers({
       'Content-Type': 'application/json',
       'Accept': 'application/json'
