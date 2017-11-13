@@ -109,6 +109,17 @@ export class AuthService {
     this.currentUser = null;
   }
 
+  forgottenPassword(login: string) {
+    const headers: Headers = new Headers({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    });
+    const options = new RequestOptions({ headers: headers });
+    const url = this.host + '/users/' + login + '/forgotten-password';
+    return this.http.put(url, options)
+      .map((res) => res.json());
+  }
+
   getUserStats(login: string): Observable<Stats> {
     const url = this.host + this.url.stats;
     return this.http.get(url + login, this.getOptions())

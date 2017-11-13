@@ -50,7 +50,7 @@
     <data-table-column property="secondCount" header="Liczba odp. B" [resizable]="true" [sortable]="true" [visible]="false">
     </data-table-column>
 
-    <data-table-column [property]="firstCount + secondCount" header="Łączna liczba odpowiedzi" [resizable]="true" [sortable]="true" [visible]="false">
+    <data-table-column [property]="answer_count" header="Łączna liczba odpowiedzi" [resizable]="true" [sortable]="true" [visible]="false">
       <ng-template #dataTableHeader>
         Odpowiedzi
       </ng-template>

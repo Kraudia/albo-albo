@@ -11,6 +11,8 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent implements OnInit {
   public errorMessage: String;
+  public forgottenPasswordSuccess: String;
+  public forgottenPasswordError: String;
 
   constructor(
     private authService: AuthService,
@@ -42,4 +44,27 @@ export class LoginComponent implements OnInit {
       this.errorMessage = 'Wypełnij oba pola.';
     }
   }
+
+  forgot(username: string) {
+    this.forgottenPasswordSuccess = null;
+    this.forgottenPasswordError = null;
+
+    if (username) {
+      this.authService.forgottenPassword(username)
+        .subscribe(
+          res => {
+            this.forgottenPasswordSuccess = 'Wysłaliśmy Ci nowe hasło na e-maila.';
+          },
+          error => {
+            if (error.status === 404) {
+              this.forgottenPasswordError = 'Nie znaleziono użytkownika o podanym loginie.';
+            } else {
+              this.forgottenPasswordError = 'Coś poszło nie tak.';
+            }
+          }
+        );
+      } else {
+        this.forgottenPasswordError = 'Pole nie może być puste.'
+      }
+    }
 }

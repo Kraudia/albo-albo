@@ -29,16 +29,55 @@
             </div>
           </div>
           <div class="col text-right">
-            <button type="button" class="btn btn-link">Nie pamiętam hasła</button>
+            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#forgottenPasswordModal">Nie pamiętam hasła</button>
           </div>
         </div>
 
         <button class="btn btn-primary btn-block btn-signin" (click)="login(loginInput.value, passwordInput.value)" type="button">Zaloguj się</button>
-
-        <div class="text-center">
-          <a [routerLink]="['/rejestracja']" class="btn btn-link" aria-label="Zarejestruj się">Nie masz jeszcze konta? <strong>Załóż konto</strong></a>
-        </div>
       </div>
     </form>
+
+    <div class="text-center mb-2">
+      <a [routerLink]="['/rejestracja']" class="btn btn-link" aria-label="Zarejestruj się">Nie masz jeszcze konta? <strong>Załóż konto</strong></a>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="forgottenPasswordModal" tabindex="-1" role="dialog" aria-labelledby="forgottenPasswordModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="forgottenPasswordModalLabel">Nie pamiętam hasła</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="mb-2" (keyup.enter)="forgot(forgotInput.value)">
+          <div class="container">
+            <div class="mb-3 text-justify">
+              Podaj swój login, który podawałeś przy rejestracji, a za chwilę wyślemy Ci nowe hasłona e-maila, którym będziesz mógł się zalogować.
+            </div>
+
+            <div class="form-group row">
+              <label for="forgotInput" class="col-sm-2 col-form-label text-left">Login</label>
+              <div class="col-sm-10">
+                <input #forgotInput id="forgotInput" type="text" class="form-control" [class.is-valid]="forgottenPasswordSuccess" [class.is-invalid]="forgottenPasswordError"  placeholder="Wpisz login" formControlName="inputLogin" required />
+                <small class="invalid-feedback">
+                  {{ forgottenPasswordError }}
+                </small>
+                <small class="valid-feedback">
+                  {{ forgottenPasswordSuccess }}
+                </small>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+        <button type="button" class="btn btn-primary" (click)="forgot(forgotInput.value)">Wyślij mi nowe hasło</button>
+      </div>
+    </div>
   </div>
 </div>

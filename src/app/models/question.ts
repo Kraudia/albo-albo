@@ -2,6 +2,7 @@ export class Question {
   acceptedDate: string;
   adultRated: boolean;
   answeredDate: string;
+  answer_count: number;
   commentsCount: number;
   createdDate: string;
   favourite_count: number;
