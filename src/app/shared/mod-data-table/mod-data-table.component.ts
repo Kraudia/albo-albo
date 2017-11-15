@@ -19,7 +19,7 @@ export class ModDataTableComponent implements OnInit, OnChanges, OnDestroy {
   @Input('tag') tag: number;
   @ViewChild(DataTable) questionsTable: DataTable;
 
-  private selectedQuestion: Question;
+  public selectedQuestion: Question;
   private selectedTags: {
     id: number;
     name: string;

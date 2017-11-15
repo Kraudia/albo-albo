@@ -2,10 +2,11 @@ export class Question {
   acceptedDate: string;
   adultRated: boolean;
   answeredDate: string;
-  answer_count: number;
+  answerCount: number;
+  commentCount: number;
   commentsCount: number;
   createdDate: string;
-  favourite_count: number;
+  favouriteCount: number;
   firstAnswer: string;
   firstCount: number;
   id: number;
@@ -25,5 +26,5 @@ export class Question {
   userId: number;
   userLogin: string;
   value: string;
-  vote_count: number;
+  voteCount: number;
 }

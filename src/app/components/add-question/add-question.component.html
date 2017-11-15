@@ -28,7 +28,7 @@
         <div class="form-group row">
           <label for="inputSecondAnswer" class="col-md-2 col-form-label text-left">Odpowiedź B</label>
           <div class="col-md-10">
-            <input #inputSecondAnswer id="inputSecondAnswer" formControlName="inputSecondAnswer" type="text" class="form-control" [ngClass]="displayFieldCss('inputSecondAnswer')" placeholder="Wpisz odpowiedź, która będzie po lewej" required />
+            <input #inputSecondAnswer id="inputSecondAnswer" formControlName="inputSecondAnswer" type="text" class="form-control" [ngClass]="displayFieldCss('inputSecondAnswer')" placeholder="Wpisz odpowiedź, która będzie po prawej" required />
             <small class="invalid-feedback">
               <span *ngFor="let field of getKeysOfObject(addQuestionForm.get('inputSecondAnswer').errors)">{{ validationMessages.inputSecondAnswer[field] }}</span>
             </small>

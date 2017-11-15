@@ -86,6 +86,7 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
       this.getOneQuestion();
     } else {
       this.question = this.oneQuestion;
+      console.log(this.question)
       this.loadProgress();
     }
   }
@@ -173,10 +174,6 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
 
   hideComments() {
     this.comments = null;
-  }
-
-  goToUserPage() {
-    // TODO: go to user page
   }
 
   addToFavorites() {

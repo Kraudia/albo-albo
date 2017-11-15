@@ -37,6 +37,14 @@ const appRoutes: Routes = [
     loadChildren: 'app/components/pending/pending.module#PendingModule'
   },
   {
+    path: 'top',
+    loadChildren: 'app/components/top/top.module#TopModule'
+  },
+  {
+    path: 'profil',
+    loadChildren: 'app/components/profile/profile.module#ProfileModule'
+  },
+  {
     path: 'logowanie',
     loadChildren: 'app/components/login/login.module#LoginModule',
     canLoad: [ OnlyNotLoggedInUsersGuard ]
