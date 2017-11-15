@@ -3,6 +3,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { TopComponent } from './top.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpModule } from '@angular/http';
+import { QuestionModule } from '../../shared/question/question.module';
+import { QuestionService } from '../../services/question.service';
+import { AuthService } from '../../services/auth.service';
 
 describe('TopComponent', () => {
   let component: TopComponent;
@@ -12,12 +15,15 @@ describe('TopComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         HttpModule,
+        QuestionModule,
         RouterTestingModule
       ],
       declarations: [
         TopComponent
       ],
       providers: [
+        AuthService,
+        QuestionService
       ]
     })
     .compileComponents();

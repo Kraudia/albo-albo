@@ -68,6 +68,14 @@ export class QuestionService {
       .map((res) => res.json());
   }
 
+  getTopQuestions(type: string): Observable<Question[]> {
+    const url = this.host + 'top?type=' + type;
+    const options = this.authService.getOptions();
+
+    return this.http.get(url, options)
+      .map((res) => res.json());
+  }
+
   getTags(): Observable<Tag[]> {
     const url = this.host + 'tags';
     const options = this.authService.getOptions();

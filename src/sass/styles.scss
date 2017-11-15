@@ -82,6 +82,24 @@ body {
   }
 }
 
+.btn-top-first {
+  color: #000;
+  background-color: $yellow-lighter;
+
+  &:hover {
+    background-color: $yellow-light;
+  }
+}
+
+.btn-top-second {
+  color: #000;
+  background-color: $orange-lighter;
+
+  &:hover {
+    background-color: $orange-light;
+  }
+}
+
 .btn-default-first {
   color: #000;
   background-color: $green-lighter;

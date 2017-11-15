@@ -7,19 +7,7 @@ const routes: Routes = [
     redirectTo: 'oceniane'
   },
   {
-    path: 'oceniane',
-    component: TopComponent
-  },
-  {
-    path: 'komentowane',
-    component: TopComponent
-  },
-  {
-    path: 'odpowiadane',
-    component: TopComponent
-  },
-  {
-    path: 'lubiane',
+    path: ':type',
     component: TopComponent
   }
 ];

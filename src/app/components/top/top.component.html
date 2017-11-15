@@ -1,6 +1,8 @@
-<nav class="nav nav-pills nav-justified">
-  <a class="nav-item nav-link" [routerLink]="['/top', 'oceniane']" [routerLinkActive]="['active']"><i class="fa fa-comments" aria-hidden="true"></i> Top ocenianych</a>
-  <a class="nav-item nav-link" [routerLink]="['/top', 'komentowane']" [routerLinkActive]="['active']"><i class="fa fa-comments" aria-hidden="true"></i> Top komentowanych</a>
-  <a class="nav-item nav-link" [routerLink]="['/top', 'odpowiadane']" [routerLinkActive]="['active']"><i class="fa fa-envelope" aria-hidden="true"></i> Top odpowiadanych</a>
-  <a class="nav-item nav-link" [routerLink]="['/top', 'lubiane']" [routerLinkActive]="['active']"><i class="fa fa-heartbeat" aria-hidden="true"></i> Top lubianych</a>
+<nav class="nav nav-justified">
+  <a class="nav-item nav-link text-success" [routerLink]="['/top', 'oceniane']" [routerLinkActive]="['active']"><i class="fa fa-comments" aria-hidden="true"></i> Top ocenianych</a>
+  <a class="nav-item nav-link text-success" [routerLink]="['/top', 'komentowane']" [routerLinkActive]="['active']"><i class="fa fa-comments" aria-hidden="true"></i> Top komentowanych</a>
+  <a class="nav-item nav-link text-success" [routerLink]="['/top', 'odpowiadane']" [routerLinkActive]="['active']"><i class="fa fa-envelope" aria-hidden="true"></i> Top odpowiadanych</a>
+  <a class="nav-item nav-link text-success" [routerLink]="['/top', 'lubiane']" [routerLinkActive]="['active']"><i class="fa fa-heartbeat" aria-hidden="true"></i> Top lubianych</a>
 </nav>
+
+<app-question *ngFor="let question of questions" [oneQuestion]="question" [btnFirst]="btnFirst" [btnSecond]="btnSecond"></app-question>

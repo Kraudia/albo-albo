@@ -86,7 +86,6 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
       this.getOneQuestion();
     } else {
       this.question = this.oneQuestion;
-      console.log(this.question)
       this.loadProgress();
     }
   }
