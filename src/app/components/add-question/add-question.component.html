@@ -1,6 +1,6 @@
 <div class="row justify-content-md-center">
   <div class="col-lg-10">
-    <form id="needs-validation" [formGroup]="addQuestionForm" novalidate>
+    <form id="needs-validation" [formGroup]="addQuestionForm" novalidate (keyup.enter)="addQuestion(inputValue.value, inputFirstAnswer.value, inputSecondAnswer.value)">
       <div class="container-fluid"  [ngClass]="{'was-validated': isFormValid()}">
 
         <h1>Dodaj pytanie</h1>
@@ -65,7 +65,7 @@
           </div>
         </div>
 
-        <button class="btn btn-secondary btn-block" type="reset" (click)="reset()">Anuluj</button>
+        <button class="btn btn-secondary btn-block" type="button" (click)="reset()">Anuluj</button>
 
         <button class="btn btn-primary btn-block btn-add" type="button" (click)="addQuestion(inputValue.value, inputFirstAnswer.value, inputSecondAnswer.value)">Dodaj pytanie</button>
 

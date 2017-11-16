@@ -124,7 +124,7 @@ export class AddQuestionComponent implements OnInit {
   }
 
   isFormValid() {
-    return this.addQuestionForm.valid;
+    return this.validated;
   }
 
   getKeysOfObject(object: Object) {
@@ -181,5 +181,8 @@ export class AddQuestionComponent implements OnInit {
     this.addQuestionForm.reset();
     this.validated = false;
     this.checked = false;
+    this.value = '';
+    this.firstAnswer = '';
+    this.secondAnswer = '';
   }
 }

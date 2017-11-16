@@ -142,6 +142,20 @@ body {
   }
 }
 
-.emoji-input-holder .eih-smiley {
-  top: -7px;
+.emoji-input-holder {
+  .eih-smiley {
+    top: -7px;
+  }
+  .eih-emojis-dialog {
+    min-width: 250px;
+    .eih-emoticons-category {
+      p {
+        display: none;
+        visibility: hidden;
+      }
+      .eih-emoticon {
+        font-size: 20px;
+      }
+    }
+  }
 }
