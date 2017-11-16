@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AddQuestionComponent } from './add-question.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { addQuestionRouter } from './add-question-routing.module';
+import { EmojisModule } from 'ng2-emojis';
 
 @NgModule({
   declarations: [
@@ -10,6 +11,7 @@ import { addQuestionRouter } from './add-question-routing.module';
   ],
   imports: [
     CommonModule,
+    EmojisModule,
     FormsModule,
     ReactiveFormsModule,
     addQuestionRouter

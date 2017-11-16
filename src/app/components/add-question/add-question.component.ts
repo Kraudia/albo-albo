@@ -22,6 +22,9 @@ export class AddQuestionComponent implements OnInit {
 
   public tags: Tag[] = [];
   public userTags: number[] = [];
+  public value = '';
+  public firstAnswer = '';
+  public secondAnswer = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -64,6 +67,16 @@ export class AddQuestionComponent implements OnInit {
         Validators.maxLength(150)
       ]]
     });
+  }
+
+  emojiAdded(v, type: string) {
+    if (type === 'value') {
+      this.value = v;
+    } else if (type === 'firstAnswer') {
+      this.firstAnswer = v;
+    } else if (type === 'secondAnswer') {
+      this.secondAnswer = v;
+    }
   }
 
   getTags() {
@@ -120,6 +133,10 @@ export class AddQuestionComponent implements OnInit {
     } else {
       return null;
     }
+  }
+
+  showFeedback() {
+    return this.validated;
   }
 
   validateForm() {
