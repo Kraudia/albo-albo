@@ -64,6 +64,10 @@ export class AuthService {
     'Accept': 'application/json'
   });
   headers.append('Authorization', 'Basic ' + btoa(username + ':' + password));
+  if (!localStorage.getItem('uuid')) {
+    localStorage.setItem('uuid', this.generateUUID());
+  }
+  headers.append('X-request-UUID', localStorage.getItem('uuid'));
   const options = new RequestOptions({ headers: headers });
 
   const url = this.host + this.url.login;
@@ -110,13 +114,8 @@ export class AuthService {
   }
 
   forgottenPassword(login: string) {
-    const headers: Headers = new Headers({
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    });
-    const options = new RequestOptions({ headers: headers });
     const url = this.host + '/users/' + login + '/forgotten-password';
-    return this.http.put(url, options)
+    return this.http.put(url, this.getOptions())
       .map((res) => res.json());
   }
 
@@ -127,17 +126,9 @@ export class AuthService {
   }
 
   changePassword(oldPassword: string, newPassword: string) {
-    const headers = new Headers({
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    });
-    headers.append('Authorization', 'Basic ' + btoa(JSON.parse(localStorage.getItem('currentUser')).username + ':' + oldPassword));
-
-    const options = new RequestOptions({ headers: headers });
-
     const password = newPassword;
     const url = this.host + this.url.pass;
-    return this.http.put(url, JSON.stringify({ password }), options)
+    return this.http.put(url, JSON.stringify({ password }), this.getOptions())
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -158,11 +149,20 @@ export class AuthService {
       const password = JSON.parse(currentUser).password;
       headers.append('Authorization', 'Basic ' + btoa(username + ':' + password));
     }
+
+    if (!localStorage.getItem('uuid')) {
+      localStorage.setItem('uuid', this.generateUUID());
+    }
+    headers.append('X-request-UUID', localStorage.getItem('uuid'));
     return headers;
   }
 
   getOptions() {
     return new RequestOptions({headers: this.getHeaders()});
+  }
+
+  generateUUID() {
+    return Math.random().toString(36).substring(2) + (new Date()).getTime().toString(36);
   }
 
   private extractData(res: Response) {
