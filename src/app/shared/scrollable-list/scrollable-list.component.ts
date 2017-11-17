@@ -22,6 +22,7 @@ export class ScrollableListComponent implements OnInit, OnChanges, OnDestroy {
   public scrollDistance = 0;
   public disableScroll;
   public questions: Question[];
+  public isLoading = false;
 
   private index: string;
   private subscription = new Subscription();
@@ -61,6 +62,7 @@ export class ScrollableListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getMoreQuestions() {
+    this.isLoading = true;
     this.disableScroll = true;
     const subscription = this.questionService.getQuestions(this.adult, this.answered, this.index, this.limit, this.order, this.status, this.tag)
       .subscribe(
@@ -69,6 +71,7 @@ export class ScrollableListComponent implements OnInit, OnChanges, OnDestroy {
           this.questions = [ ...this.questions, ...response];
           this.index = this.questions[this.questions.length - 1].createdDate;
           this.disableScroll = false;
+          this.isLoading = false;
         });
     this.subscription.add(subscription);
   }

@@ -6,6 +6,7 @@ import { AuthService } from '../../services/auth.service';
 import { QuestionService } from '../../services/question.service';
 import { QuestionModule } from '../question/question.module';
 import { ScrollableListComponent } from './scrollable-list.component';
+import { LoadingModule } from 'ngx-loading';
 
 describe('ScrollableListComponent', () => {
   let component: ScrollableListComponent;
@@ -19,6 +20,7 @@ describe('ScrollableListComponent', () => {
       imports: [
         HttpModule,
         InfiniteScrollModule,
+        LoadingModule,
         QuestionModule
       ],
       providers: [

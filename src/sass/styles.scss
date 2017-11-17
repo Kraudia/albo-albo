@@ -1,7 +1,7 @@
 @import './variables';
 @import './mixins';
 @import '~ngx-toastr/toastr';
-
+@import "~ng2-slim-loading-bar/style.css";
 html {
   position: relative;
   min-height: 100%;

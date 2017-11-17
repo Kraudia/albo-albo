@@ -3,6 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { MomentModule } from 'angular2-moment';
+import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { ToastrModule, ToastContainerModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
@@ -23,6 +24,7 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserAnimationsModule,
     HttpModule,
     MomentModule,
+    SlimLoadingBarModule.forRoot(),
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,

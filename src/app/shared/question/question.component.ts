@@ -53,7 +53,7 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
   @Input('idQuestion') idQuestion: string;
   @Input('oneQuestion') oneQuestion: Question;
   private subscription = new Subscription();
-
+  public isLoading = false;
   public comments: Comment[];
   public firstCountPercentage = 0;
   public secondCountPercentage = 0;
@@ -165,10 +165,12 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getComments() {
+    this.isLoading = true;
       const subscription = this.commentService.getComments(this.question.id)
         .subscribe(
           response => {
             this.comments = response;
+            this.isLoading = false;
           });
       this.subscription.add(subscription);
   }
