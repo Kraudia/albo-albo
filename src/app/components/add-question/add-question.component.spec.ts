@@ -3,6 +3,7 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpModule } from '@angular/http';
 import { EmojisModule } from 'ng2-emojis';
+import { ToastrService, ToastrModule } from 'ngx-toastr';
 
 import { AddQuestionComponent } from './add-question.component';
 import { AddQuestionService } from '../../services/add-question.service';
@@ -22,13 +23,18 @@ describe('AddQuestionComponent', () => {
         HttpModule,
         EmojisModule,
         ReactiveFormsModule,
-        RouterTestingModule
+        RouterTestingModule,
+        ToastrModule.forRoot({
+          positionClass: 'toast-bottom-right',
+          preventDuplicates: true,
+        })
       ],
       providers: [
         FormBuilder,
         AddQuestionService,
         AuthService,
-        QuestionService
+        QuestionService,
+        ToastrService
       ]
     })
     .compileComponents();

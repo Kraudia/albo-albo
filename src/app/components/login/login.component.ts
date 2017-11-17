@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { ToastrService } from 'ngx-toastr';
 
 import { AuthService } from '../../services/auth.service';
 
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private titleService: Title
+    private titleService: Title,
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit() {
@@ -36,9 +38,10 @@ export class LoginComponent implements OnInit {
         .subscribe(
           res => {
             this.router.navigate(['/']);
+            this.toastrService.success('Logowanie się powiodło.');
           },
           error => {
-            this.errorMessage = 'Nie istnieje użytkownik o podanym loginie i haśle.';
+            this.toastrService.error('Nie istnieje użytkownik o podanym loginie lub haśle.');
           });
     } else {
       this.errorMessage = 'Wypełnij oba pola.';

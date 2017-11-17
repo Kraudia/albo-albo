@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { CommentService } from '../../../services/comment.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-comment',
@@ -17,7 +18,8 @@ export class AddCommentComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
-    private commentService: CommentService
+    private commentService: CommentService,
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit() {
@@ -35,7 +37,11 @@ export class AddCommentComponent implements OnInit {
             this.isValid = true;
             this.commentValue = '';
             this.refresh.emit();
-          });
+            this.toastrService.success('Twój komentarz został opublikowany.', 'Sukces');
+          },
+        error => {
+          this.toastrService.error('Niestety nie udało się dodać Twojego komentarza.', 'Coś poszło nie tak');
+        });
     } else {
       this.isInvalid = true;
     }

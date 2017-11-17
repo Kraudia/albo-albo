@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpModule } from '@angular/http';
+import { ToastrService, ToastrModule } from 'ngx-toastr';
 
 import { LoginComponent } from './login.component';
 import { AuthService } from '../../services/auth.service';
@@ -13,13 +14,18 @@ describe('LoginComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         HttpModule,
-        RouterTestingModule
+        RouterTestingModule,
+        ToastrModule.forRoot({
+          positionClass: 'toast-bottom-right',
+          preventDuplicates: true,
+        })
       ],
       declarations: [
         LoginComponent
       ],
       providers: [
-        AuthService
+        AuthService,
+        ToastrService
       ]
     })
     .compileComponents();

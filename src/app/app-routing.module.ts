@@ -12,6 +12,7 @@ import { RegisterService } from './services/register.service';
 import { StatsService } from './services/stats.service';
 import { ModGuard } from './guards/mod.guard';
 import { ModService } from './services/mod.service';
+import { ToastrService } from 'ngx-toastr';
 
 const appRoutes: Routes = [
   {
@@ -88,7 +89,8 @@ const appRoutes: Routes = [
     ModService,
     QuestionService,
     RegisterService,
-    StatsService
+    StatsService,
+    ToastrService
   ],
   declarations: [],
 })

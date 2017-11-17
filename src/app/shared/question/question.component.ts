@@ -10,6 +10,7 @@ import { QuestionService } from '../../services/question.service';
 import { Question } from '../../models/question';
 import { Comment } from '../../models/comment';
 import { animateNumber } from './animateNumber';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-question',
@@ -66,7 +67,8 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
     public authService: AuthService,
     private commentService: CommentService,
     private questionService: QuestionService,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    private toastrService: ToastrService
   ) {
     this.voteSum = true;
   }
@@ -194,6 +196,13 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
     const subscription = this.questionService.voteQuestion(this.question.id, value).subscribe(
       res => {
         this.question.myVote = value;
+      },
+      error => {
+        if (error === '400 - OK Bad Request') {
+          this.toastrService.error('Głos na te pytanie już został udzielony.', 'Błąd');
+        } else {
+          this.toastrService.error('Niestety nie udało się dodać Twojego głosu.', 'Coś poszło nie tak');
+        }
       }
     );
     this.subscription.add(subscription);

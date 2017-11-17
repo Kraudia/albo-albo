@@ -8,6 +8,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 
 import { AppRoutingModule } from './app-routing.module';
+import { ToastrModule } from 'ngx-toastr';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -15,7 +16,11 @@ describe('AppComponent', () => {
       imports: [
         AppRoutingModule,
         BrowserModule,
-        HttpModule
+        HttpModule,
+        ToastrModule.forRoot({
+          positionClass: 'toast-bottom-right',
+          preventDuplicates: true,
+        })
       ],
       declarations: [
         AppComponent,

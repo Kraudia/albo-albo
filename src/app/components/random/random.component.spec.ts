@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpModule } from '@angular/http';
+import { ToastrService, ToastrModule } from 'ngx-toastr';
 
 import { RandomComponent } from './random.component';
 import { QuestionModule } from '../../shared/question/question.module';
@@ -17,7 +18,11 @@ describe('RandomComponent', () => {
       imports: [
         HttpModule,
         QuestionModule,
-        RouterTestingModule
+        RouterTestingModule,
+        ToastrModule.forRoot({
+          positionClass: 'toast-bottom-right',
+          preventDuplicates: true,
+        })
       ],
       declarations: [
         RandomComponent
@@ -25,7 +30,8 @@ describe('RandomComponent', () => {
       providers: [
         AuthService,
         CommentService,
-        QuestionService
+        QuestionService,
+        ToastrService
       ]
     })
     .compileComponents();

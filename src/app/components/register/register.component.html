@@ -68,10 +68,6 @@
 
         <button class="btn btn-primary btn-block btn-register" type="button" (click)="register(inputLogin.value, inputEmail.value, inputPassword.value, inputDate.value)">Zarejestruj się</button>
 
-        <p class="text-center text-danger" *ngIf="errorMessage">
-          {{ errorMessage }}
-        </p>
-
         <div class="text-center">
           <a [routerLink]="['/logowanie']" class="btn btn-link" aria-label="Zaloguj się">Masz już konto? <strong>Zaloguj się</strong></a>
         </div>

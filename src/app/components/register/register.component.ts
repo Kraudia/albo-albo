@@ -6,6 +6,7 @@ import { PasswordValidation } from './PasswordValidation';
 import { validationErrors } from './validationMessages';
 
 import { RegisterService } from '../../services/register.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,6 @@ import { RegisterService } from '../../services/register.service';
 export class RegisterComponent implements OnInit {
   private validated: boolean;
   private checked: boolean;
-  public errorMessage: String;
   public registerForm: FormGroup;
   public validationMessages = validationErrors;
 
@@ -23,7 +23,8 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder,
     private registerService: RegisterService,
     private router: Router,
-    private titleService: Title
+    private titleService: Title,
+    private toastrService: ToastrService
   ) {
     this.validated = false;
     this.checked = false;
@@ -142,12 +143,14 @@ export class RegisterComponent implements OnInit {
             res => {
               console.log('res = ', res);
               this.router.navigate(['/logowanie']);
+              const success = 'Żeby aktywować konto, kliknij w link potwierdzający, który wysłaliśmy na Twój adres email.';
+              this.toastrService.success(success, 'Rejestracja się powiodła');
             },
             error => {
               if (error === '409 - OK Conflict') {
-                this.errorMessage = 'Zajęty login lub mail.';
+                this.toastrService.error('Zajęty login lub mail. Proszę wpisać inne dane.', 'Błąd.');
               } else {
-                this.errorMessage = 'Twoja rejestracja sie nie udała.';
+                this.toastrService.error('Twoja rejestracja sie nie udała.', 'Coś poszło nie tak.');
               }
             });
     }

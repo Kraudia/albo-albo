@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpModule } from '@angular/http';
 import { MomentModule } from 'angular2-moment';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { CommentComponent } from './comment.component';
 import { AuthService } from '../../../services/auth.service';
 import { CommentService } from '../../../services/comment.service';
@@ -16,11 +17,16 @@ describe('CommentComponent', () => {
       imports: [
         HttpModule,
         MomentModule,
-        VoteButtonModule
+        VoteButtonModule,
+        ToastrModule.forRoot({
+          positionClass: 'toast-bottom-right',
+          preventDuplicates: true,
+        })
       ],
       providers: [
         AuthService,
-        CommentService
+        CommentService,
+        ToastrService
       ]
     })
     .compileComponents();

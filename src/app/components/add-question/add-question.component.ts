@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { ToastrService } from 'ngx-toastr';
 import { validationErrors } from './validationErrors';
 
 import { AddQuestionService } from '../../services/add-question.service';
@@ -31,7 +32,8 @@ export class AddQuestionComponent implements OnInit {
     private addQuestionService: AddQuestionService,
     private questionService: QuestionService,
     private router: Router,
-    private titleService: Title
+    private titleService: Title,
+    private toastrService: ToastrService
   ) {
     this.validated = false;
     this.checked = false;
@@ -167,11 +169,11 @@ export class AddQuestionComponent implements OnInit {
       this.addQuestionService.postQuestion(value, firstAnswer, secondAnswer, this.userTags, this.isChecked())
         .subscribe(
           res => {
-            // TODO: success alert
+            this.toastrService.success('Twoje pytanie zostało dodane do poczekalni.', 'Sukces');
             this.router.navigate(['/poczekalnia']);
           },
           error => {
-            // TODO: error alert
+            this.toastrService.error('Niestety nie udało się dodać Twojego pytania.', 'Coś poszło nie tak');
               this.errorMessage = 'Twoje pytanie nie zostało dodane.';
           });
     }

@@ -1,10 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ToastrService, ToastrModule } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AuthService } from '../../../services/auth.service';
 import { CommentService } from '../../../services/comment.service';
 import { AddCommentComponent } from './add-comment.component';
-import { RouterTestingModule } from '@angular/router/testing';
 
 describe('AddCommentComponent', () => {
   let component: AddCommentComponent;
@@ -16,11 +17,16 @@ describe('AddCommentComponent', () => {
       imports: [
         FormsModule,
         HttpModule,
-        RouterTestingModule
+        RouterTestingModule,
+        ToastrModule.forRoot({
+          positionClass: 'toast-bottom-right',
+          preventDuplicates: true,
+        })
       ],
       providers: [
         AuthService,
-        CommentService
+        CommentService,
+        ToastrService
       ]
     })
     .compileComponents();

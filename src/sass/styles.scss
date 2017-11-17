@@ -1,5 +1,6 @@
 @import './variables';
 @import './mixins';
+@import '~ngx-toastr/toastr';
 
 html {
   position: relative;
@@ -158,4 +159,8 @@ body {
       }
     }
   }
+}
+
+.toast-success {
+  background-color: #28a745;
 }

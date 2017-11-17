@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpModule } from '@angular/http';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 import { RegisterComponent } from './register.component';
 import { RegisterService } from '../../services/register.service';
@@ -15,14 +16,19 @@ describe('RegisterComponent', () => {
       imports: [
         HttpModule,
         ReactiveFormsModule,
-        RouterTestingModule
+        RouterTestingModule,
+        ToastrModule.forRoot({
+          positionClass: 'toast-bottom-right',
+          preventDuplicates: true,
+        })
       ],
       declarations: [
         RegisterComponent
       ],
       providers: [
         FormBuilder,
-        RegisterService
+        RegisterService,
+        ToastrService
       ]
     })
     .compileComponents();

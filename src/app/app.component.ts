@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from './services/auth.service';
+import { ToastrService, ToastContainerDirective } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
@@ -7,12 +8,15 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  @ViewChild(ToastContainerDirective) toastContainer: ToastContainerDirective;
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private toastrService: ToastrService
   ) {}
 
   ngOnInit() {
     this.authService.loginCurrentUser();
+    this.toastrService.overlayContainer = this.toastContainer;
   }
 }

@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MomentModule } from 'angular2-moment';
 import { RouterTestingModule } from '@angular/router/testing';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 import { AuthService } from '../../services/auth.service';
 import { CommentService } from '../../services/comment.service';
@@ -24,7 +25,11 @@ describe('QuestionComponent', () => {
         HttpModule,
         MomentModule,
         RouterTestingModule,
-        VoteButtonModule
+        VoteButtonModule,
+        ToastrModule.forRoot({
+          positionClass: 'toast-bottom-right',
+          preventDuplicates: true,
+        })
       ],
       declarations: [
         AddCommentComponent,
@@ -35,7 +40,8 @@ describe('QuestionComponent', () => {
       providers: [
         AuthService,
         CommentService,
-        QuestionService
+        QuestionService,
+        ToastrService
       ]
     })
     .compileComponents();

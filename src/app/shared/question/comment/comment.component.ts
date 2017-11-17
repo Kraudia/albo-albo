@@ -3,6 +3,7 @@ import { Comment } from '../../../models/comment';
 import { AuthService } from '../../../services/auth.service';
 import { CommentService } from '../../../services/comment.service';
 import { Subscription } from 'rxjs/Subscription';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-comment',
@@ -17,7 +18,8 @@ export class CommentComponent implements OnDestroy {
 
   constructor(
     public authService: AuthService,
-    private commentService: CommentService
+    private commentService: CommentService,
+    private toastrService: ToastrService
   ) { }
 
   ngOnDestroy() {
@@ -35,6 +37,13 @@ export class CommentComponent implements OnDestroy {
     const subscription = this.commentService.voteComment(this.idQuestion, this.comment.id, value).subscribe(
       res => {
         this.comment.myRank = value;
+      },
+      error => {
+        if (error === '409 - OK Conflict') {
+          this.toastrService.error('Głos na ten komentarz już został udzielony.', 'Błąd');
+        } else {
+          this.toastrService.error('Niestety nie udało się dodać Twojego głosu.', 'Coś poszło nie tak');
+        }
       }
     );
     this.subscription.add(subscription);
