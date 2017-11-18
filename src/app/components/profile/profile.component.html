@@ -1,8 +1,6 @@
 <div class="row flex-column-reverse flex-md-row">
   <div class="col-md-9">
-    <div class="card">
-      <div class="card-header">
-        <ul class="nav nav-tabs card-header-tabs">
+        <ul class="nav nav-tabs ">
           <li class="nav-item">
             <a class="nav-link" [routerLink]="['/profil', login, 'wszystkie']" [routerLinkActive]="['active']">Wszystkie pytania</a>
           </li>
@@ -19,15 +17,14 @@
             <a class="nav-link" [routerLink]="['/profil', login, 'komentarze']" [routerLinkActive]="['active']">Komentarze</a>
           </li>
         </ul>
-      </div>
-      <div class="card-body">
 
-      </div>
+    <div class="container">
+      <router-outlet></router-outlet>
     </div>
   </div>
 
   <div class="col-md-3">
     <h1>{{ login }}</h1>
-    <app-user-stats [login]="login"></app-user-stats>
+    <app-user-stats *ngIf="login" [login]="login"></app-user-stats>
   </div>
 </div>

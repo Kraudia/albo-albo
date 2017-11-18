@@ -1,5 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 import { ProfileComponent } from './profile.component';
+import { ProfileTabComponent } from './profile-tab/profile-tab.component';
 
 const routes: Routes = [
   {
@@ -8,27 +9,29 @@ const routes: Routes = [
   },
   {
     path: ':login',
-    redirectTo: ':login/wszystkie'
-  },
-  {
-    path: ':login/wszystkie',
-    component: ProfileComponent
-  },
-  {
-    path: ':login/zatwierdzone',
-    component: ProfileComponent
-  },
-  {
-    path: ':login/oczekujace',
-    component: ProfileComponent
-  },
-  {
-    path: ':login/zarchiwizowane',
-    component: ProfileComponent
-  },
-  {
-    path: ':login/komentarze',
-    component: ProfileComponent
+    component: ProfileComponent,
+    children: [
+      {
+        path: 'wszystkie',
+        component: ProfileTabComponent
+      },
+      {
+        path: 'zatwierdzone',
+        component: ProfileTabComponent
+      },
+      {
+        path: 'oczekujace',
+        component: ProfileTabComponent
+      },
+      {
+        path: 'zarchiwizowane',
+        component: ProfileTabComponent
+      },
+      {
+        path: 'komentarze',
+        component: ProfileTabComponent
+      }
+    ]
   }
 ];
 
