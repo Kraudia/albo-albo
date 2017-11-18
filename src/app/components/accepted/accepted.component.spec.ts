@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpModule } from '@angular/http';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 
 import { AcceptedComponent } from './accepted.component';
 import { CloudModule } from '../../shared/cloud/cloud.module';
@@ -35,7 +36,8 @@ describe('AcceptedComponent', () => {
         AuthService,
         CommentService,
         QuestionService,
-        StatsService
+        StatsService,
+        SlimLoadingBarService
       ]
     })
       .compileComponents();

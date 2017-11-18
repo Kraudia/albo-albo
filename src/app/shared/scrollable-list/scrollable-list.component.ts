@@ -1,14 +1,15 @@
-import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChange } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, SimpleChange } from '@angular/core';
 import { Question } from '../../models/question';
 import { QuestionService } from '../../services/question.service';
 import { Subscription } from 'rxjs/Subscription';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 
 @Component({
   selector: 'app-scrollable-list',
   templateUrl: './scrollable-list.component.html',
   styleUrls: ['./scrollable-list.component.scss']
 })
-export class ScrollableListComponent implements OnInit, OnChanges, OnDestroy {
+export class ScrollableListComponent implements OnChanges, OnDestroy {
   @Input('btnFirst') btnFirst: string;
   @Input('btnSecond') btnSecond: string;
   @Input('adult') adult: string;
@@ -28,13 +29,9 @@ export class ScrollableListComponent implements OnInit, OnChanges, OnDestroy {
   private subscription = new Subscription();
 
   constructor(
+    private slimLoadingBarService: SlimLoadingBarService,
     private questionService: QuestionService
   ) { }
-
-  ngOnInit() {
-    this.subscription = new Subscription();
-    this.getQuestions();
-  }
 
   ngOnChanges(changes: {[propertyName: string]: SimpleChange}) {
     this.subscription.unsubscribe();
@@ -57,11 +54,16 @@ export class ScrollableListComponent implements OnInit, OnChanges, OnDestroy {
             this.index = this.questions[this.questions.length - 1].createdDate;
           }
           this.disableScroll = false;
+          this.slimLoadingBarService.complete();
+        },
+        err => {
+          this.slimLoadingBarService.stop();
         });
     this.subscription.add(subscription);
   }
 
   getMoreQuestions() {
+    this.slimLoadingBarService.start();
     this.isLoading = true;
     this.disableScroll = true;
     const subscription = this.questionService.getQuestions(this.adult, this.answered, this.index, this.limit, this.order, this.status, this.tag)
@@ -72,6 +74,10 @@ export class ScrollableListComponent implements OnInit, OnChanges, OnDestroy {
           this.index = this.questions[this.questions.length - 1].createdDate;
           this.disableScroll = false;
           this.isLoading = false;
+          this.slimLoadingBarService.complete();
+        },
+        err => {
+          this.slimLoadingBarService.stop();
         });
     this.subscription.add(subscription);
   }
