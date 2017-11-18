@@ -1,11 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ProfileComponent } from './profile.component';
-import { RouterTestingModule } from '@angular/router/testing';
-import { StatsModule } from '../../shared/stats/stats.module';
-import { AuthService } from '../../services/auth.service';
 import { HttpModule } from '@angular/http';
+import { RouterTestingModule } from '@angular/router/testing';
+
+import { UserStatsModule } from '../../shared/user-stats/user-stats.module';
+import { AuthService } from '../../services/auth.service';
 import { StatsService } from '../../services/stats.service';
+import { ProfileComponent } from './profile.component';
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;
@@ -17,7 +17,7 @@ describe('ProfileComponent', () => {
       imports: [
         HttpModule,
         RouterTestingModule,
-        StatsModule
+        UserStatsModule
       ],
       providers: [
         AuthService,

@@ -15,7 +15,13 @@ export class StatsService {
 
   getStats(): Observable<Stats> {
     const url = this.host + 'stats';
+    return this.http.get(url)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
 
+  getUserStats(user: string): Observable<Stats> {
+    const url = this.host + 'stats/' + user;
     return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);

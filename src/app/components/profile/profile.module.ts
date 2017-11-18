@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ProfileComponent } from './profile.component';
 import { profileRouter } from './profile-routing.module';
-import { StatsModule } from '../../shared/stats/stats.module';
+import { UserStatsModule } from '../../shared/user-stats/user-stats.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +12,7 @@ import { StatsModule } from '../../shared/stats/stats.module';
   imports: [
     CommonModule,
     profileRouter,
-    StatsModule
+    UserStatsModule
   ]
 })
 export class ProfileModule { }

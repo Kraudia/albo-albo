@@ -9,7 +9,17 @@ export interface Stats {
     pendingQuestions: number;
     rejectedQuestions: number;
   };
+  favQuestion: {
+    accepted: number;
+    pending: number;
+    rejected: number;
+  };
   questions: {
+    accepted: number;
+    pending: number;
+    rejected: number;
+  };
+  votes: {
     accepted: number;
     pending: number;
     rejected: number;

@@ -8,7 +8,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  public login;
+  public login: string;
 
   constructor(
     private authService: AuthService,

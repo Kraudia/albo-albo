@@ -1,0 +1,30 @@
+@import '../../../sass/variables';
+
+h3 {
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.user-stats-questions--accepted {
+  color: $text-olive;
+}
+
+.user-stats-questions--pending {
+  color: $text-brown;
+}
+
+.user-stats-questions--rejected {
+  color: $text-red;
+}
+
+.user-stats-comments {
+  color: $text-blue;
+}
+
+.user-stats-votes {
+  color: $text-navy;
+}
+
+.user-stats-favourites {
+  color: $text-maroon;
+}
