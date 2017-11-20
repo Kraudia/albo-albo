@@ -12,6 +12,10 @@ const routes: Routes = [
     component: ProfileComponent,
     children: [
       {
+        path: '',
+        redirectTo: 'wszystkie'
+      },
+      {
         path: ':status',
         component: ProfileTabComponent
       }

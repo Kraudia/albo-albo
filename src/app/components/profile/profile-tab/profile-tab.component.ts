@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import * as moment from 'moment';
 declare const $: any;
 
@@ -8,7 +9,6 @@ import { CommentService } from '../../../services/comment.service';
 import { QuestionService } from '../../../services/question.service';
 import { Question } from '../../../models/question';
 import { Comment } from '../../../models/comment';
-import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 
 @Component({
   selector: 'app-profile-tab',
@@ -34,6 +34,7 @@ export class ProfileTabComponent implements OnInit, OnDestroy {
     private commentService: CommentService,
     private questionService: QuestionService,
     private route: ActivatedRoute,
+    private router: Router,
     private slimLoadingBarService: SlimLoadingBarService
   ) { }
 
@@ -69,6 +70,7 @@ export class ProfileTabComponent implements OnInit, OnDestroy {
             this.getUserComments();
             this.commentsShow = true;
           } else {
+            this.router.navigate(['profil', this.login], {replaceUrl: true});
             this.status = null;
             this.getUserQuestions();
           }
