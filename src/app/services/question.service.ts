@@ -76,6 +76,23 @@ export class QuestionService {
       .map((res) => res.json());
   }
 
+  getUserQuestions(login: string, status: string, index: string, limit: number) {
+    let url = this.host + 'users/' + login + '/questions?';
+    if (status) {
+      url += `&status=${ status }`;
+    }
+    if (index) {
+      url += `&index=${ index }`;
+    }
+    if (limit) {
+      url += `&limit=${ limit }`;
+    }
+    const options = this.authService.getOptions();
+
+    return this.http.get(url, options)
+      .map((res) => res.json());
+  }
+
   getTags(): Observable<Tag[]> {
     const url = this.host + 'tags';
     const options = this.authService.getOptions();

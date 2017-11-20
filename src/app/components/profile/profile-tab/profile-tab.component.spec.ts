@@ -1,5 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpModule } from '@angular/http';
 
+import { AuthService } from '../../../services/auth.service';
+import { CommentService } from '../../../services/comment.service';
+import { QuestionService } from '../../../services/question.service';
 import { ProfileTabComponent } from './profile-tab.component';
 
 describe('ProfileTabComponent', () => {
@@ -8,7 +13,19 @@ describe('ProfileTabComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProfileTabComponent ]
+      declarations: [
+        ProfileTabComponent
+      ],
+      imports: [
+        HttpModule,
+        RouterTestingModule
+      ],
+      providers: [
+        HttpModule,
+        AuthService,
+        CommentService,
+        QuestionService
+      ]
     })
     .compileComponents();
   }));

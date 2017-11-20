@@ -1,3 +1,31 @@
-<p>
-  profile-tab works!
-</p>
+<div class="row" *ngIf="login">
+  <div class="col">
+    <div class="list-group" >
+      <a *ngFor="let question of questions" class="list-group-item list-group-item-action" [routerLink]="['/pytanie', question.id, question.shortLink]" aria-label="Przejdź do strony pytania">
+        <div class="row mb-1">
+          <div class="col-12 text-center">
+            {{ question.value }}
+
+            <div class="float-right text-md-right text-center">
+              <span title="{{ question.firstCount + question.secondCount }} odpowiedzi"><i class="fa fa-envelope text-success" aria-hidden="true"></i> {{ question.firstCount + question.secondCount }}</span>
+              <span title="{{ question.plusCount + question.minusCount }} głosów"><i class="fa fa-paper-plane text-warning" aria-hidden="true"></i> {{ question.plusCount + question.minusCount }}</span>
+              <span title="{{ question.commentsCount }} komentarzy"><i class="fa fa-comments text-info" aria-hidden="true"></i> {{ question.commentsCount }}</span>
+              <span title="{{ question.favourite_count }} polubień"><i class="fa fa-heart text-danger" aria-hidden="true"></i> {{ question.favourite_count }}</span>
+              <span><i class="fa fa-hashtag" aria-hidden="true"></i> {{ question.id }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-6">
+            <div class="p-3 mb-2 bg-light text-dark">{{ question.firstAnswer }}</div>
+          </div>
+
+          <div class="col-6">
+            <div class="p-3 mb-2 bg-light text-dark">{{ question.secondAnswer }}</div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

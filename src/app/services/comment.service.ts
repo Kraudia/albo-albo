@@ -26,6 +26,14 @@ export class CommentService {
       .map((res) => res.json());
   }
 
+  getUserComments(login: string): Observable<Comment[]> {
+    const url = this.host + 'users/' + login + '/comments';
+    const options = this.authService.getOptions();
+
+    return this.http.get(url, options)
+      .map((res) => res.json());
+  }
+
   postComment(idQuestion: number, value: string) {
     const url = this.host + 'questions/' + idQuestion + '/comments';
     const options = this.authService.getOptions();

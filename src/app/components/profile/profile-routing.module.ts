@@ -12,23 +12,7 @@ const routes: Routes = [
     component: ProfileComponent,
     children: [
       {
-        path: 'wszystkie',
-        component: ProfileTabComponent
-      },
-      {
-        path: 'zatwierdzone',
-        component: ProfileTabComponent
-      },
-      {
-        path: 'oczekujace',
-        component: ProfileTabComponent
-      },
-      {
-        path: 'zarchiwizowane',
-        component: ProfileTabComponent
-      },
-      {
-        path: 'komentarze',
+        path: ':status',
         component: ProfileTabComponent
       }
     ]

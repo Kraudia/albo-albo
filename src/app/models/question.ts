@@ -7,6 +7,7 @@ export class Question {
   commentsCount: number;
   createdDate: string;
   favouriteCount: number;
+  favourite_count: number;
   firstAnswer: string;
   firstCount: number;
   id: number;
