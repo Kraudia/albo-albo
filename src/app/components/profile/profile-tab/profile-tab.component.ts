@@ -88,7 +88,6 @@ export class ProfileTabComponent implements OnInit, OnDestroy {
           this.questions = response;
           if (this.questions.length > 0) {
             this.index = this.questions[this.questions.length - 1].createdDate;
-            // this.index =  (parseInt(this.index) - 7200000).toString();
           }
           this.isLoading = false;
           this.disableScroll = false;
@@ -107,7 +106,6 @@ export class ProfileTabComponent implements OnInit, OnDestroy {
           this.questions = [ ...this.questions, ...response];
           if (this.questions.length > 0) {
             this.index = this.questions[this.questions.length - 1].createdDate;
-            // this.index =  (parseInt(this.index) - 7200000).toString();
           }
           this.disableScroll = false;
           this.isLoading = false;

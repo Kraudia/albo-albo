@@ -1,5 +1,5 @@
 <div class="row" *ngIf="stats">
-  <div class="col-12">
+  <div class="col-6 col-md-12">
     <h3>{{ stats.questions.accepted + stats.questions.pending + stats.questions.rejected }} utworzonych pytań</h3>
     <ul class="fa-ul">
       <li class="user-stats-questions--accepted">
@@ -12,14 +12,19 @@
         <i class="fa-li fa fa-ban" aria-hidden="true"></i>{{ stats.questions.rejected }} odrzuconych
       </li>
     </ul>
+  </div>
 
+  <div class="col-6 col-md-12">
     <h3>Aktywność</h3>
     <ul class="fa-ul">
+      <li class="user-stats-answers">
+        <i class="fa-li fa fa-paper-plane-o" aria-hidden="true"></i>{{ stats.answers.acceptedQuestions + stats.answers.pendingQuestions + stats.answers.rejectedQuestions }} odpowiedzi
+      </li>
       <li class="user-stats-comments">
         <i class="fa-li fa fa-comments-o" aria-hidden="true"></i>{{ stats.comments.acceptedQuestions + stats.comments.pendingQuestions + stats.comments.rejectedQuestions }} komentarzy
       </li>
       <li class="user-stats-votes">
-        <i class="fa-li fa fa-paper-plane-o" aria-hidden="true"></i>{{ stats.votes.accepted + stats.votes.pending + stats.votes.rejected }} głosów
+        <i class="fa-li fa fa-check-square-o" aria-hidden="true"></i>{{ stats.votes.accepted + stats.votes.pending + stats.votes.rejected }} głosów
       </li>
       <li class="user-stats-favourites">
         <i class="fa-li fa fa-heart-o" aria-hidden="true"></i>{{ stats.favQuestion.accepted + stats.favQuestion.pending + stats.favQuestion.rejected }} ulubionych pytań

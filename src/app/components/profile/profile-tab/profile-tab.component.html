@@ -6,7 +6,7 @@
           <div class="row mb-1">
             <div class="col-12">
               <div class="float-left text-md-right text-center">
-                {{ question.value }}
+                <span class="small">{{ question.createdDate | amDateFormat: 'YYYY-MM-DD' }}</span> {{ question.value }}
               </div>
 
               <div class="float-right text-md-right text-center">
@@ -42,8 +42,8 @@
                 <i class="fa fa-hashtag" aria-hidden="true"></i> {{ comment.id }}
               </div>
 
-              <div class="float-left text-md-right text-center">
-                {{ comment.createdDate | amTimeAgo }}
+              <div class="float-left text-md-right text-center small">
+                {{ comment.createdDate | amDateFormat: 'YYYY-MM-DD' }}
               </div>
             </div>
           </div>
