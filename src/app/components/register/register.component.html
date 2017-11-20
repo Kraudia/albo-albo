@@ -66,7 +66,7 @@
         </div>
         <button class="btn btn-secondary btn-block btn-register" type="reset" (click)="reset()">Anuluj</button>
 
-        <button class="btn btn-primary btn-block btn-register" type="button" (click)="register(inputLogin.value, inputEmail.value, inputPassword.value, inputDate.value)">Zarejestruj się</button>
+        <button class="btn btn-primary btn-block btn-register" type="button" (click)="register(inputLogin.value, inputEmail.value, inputPassword.value, inputDate.value)">Zarejestruj się <i class="fa fa-refresh fa-spin fa-fw" *ngIf="isLoading"></i></button>
 
         <div class="row mt-3">
           <div class="col">

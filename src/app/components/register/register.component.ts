@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
+import { ToastrService } from 'ngx-toastr';
+
 import { PasswordValidation } from './PasswordValidation';
 import { validationErrors } from './validationMessages';
-
 import { RegisterService } from '../../services/register.service';
-import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-register',
@@ -18,13 +20,15 @@ export class RegisterComponent implements OnInit {
   private checked: boolean;
   public registerForm: FormGroup;
   public validationMessages = validationErrors;
+  public isLoading = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private registerService: RegisterService,
     private router: Router,
     private titleService: Title,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private slimLoadingBarService: SlimLoadingBarService
   ) {
     this.validated = false;
     this.checked = false;
@@ -138,6 +142,8 @@ export class RegisterComponent implements OnInit {
     this.validateForm();
 
     if (this.validateForm()) {
+      this.isLoading = true;
+      this.slimLoadingBarService.start();
       this.registerService.register(login, email, password, birthDate)
           .subscribe(
             res => {
@@ -145,13 +151,19 @@ export class RegisterComponent implements OnInit {
               this.router.navigate(['/logowanie']);
               const success = 'Żeby aktywować konto, kliknij w link potwierdzający, który wysłaliśmy na Twój adres email.';
               this.toastrService.success(success, 'Rejestracja się powiodła');
+              this.isLoading = false;
+              this.slimLoadingBarService.complete();
             },
             error => {
               if (error === '409 - OK Conflict') {
                 this.toastrService.error('Zajęty login lub mail. Proszę wpisać inne dane.', 'Błąd.');
+              } else if (error === '400 - OK Bad Request') {
+                this.toastrService.error('Zajęty login lub mail. Proszę wpisać inne dane.', 'Coś poszło nie tak.');
               } else {
                 this.toastrService.error('Twoja rejestracja sie nie udała.', 'Coś poszło nie tak.');
               }
+              this.isLoading = false;
+              this.slimLoadingBarService.complete();
             });
     }
   }

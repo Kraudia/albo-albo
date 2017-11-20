@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpModule } from '@angular/http';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 import { RegisterComponent } from './register.component';
@@ -28,7 +29,8 @@ describe('RegisterComponent', () => {
       providers: [
         FormBuilder,
         RegisterService,
-        ToastrService
+        ToastrService,
+        SlimLoadingBarService
       ]
     })
     .compileComponents();

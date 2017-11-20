@@ -1,3 +1,112 @@
-<p>
-  settings works!
-</p>
+<div class="row" *ngIf="user">
+  <div class="col-12 col-md-6" *ngIf="user">
+    <h2>{{ user.login }}</h2>
+
+    <div class="row">
+      <div class="col-3">
+        <img class="img-fluid mb-2 mt-2" src="{{ user.avatar }}" alt="Awatar użytkownika {{ user.login}}" />
+      </div>
+
+      <div class="col-8">
+        <dl class="row">
+          <dt class="col-5">Email</dt>
+          <dd class="col-7">{{ user.email }}</dd>
+
+          <dt class="col-5">Rejestracja</dt>
+          <dd class="col-7">{{ user.registeredDate | date }}</dd>
+
+          <dt class="col-5">Ostatnie logowanie</dt>
+          <dd class="col-7">{{ user.loginDate | date }}</dd>
+
+          <dt class="col-5">Data urodzin</dt>
+          <dd class="col-7">{{ user.birthDate | date }}</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3" *ngIf="stats">
+    <h3>Statystyki</h3>
+
+    <div class="row">
+      <div class="col-6">
+        {{ stats.questions.accepted + stats.questions.pending + stats.questions.rejected }} utworzonych pytań, w tym:
+        <ul class="fa-ul">
+        <li>
+          <i class="fa-li fa fa-check-circle-o" aria-hidden="true"></i>{{ stats.questions.accepted }} zatwierdzonych
+        </li>
+        <li>
+          <i class="fa-li fa fa-clock-o" aria-hidden="true"></i>{{ stats.questions.pending }} czekających w poczekalni
+        </li>
+        <li>
+          <i class="fa-li fa fa-ban" aria-hidden="true"></i>{{ stats.questions.rejected }} odrzuconych
+        </li>
+      </ul>
+      </div>
+
+      <div class="col-6">
+        <ul class="fa-ul">
+          <li>
+            <i class="fa-li fa fa-paper-plane-o" aria-hidden="true"></i>{{ stats.answers.acceptedQuestions + stats.answers.pendingQuestions + stats.answers.rejectedQuestions }} odpowiedzi
+          </li>
+          <li>
+            <i class="fa-li fa fa-comments-o" aria-hidden="true"></i>{{ stats.comments.acceptedQuestions + stats.comments.pendingQuestions + stats.comments.rejectedQuestions }} komentarzy
+          </li>
+          <li>
+            <i class="fa-li fa fa-check-square-o" aria-hidden="true"></i>{{ stats.votes.accepted + stats.votes.pending + stats.votes.rejected }} głosów
+          </li>
+          <li>
+            <i class="fa-li fa fa-heart-o" aria-hidden="true"></i>{{ stats.favQuestion.accepted + stats.favQuestion.pending + stats.favQuestion.rejected }} ulubionych pytań
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-8">
+    <h3>Zmiana hasła</h3>
+
+    <form (keyup.enter)="changePassword(inputOldPassword.value, inputNewPassword.value, inputRepeatNewPassword.value)">
+      <div class="form-group row">
+        <label for="inputOldPassword" class="col-sm-2 col-form-label">Stare hasło</label>
+        <div class="col-sm-10">
+          <input #inputOldPassword id="inputOldPassword" type="password" class="form-control" [class.is-invalid]="errorMessage && inputOldPassword.value ===''" placeholder="Wpisz stare hasło" required>
+          <small class="invalid-feedback">
+            Pole jest wymagane.
+          </small>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputNewPassword" class="col-sm-2 col-form-label">Nowe hasło</label>
+        <div class="col-sm-10">
+          <input #inputNewPassword  id="inputNewPassword" type="password" class="form-control" [class.is-invalid]="errorMessage && inputNewPassword.value ==='' " placeholder="Wpisz nowe hasło" required>
+          <small class="invalid-feedback">
+            Pole jest wymagane.
+          </small>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputRepeatNewPassword" class="col-sm-2 col-form-label">Powtórz nowe hasło</label>
+        <div class="col-sm-10">
+          <input #inputRepeatNewPassword  id="inputRepeatNewPassword" type="password" class="form-control" [class.is-invalid]="errorMessage && inputRepeatNewPassword.value ===''" placeholder="Wpisz nowe hasło" required>
+          <small class="invalid-feedback">
+            Pole jest wymagane.
+          </small>
+        </div>
+      </div>
+
+      <button class="btn btn-block btn-secondary" type="reset" (click)="reset()">Anuluj</button>
+      <button type="button" class="btn btn-block btn-primary" (click)="changePassword(inputOldPassword.value, inputNewPassword.value, inputRepeatNewPassword.value) ">Zmień hasło <i class="fa fa-refresh fa-spin fa-fw" *ngIf="isLoading"></i></button>
+
+      <div class="text-danger text-center p-3" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <div class="text-success text-center p-3" *ngIf="successMessage">
+        {{ successMessage }}
+      </div>
+    </form>
+  </div>
+</div>

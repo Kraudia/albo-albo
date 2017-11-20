@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpModule } from '@angular/http';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { ToastrService, ToastrModule } from 'ngx-toastr';
 
 import { LoginComponent } from './login.component';
@@ -25,7 +26,8 @@ describe('LoginComponent', () => {
       ],
       providers: [
         AuthService,
-        ToastrService
+        ToastrService,
+        SlimLoadingBarService
       ]
     })
     .compileComponents();
