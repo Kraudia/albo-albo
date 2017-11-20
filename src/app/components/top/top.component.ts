@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChange } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Question } from '../../models/question';
 import { QuestionService } from '../../services/question.service';
@@ -10,12 +10,13 @@ import { Title } from '@angular/platform-browser';
   templateUrl: './top.component.html',
   styleUrls: ['./top.component.scss']
 })
-export class TopComponent implements OnInit, OnChanges, OnDestroy {
+export class TopComponent implements OnInit, OnDestroy {
   private subscription = new Subscription();
   private type = 'vote';
 
   public btnFirst = 'btn-top-first';
   public btnSecond = 'btn-top-second';
+  public isLoading = false;
   public questions: Question[] = [];
 
   constructor(
@@ -46,12 +47,8 @@ export class TopComponent implements OnInit, OnChanges, OnDestroy {
           this.getTopQuestions();
         }
       });
-    const title = `Top - Albo Albo`;
+    const title = `Top pytań - Albo Albo`;
     this.titleService.setTitle(title);
-  }
-
-  ngOnChanges(changes: {[propertyName: string]: SimpleChange}) {
-    console.log('cos sie zmienilo');
   }
 
   ngOnDestroy() {
@@ -59,10 +56,13 @@ export class TopComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getTopQuestions() {
+  this.questions = [];
+    this.isLoading = true;
     const subscription = this.questionService.getTopQuestions(this.type)
       .subscribe(
         response => {
           this.questions = response;
+          this.isLoading = false;
         });
     this.subscription.add(subscription);
   }

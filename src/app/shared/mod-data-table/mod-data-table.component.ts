@@ -6,6 +6,7 @@ import { QuestionService } from '../../services/question.service';
 import { Subscription } from 'rxjs/Subscription';
 import { ModService } from '../../services/mod.service';
 import { Tag } from '../../models/tag';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 
 @Component({
   selector: 'app-mod-data-table',
@@ -24,17 +25,24 @@ export class ModDataTableComponent implements OnInit, OnChanges, OnDestroy {
     id: number;
     name: string;
   }[] = [];
-  public tags: Tag[] = [];
+  private index: string;
 
+  public tags: Tag[] = [];
   public questions: Question[] = [];
   public questionCount = 0;
+  public throttle = 300;
+  public scrollDistance = 0;
+  public disableScroll;
+  public isLoading = false;
+
   private subscription = new Subscription();
   private questionResource = new DataTableResource([]);
   private status = 'PENDING';
 
   constructor(
     private modService: ModService,
-    private questionService: QuestionService
+    private questionService: QuestionService,
+    private slimLoadingBarService: SlimLoadingBarService
   ) { }
 
   ngOnInit() {
@@ -47,6 +55,7 @@ export class ModDataTableComponent implements OnInit, OnChanges, OnDestroy {
     this.subscription.unsubscribe();
     this.subscription = new Subscription();
     this.questions = null;
+    this.index = null;
     this.getQuestions();
   }
 
@@ -55,16 +64,43 @@ export class ModDataTableComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   reload(params) {
+    this.slimLoadingBarService.start();
     this.questionResource.query(params).then(questions => this.questions = questions);
+    this.slimLoadingBarService.complete();
   }
 
   getQuestions() {
+    this.isLoading = true;
     const subscription = this.questionService.getQuestions(this.adult, null, null, this.limit, this.order, this.status, this.tag)
       .subscribe(
         response => {
           this.questions = response;
           this.questionResource = new DataTableResource(this.questions);
           this.questionResource.count().then(count => this.questionCount = count);
+          if (this.questions.length > 0) {
+            this.index = this.questions[this.questions.length - 1].createdDate;
+          }
+          this.isLoading = false;
+          this.disableScroll = false;
+        });
+    this.subscription.add(subscription);
+  }
+
+  getMoreQuestions() {
+    this.slimLoadingBarService.start();
+    this.isLoading = true;
+    this.disableScroll = true;
+    const subscription = this.questionService.getQuestions(this.adult, null, this.index, this.limit, this.order, this.status, this.tag)
+      .subscribe(
+        response => {
+          response.shift();
+          this.questions = [ ...this.questions, ...response];
+          this.index = this.questions[this.questions.length - 1].createdDate;
+          this.disableScroll = false;
+          this.questionResource = new DataTableResource(this.questions);
+          this.questionResource.count().then(count => this.questionCount = count);
+          this.isLoading = false;
+          this.slimLoadingBarService.complete();
         });
     this.subscription.add(subscription);
   }
@@ -163,6 +199,9 @@ export class ModDataTableComponent implements OnInit, OnChanges, OnDestroy {
         name: tag.name
       });
     }
+  }
+  onScrollDown() {
+    this.getMoreQuestions();
   }
 
   rowColors(question) {

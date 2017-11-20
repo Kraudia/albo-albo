@@ -46,6 +46,7 @@ export class ScrollableListComponent implements OnChanges, OnDestroy {
   }
 
   getQuestions() {
+    this.isLoading = true;
     const subscription = this.questionService.getQuestions(this.adult, this.answered, this.index, this.limit, this.order, this.status, this.tag)
       .subscribe(
         response => {
@@ -54,6 +55,7 @@ export class ScrollableListComponent implements OnChanges, OnDestroy {
             this.index = this.questions[this.questions.length - 1].createdDate;
           }
           this.disableScroll = false;
+          this.isLoading = false;
           this.slimLoadingBarService.complete();
         },
         err => {
@@ -81,7 +83,6 @@ export class ScrollableListComponent implements OnChanges, OnDestroy {
         });
     this.subscription.add(subscription);
   }
-
 
   onScrollDown() {
     this.getMoreQuestions();

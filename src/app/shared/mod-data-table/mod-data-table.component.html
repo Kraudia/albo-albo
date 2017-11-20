@@ -1,4 +1,4 @@
-<div>
+<div style="height: 100%" infiniteScroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="throttle"  [infiniteScrollDisabled]="disableScroll" (scrolled)="onScrollDown()">
   <data-table
     headerTitle="Pytania oczekujące na akceptację"
     [items]="questions"
@@ -101,6 +101,14 @@
       </ng-template>
     </data-table-column>
   </data-table>
+
+  <div class="card bg-white border-0" *ngIf="isLoading">
+    <div class="card-body text-center mt-2">
+      <ngx-loading [show]="isLoading"></ngx-loading>
+      <br />
+      Trwa pobieranie...
+    </div>
+  </div>
 </div>
 
 <div class="modal fade" id="editTagsModal" tabindex="-1" role="dialog" aria-labelledby="editTagsModalLabel" aria-hidden="true">

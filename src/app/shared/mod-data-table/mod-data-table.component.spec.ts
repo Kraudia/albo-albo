@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpModule } from '@angular/http';
 import { DataTableModule } from 'angular-4-data-table-bootstrap-4';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { LoadingModule } from 'ngx-loading';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 
 import { ModDataTableComponent } from './mod-data-table.component';
 import { QuestionService } from '../../services/question.service';
@@ -18,12 +21,15 @@ describe('ModDataTableComponent', () => {
       ],
       imports: [
         HttpModule,
-        DataTableModule
+        DataTableModule,
+        InfiniteScrollModule,
+        LoadingModule
       ],
       providers: [
         AuthService,
         ModService,
-        QuestionService
+        QuestionService,
+        SlimLoadingBarService
       ]
     })
     .compileComponents();

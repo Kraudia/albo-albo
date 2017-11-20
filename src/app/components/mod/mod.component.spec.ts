@@ -7,6 +7,7 @@ import { ModDataTableModule } from '../../shared/mod-data-table/mod-data-table.m
 import { AuthService } from '../../services/auth.service';
 import { QuestionService } from '../../services/question.service';
 import { ModService } from '../../services/mod.service';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 
 describe('ModComponent', () => {
   let component: ModComponent;
@@ -25,7 +26,8 @@ describe('ModComponent', () => {
       providers: [
         AuthService,
         ModService,
-        QuestionService
+        QuestionService,
+        SlimLoadingBarService
       ]
     })
     .compileComponents();

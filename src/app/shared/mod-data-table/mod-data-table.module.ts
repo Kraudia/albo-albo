@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { DataTableModule } from 'angular-4-data-table-bootstrap-4';
 
 import { ModDataTableComponent } from './mod-data-table.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { LoadingModule } from 'ngx-loading';
 
 @NgModule({
   declarations: [
@@ -13,6 +15,8 @@ import { ModDataTableComponent } from './mod-data-table.component';
   ],
   imports: [
     CommonModule,
+    InfiniteScrollModule,
+    LoadingModule,
     DataTableModule
   ],
 })

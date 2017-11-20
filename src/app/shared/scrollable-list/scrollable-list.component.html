@@ -1,18 +1,27 @@
-<div *ngIf="questions != null && questions.length > 0" style="height: 100%" infiniteScroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="throttle"  [infiniteScrollDisabled]="disableScroll" (scrolled)="onScrollDown()">
+<div class="row">
+  <div class="col-12">
+    <div *ngIf="questions != null && questions.length > 0" style="height: 100%" infiniteScroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="throttle"  [infiniteScrollDisabled]="disableScroll" (scrolled)="onScrollDown()">
     <app-question *ngFor="let question of questions" [oneQuestion]="question" [btnFirst]="btnFirst" [btnSecond]="btnSecond"></app-question>
-
-  <div class="card bg-white border-0">
-    <div class="card-body text-center mt-2" *ngIf="isLoading">
-      <ngx-loading [show]="isLoading"></ngx-loading>
-      <br />
-      Trwa pobieranie pytań...
-    </div>
+</div>
   </div>
 </div>
 
+<div class="row mb-4" *ngIf="isLoading">
+  <div class="col-12">
+    <div class="mt-2 text-center">
+        <ngx-loading [show]="isLoading"></ngx-loading>
+        <br />
+        Trwa pobieranie...
+      </div>
+  </div>
+</div>
 
-<div class="card bg-light" *ngIf="questions != null && questions.length == 0">
-  <div class="card-body">
-    Brak pytań.
+<div class="row" *ngIf="questions != null && questions.length == 0">
+  <div class="col-12">
+    <div class="card bg-light">
+      <div class="card-body">
+        Brak pytań.
+      </div>
+    </div>
   </div>
 </div>

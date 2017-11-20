@@ -15,6 +15,7 @@ export class RandomComponent implements OnInit, OnDestroy {
   public question: Question;
   public btnFirst = 'btn-random-first';
   public btnSecond = 'btn-random-second';
+  public isLoading = false;
 
   private subscription = new Subscription();
 
@@ -42,21 +43,25 @@ export class RandomComponent implements OnInit, OnDestroy {
   }
 
   getOneQuestion(id: string) {
+  this.isLoading = true;
       const subscription = this.questionService.getOneQuestion(id)
         .subscribe(
           response => {
             this.question = response;
             this.setTitle();
+            this.isLoading = false;
           });
       this.subscription.add(subscription);
   }
 
   getRandomQuestion() {
+    this.isLoading = true;
     const subscription = this.questionService.getQuestions(null, 'false', null, 1, 'random', null, null)
       .subscribe(
         response => {
-            this.question = response.shift();
-            this.setTitle();
+          this.question = response.shift();
+          this.setTitle();
+          this.isLoading = false;
         });
     this.subscription.add(subscription);
   }

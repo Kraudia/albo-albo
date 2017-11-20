@@ -11,6 +11,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 
 import { AppRoutingModule } from './app-routing.module';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,14 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     BrowserAnimationsModule,
     HttpModule,
+    InfiniteScrollModule,
+    LoadingModule.forRoot({
+      animationType: ANIMATION_TYPES.threeBounce,
+      backdropBackgroundColour: 'rgba(255,255,255,0.5)',
+      primaryColour: '#1F8A70',
+      secondaryColour: '#BEDB39',
+      tertiaryColour: '#FFE11A'
+    }),
     MomentModule,
     SlimLoadingBarModule.forRoot(),
     ToastrModule.forRoot({
