@@ -1,3 +1,4 @@
+import { Question } from './question';
 export interface Comment {
   id: number;
   value: string;
@@ -8,4 +9,5 @@ export interface Comment {
   userAvatar: string;
   userLogin: string;
   userId: number;
+  question: Question;
 }

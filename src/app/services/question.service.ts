@@ -77,7 +77,7 @@ export class QuestionService {
   }
 
   getUserQuestions(login: string, status: string, index: string, limit: number) {
-    let url = this.host + 'users/' + login + '/questions?';
+    let url = this.host + 'users/' + login + '/questions?order=created_date DESC';
     if (status) {
       url += `&status=${ status }`;
     }
