@@ -9,6 +9,7 @@ import { CommentService } from '../../../services/comment.service';
 import { QuestionService } from '../../../services/question.service';
 import { Question } from '../../../models/question';
 import { Comment } from '../../../models/comment';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-profile-tab',
@@ -35,7 +36,8 @@ export class ProfileTabComponent implements OnInit, OnDestroy {
     private questionService: QuestionService,
     private route: ActivatedRoute,
     private router: Router,
-    private slimLoadingBarService: SlimLoadingBarService
+    private slimLoadingBarService: SlimLoadingBarService,
+    private titleService: Title
   ) { }
 
   ngOnInit() {
@@ -58,20 +60,25 @@ export class ProfileTabComponent implements OnInit, OnDestroy {
 
           if (status === 'zatwierdzone') {
             this.status = 'ACCEPTED';
+            this.setTitle('Zatwierdzone pytania');
             this.getUserQuestions();
           } else if (status === 'oczekujace') {
             this.status = 'PENDING';
+            this.setTitle('Oczekujące pytania');
             this.getUserQuestions();
           } else if (status === 'zarchiwizowane') {
             this.status = 'REJECTED';
+            this.setTitle('Zarchiwizowane pytania');
             this.getUserQuestions();
           } else if (status === 'komentarze') {
             this.status = null;
             this.getUserComments();
+            this.setTitle('Komentarze');
             this.commentsShow = true;
           } else {
             this.router.navigate(['profil', this.login], {replaceUrl: true});
             this.status = null;
+            this.setTitle('Profil');
             this.getUserQuestions();
           }
         }
@@ -128,6 +135,11 @@ export class ProfileTabComponent implements OnInit, OnDestroy {
           this.isLoading = false;
         });
     this.subscription.add(subscription);
+  }
+
+  setTitle(status) {
+    const title = `${status} użytkownika ${this.login} - Albo Albo`;
+    this.titleService.setTitle(title);
   }
 
   onScrollDown() {

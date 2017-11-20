@@ -119,16 +119,25 @@ export class AuthService {
       .map((res) => res.json());
   }
 
-  getUserStats(login: string): Observable<Stats> {
-    const url = this.host + this.url.stats;
-    return this.http.get(url + login, this.getOptions())
-      .map((res) => res.json());
-  }
-
   changePassword(oldPassword: string, newPassword: string) {
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    });
+
+    if (!localStorage.getItem('uuid')) {
+      localStorage.setItem('uuid', this.generateUUID());
+    }
+    headers.append('X-request-UUID', localStorage.getItem('uuid'));
+
+    console.log('stare to ', oldPassword);
+    console.log('nowe to ', newPassword);
+    headers.append('Authorization', 'Basic ' + btoa(JSON.parse(localStorage.getItem('currentUser')).username + ':' + oldPassword));
+
+    const options = new RequestOptions({ headers });
     const password = newPassword;
     const url = this.host + this.url.pass;
-    return this.http.put(url, JSON.stringify({ password }), this.getOptions())
+    return this.http.put(url, JSON.stringify({ password }), options)
       .map(this.extractData)
       .catch(this.handleError);
   }

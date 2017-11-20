@@ -57,7 +57,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
   }
 
   changePassword(oldPassword: string, newPassword: string, repeatNewPassword: string) {
-    this.slimLoadingBarService.start();
     this.reset();
 
     if (oldPassword === '' || newPassword === '' || repeatNewPassword === '') {
@@ -67,6 +66,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     }
 
     if (!this.errorMessage) {
+      this.slimLoadingBarService.start();
       this.isLoading = true;
       const subscription = this.authService.changePassword(oldPassword, newPassword)
         .subscribe(

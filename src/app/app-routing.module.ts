@@ -56,6 +56,11 @@ const appRoutes: Routes = [
     canLoad: [ OnlyNotLoggedInUsersGuard ]
   },
   {
+    path: 'ustawienia',
+    loadChildren: 'app/components/settings/settings.module#SettingsModule',
+    canLoad: [ OnlyLoggedInUsersGuard ]
+  },
+  {
     path: 'moderacja',
     loadChildren: 'app/components/mod/mod.module#ModModule',
     canLoad: [ ModGuard, OnlyLoggedInUsersGuard ]
