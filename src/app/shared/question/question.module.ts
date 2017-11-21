@@ -4,19 +4,19 @@ import { MomentModule } from 'angular2-moment';
 
 import { QuestionComponent } from './question.component';
 import { CommentComponent } from './comment/comment.component';
-import { VotesPipe } from '../../pipes/votes.pipe';
 import { AddCommentComponent } from './add-comment/add-comment.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap/tooltip/tooltip.module';
 import { VoteButtonModule } from '../vote-button/vote-button.module';
 import { ClipboardModule } from 'ngx-clipboard';
+import { AnswersPipe } from '../../pipes/answers.pipe';
 
 @NgModule({
   declarations: [
     QuestionComponent,
     CommentComponent,
-    VotesPipe,
+    AnswersPipe,
     AddCommentComponent
   ],
   exports: [

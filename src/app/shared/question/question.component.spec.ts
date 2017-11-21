@@ -13,8 +13,8 @@ import { QuestionService } from '../../services/question.service';
 import { AddCommentComponent } from './add-comment/add-comment.component';
 import { CommentComponent } from './comment/comment.component';
 import { QuestionComponent } from './question.component';
-import { VotesPipe } from '../../pipes/votes.pipe';
 import { VoteButtonModule } from '../vote-button/vote-button.module';
+import { AnswersPipe } from '../../pipes/answers.pipe';
 
 describe('QuestionComponent', () => {
   let component: QuestionComponent;
@@ -39,7 +39,7 @@ describe('QuestionComponent', () => {
         AddCommentComponent,
         CommentComponent,
         QuestionComponent,
-        VotesPipe
+        AnswersPipe
       ],
       providers: [
         AuthService,
