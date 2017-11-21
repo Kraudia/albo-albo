@@ -120,7 +120,7 @@ export class AuthService {
   }
 
   changePassword(oldPassword: string, newPassword: string) {
-    let headers = new Headers({
+    const headers = new Headers({
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     });

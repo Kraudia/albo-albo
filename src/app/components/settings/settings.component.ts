@@ -41,8 +41,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
       if (this.user) {
         const subscription = this.statsService.getUserStats(this.user.login).subscribe(
-          response => {
-            this.stats = response;
+          res => {
+            this.stats = res;
           }
         );
         this.subscription.add(subscription);
@@ -61,7 +61,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
     if (oldPassword === '' || newPassword === '' || repeatNewPassword === '') {
       this.errorMessage = 'Proszę wypełnić wszystkie pola.';
-    } else if (newPassword != repeatNewPassword) {
+    } else if (newPassword !== repeatNewPassword) {
       this.errorMessage = 'Źle powtórzono nowe hasło. Spróbuj jeszcze raz.';
     }
 

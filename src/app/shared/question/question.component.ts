@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 import * as moment from 'moment';
 declare const $: any;
 
+import { environment } from '../../../environments/environment';
 import { AuthService } from '../../services/auth.service';
 import { CommentService } from '../../services/comment.service';
 import { QuestionService } from '../../services/question.service';
@@ -53,6 +54,7 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
   @Input('idQuestion') idQuestion: string;
   @Input('oneQuestion') oneQuestion: Question;
   private subscription = new Subscription();
+  public url = environment.APP_URL;
   public isLoading = false;
   public comments: Comment[];
   public firstCountPercentage = 0;
@@ -78,6 +80,7 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
       this.getOneQuestion();
     } else {
       this.question = this.oneQuestion;
+      this.url += 'pytanie/' + this.question.id + '/' + this.question.shortLink;
       this.loadProgress();
     }
   }
@@ -158,6 +161,7 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
         .subscribe(
           response => {
             this.question = response;
+            this.url += 'pytanie/' + this.question.id + '/' + this.question.shortLink;
             this.loadProgress();
           });
       this.subscription.add(subscription);

@@ -4,6 +4,8 @@ import { HttpModule } from '@angular/http';
 import { MomentModule } from 'angular2-moment';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap/tooltip/tooltip.module';
+import { ClipboardModule } from 'ngx-clipboard';
 
 import { AuthService } from '../../services/auth.service';
 import { CommentService } from '../../services/comment.service';
@@ -23,7 +25,9 @@ describe('QuestionComponent', () => {
       imports: [
         FormsModule,
         HttpModule,
+        ClipboardModule,
         MomentModule,
+        NgbTooltipModule,
         RouterTestingModule,
         VoteButtonModule,
         ToastrModule.forRoot({

@@ -8,7 +8,9 @@ import { VotesPipe } from '../../pipes/votes.pipe';
 import { AddCommentComponent } from './add-comment/add-comment.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap/tooltip/tooltip.module';
 import { VoteButtonModule } from '../vote-button/vote-button.module';
+import { ClipboardModule } from 'ngx-clipboard';
 
 @NgModule({
   declarations: [
@@ -22,10 +24,12 @@ import { VoteButtonModule } from '../vote-button/vote-button.module';
   ],
   imports: [
     CommonModule,
+    ClipboardModule,
     FormsModule,
     MomentModule,
     RouterModule,
-    VoteButtonModule
+    VoteButtonModule,
+    NgbTooltipModule
   ]
 })
 

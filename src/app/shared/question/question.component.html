@@ -48,7 +48,7 @@
 
         <button *ngIf="question.myFavourite && authService.isLoggedIn()" type="button" class="btn btn-sm btn-light" (click)="removeFromFavorites()"><i class="fa fa-heart text-danger" aria-hidden="true"></i> Usuń z ulubionych</button>
 
-        <button type="button" class="btn btn-sm btn-light"><i class="fa fa-link" aria-hidden="true"></i> Skopiuj link</button>
+        <button type="button" class="btn btn-sm btn-light" ngxClipboard [cbContent]="url" placement="bottom" ngbTooltip="Skopiowano link!" triggers="click:blur"><i class="fa fa-link" aria-hidden="true"></i> Skopiuj link</button>
 
         <button type="button" class="btn btn-sm btn-light" (click)="getComments()" *ngIf="!comments"><i class="fa fa-comments text-primary" aria-hidden="true"></i> Skomentuj ({{ question.commentsCount }})</button>
 

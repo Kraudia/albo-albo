@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  API_URL: 'https://albo-albo.herokuapp.com/'
+  API_URL: 'https://albo-albo.herokuapp.com/',
+  APP_URL: 'https://kraudia.github.io/albo-albo/'
 };

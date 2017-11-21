@@ -13,6 +13,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { AppRoutingModule } from './app-routing.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
       tertiaryColour: '#FFE11A'
     }),
     MomentModule,
+    NgbModule.forRoot(),
     SlimLoadingBarModule.forRoot(),
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
