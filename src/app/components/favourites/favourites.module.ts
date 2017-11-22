@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { FavouritesComponent } from './favourites.component';
 import { favouritesRouter } from './favourites-routing.module';
+import { MediumQuestionModule } from '../../shared/medium-question/medium-question.module';
 
 @NgModule({
   declarations: [
@@ -10,7 +11,8 @@ import { favouritesRouter } from './favourites-routing.module';
   ],
   imports: [
     CommonModule,
-    favouritesRouter
+    favouritesRouter,
+    MediumQuestionModule
   ]
 })
 export class FavouritesModule { }

@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { MediumQuestionModule } from '../../shared/medium-question/medium-question.module';
 import { FavouritesComponent } from './favourites.component';
 
 describe('FavouritesComponent', () => {
@@ -8,7 +9,12 @@ describe('FavouritesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FavouritesComponent ]
+      declarations: [
+        FavouritesComponent
+      ],
+      imports: [
+        MediumQuestionModule
+      ]
     })
     .compileComponents();
   }));

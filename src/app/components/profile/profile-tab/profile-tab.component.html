@@ -2,33 +2,7 @@
   <div class="col">
     <div class="list-group">
       <div *ngIf="questions" style="height: 100%" infiniteScroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="throttle" [infiniteScrollDisabled]="disableScroll" (scrolled)="onScrollDown()">
-        <a *ngFor="let question of questions" class="list-group-item list-group-item-action" [routerLink]="['/pytanie', question.id, question.shortLink]" aria-label="Przejdź do strony pytania">
-          <div class="row mb-1">
-            <div class="col-12">
-              <div class="float-left text-md-right text-center">
-                <span class="small">{{ question.createdDate | amDateFormat: 'YYYY-MM-DD' }}</span> {{ question.value }}
-              </div>
-
-              <div class="float-right text-md-right text-center">
-                <span title="{{ question.firstCount + question.secondCount }} odpowiedzi"><i class="fa fa-envelope text-success" aria-hidden="true"></i> {{ question.firstCount + question.secondCount }}</span>
-                <span title="{{ question.plusCount + question.minusCount }} głosów"><i class="fa fa-paper-plane text-warning" aria-hidden="true"></i> {{ question.plusCount + question.minusCount }}</span>
-                <span title="{{ question.commentsCount }} komentarzy"><i class="fa fa-comments text-info" aria-hidden="true"></i> {{ question.commentsCount }}</span>
-                <span title="{{ question.favourite_count }} polubień"><i class="fa fa-heart text-danger" aria-hidden="true"></i> {{ question.favourite_count }}</span>
-                <span><i class="fa fa-hashtag" aria-hidden="true"></i></span> {{ question.id }}
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-6">
-              <div class="p-3 mb-2 bg-profile-item text-dark">{{ question.firstAnswer }}</div>
-            </div>
-
-            <div class="col-6">
-              <div class="p-3 mb-2 bg-profile-item text-dark">{{ question.secondAnswer }}</div>
-            </div>
-          </div>
-        </a>
+        <app-medium-question *ngFor="let question of questions" [question]="question"></app-medium-question>
       </div>
 
       <div *ngIf="commentsShow && comments">

@@ -1,3 +1,27 @@
-<p>
-  medium-question works!
-</p>
+<a *ngIf="question" class="list-group-item list-group-item-action" [routerLink]="['/pytanie', question.id, question.shortLink]" aria-label="Przejdź do strony pytania">
+  <div class="row mb-1">
+    <div class="col-12">
+      <div class="float-left text-md-right text-center">
+        <span class="small">{{ question.createdDate | amDateFormat: 'YYYY-MM-DD' }}</span> {{ question.value }}
+      </div>
+
+      <div class="float-right text-md-right text-center">
+        <span [ngbTooltip]="(question.firstCount + question.secondCount) | answers"><i class="fa fa-envelope text-success" aria-hidden="true"></i> {{ question.firstCount + question.secondCount }}</span>
+        <span [ngbTooltip]="(question.plusCount + question.minusCount) | votes"><i class="fa fa-paper-plane text-warning" aria-hidden="true"></i> {{ question.plusCount + question.minusCount }}</span>
+        <span [ngbTooltip]="question.commentsCount | comments"><i class="fa fa-comments text-info" aria-hidden="true"></i> {{ question.commentsCount }}</span>
+        <span [ngbTooltip]="question.favourite_count | favourites"><i class="fa fa-heart text-danger" aria-hidden="true"></i> {{ question.favourite_count }}</span>
+        <span><i class="fa fa-hashtag" aria-hidden="true"></i></span> {{ question.id }}
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-6">
+      <div class="p-3 mb-2 bg-profile-item text-dark">{{ question.firstAnswer }}</div>
+    </div>
+
+    <div class="col-6">
+      <div class="p-3 mb-2 bg-profile-item text-dark">{{ question.secondAnswer }}</div>
+    </div>
+  </div>
+</a>

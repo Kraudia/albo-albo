@@ -6,6 +6,7 @@ import { MomentModule } from 'angular2-moment';
 
 import { ProfileComponent } from './profile.component';
 import { profileRouter } from './profile-routing.module';
+import { MediumQuestionModule } from '../../shared/medium-question/medium-question.module';
 import { UserStatsModule } from '../../shared/user-stats/user-stats.module';
 import { ProfileTabComponent } from './profile-tab/profile-tab.component';
 
@@ -20,6 +21,7 @@ import { ProfileTabComponent } from './profile-tab/profile-tab.component';
     LoadingModule,
     MomentModule,
     profileRouter,
+    MediumQuestionModule,
     UserStatsModule
   ]
 })

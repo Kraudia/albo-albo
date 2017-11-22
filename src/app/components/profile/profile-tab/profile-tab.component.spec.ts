@@ -5,6 +5,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MomentModule } from 'angular2-moment';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 
+import { MediumQuestionModule } from '../../../shared/medium-question/medium-question.module';
 import { AuthService } from '../../../services/auth.service';
 import { CommentService } from '../../../services/comment.service';
 import { QuestionService } from '../../../services/question.service';
@@ -25,7 +26,8 @@ describe('ProfileTabComponent', () => {
         InfiniteScrollModule,
         LoadingModule,
         MomentModule,
-        RouterTestingModule
+        RouterTestingModule,
+        MediumQuestionModule
       ],
       providers: [
         HttpModule,
