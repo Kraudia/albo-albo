@@ -56,6 +56,11 @@ const appRoutes: Routes = [
     canLoad: [ OnlyNotLoggedInUsersGuard ]
   },
   {
+    path: 'ulubione',
+    loadChildren: 'app/components/favourites/favourites.module#FavouritesModule',
+    canLoad: [ OnlyLoggedInUsersGuard ]
+  },
+  {
     path: 'ustawienia',
     loadChildren: 'app/components/settings/settings.module#SettingsModule',
     canLoad: [ OnlyLoggedInUsersGuard ]
