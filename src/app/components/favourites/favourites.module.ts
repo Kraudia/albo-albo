@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LoadingModule } from 'ngx-loading';
 
 import { FavouritesComponent } from './favourites.component';
 import { favouritesRouter } from './favourites-routing.module';
@@ -12,7 +13,8 @@ import { MediumQuestionModule } from '../../shared/medium-question/medium-questi
   imports: [
     CommonModule,
     favouritesRouter,
-    MediumQuestionModule
+    MediumQuestionModule,
+    LoadingModule
   ]
 })
 export class FavouritesModule { }

@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map';
 
 import { environment } from '../../environments/environment';
 import { AuthService } from './auth.service';
+import { FavouriteQuestion } from '../models/favouriteQuestion';
 import { Question } from '../models/question';
 import { Tag } from '../models/tag';
 
@@ -87,6 +88,14 @@ export class QuestionService {
     if (limit) {
       url += `&limit=${ limit }`;
     }
+    const options = this.authService.getOptions();
+
+    return this.http.get(url, options)
+      .map((res) => res.json());
+  }
+
+  getUserFavouriteQuestions(): Observable<FavouriteQuestion[]> {
+    const url = this.host + 'questions/favourite';
     const options = this.authService.getOptions();
 
     return this.http.get(url, options)
