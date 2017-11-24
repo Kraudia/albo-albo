@@ -44,11 +44,11 @@
       </div>
 
       <div class="col-lg-6 text-center">
-        <button *ngIf="!question.myFavourite && authService.isLoggedIn()" type="button" class="btn btn-sm btn-light" (click)="addToFavorites()"><i class="fa fa-heart" aria-hidden="true"></i> Dodaj do ulubionych</button>
+        <button *ngIf="!question.myFavourite && authService.isLoggedIn()" type="button" class="btn btn-sm btn-light" (click)="addToFavorites()"><i *ngIf="!isFavouriteLoading" class="fa fa-heart fa-fw" aria-hidden="true"></i><i *ngIf="isFavouriteLoading" class="fa fa-refresh fa-spin fa-fw"></i> Dodaj do ulubionych</button>
 
-        <button *ngIf="question.myFavourite && authService.isLoggedIn()" type="button" class="btn btn-sm btn-light" (click)="removeFromFavorites()"><i class="fa fa-heart text-danger" aria-hidden="true"></i> Usuń z ulubionych</button>
+        <button *ngIf="question.myFavourite && authService.isLoggedIn()" type="button" class="btn btn-sm btn-light" (click)="removeFromFavorites()"><i *ngIf="!isFavouriteLoading" class="fa fa-heart fa-fw text-danger" aria-hidden="true"></i><i *ngIf="isFavouriteLoading" class="fa fa-refresh fa-spin fa-fw"></i> Usuń z ulubionych</button>
 
-        <button type="button" class="btn btn-sm btn-light" ngxClipboard [cbContent]="url" placement="bottom" ngbTooltip="Skopiowano link!" triggers="click:blur"><i class="fa fa-link" aria-hidden="true"></i> Skopiuj link</button>
+        <button type="button" class="btn btn-sm btn-light" ngxClipboard [cbContent]="url" placement="bottom" ngbTooltip="Skopiowano link!" triggers="click:blur"><i class="fa fa-link fa-fw" aria-hidden="true"></i> Skopiuj link</button>
 
         <button type="button" class="btn btn-sm btn-light" (click)="getComments()" *ngIf="!comments"><i class="fa fa-comments text-primary" aria-hidden="true"></i> Skomentuj ({{ question.commentsCount }})</button>
 

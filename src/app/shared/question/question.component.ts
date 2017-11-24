@@ -56,6 +56,7 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
   private subscription = new Subscription();
   public url = environment.APP_URL;
   public isLoading = false;
+  public isFavouriteLoading = false;
   public comments: Comment[];
   public firstCountPercentage = 0;
   public secondCountPercentage = 0;
@@ -184,11 +185,31 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   addToFavorites() {
-    // TODO: add to favorites
+    this.isFavouriteLoading = true;
+    const subscription = this.questionService.addFavouriteQuestion(this.question.id).subscribe(
+      res => {
+        this.question.myFavourite = true;
+        this.isFavouriteLoading = false;
+      },
+      error => {
+        this.isFavouriteLoading = false;
+      }
+    );
+    this.subscription.add(subscription);
   }
 
   removeFromFavorites() {
-    // TODO: remove from favorites
+    this.isFavouriteLoading = true;
+    const subscription = this.questionService.removeFavouriteQuestion(this.question.id).subscribe(
+      res => {
+        this.question.myFavourite = false;
+        this.isFavouriteLoading = false;
+      },
+      error => {
+        this.isFavouriteLoading = false;
+      }
+    );
+    this.subscription.add(subscription);
   }
 
   vote(value: number) {

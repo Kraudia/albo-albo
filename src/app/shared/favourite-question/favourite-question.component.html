@@ -1,0 +1,45 @@
+<div class="row justify-content-center align-items-center" *ngIf="question" @fadeInOut>
+ <div class="col">
+   <a *ngIf="question" class="list-group-item list-group-item-action" [routerLink]="['/pytanie', question.question.id, question.question.shortLink]" aria-label="Przejdź do strony pytania">
+     <div class="row mt-2 mb-2">
+       <div class="col-12 text-center">
+         <div class="float-left text-md-right text-center" [ngbTooltip]="'Data utworzenia pytania przez autora'">
+           <span class="small">{{ question.question.createdDate | amDateFormat: 'DD.MM.YYYY' }}</span>
+         </div>
+
+         {{ question.question.value }}
+
+         <div class="float-right">
+           <span><i class="fa fa-hashtag" aria-hidden="true"></i></span> {{ question.question.id }}
+         </div>
+       </div>
+     </div>
+
+     <div class="row">
+       <div class="col-12 col-sm-6">
+         <div class="p-3 mb-2 bg-favourite text-dark">{{ question.question.firstAnswer }}</div>
+       </div>
+
+       <div class="col-12 col-sm-6">
+         <div class="p-3 mb-2 bg-favourite text-dark">{{ question.question.secondAnswer }}</div>
+       </div>
+     </div>
+
+     <div class="row">
+       <div class="col-12 text-center">
+         <div class="float-left text-md-right text-center">
+           <a class="btn btn-sm btn-white" [routerLink]="['/profil', question.question.userLogin]" aria-label="Przejdź do strony autora"><i class="fa fa-user" aria-hidden="true"></i> {{ question.question.userLogin }}</a>
+         </div>
+
+         <div class="float-right text-md-right text-center">
+          <span [ngbTooltip]="'Data dodania do ulubionych: ' + (question.addedDate | amCalendar)"><i class="fa fa-heart text-danger" aria-hidden="true"></i> {{ question.addedDate | amTimeAgo }}</span>
+         </div>
+       </div>
+     </div>
+   </a>
+ </div>
+
+ <div class="col-auto">
+   <button *ngIf="question.question.myFavourite !== false" type="button" class="btn btn-sm btn-danger" (click)="removeFromFavorites()"><i *ngIf="!isFavouriteLoading" class="fa fa-trash fa-fw" aria-hidden="true"></i><i *ngIf="isFavouriteLoading" class="fa fa-refresh fa-spin fa-fw"></i> Usuń</button>
+ </div>
+</div>

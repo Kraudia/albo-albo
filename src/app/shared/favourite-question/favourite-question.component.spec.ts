@@ -1,29 +1,29 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpModule } from '@angular/http';
-import { LoadingModule } from 'ngx-loading';
-import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { RouterTestingModule } from '@angular/router/testing';
+import { MomentModule } from 'angular2-moment';
 
-import { FavouriteQuestionModule } from '../../shared/favourite-question/favourite-question.module';
 import { AuthService } from '../../services/auth.service';
 import { QuestionService } from '../../services/question.service';
-import { FavouritesComponent } from './favourites.component';
+import { FavouriteQuestionComponent } from './favourite-question.component';
 
-describe('FavouritesComponent', () => {
-  let component: FavouritesComponent;
-  let fixture: ComponentFixture<FavouritesComponent>;
+describe('FavouriteQuestionComponent', () => {
+  let component: FavouriteQuestionComponent;
+  let fixture: ComponentFixture<FavouriteQuestionComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        FavouritesComponent
+        FavouriteQuestionComponent
       ],
       imports: [
         HttpModule,
-        FavouriteQuestionModule,
-        LoadingModule
+        MomentModule,
+        NgbTooltipModule,
+        RouterTestingModule
       ],
       providers: [
-        SlimLoadingBarService,
         AuthService,
         QuestionService
       ]
@@ -32,7 +32,7 @@ describe('FavouritesComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FavouritesComponent);
+    fixture = TestBed.createComponent(FavouriteQuestionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

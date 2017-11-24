@@ -119,8 +119,30 @@ export class QuestionService {
       .catch(this.handleError);
   }
 
+  addFavouriteQuestion(question: number) {
+    const url = this.host + 'questions/favourite';
+    const options = this.authService.getOptions();
+
+    return this.http.post(url, JSON.stringify({ question }), options)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  removeFavouriteQuestion(question: number) {
+    const url = this.host + 'questions/favourite';
+    const options = this.authService.getOptions();
+
+    options.body = JSON.stringify({ question });
+    return this.http.delete(url, options)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
   private extractData(res: Response) {
     const body = res.json();
+    if (res.status === 204) {
+      return { };
+    }
     return body.data || { };
   }
 
@@ -133,7 +155,6 @@ export class QuestionService {
     } else {
       errMsg = error.message ? error.message : error.toString();
     }
-    console.error(errMsg);
     return Observable.throw(errMsg);
   }
 }
