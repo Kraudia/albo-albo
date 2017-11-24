@@ -28,6 +28,7 @@ import { VoteButtonModule } from '../vote-button/vote-button.module';
     MomentModule,
     PipesModule,
     RouterModule,
+
     VoteButtonModule,
     NgbTooltipModule
   ]

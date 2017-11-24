@@ -12,6 +12,9 @@
     [rowColors]="rowColors"
   >
     <data-table-column property="id" header="#" [sortable]="true" [width]="50">
+      <ng-template #dataTableCell let-item="item">
+        <a class="btn btn-light btn-sm" [routerLink]="['/pytanie', item.id, item.shortLink]" aria-label="Przejdź do strony pytania">{{ item.id }}</a>
+      </ng-template>
     </data-table-column>
 
     <data-table-column property="createdDate" header="Data utworzenia" [resizable]="true" [sortable]="true" [visible]="false">

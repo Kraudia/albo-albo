@@ -4,6 +4,7 @@ import { DataTableModule } from 'angular-4-data-table-bootstrap-4';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { LoadingModule } from 'ngx-loading';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { ModDataTableComponent } from './mod-data-table.component';
 import { QuestionService } from '../../services/question.service';
@@ -23,7 +24,8 @@ describe('ModDataTableComponent', () => {
         HttpModule,
         DataTableModule,
         InfiniteScrollModule,
-        LoadingModule
+        LoadingModule,
+        RouterTestingModule
       ],
       providers: [
         AuthService,
