@@ -66,9 +66,9 @@ export class ProfileTabComponent implements OnInit, OnDestroy {
             this.status = 'PENDING';
             this.setTitle('Oczekujące pytania');
             this.getUserQuestions();
-          } else if (status === 'zarchiwizowane') {
+          } else if (status === 'odrzucone') {
             this.status = 'REJECTED';
-            this.setTitle('Zarchiwizowane pytania');
+            this.setTitle('Odrzucone pytania');
             this.getUserQuestions();
           } else if (status === 'komentarze') {
             this.status = null;
