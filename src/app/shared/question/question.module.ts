@@ -10,6 +10,7 @@ import { PipesModule } from '../../pipes/pipes.module';
 import { QuestionComponent } from './question.component';
 import { CommentComponent } from './comment/comment.component';
 import { AddCommentComponent } from './add-comment/add-comment.component';
+import { ReportButtonModule } from '../report-button/report-button.module';
 import { VoteButtonModule } from '../vote-button/vote-button.module';
 
 @NgModule({
@@ -28,7 +29,7 @@ import { VoteButtonModule } from '../vote-button/vote-button.module';
     MomentModule,
     PipesModule,
     RouterModule,
-
+    ReportButtonModule,
     VoteButtonModule,
     NgbTooltipModule
   ]

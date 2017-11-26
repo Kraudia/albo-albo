@@ -212,6 +212,11 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
     this.subscription.add(subscription);
   }
 
+  report(value: string) {
+    console.log('reported question ', this.question.id);
+    console.log('reported ', value);
+  }
+
   vote(value: number) {
     this.question.myVote = value;
     if (value === -1) {

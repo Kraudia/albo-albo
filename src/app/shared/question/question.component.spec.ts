@@ -13,6 +13,7 @@ import { QuestionService } from '../../services/question.service';
 import { AddCommentComponent } from './add-comment/add-comment.component';
 import { CommentComponent } from './comment/comment.component';
 import { QuestionComponent } from './question.component';
+import { ReportButtonModule } from '../report-button/report-button.module';
 import { VoteButtonModule } from '../vote-button/vote-button.module';
 import { AnswersPipe } from '../../pipes/answers.pipe';
 
@@ -29,6 +30,7 @@ describe('QuestionComponent', () => {
         MomentModule,
         NgbTooltipModule,
         RouterTestingModule,
+        ReportButtonModule,
         VoteButtonModule,
         ToastrModule.forRoot({
           positionClass: 'toast-bottom-right',

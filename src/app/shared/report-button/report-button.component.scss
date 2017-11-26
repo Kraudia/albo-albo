@@ -1,0 +1,6 @@
+.btn-report {
+  background-color: transparent;
+  &:hover, &:focus {
+    background-color: rgba(190, 214, 222, 0.7);
+  }
+}
