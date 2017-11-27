@@ -2,10 +2,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpModule } from '@angular/http';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { UserStatsModule } from '../../shared/user-stats/user-stats.module';
 import { AuthService } from '../../services/auth.service';
+import { PipesModule } from '../../pipes/pipes.module';
 import { StatsService } from '../../services/stats.service';
 import { ProfileComponent } from './profile.component';
+import { UserStatsComponent } from './user-stats/user-stats.component';
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;
@@ -13,11 +14,14 @@ describe('ProfileComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProfileComponent ],
+      declarations: [
+        ProfileComponent,
+        UserStatsComponent
+      ],
       imports: [
         HttpModule,
         RouterTestingModule,
-        UserStatsModule
+        PipesModule
       ],
       providers: [
         AuthService,
