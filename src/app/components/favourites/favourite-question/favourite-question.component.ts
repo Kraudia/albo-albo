@@ -2,13 +2,13 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { trigger, style, transition, animate } from '@angular/animations';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs/Subscription';
-import { FavouriteQuestion } from '../../models/favouriteQuestion';
-import { QuestionService } from '../../services/question.service';
+import { FavouriteQuestion } from '../../../models/favouriteQuestion';
+import { QuestionService } from '../../../services/question.service';
 
 @Component({
   selector: 'app-favourite-question',
-  templateUrl: './favourite-question.component.html',
-  styleUrls: ['./favourite-question.component.scss'],
+  templateUrl: 'favourite-question.component.html',
+  styleUrls: ['favourite-question.component.scss'],
   animations: [
     trigger('fadeInOut', [
       transition(':leave', [

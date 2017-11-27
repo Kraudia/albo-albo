@@ -1,19 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoadingModule } from 'ngx-loading';
+import { MomentModule } from 'angular2-moment';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { RouterModule } from '@angular/router';
 
 import { FavouritesComponent } from './favourites.component';
 import { favouritesRouter } from './favourites-routing.module';
-import { FavouriteQuestionModule } from '../../shared/favourite-question/favourite-question.module';
+import { FavouriteQuestionComponent } from './favourite-question/favourite-question.component';
 
 @NgModule({
   declarations: [
-    FavouritesComponent
+    FavouritesComponent,
+    FavouriteQuestionComponent
   ],
   imports: [
     CommonModule,
+    MomentModule,
+    NgbTooltipModule,
+    RouterModule,
     favouritesRouter,
-    FavouriteQuestionModule,
     LoadingModule
   ]
 })

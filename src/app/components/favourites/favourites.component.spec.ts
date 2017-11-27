@@ -1,12 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpModule } from '@angular/http';
 import { LoadingModule } from 'ngx-loading';
+import { MomentModule } from 'angular2-moment';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { RouterTestingModule } from '@angular/router/testing';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 
-import { FavouriteQuestionModule } from '../../shared/favourite-question/favourite-question.module';
 import { AuthService } from '../../services/auth.service';
 import { QuestionService } from '../../services/question.service';
 import { FavouritesComponent } from './favourites.component';
+import { FavouriteQuestionComponent } from './favourite-question/favourite-question.component';
 
 describe('FavouritesComponent', () => {
   let component: FavouritesComponent;
@@ -15,12 +18,15 @@ describe('FavouritesComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        FavouritesComponent
+        FavouritesComponent,
+        FavouriteQuestionComponent
       ],
       imports: [
         HttpModule,
-        FavouriteQuestionModule,
-        LoadingModule
+        LoadingModule,
+        MomentModule,
+        NgbTooltipModule,
+        RouterTestingModule
       ],
       providers: [
         SlimLoadingBarService,

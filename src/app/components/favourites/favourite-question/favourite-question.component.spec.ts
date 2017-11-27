@@ -4,8 +4,8 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MomentModule } from 'angular2-moment';
 
-import { AuthService } from '../../services/auth.service';
-import { QuestionService } from '../../services/question.service';
+import { AuthService } from '../../../services/auth.service';
+import { QuestionService } from '../../../services/question.service';
 import { FavouriteQuestionComponent } from './favourite-question.component';
 
 describe('FavouriteQuestionComponent', () => {
