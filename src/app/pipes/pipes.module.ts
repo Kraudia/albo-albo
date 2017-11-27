@@ -4,13 +4,23 @@ import { AnswersPipe } from './answers.pipe';
 import { CommentsPipe } from './comments.pipe';
 import { VotesPipe } from './votes.pipe';
 import { FavouritesPipe } from './favourites.pipe';
+import { CreatedQuestionsPipe } from './created-questions.pipe';
+import { AcceptedQuestionsPipe } from './accepted-questions.pipe';
+import { PendingQuestionsPipe } from './pending-questions.pipe';
+import { RejectedQuestionsPipe } from './rejected-questions.pipe';
+import { FavouriteQuestionsPipe } from './favourite-questions.pipe';
 
 @NgModule({
   declarations: [
     AnswersPipe,
     CommentsPipe,
     FavouritesPipe,
-    VotesPipe
+    VotesPipe,
+    CreatedQuestionsPipe,
+    AcceptedQuestionsPipe,
+    PendingQuestionsPipe,
+    RejectedQuestionsPipe,
+    FavouriteQuestionsPipe
   ],
   imports: [
     CommonModule
@@ -19,7 +29,12 @@ import { FavouritesPipe } from './favourites.pipe';
     AnswersPipe,
     CommentsPipe,
     FavouritesPipe,
-    VotesPipe
+    VotesPipe,
+    CreatedQuestionsPipe,
+    AcceptedQuestionsPipe,
+    PendingQuestionsPipe,
+    RejectedQuestionsPipe,
+    FavouriteQuestionsPipe
   ]
 })
 export class PipesModule { }

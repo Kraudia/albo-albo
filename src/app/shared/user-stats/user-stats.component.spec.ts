@@ -3,6 +3,7 @@ import { HttpModule } from '@angular/http';
 
 import { StatsService } from '../../services/stats.service';
 import { UserStatsComponent } from './user-stats.component';
+import { PipesModule } from '../../pipes/pipes.module';
 
 describe('UserStatsComponent', () => {
   let component: UserStatsComponent;
@@ -14,7 +15,8 @@ describe('UserStatsComponent', () => {
         UserStatsComponent
       ],
       imports: [
-        HttpModule
+        HttpModule,
+        PipesModule
       ],
       providers: [
         StatsService
