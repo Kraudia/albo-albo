@@ -56,6 +56,11 @@ const appRoutes: Routes = [
     canLoad: [ OnlyNotLoggedInUsersGuard ]
   },
   {
+    path: 'historia',
+    loadChildren: 'app/components/history/history.module#HistoryModule',
+    canLoad: [ OnlyLoggedInUsersGuard ]
+  },
+  {
     path: 'ulubione',
     loadChildren: 'app/components/favourites/favourites.module#FavouritesModule',
     canLoad: [ OnlyLoggedInUsersGuard ]
