@@ -44,15 +44,15 @@
       </div>
 
       <div class="col-lg-7 text-center">
-        <button *ngIf="!question.myFavourite && authService.isLoggedIn()" type="button" class="btn btn-sm btn-light" (click)="addToFavorites()"><i *ngIf="!isFavouriteLoading" class="fa fa-heart fa-fw" aria-hidden="true"></i><i *ngIf="isFavouriteLoading" class="fa fa-refresh fa-spin fa-fw"></i> Dodaj do ulubionych</button>
+        <button *ngIf="!question.myFavourite && authService.isLoggedIn()" type="button" class="btn btn-sm btn-light" (click)="addToFavorites()"><i *ngIf="!isFavouriteLoading" class="fa fa-heart fa-fw" aria-hidden="true"></i><i *ngIf="isFavouriteLoading" class="fa fa-refresh fa-spin fa-fw" aria-hidden="true"></i> Dodaj do ulubionych</button>
 
-        <button *ngIf="question.myFavourite && authService.isLoggedIn()" type="button" class="btn btn-sm btn-light" (click)="removeFromFavorites()"><i *ngIf="!isFavouriteLoading" class="fa fa-heart fa-fw text-danger" aria-hidden="true"></i><i *ngIf="isFavouriteLoading" class="fa fa-refresh fa-spin fa-fw"></i> Usuń z ulubionych</button>
+        <button *ngIf="question.myFavourite && authService.isLoggedIn()" type="button" class="btn btn-sm btn-light" (click)="removeFromFavorites()"><i *ngIf="!isFavouriteLoading" class="fa fa-heart fa-fw text-danger" aria-hidden="true"></i><i *ngIf="isFavouriteLoading" class="fa fa-refresh fa-spin fa-fw" aria-hidden="true"></i> Usuń z ulubionych</button>
 
-        <app-report-button [question]="question.id" (onReported)="report($event)"></app-report-button>
+        <app-report-button [question]="question.id"></app-report-button>
 
         <button type="button" class="btn btn-sm btn-light" ngxClipboard [cbContent]="url" placement="bottom" ngbTooltip="Skopiowano link!" triggers="click:blur"><i class="fa fa-link fa-fw" aria-hidden="true"></i> Skopiuj link</button>
 
-        <button type="button" class="btn btn-sm btn-light" (click)="getComments()" *ngIf="!comments"><i class="fa fa-comments text-primary" aria-hidden="true"></i> Skomentuj ({{ question.commentsCount }})</button>
+        <button type="button" class="btn btn-sm btn-light" (click)="getComments()" *ngIf="!comments"><i  *ngIf="!isCommentsLoading" class="fa fa-comments text-primary" aria-hidden="true"></i><i *ngIf="isCommentsLoading" class="fa fa-refresh fa-spin fa-fw" aria-hidden="true"></i>  Skomentuj ({{ question.commentsCount }})</button>
 
         <button type="button" class="btn btn-sm btn-light" (click)="hideComments()" *ngIf="comments"><i class="fa fa-comments text-primary" aria-hidden="true"></i> Ukryj komentarze ({{ question.commentsCount }})</button>
       </div>

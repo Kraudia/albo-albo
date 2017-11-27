@@ -57,6 +57,7 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
   public url = environment.APP_URL;
   public isLoading = false;
   public isFavouriteLoading = false;
+  public isCommentsLoading = false;
   public comments: Comment[];
   public firstCountPercentage = 0;
   public secondCountPercentage = 0;
@@ -170,12 +171,12 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getComments() {
-    this.isLoading = true;
+    this.isCommentsLoading = true;
       const subscription = this.commentService.getComments(this.question.id)
         .subscribe(
           response => {
             this.comments = response;
-            this.isLoading = false;
+            this.isCommentsLoading = false;
           });
       this.subscription.add(subscription);
   }
@@ -210,11 +211,6 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
       }
     );
     this.subscription.add(subscription);
-  }
-
-  report(value: string) {
-    console.log('reported question ', this.question.id);
-    console.log('reported ', value);
   }
 
   vote(value: number) {
