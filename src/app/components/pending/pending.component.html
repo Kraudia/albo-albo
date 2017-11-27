@@ -1,17 +1,16 @@
 <div class="row flex-column-reverse flex-md-row">
   <div class="col-md-9">
-    <app-scrollable-list [btnFirst]="btnFirst" [btnSecond]="btnSecond" [status]="status" [order]="sort" [tag]="tag"></app-scrollable-list>
+    <app-scrollable-list [btnFirst]="btnFirst" [btnSecond]="btnSecond" [adult]="adult" [answered]="answered" [status]="status" [order]="sort" [tag]="tag"></app-scrollable-list>
   </div>
 
   <div class="col-md-3">
-    <h6>Poczekalnia</h6>
+    <h3>Poczekalnia</h3>
       <p class="p-info">Tutaj trafiają wszystkie pytania dodane przez użytkowników. Od was zależy, które z nich zostaną przeniesione do <a [routerLink]="['/najnowsze']">najnowszych</a>. Ostateczny wybór należy do moderacji.</p>
 
-
-    <h6>Tagi</h6>
+    <h3>Tagi</h3>
     <app-cloud [tags]="tags" [status]="status" (selected)="selectTag($event)"></app-cloud>
 
-    <h6>Sortuj wg</h6>
+    <h3>Sortuj wg</h3>
     <button type="button"
             [class.btn-sort-selected]="sort == 'created_date DESC' || sort == 'created_date ASC'"
             class="btn btn-sm btn-sort text-left"
@@ -29,10 +28,50 @@
             class="btn btn-sm btn-sort text-left"
             (click)="sortBy('vote_count DESC')"><i class="fa fa-check-square-o" aria-hidden="true"></i> głosów</button>
 
-    <h6 *ngIf="authService.isLoggedIn()">Historia</h6>
-    <app-simple-list *ngIf="authService.isLoggedIn()" [status]="status" [answered]="answered" [order]="order"></app-simple-list>
 
-    <h6>Statystyki</h6>
+    <h3 *ngIf="authService.isLoggedIn()">Filtry</h3>
+    <fieldset class="form-group d-block small" *ngIf="authService.isLoggedIn()">
+      <legend class="col-form-legend">Pytania zawierające treść nieodpowiednią dla osób niepełnoletnich:</legend>
+      <div class="form-check d-inline-block d-md-block">
+        <label class="form-check-label">
+          <input [(ngModel)]="adult" class="form-check-input" type="radio" name="adultRatedRadio" value="false"> ukryj pytania +18
+        </label>
+      </div>
+      <div class="form-check d-inline-block d-md-block">
+        <label class="form-check-label">
+          <input [(ngModel)]="adult" class="form-check-input" type="radio" name="adultRatedRadio" value="true"> pokaż tylko pytania +18
+        </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <label class="form-check-label">
+          <input [(ngModel)]="adult" class="form-check-input" type="radio" name="adultRatedRadio" value=""> pokaż wszystkie pytania
+        </label>
+      </div>
+    </fieldset>
+
+    <fieldset class="form-group d-block mt-3 small" *ngIf="authService.isLoggedIn()">
+      <legend class="col-form-legend">Pytania, na które udzielono odpowiedzi:</legend>
+      <div class="form-check  d-inline d-md-block">
+        <label class="form-check-label">
+          <input [(ngModel)]="answered" class="form-check-input" type="radio" name="answeredRadio" value="true"> wyświetl tylko te pytania, na ktore udzielono odpowiedzi
+        </label>
+      </div>
+      <div class="form-check  d-inline d-md-block">
+        <label class="form-check-label">
+          <input [(ngModel)]="answered" class="form-check-input" type="radio" name="answeredRadio" value="false"> pokaż tylko te pytania, na które nie udzielono odpowiedź
+        </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <label class="form-check-label">
+          <input [(ngModel)]="answered" class="form-check-input" type="radio" name="answeredRadio" value="" checked> pokaż wszystkie pytania
+        </label>
+      </div>
+    </fieldset>
+
+    <h3 *ngIf="authService.isLoggedIn()">Historia</h3>
+    <app-simple-list *ngIf="authService.isLoggedIn()" [status]="status" [answered]="'true'" [order]="order"></app-simple-list>
+
+    <h3>Statystyki</h3>
     <app-stats [status]="status"></app-stats>
   </div>
 </div>

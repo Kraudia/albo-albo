@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
 import { AcceptedComponent } from './accepted.component';
 import { acceptedRouter } from './accepted-routing.module';
 import { CloudModule } from '../../shared/cloud/cloud.module';
@@ -9,9 +11,12 @@ import { SimpleListModule } from '../../shared/simple-list/simple-list.module';
 import { ScrollableListModule } from '../../shared/scrollable-list/scrollable-list.module';
 
 @NgModule({
-  declarations: [AcceptedComponent],
+  declarations: [
+    AcceptedComponent
+  ],
   imports: [
     CommonModule,
+    FormsModule,
     acceptedRouter,
     CloudModule,
     QuestionModule,

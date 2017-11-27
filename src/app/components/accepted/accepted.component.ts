@@ -11,7 +11,6 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./accepted.component.scss']
 })
 export class AcceptedComponent implements OnInit {
-  public answered = 'true';
   public btnFirst = 'btn-accepted-first';
   public btnSecond = 'btn-accepted-second';
 
@@ -21,6 +20,8 @@ export class AcceptedComponent implements OnInit {
   public order = 'answered_date DESC';
   public status = 'ACCEPTED';
   public tags: Tag[];
+  public adult = 'false';
+  public answered: string;
 
   constructor(
     public authService: AuthService,

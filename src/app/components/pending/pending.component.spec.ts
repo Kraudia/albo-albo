@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { RouterTestingModule } from '@angular/router/testing';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
@@ -26,6 +27,7 @@ describe('PendingComponent', () => {
       ],
       imports: [
         HttpModule,
+        FormsModule,
         InfiniteScrollModule,
         CloudModule,
         QuestionModule,
