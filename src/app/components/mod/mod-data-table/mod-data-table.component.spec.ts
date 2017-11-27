@@ -7,9 +7,9 @@ import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { ModDataTableComponent } from './mod-data-table.component';
-import { QuestionService } from '../../services/question.service';
-import { AuthService } from '../../services/auth.service';
-import { ModService } from '../../services/mod.service';
+import { QuestionService } from '../../../services/question.service';
+import { AuthService } from '../../../services/auth.service';
+import { ModService } from '../../../services/mod.service';
 
 describe('ModDataTableComponent', () => {
   let component: ModDataTableComponent;

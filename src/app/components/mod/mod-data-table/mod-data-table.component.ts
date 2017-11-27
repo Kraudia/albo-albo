@@ -1,12 +1,12 @@
 import { Component, ViewChild, Input, OnInit, OnChanges, SimpleChange, OnDestroy } from '@angular/core';
 import { DataTable, DataTableResource } from 'angular-4-data-table-bootstrap-4';
-
-import { Question } from '../../models/question';
-import { QuestionService } from '../../services/question.service';
-import { Subscription } from 'rxjs/Subscription';
-import { ModService } from '../../services/mod.service';
-import { Tag } from '../../models/tag';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
+import { Subscription } from 'rxjs/Subscription';
+
+import { Question } from '../../../models/question';
+import { QuestionService } from '../../../services/question.service';
+import { ModService } from '../../../services/mod.service';
+import { Tag } from '../../../models/tag';
 
 @Component({
   selector: 'app-mod-data-table',
