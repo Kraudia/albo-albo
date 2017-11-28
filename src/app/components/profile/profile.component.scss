@@ -1,0 +1,10 @@
+@media (max-width: 991px) {
+  ul.nav-tabs a.nav-link {
+    border-color: #ddd #ddd #ddd;
+
+    &.active {
+      border-color: #ddd #ddd #fff;
+      font-weight: 600;
+    }
+  }
+}

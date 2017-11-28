@@ -2,7 +2,7 @@
   <div class="col">
     <div class="list-group">
       <div *ngIf="questions" style="height: 100%" infiniteScroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="throttle" [infiniteScrollDisabled]="disableScroll" (scrolled)="onScrollDown()">
-        <app-medium-question *ngFor="let question of questions" [question]="question"></app-medium-question>
+        <app-profile-question *ngFor="let question of questions" [question]="question"></app-profile-question>
       </div>
 
       <div *ngIf="commentsShow && comments">

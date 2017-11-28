@@ -7,6 +7,7 @@ import { PipesModule } from '../../pipes/pipes.module';
 import { StatsService } from '../../services/stats.service';
 import { ProfileComponent } from './profile.component';
 import { UserStatsComponent } from './user-stats/user-stats.component';
+import { ProfileQuestionComponent } from './profile-tab/profile-question/profile-question.component';
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;
@@ -16,7 +17,8 @@ describe('ProfileComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         ProfileComponent,
-        UserStatsComponent
+        UserStatsComponent,
+        ProfileQuestionComponent
       ],
       imports: [
         HttpModule,

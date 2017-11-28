@@ -2,7 +2,7 @@
   <div class="row mb-1">
     <div class="col-12">
       <div class="float-left text-md-right text-center">
-        <span class="small">{{ question.createdDate | amDateFormat: 'DD.MM.YYYY' }}</span> {{ question.value }}
+        <span class="small">{{ question.createdDate | amDateFormat: 'DD.MM.YYYY HH:mm' }}</span> {{ question.value }}
         <span *ngIf="question.adultRated" class="font-weight-bold text-danger">+18</span>
       </div>
 
@@ -17,11 +17,11 @@
   </div>
 
   <div class="row">
-    <div class="col-6">
+    <div class="col-12 col-sm-6">
       <div class="p-3 mb-2 bg-profile-item text-dark">{{ question.firstAnswer }}</div>
     </div>
 
-    <div class="col-6">
+    <div class="col-12 col-sm-6">
       <div class="p-3 mb-2 bg-profile-item text-dark">{{ question.secondAnswer }}</div>
     </div>
   </div>
