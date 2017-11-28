@@ -8,7 +8,7 @@
         <div class="form-group row">
           <label for="inputValue" class="col-md-2 col-form-label text-left">Pytanie</label>
           <div class="col-md-10">
-            <emojify-holder (emojiAdded)="emojiAdded($event, 'value')">
+            <emojify-holder (emojiAdded)="emojiAdded($event, 'value')" class="emojisDialogFirst">
               <input #inputValue id="inputValue" type="text" class="form-control" [ngClass]="displayFieldCss('inputValue')" placeholder="Co wolisz" formControlName="inputValue" required emojiInput [emojiInputValue]="value" [(ngModel)]="value" />
             </emojify-holder>
             <ng-container *ngIf="showFeedback()">
@@ -22,7 +22,7 @@
         <div class="form-group row">
           <label for="inputFirstAnswer" class="col-md-2 col-form-label text-left">Odpowiedź A</label>
           <div class="col-md-10">
-            <emojify-holder (emojiAdded)="emojiAdded($event, 'firstAnswer')">
+            <emojify-holder (emojiAdded)="emojiAdded($event, 'firstAnswer')" class="emojisDialogSecond">
               <input #inputFirstAnswer id="inputFirstAnswer" formControlName="inputFirstAnswer" type="text" class="form-control" [ngClass]="displayFieldCss('inputFirstAnswer')" placeholder="Wpisz odpowiedź, która będzie po lewej" required  emojiInput [emojiInputValue]="firstAnswer" [(ngModel)]="firstAnswer" />
             </emojify-holder>
             <ng-container *ngIf="showFeedback()">
@@ -36,7 +36,7 @@
         <div class="form-group row">
           <label for="inputSecondAnswer" class="col-md-2 col-form-label text-left">Odpowiedź B</label>
           <div class="col-md-10">
-            <emojify-holder (emojiAdded)="emojiAdded($event, 'secondAnswer')">
+            <emojify-holder (emojiAdded)="emojiAdded($event, 'secondAnswer')" class="emojisDialogLast">
               <input #inputSecondAnswer id="inputSecondAnswer" formControlName="inputSecondAnswer" type="text" class="form-control" [ngClass]="displayFieldCss('inputSecondAnswer')" placeholder="Wpisz odpowiedź, która będzie po prawej" required  emojiInput [emojiInputValue]="secondAnswer" [(ngModel)]="secondAnswer" />
             </emojify-holder>
             <ng-container *ngIf="showFeedback()">

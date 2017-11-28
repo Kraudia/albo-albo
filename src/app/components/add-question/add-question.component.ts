@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, Renderer2 } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
@@ -14,7 +14,7 @@ import { QuestionService } from '../../services/question.service';
   templateUrl: './add-question.component.html',
   styleUrls: ['./add-question.component.scss']
 })
-export class AddQuestionComponent implements OnInit {
+export class AddQuestionComponent implements OnInit, AfterViewInit {
   private validated: boolean;
   private checked: boolean;
   public errorMessage: String;
@@ -28,6 +28,11 @@ export class AddQuestionComponent implements OnInit {
   public secondAnswer = '';
 
   constructor(
+    private elRef: ElementRef,
+    private renderer: Renderer2,
+    private emojisDialogFirst: ElementRef,
+    private emojisDialogSecond: ElementRef,
+    private emojisDialogLast: ElementRef,
     private formBuilder: FormBuilder,
     private addQuestionService: AddQuestionService,
     private questionService: QuestionService,
@@ -43,6 +48,35 @@ export class AddQuestionComponent implements OnInit {
     this.setTitle();
     this.buildForm();
     this.getTags();
+  }
+
+  ngAfterViewInit() {
+    this.emojisDialogFirst = this.elRef.nativeElement.querySelector('.emojisDialogFirst section.eih-emojis-dialog');
+    this.emojisDialogSecond = this.elRef.nativeElement.querySelector('.emojisDialogSecond section.eih-emojis-dialog');
+    this.emojisDialogLast = this.elRef.nativeElement.querySelector('.emojisDialogLast section.eih-emojis-dialog');
+
+    const smileyFirst = this.elRef.nativeElement.querySelector('.emojisDialogFirst .eih-smiley');
+    const smileySecond = this.elRef.nativeElement.querySelector('.emojisDialogSecond .eih-smiley');
+    const smileyLast = this.elRef.nativeElement.querySelector('.emojisDialogLast .eih-smiley');
+
+    this.renderer.listen(smileyFirst, 'click', (evt) => {
+      this.renderer.addClass(this.emojisDialogFirst, 'eih-visible');
+      this.renderer.removeClass(this.emojisDialogSecond, 'eih-visible');
+      this.renderer.removeClass(this.emojisDialogLast, 'eih-visible');
+    });
+
+    this.renderer.listen(smileySecond, 'click', (evt) => {
+      this.renderer.removeClass(this.emojisDialogFirst, 'eih-visible');
+      this.renderer.addClass(this.emojisDialogSecond, 'eih-visible');
+      this.renderer.removeClass(this.emojisDialogLast, 'eih-visible');
+    });
+
+    this.renderer.listen(smileyLast, 'click', (evt) => {
+      this.renderer.removeClass(this.emojisDialogFirst, 'eih-visible');
+      this.renderer.removeClass(this.emojisDialogSecond, 'eih-visible');
+      this.renderer.addClass(this.emojisDialogLast, 'eih-visible');
+    });
+
   }
 
   setTitle() {
