@@ -23,7 +23,7 @@
           <label for="inputFirstAnswer" class="col-md-2 col-form-label text-left">Odpowiedź A</label>
           <div class="col-md-10">
             <emojify-holder (emojiAdded)="emojiAdded($event, 'firstAnswer')" class="emojisDialogSecond">
-              <input #inputFirstAnswer id="inputFirstAnswer" formControlName="inputFirstAnswer" type="text" class="form-control" [ngClass]="displayFieldCss('inputFirstAnswer')" placeholder="Wpisz odpowiedź, która będzie po lewej" required  emojiInput [emojiInputValue]="firstAnswer" [(ngModel)]="firstAnswer" />
+              <input #inputFirstAnswer id="inputFirstAnswer" formControlName="inputFirstAnswer" type="text" class="form-control" [ngClass]="displayFieldCss('inputFirstAnswer')" placeholder="Odpowiedź po lewej" required  emojiInput [emojiInputValue]="firstAnswer" [(ngModel)]="firstAnswer" />
             </emojify-holder>
             <ng-container *ngIf="showFeedback()">
               <small class="invalid-feedback">
@@ -37,7 +37,7 @@
           <label for="inputSecondAnswer" class="col-md-2 col-form-label text-left">Odpowiedź B</label>
           <div class="col-md-10">
             <emojify-holder (emojiAdded)="emojiAdded($event, 'secondAnswer')" class="emojisDialogLast">
-              <input #inputSecondAnswer id="inputSecondAnswer" formControlName="inputSecondAnswer" type="text" class="form-control" [ngClass]="displayFieldCss('inputSecondAnswer')" placeholder="Wpisz odpowiedź, która będzie po prawej" required  emojiInput [emojiInputValue]="secondAnswer" [(ngModel)]="secondAnswer" />
+              <input #inputSecondAnswer id="inputSecondAnswer" formControlName="inputSecondAnswer" type="text" class="form-control" [ngClass]="displayFieldCss('inputSecondAnswer')" placeholder="Odpowiedź po prawej" required  emojiInput [emojiInputValue]="secondAnswer" [(ngModel)]="secondAnswer" />
             </emojify-holder>
             <ng-container *ngIf="showFeedback()">
               <small class="invalid-feedback">
