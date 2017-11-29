@@ -1,10 +1,10 @@
-<div class="row justify-content-center align-items-center" *ngIf="question" @fadeInOut>
- <div class="col">
+<div class="row flex-column-reverse flex-md-row align-items-center" *ngIf="question" @fadeInOut>
+ <div class="col-12 col-md-11">
    <a *ngIf="question" class="list-group-item list-group-item-action" [routerLink]="['/pytanie', question.question.id, question.question.shortLink]" aria-label="Przejdź do strony pytania">
      <div class="row mt-2 mb-2">
        <div class="col-12 text-center">
          <div class="float-left text-md-right text-center" [ngbTooltip]="'Data utworzenia pytania przez autora'">
-           <span class="small">{{ question.question.createdDate | amDateFormat: 'DD.MM.YYYY' }}</span>
+           <span class="small">{{ question.question.createdDate | amDateFormat: 'DD.MM.YYYY HH:mm' }}</span>
          </div>
 
          {{ question.question.value }} <span *ngIf="question.question.adultRated" class="font-weight-bold text-danger">+18</span>
@@ -39,7 +39,7 @@
    </a>
  </div>
 
- <div class="col-auto">
+ <div class="col-12 col-md-1 mt-3 mt-md-0 text-right text-md-center">
    <button *ngIf="question.question.myFavourite !== false" type="button" class="btn btn-sm btn-danger" (click)="removeFromFavorites()"><i *ngIf="!isFavouriteLoading" class="fa fa-trash fa-fw" aria-hidden="true"></i><i *ngIf="isFavouriteLoading" class="fa fa-refresh fa-spin fa-fw"></i> Usuń</button>
  </div>
 </div>

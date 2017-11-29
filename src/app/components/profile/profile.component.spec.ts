@@ -8,6 +8,8 @@ import { StatsService } from '../../services/stats.service';
 import { ProfileComponent } from './profile.component';
 import { UserStatsComponent } from './user-stats/user-stats.component';
 import { ProfileQuestionComponent } from './profile-tab/profile-question/profile-question.component';
+import { MomentModule } from 'angular2-moment';
+import { NgbTooltip, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;
@@ -23,7 +25,9 @@ describe('ProfileComponent', () => {
       imports: [
         HttpModule,
         RouterTestingModule,
-        PipesModule
+        PipesModule,
+        MomentModule,
+        NgbTooltipModule
       ],
       providers: [
         AuthService,
