@@ -9,7 +9,7 @@
       <div class="float-right text-md-right text-center">
         <span [ngbTooltip]="(question.firstCount + question.secondCount) | answers"><i class="fa fa-envelope text-success" aria-hidden="true"></i> {{ question.firstCount + question.secondCount }}</span>
         <span [ngbTooltip]="(question.plusCount + question.minusCount) | votes"><i class="fa fa-paper-plane text-warning" aria-hidden="true"></i> {{ question.plusCount + question.minusCount }}</span>
-        <span [ngbTooltip]="question.commentsCount | comments"><i class="fa fa-comments text-info" aria-hidden="true"></i> {{ question.commentsCount }}</span>
+        <span [ngbTooltip]="question.commentCount | comments"><i class="fa fa-comments text-info" aria-hidden="true"></i> {{ question.commentCount }}</span>
         <span [ngbTooltip]="question.favourite_count | favourites"><i class="fa fa-heart text-danger" aria-hidden="true"></i> {{ question.favourite_count }}</span>
         <span><i class="fa fa-hashtag" aria-hidden="true"></i></span> {{ question.id }}
       </div>

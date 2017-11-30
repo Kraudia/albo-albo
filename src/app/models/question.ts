@@ -4,7 +4,6 @@ export class Question {
   answeredDate: string;
   answerCount: number;
   commentCount: number;
-  commentsCount: number;
   createdDate: string;
   favouriteCount: number;
   favourite_count: number;
