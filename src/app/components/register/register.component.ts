@@ -21,6 +21,7 @@ export class RegisterComponent implements OnInit {
   public registerForm: FormGroup;
   public validationMessages = validationErrors;
   public isLoading = false;
+  private isTaken  = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -117,9 +118,40 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  validateLoginEmail() {
+    this.isTaken = false;
+    const loginControl = this.registerForm.get('inputLogin');
+    const emailControl = this.registerForm.get('inputEmail');
+    if (loginControl) {
+      const login = loginControl.value;
+      if (login) {
+        this.registerService.checkLogin(login).subscribe(
+          res => { },
+        err => {
+          this.isTaken = true;
+          this.registerForm.controls['inputLogin'].setErrors({'loginTaken': true});
+        });
+      }
+    }
+
+    if (emailControl) {
+      const email = emailControl.value;
+      if (email) {
+        this.registerService.checkEmail(email).subscribe(
+          res => { },
+          err => {
+            this.isTaken = true;
+            this.registerForm.controls['inputEmail'].setErrors({'emailTaken': true});
+          });
+      }
+    }
+  }
+
   validateForm() {
     this.validated = true;
-    if (this.registerForm.valid && this.checked) {
+    this.validateLoginEmail();
+
+    if (this.registerForm.valid && this.checked && !this.isTaken) {
       return true;
     } else {
       this.validateAllFormFields(this.registerForm);
@@ -139,6 +171,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register(login: string, email: string, password: string, birthDate: string) {
+    this.isLoading = true;
     this.validateForm();
 
     if (this.validateForm()) {
@@ -147,7 +180,6 @@ export class RegisterComponent implements OnInit {
       this.registerService.register(login, email, password, birthDate)
           .subscribe(
             res => {
-              console.log('res = ', res);
               this.router.navigate(['/logowanie']);
               const success = 'Żeby aktywować konto, kliknij w link potwierdzający, który wysłaliśmy na Twój adres email.';
               this.toastrService.success(success, 'Rejestracja się powiodła');
@@ -155,16 +187,12 @@ export class RegisterComponent implements OnInit {
               this.slimLoadingBarService.complete();
             },
             error => {
-              if (error === '409 - OK Conflict') {
-                this.toastrService.error('Zajęty login lub mail. Proszę wpisać inne dane.', 'Błąd.');
-              } else if (error === '400 - OK Bad Request') {
-                this.toastrService.error('Zajęty login lub mail. Proszę wpisać inne dane.', 'Coś poszło nie tak.');
-              } else {
-                this.toastrService.error('Twoja rejestracja sie nie udała.', 'Coś poszło nie tak.');
-              }
+              this.toastrService.error('Twoja rejestracja sie nie udała.', 'Coś poszło nie tak.');
               this.isLoading = false;
               this.slimLoadingBarService.complete();
             });
+    } else {
+      this.isLoading = false;
     }
   }
 

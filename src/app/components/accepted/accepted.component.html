@@ -76,7 +76,7 @@
       </fieldset>
 
     <h3 *ngIf="authService.isLoggedIn()">Historia</h3>
-    <app-simple-list *ngIf="authService.isLoggedIn()" [status]="status" [answered]="'true'" [order]="order"></app-simple-list>
+    <app-simple-list *ngIf="authService.isLoggedIn()" [status]="status" [answered]="'true'" [order]="order" [adult]="adult"></app-simple-list>
 
     <h3>Statystyki</h3>
     <app-stats [status]="status"></app-stats>

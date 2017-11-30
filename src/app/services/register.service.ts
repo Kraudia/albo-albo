@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class RegisterService {
-  private usersUrl = 'https://albo-albo.herokuapp.com/users';
+  private host = 'https://albo-albo.herokuapp.com/users';
 
   constructor(private http: Http) { }
 
@@ -19,8 +19,20 @@ export class RegisterService {
 
     const options = new RequestOptions({ headers: headers });
 
-    return this.http.post(this.usersUrl, JSON.stringify({ login, email, password, birthDate }), options)
+    return this.http.post(this.host, JSON.stringify({ login, email, password, birthDate }), options)
       .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  checkLogin(login: string) {
+    const url = `https://albo-albo.herokuapp.com/test/users?login=${login}`;
+    return this.http.get(url)
+      .catch(this.handleError);
+  }
+
+  checkEmail(email: string) {
+    const url = `https://albo-albo.herokuapp.com/test/users?email=${email}`;
+    return this.http.get(url)
       .catch(this.handleError);
   }
 
