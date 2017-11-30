@@ -26,9 +26,9 @@
             class="btn btn-sm btn-sort text-left"
             (click)="sortBy('created_date DESC')"><i class="fa fa-calendar" aria-hidden="true"></i> daty dodania</button>
     <button type="button"
-            [class.btn-sort-selected]="sort == 'comments_count DESC' || sort == 'comments_count ASC'"
+            [class.btn-sort-selected]="sort == 'comment_count DESC' || sort == 'comment_count ASC'"
             class="btn btn-sm btn-sort text-left"
-            (click)="sortBy('comments_count DESC')"><i class="fa fa-comments-o" aria-hidden="true"></i> komentarzy</button>
+            (click)="sortBy('comment_count DESC')"><i class="fa fa-comments-o" aria-hidden="true"></i> komentarzy</button>
     <button type="button"
             [class.btn-sort-selected]="sort == 'answer_count DESC' || sort == 'answer_count ASC'"
             class="btn btn-sm btn-sort text-left"

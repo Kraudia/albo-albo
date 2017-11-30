@@ -54,8 +54,8 @@ export class PendingComponent implements OnInit {
 
   sortBy(sort: string) {
     if (this.sort === sort) {
-      if (sort === 'comments_count DESC') {
-        this.sort = 'comments_count ASC';
+      if (sort === 'comment_count DESC') {
+        this.sort = 'comment_count ASC';
       } else if (sort === 'answer_count DESC') {
         this.sort = 'answer_count ASC';
       } else if (sort === 'vote_count DESC') {

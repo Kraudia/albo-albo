@@ -52,7 +52,13 @@ export class ScrollableListComponent implements OnChanges, OnDestroy {
         response => {
           this.questions = response;
           if (this.questions.length > 0) {
-            this.index = this.questions[this.questions.length - 1].createdDate;
+            if (this.order === 'accepted_date DESC' || this.order === 'accepted_date ASC') {
+              this.index = this.questions[this.questions.length - 1].acceptedDate;
+            } else if (this.order === 'created_date DESC' || this.order === 'created_date ASC') {
+              this.index = this.questions[this.questions.length - 1].createdDate;
+            } else {
+              this.index = this.questions.length.toString();
+            }
           }
           this.disableScroll = false;
           this.isLoading = false;
@@ -71,9 +77,18 @@ export class ScrollableListComponent implements OnChanges, OnDestroy {
     const subscription = this.questionService.getQuestions(this.adult, this.answered, this.index, this.limit, this.order, this.status, this.tag)
       .subscribe(
         response => {
-          response.shift();
-          this.questions = [ ...this.questions, ...response];
-          this.index = this.questions[this.questions.length - 1].createdDate;
+          if (this.order === 'accepted_date DESC' || this.order === 'accepted_date ASC') {
+            response.shift();
+            this.questions = [ ...this.questions, ...response];
+            this.index = this.questions[this.questions.length - 1].acceptedDate;
+          } else if (this.order === 'created_date DESC' || this.order === 'created_date ASC') {
+            response.shift();
+            this.questions = [ ...this.questions, ...response];
+            this.index = this.questions[this.questions.length - 1].createdDate;
+          } else {
+            this.questions = [ ...this.questions, ...response];
+            this.index = this.questions.length.toString();
+          }
           this.disableScroll = false;
           this.isLoading = false;
           this.slimLoadingBarService.complete();
