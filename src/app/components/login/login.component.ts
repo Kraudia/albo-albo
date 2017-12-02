@@ -52,6 +52,7 @@ export class LoginComponent implements OnInit {
             this.toastrService.error('Nie istnieje użytkownik o podanym loginie lub haśle.');
             this.isLoading = false;
             this.slimLoadingBarService.complete();
+            this.toastrService.error(error);
           });
     } else {
       this.errorMessage = 'Wypełnij oba pola.';
@@ -69,14 +70,12 @@ export class LoginComponent implements OnInit {
           res => {
             this.forgottenPasswordSuccess = 'Wysłaliśmy Ci nowe hasło na e-maila.';
             this.slimLoadingBarService.complete();
+            this.toastrService.success(res.message);
           },
           error => {
-            if (error.status === 404) {
-              this.forgottenPasswordError = 'Nie znaleziono użytkownika o podanym loginie.';
-            } else {
-              this.forgottenPasswordError = 'Coś poszło nie tak.';
-            }
+            this.forgottenPasswordError = error;
             this.slimLoadingBarService.complete();
+            this.toastrService.error(error);
           }
         );
       } else {

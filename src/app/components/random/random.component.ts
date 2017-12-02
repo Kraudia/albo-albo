@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
 import { Location } from '@angular/common';
 import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs/Subscription';
 import { Question } from '../../models/question';
 import { QuestionService } from '../../services/question.service';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-random',
@@ -12,6 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./random.component.scss']
 })
 export class RandomComponent implements OnInit, OnDestroy {
+  public errorMessage: string;
   public question: Question;
   public btnFirst = 'btn-random-first';
   public btnSecond = 'btn-random-second';
@@ -24,7 +26,8 @@ export class RandomComponent implements OnInit, OnDestroy {
     private questionService: QuestionService,
     private route: ActivatedRoute,
     private router: Router,
-    private titleService: Title
+    private titleService: Title,
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit() {
@@ -50,7 +53,12 @@ export class RandomComponent implements OnInit, OnDestroy {
             this.question = response;
             this.setTitle();
             this.isLoading = false;
-          });
+          },
+        error => {
+          this.errorMessage = error;
+          this.toastrService.error(error);
+          this.isLoading = false;
+        });
       this.subscription.add(subscription);
   }
 

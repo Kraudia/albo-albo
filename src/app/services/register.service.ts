@@ -27,12 +27,14 @@ export class RegisterService {
   checkLogin(login: string) {
     const url = `https://albo-albo.herokuapp.com/test/users?login=${login}`;
     return this.http.get(url)
+      .map(this.extractData)
       .catch(this.handleError);
   }
 
   checkEmail(email: string) {
     const url = `https://albo-albo.herokuapp.com/test/users?email=${email}`;
     return this.http.get(url)
+      .map(this.extractData)
       .catch(this.handleError);
   }
 
@@ -46,11 +48,10 @@ export class RegisterService {
     if (error instanceof Response) {
       const body = error.json() || '';
       const err = body.error || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+      errMsg = body.message ?  body.message : `${error.status} - ${error.statusText || ''} ${err}`;
     } else {
       errMsg = error.message ? error.message : error.toString();
     }
-    console.error(errMsg);
     return Observable.throw(errMsg);
   }
 }

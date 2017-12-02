@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
+import { ToastrService } from 'ngx-toastr';
 import { Stats } from '../../../models/stats';
 import { StatsService } from '../../../services/stats.service';
 
@@ -14,7 +15,8 @@ export class UserStatsComponent implements OnInit, OnDestroy {
   public stats: Stats;
 
   constructor(
-    public statsService: StatsService
+    public statsService: StatsService,
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit() {
@@ -30,6 +32,9 @@ export class UserStatsComponent implements OnInit, OnDestroy {
       .subscribe(
         response => {
           this.stats = response;
+        },
+        error => {
+          this.toastrService.error(error);
         });
     this.subscription.add(subscription);
   }

@@ -187,9 +187,9 @@ export class RegisterComponent implements OnInit {
               this.slimLoadingBarService.complete();
             },
             error => {
-              this.toastrService.error('Twoja rejestracja sie nie udała.', 'Coś poszło nie tak.');
               this.isLoading = false;
               this.slimLoadingBarService.complete();
+              this.toastrService.error(error);
             });
     } else {
       this.isLoading = false;

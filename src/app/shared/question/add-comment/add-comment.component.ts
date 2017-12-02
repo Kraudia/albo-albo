@@ -40,11 +40,10 @@ export class AddCommentComponent implements OnInit {
             this.toastrService.success('Twój komentarz został opublikowany.', 'Sukces');
           },
         error => {
-          this.toastrService.error('Niestety nie udało się dodać Twojego komentarza.', 'Coś poszło nie tak');
+          this.toastrService.error(error);
         });
     } else {
       this.isInvalid = true;
     }
   }
-
 }

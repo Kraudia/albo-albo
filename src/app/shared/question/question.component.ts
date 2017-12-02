@@ -1,6 +1,7 @@
 import { Component, OnInit, OnChanges, OnDestroy, SimpleChange, Input, ElementRef } from '@angular/core';
 import { trigger, style, transition, animate, keyframes } from '@angular/animations';
 import { Subscription } from 'rxjs/Subscription';
+import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
 declare const $: any;
 
@@ -11,7 +12,6 @@ import { QuestionService } from '../../services/question.service';
 import { Question } from '../../models/question';
 import { Comment } from '../../models/comment';
 import { animateNumber } from './animateNumber';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-question',
@@ -59,6 +59,7 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
   public isFavouriteLoading = false;
   public isCommentsLoading = false;
   public comments: Comment[];
+  public error: boolean;
   public firstCountPercentage = 0;
   public secondCountPercentage = 0;
   public question: Question;
@@ -122,7 +123,12 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
       }
       this.loadProgress();
       const subscription = this.questionService.answerQuestion(this.question.id, answer)
-        .subscribe();
+        .subscribe(
+          res => {},
+          error => {
+            this.toastrService.error(error);
+          }
+        );
       this.subscription.add(subscription);
     }
   }
@@ -165,7 +171,14 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
             this.question = response;
             this.url += 'pytanie/' + this.question.id + '/' + this.question.shortLink;
             this.loadProgress();
-          });
+          },
+          error => {
+            this.error = true;
+            this.isLoading = false;
+            this.toastrService.error(error);
+        },
+          () => {
+        });
       this.subscription.add(subscription);
     }
   }
@@ -177,7 +190,11 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
           response => {
             this.comments = response;
             this.isCommentsLoading = false;
-          });
+          },
+        error => {
+          this.isCommentsLoading = false;
+          this.toastrService.error(error);
+        });
       this.subscription.add(subscription);
   }
 
@@ -194,6 +211,7 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
       },
       error => {
         this.isFavouriteLoading = false;
+        this.toastrService.error(error);
       }
     );
     this.subscription.add(subscription);
@@ -207,6 +225,7 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
         this.isFavouriteLoading = false;
       },
       error => {
+        this.toastrService.error(error);
         this.isFavouriteLoading = false;
       }
     );
@@ -214,23 +233,18 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   vote(value: number) {
-    this.question.myVote = value;
-    if (value === -1) {
-      this.question.minusCount += 1;
-    } else {
-      this.question.plusCount += 1;
-    }
-
-    const subscription = this.questionService.voteQuestion(this.question.id, value).subscribe(
+    const subscription = this.questionService.voteQuestion(this.question.id, value)
+      .subscribe(
       res => {
         this.question.myVote = value;
+        if (value === -1) {
+          this.question.minusCount += 1;
+        } else {
+          this.question.plusCount += 1;
+        }
       },
       error => {
-        if (error === '400 - OK Bad Request') {
-          this.toastrService.error('Głos na te pytanie już został udzielony.', 'Błąd');
-        } else {
-          this.toastrService.error('Niestety nie udało się dodać Twojego głosu.', 'Coś poszło nie tak');
-        }
+        this.toastrService.error(error);
       }
     );
     this.subscription.add(subscription);

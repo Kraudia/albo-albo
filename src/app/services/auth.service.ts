@@ -51,7 +51,8 @@ export class AuthService {
   getUserInfo(): Observable<User> {
     const url = this.host + this.url.users;
     return this.http.get(url, this.getOptions())
-      .map((res) => res.json());
+      .map((res) => res.json())
+      .catch(this.handleError);
   }
 
   getUser() {
@@ -88,7 +89,8 @@ export class AuthService {
               this.user = user;
             });
       }
-    });
+    })
+    .catch(this.handleError);
   }
 
   loginCurrentUser() {
@@ -116,7 +118,8 @@ export class AuthService {
   forgottenPassword(login: string) {
     const url = this.host + '/users/' + login + '/forgotten-password';
     return this.http.put(url, this.getOptions())
-      .map((res) => res.json());
+      .map((res) => res.json())
+      .catch(this.handleError);
   }
 
   changePassword(oldPassword: string, newPassword: string) {
@@ -184,11 +187,10 @@ export class AuthService {
     if (error instanceof Response) {
       const body = error.json() || '';
       const err = body.error || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+      errMsg = body.message ?  body.message : `${error.status} - ${error.statusText || ''} ${err}`;
     } else {
       errMsg = error.message ? error.message : error.toString();
     }
-    console.error(errMsg);
     return Observable.throw(errMsg);
   }
 }

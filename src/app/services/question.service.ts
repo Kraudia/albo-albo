@@ -35,7 +35,8 @@ export class QuestionService {
     const options = this.authService.getOptions();
 
     return this.http.get(url, options)
-      .map((res) => res.json());
+      .map((res) => res.json())
+      .catch(this.handleError);
   }
 
   getQuestions(adult: string, answered: string, index: string, limit: number, order: string, status: string, tag: number) {
@@ -66,7 +67,8 @@ export class QuestionService {
     const options = this.authService.getOptions();
 
     return this.http.get(url, options)
-      .map((res) => res.json());
+      .map((res) => res.json())
+      .catch(this.handleError);
   }
 
   getTopQuestions(type: string): Observable<Question[]> {
@@ -74,7 +76,8 @@ export class QuestionService {
     const options = this.authService.getOptions();
 
     return this.http.get(url, options)
-      .map((res) => res.json());
+      .map((res) => res.json())
+      .catch(this.handleError);
   }
 
   getUserQuestions(login: string, status: string, index: string, limit: number) {
@@ -91,7 +94,8 @@ export class QuestionService {
     const options = this.authService.getOptions();
 
     return this.http.get(url, options)
-      .map((res) => res.json());
+      .map((res) => res.json())
+      .catch(this.handleError);
   }
 
   getUserFavouriteQuestions(): Observable<FavouriteQuestion[]> {
@@ -99,7 +103,8 @@ export class QuestionService {
     const options = this.authService.getOptions();
 
     return this.http.get(url, options)
-      .map((res) => res.json());
+      .map((res) => res.json())
+      .catch(this.handleError);
   }
 
   getTags(): Observable<Tag[]> {
@@ -107,7 +112,8 @@ export class QuestionService {
     const options = this.authService.getOptions();
 
     return this.http.get(url, options)
-      .map((res) => res.json());
+      .map((res) => res.json())
+      .catch(this.handleError);
   }
 
   voteQuestion(question: number, vote: number) {
@@ -160,7 +166,7 @@ export class QuestionService {
     if (error instanceof Response) {
       const body = error.json() || '';
       const err = body.error || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+      errMsg = body.message ?  body.message : `${error.status} - ${error.statusText || ''} ${err}`;
     } else {
       errMsg = error.message ? error.message : error.toString();
     }

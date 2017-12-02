@@ -16,6 +16,15 @@
     <button class="btn btn-block btn-link align-self-stretch" (click)="goForward()"><i class="fa fa-chevron-right fa-2x" aria-hidden="true"></i></button>
   </div>
   <div class="order-md-2 col-md-10 col-12">
-    <app-question [oneQuestion]="question" [btnFirst]="btnFirst" [btnSecond]="btnSecond"></app-question>
+    <app-question [oneQuestion]="question" [btnFirst]="btnFirst" [btnSecond]="btnSecond" *ngIf="!errorMessage"></app-question>
+
+    <div class="alert alert-danger text-center" role="alert" *ngIf="errorMessage">
+      <h4 class="alert-heading">Błąd 404</h4>
+      <p>
+        Oops, wygląda na to, że nie ma takiego pytania.</p>
+      <p>
+        Sprawdź poprawność adresu lub <a href class="alert-link" (click)="backLocation()">cofnij się do poprzedniej strony</a>. Możesz też <a class="alert-link" [routerLink]="['/']">wylosować nowe pytanie</a>.
+      </p>
+    </div>
   </div>
 </div>

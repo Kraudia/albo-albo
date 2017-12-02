@@ -120,6 +120,9 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
       .subscribe(
         res => {
           this.tags = res;
+        },
+        error => {
+          this.toastrService.error(error);
         });
   }
 
@@ -207,8 +210,8 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
             this.router.navigate(['/poczekalnia']);
           },
           error => {
-            this.toastrService.error('Niestety nie udało się dodać Twojego pytania.', 'Coś poszło nie tak');
-              this.errorMessage = 'Twoje pytanie nie zostało dodane.';
+            this.errorMessage = 'Twoje pytanie nie zostało dodane.';
+            this.toastrService.error(error);
           });
     }
   }

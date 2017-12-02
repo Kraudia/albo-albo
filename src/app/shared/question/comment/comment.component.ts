@@ -27,23 +27,18 @@ export class CommentComponent implements OnDestroy {
   }
 
   vote(value: number) {
-    this.comment.myRank = value;
-    if (value === -1) {
-      this.comment.minusCount += 1;
-    } else {
-      this.comment.plusCount += 1;
-    }
 
     const subscription = this.commentService.voteComment(this.idQuestion, this.comment.id, value).subscribe(
       res => {
         this.comment.myRank = value;
+        if (value === -1) {
+          this.comment.minusCount += 1;
+        } else {
+          this.comment.plusCount += 1;
+        }
       },
       error => {
-        if (error === '409 - OK Conflict') {
-          this.toastrService.error('Głos na ten komentarz już został udzielony.', 'Błąd');
-        } else {
-          this.toastrService.error('Niestety nie udało się dodać Twojego głosu.', 'Coś poszło nie tak');
-        }
+        this.toastrService.error(error);
       }
     );
     this.subscription.add(subscription);

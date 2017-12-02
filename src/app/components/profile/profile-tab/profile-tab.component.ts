@@ -1,7 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
+import { Title } from '@angular/platform-browser';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
+import { Subscription } from 'rxjs/Subscription';
+import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
 declare const $: any;
 
@@ -9,7 +11,6 @@ import { CommentService } from '../../../services/comment.service';
 import { QuestionService } from '../../../services/question.service';
 import { Question } from '../../../models/question';
 import { Comment } from '../../../models/comment';
-import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-profile-tab',
@@ -17,6 +18,7 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./profile-tab.component.scss']
 })
 export class ProfileTabComponent implements OnInit, OnDestroy {
+ public error;
   public login: string;
   public status: string;
   private subscription = new Subscription();
@@ -37,7 +39,8 @@ export class ProfileTabComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private slimLoadingBarService: SlimLoadingBarService,
-    private titleService: Title
+    private titleService: Title,
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit() {
@@ -100,7 +103,13 @@ export class ProfileTabComponent implements OnInit, OnDestroy {
           }
           this.isLoading = false;
           this.disableScroll = false;
-        });
+        },
+      error => {
+        this.isLoading = false;
+        this.disableScroll = false;
+        this.toastrService.error(error);
+        this.error = error;
+      });
     this.subscription.add(subscription);
   }
 
@@ -120,8 +129,11 @@ export class ProfileTabComponent implements OnInit, OnDestroy {
           this.isLoading = false;
           this.slimLoadingBarService.complete();
         },
-        err => {
+        error => {
+          this.disableScroll = false;
+          this.isLoading = false;
           this.slimLoadingBarService.stop();
+          this.toastrService.error(error);
         });
     this.subscription.add(subscription);
   }
@@ -133,7 +145,11 @@ export class ProfileTabComponent implements OnInit, OnDestroy {
         response => {
           this.comments = response;
           this.isLoading = false;
-        });
+        },
+      error => {
+        this.isLoading = false;
+        this.toastrService.error(error);
+      });
     this.subscription.add(subscription);
   }
 

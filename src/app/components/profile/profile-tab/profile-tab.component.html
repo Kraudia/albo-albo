@@ -1,4 +1,13 @@
-<div class="row" *ngIf="login">
+<div class="alert alert-danger text-center" role="alert" *ngIf="error">
+  <h4 class="alert-heading">Błąd 404</h4>
+  <p>
+    Oops, wygląda na to, że nie ma takiego użytkownika.</p>
+  <p>
+    Sprawdź poprawność nazwy użytkownika lub <a class="alert-link" [routerLink]="['/']">wróć na stronę główną</a>.
+  </p>
+</div>
+
+<div class="row" *ngIf="login && !error">
   <div class="col">
     <div class="list-group">
       <div *ngIf="questions" style="height: 100%" infiniteScroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="throttle" [infiniteScrollDisabled]="disableScroll" (scrolled)="onScrollDown()">
