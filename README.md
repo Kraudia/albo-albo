@@ -1,27 +1,33 @@
 # AlboAlbo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.8.
+Aplikacja webowa umożliwiająca grę w pytania z serii “Co wolisz?”. 
 
-## Development server
+##### Przykładowe pytania:
+* mieć poparzone 50% ciała czy wytatuowane 100% ciała?
+* mówić tylko głosem syntezatora czy brzmieć jak staruszka?
+* wiedzieć kiedy jest koniec świata czy jak wygląda koniec świata?
+* opuścić na zawszę Ziemię i zamieszkać z obcymi czy poznać obcych i zostać na Ziemi?
+* mieć klawiaturę bez podpisanych klawiszy czy być w stanie * pisać tylko dwoma palcami na klawiaturze?
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### Wymagania
 
-## Code scaffolding
+Potrzebujesz Node  w wersji 6.9.0 lub nowszej oraz NPM w wersji 3  lub nowszej.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Instalacja
 
-## Build
+Najpierw sklonuj tej projekt oraz zainstaluj wszystkie paczki, korzystając z konsoli (wiersza poleceń).
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+```
+npm install
+```
+A następnie uruchom projekt.
 
-## Running unit tests
+```
+npm start
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Projekt jest dostępny na `http://localhost:4200/`. Po każdej zmianie w kodzie aplikacja automatycznie się odswieża.
 
-## Running end-to-end tests
+### Demo
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Działająca wersja jest dostępna także na https://kraudia.github.io/albo-albo/
