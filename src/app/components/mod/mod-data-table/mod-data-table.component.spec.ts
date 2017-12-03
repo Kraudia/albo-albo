@@ -5,6 +5,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { LoadingModule } from 'ngx-loading';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { RouterTestingModule } from '@angular/router/testing';
+import { ToastrModule, ToastrService, } from 'ngx-toastr';
 
 import { ModDataTableComponent } from './mod-data-table.component';
 import { QuestionService } from '../../../services/question.service';
@@ -25,13 +26,15 @@ describe('ModDataTableComponent', () => {
         DataTableModule,
         InfiniteScrollModule,
         LoadingModule,
-        RouterTestingModule
+        RouterTestingModule,
+        ToastrModule.forRoot()
       ],
       providers: [
         AuthService,
         ModService,
         QuestionService,
-        SlimLoadingBarService
+        SlimLoadingBarService,
+        ToastrService
       ]
     })
     .compileComponents();

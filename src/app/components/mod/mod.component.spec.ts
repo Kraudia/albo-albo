@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { DataTableModule } from 'angular-4-data-table-bootstrap-4';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { LoadingModule } from 'ngx-loading';
+import { ToastrModule, ToastrService, } from 'ngx-toastr';
 
 import { CloudModule } from '../../shared/cloud/cloud.module';
 import { ModComponent } from './mod.component';
@@ -29,13 +30,15 @@ describe('ModComponent', () => {
         DataTableModule,
         InfiniteScrollModule,
         LoadingModule,
-        RouterTestingModule
+        RouterTestingModule,
+        ToastrModule.forRoot()
       ],
       providers: [
         AuthService,
         ModService,
         QuestionService,
-        SlimLoadingBarService
+        SlimLoadingBarService,
+        ToastrService
       ]
     })
     .compileComponents();

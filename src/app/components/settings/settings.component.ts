@@ -71,11 +71,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
       const subscription = this.authService.changePassword(oldPassword, newPassword)
         .subscribe(
           res => {
-            localStorage.setItem('currentUser', JSON.stringify({
-              valid: true,
-              username: this.user.login,
-              password: newPassword
-            }));
             this.successMessage = 'Udało się zmienić hasło.';
             this.toastrService.success(this.successMessage);
             this.isLoading = false;

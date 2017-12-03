@@ -2,6 +2,7 @@ import { Component, ViewChild, Input, OnInit, OnChanges, SimpleChange, OnDestroy
 import { DataTable, DataTableResource } from 'angular-4-data-table-bootstrap-4';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { Subscription } from 'rxjs/Subscription';
+import { ToastrService } from 'ngx-toastr';
 
 import { Question } from '../../../models/question';
 import { QuestionService } from '../../../services/question.service';
@@ -42,7 +43,8 @@ export class ModDataTableComponent implements OnInit, OnChanges, OnDestroy {
   constructor(
     private modService: ModService,
     private questionService: QuestionService,
-    private slimLoadingBarService: SlimLoadingBarService
+    private slimLoadingBarService: SlimLoadingBarService,
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit() {
@@ -164,7 +166,7 @@ export class ModDataTableComponent implements OnInit, OnChanges, OnDestroy {
           question.status = 'ACCEPTED';
         },
       error => {
-          console.log('error = ', error);
+          this.toastrService.error(error);
       });
   }
 
@@ -175,7 +177,7 @@ export class ModDataTableComponent implements OnInit, OnChanges, OnDestroy {
           question.status = 'REJECTED';
         },
         error => {
-          console.log('error = ', error);
+          this.toastrService.error(error);
         });
   }
 

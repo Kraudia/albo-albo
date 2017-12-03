@@ -97,16 +97,16 @@
         </div>
       </div>
 
-      <button class="btn btn-block btn-secondary" type="reset" (click)="reset()">Anuluj</button>
-      <button type="button" class="btn btn-block btn-primary" (click)="changePassword(inputOldPassword.value, inputNewPassword.value, inputRepeatNewPassword.value) ">Zmień hasło <i class="fa fa-refresh fa-spin fa-fw" *ngIf="isLoading"></i></button>
-
-      <div class="text-danger text-center p-3" *ngIf="errorMessage">
+      <div class="text-danger text-center mb-3" *ngIf="errorMessage">
         {{ errorMessage }}
       </div>
 
-      <div class="text-success text-center p-3" *ngIf="successMessage">
+      <div class="text-success text-center mb-3" *ngIf="successMessage">
         {{ successMessage }}
       </div>
+
+      <button class="btn btn-block btn-secondary" type="reset" (click)="reset()">Anuluj</button>
+      <button type="button" class="btn btn-block btn-primary" (click)="changePassword(inputOldPassword.value, inputNewPassword.value, inputRepeatNewPassword.value) ">Zmień hasło <i class="fa fa-refresh fa-spin fa-fw" *ngIf="isLoading"></i></button>
     </form>
   </div>
 </div>

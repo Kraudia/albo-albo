@@ -122,7 +122,7 @@ export class AuthService {
       .catch(this.handleError);
   }
 
-  changePassword(oldPassword: string, newPassword: string) {
+  changePassword(oldPassword: string, password: string) {
     const headers = new Headers({
       'Content-Type': 'application/json',
       'Accept': 'application/json'
@@ -132,16 +132,23 @@ export class AuthService {
       localStorage.setItem('uuid', this.generateUUID());
     }
     headers.append('X-request-UUID', localStorage.getItem('uuid'));
-
-    console.log('stare to ', oldPassword);
-    console.log('nowe to ', newPassword);
     headers.append('Authorization', 'Basic ' + btoa(JSON.parse(localStorage.getItem('currentUser')).username + ':' + oldPassword));
 
     const options = new RequestOptions({ headers });
-    const password = newPassword;
     const url = this.host + this.url.pass;
     return this.http.put(url, JSON.stringify({ password }), options)
-      .map(this.extractData)
+      .map((res) => {
+        if (res.ok = true) {
+          const username = JSON.parse(localStorage.getItem('currentUser')).username;
+          localStorage.setItem('currentUser', JSON.stringify({
+            username: username,
+            password: password
+          }));
+          this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        }
+        const body = res.json();
+        return body.data || { };
+      })
       .catch(this.handleError);
   }
 
