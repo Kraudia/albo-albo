@@ -3,7 +3,7 @@
     <a [routerLink]="['/profil', comment.userLogin]" aria-label="Przejdź do strony autora"><img class="mx-auto img-fluid" [src]="comment.userAvatar" alt="avatar"></a>
   </div>
   <div class="comment-content col-md-11 col-10">
-    <h6 class="small comment-meta"><a [routerLink]="['/profil', comment.userLogin]" aria-label="Przejdź do strony autora">{{ comment.userLogin }}</a> {{ comment.createdDate | amTimeAgo }}</h6>
+    <h6 class="comment-meta d-inline"><a [routerLink]="['/profil', comment.userLogin]" aria-label="Przejdź do strony autora">{{ comment.userLogin }}</a> {{ comment.createdDate | amTimeAgo }} </h6><app-report-button [question]="idQuestion" [comment]="comment.id"></app-report-button>
 
     <div class="float-right">
       <app-vote-button [myVote]="comment.myRank" [minusCount]="comment.minusCount" [plusCount]="comment.plusCount" (onVoted)="vote($event)"></app-vote-button>

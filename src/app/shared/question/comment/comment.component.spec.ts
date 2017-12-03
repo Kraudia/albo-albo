@@ -7,6 +7,7 @@ import { CommentComponent } from './comment.component';
 import { AuthService } from '../../../services/auth.service';
 import { CommentService } from '../../../services/comment.service';
 import { VoteButtonModule } from '../../vote-button/vote-button.module';
+import { ReportButtonModule } from '../../report-button/report-button.module';
 
 describe('CommentComponent', () => {
   let component: CommentComponent;
@@ -19,11 +20,9 @@ describe('CommentComponent', () => {
         HttpModule,
         MomentModule,
         RouterTestingModule,
+        ReportButtonModule,
         VoteButtonModule,
-        ToastrModule.forRoot({
-          positionClass: 'toast-bottom-right',
-          preventDuplicates: true,
-        })
+        ToastrModule.forRoot()
       ],
       providers: [
         AuthService,

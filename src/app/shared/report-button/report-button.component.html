@@ -1,10 +1,10 @@
-<button *ngIf="authService.isLoggedIn()" (click)="showReportModal()" type="button" class="btn btn-sm btn-report"><i class="fa fa-flag text-warning" aria-hidden="true"></i> Zgłoś</button>
+<button *ngIf="authService.isLoggedIn()" (click)="showReportModal()" type="button" class="btn btn-sm btn-report" [class.btn-report-comment]="comment" ><i class="fa fa-flag text-warning" aria-hidden="true"></i> Zgłoś</button>
 
 <div class="modal fade" #reportModal tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
   <div class="modal-dialog text-left" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="reportModalLabel"><i class="fa fa-hashtag" aria-hidden="true"></i>{{ question }} Zgłoś pytanie</h5>
+        <h5 class="modal-title" id="reportModalLabel"><i class="fa fa-hashtag" aria-hidden="true"></i>{{ comment ? comment : question }} Zgłoś {{ comment ? 'komentarz' : 'pytanie' }} </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Zamknij">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -27,7 +27,7 @@
           </div>
           <div class="form-check form-check-inline">
             <label class="form-check-label">
-              <input [(ngModel)]="reason" class="form-check-input" type="radio" name="reason" value="dublowanie pytania" required> dublowanie pytania
+              <input [(ngModel)]="reason" class="form-check-input" type="radio" name="reason" value="dublowanie pytania" required> dublowanie treści
             </label>
           </div>
           <div class="form-check form-check-inline">

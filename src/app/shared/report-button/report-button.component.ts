@@ -13,6 +13,8 @@ declare const $: any;
 export class ReportButtonComponent implements OnInit {
   @ViewChild('reportModal') reportModal: ElementRef;
   @Input('question') question: number;
+  @Input('comment') comment: number;
+
 
   public buttonClicked = false;
   public reason: string;
@@ -34,10 +36,11 @@ export class ReportButtonComponent implements OnInit {
 
   report() {
     this.buttonClicked = true;
+    this.isLoading = true;
 
-    if (this.reason) {
+    if (this.reason && this.comment) {
       this.slimLoadingBarService.start();
-      this.questionService.reportQuestion(this.question, this.reason)
+      this.questionService.reportComment(this.question, this.comment, this.reason)
         .subscribe(
         res => {
           this.toastrService.success('Zgłoszenie zostało wysłane.');
@@ -51,6 +54,22 @@ export class ReportButtonComponent implements OnInit {
           this.slimLoadingBarService.complete();
           $(this.reportModal.nativeElement).modal('hide');
         });
+    } else {
+      this.slimLoadingBarService.start();
+      this.questionService.reportQuestion(this.question, this.reason)
+        .subscribe(
+          res => {
+            this.toastrService.success('Zgłoszenie zostało wysłane.');
+            this.isLoading = false;
+            this.slimLoadingBarService.complete();
+            $(this.reportModal.nativeElement).modal('hide');
+          },
+          error => {
+            this.toastrService.error('Niestety coś poszło nie tak, spróbuj ponownie później.');
+            this.isLoading = false;
+            this.slimLoadingBarService.complete();
+            $(this.reportModal.nativeElement).modal('hide');
+          });
     }
   }
 }
