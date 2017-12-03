@@ -1,0 +1,17 @@
+.btn-sort {
+  background-color: transparent;
+  border: 0;
+  text-align: left;
+
+  &:focus, &:hover {
+    background-color: #e2e6ea;
+    border-color: #dae0e5;
+    box-shadow: 0 0 0 0.2rem rgba(248, 249, 250, 0.5);
+    color: #111;
+    cursor: pointer;
+  }
+}
+
+.btn-sort-selected {
+  background-color: #edf3f8;
+}

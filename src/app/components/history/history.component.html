@@ -1,3 +1,41 @@
-<p>
-  history works!
-</p>
+<div class="container">
+  <div class="col-12">
+    <ul class="nav nav-tabs justify-content-end">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Sortuj</a>
+        <div class="dropdown-menu">
+          <button type="button"
+                  class="dropdown-item"
+                  (click)="sortBy('answered_date ASC')"><i class="fa fa-sort-alpha-asc" aria-hidden="true"></i> Od najnowszych</button>
+          <button type="button"
+                  class="dropdown-item"
+                  (click)="sortBy('answered_date DESC')"><i class="fa fa-sort-alpha-desc" aria-hidden="true"></i> Od najstarszych</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="col-12" *ngIf="questions != null && questions.length > 0">
+    <div  style="height: 100%" infiniteScroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="throttle"  [infiniteScrollDisabled]="disableScroll" (scrolled)="onScrollDown()">
+      <div class="list-group" *ngIf="questions">
+        <a *ngFor="let question of questions" [routerLink]="['/pytanie', question.id, question.shortLink]" class="list-group-item list-group-item-action">Wolisz <strong>{{ question.myAnswer ? (question.myAnswer == 1 ? question.firstAnswer : question.secondAnswer) : question.firstAnswer }}</strong> niż {{ question.myAnswer ? (question.myAnswer == 1 ? question.secondAnswer : question.firstAnswer) : question.secondAnswer }}.</a>
+      </div >
+    </div>
+  </div>
+
+  <div class="col-12" *ngIf="questions != null && questions.length == 0">
+    <div class="card bg-light">
+      <div class="card-body">
+        Brak pytań.
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12" *ngIf="isLoading">
+    <div class="mt-2 text-center">
+      <ngx-loading [show]="isLoading"></ngx-loading>
+      <br />
+      Trwa pobieranie...
+    </div>
+  </div>
+</div>

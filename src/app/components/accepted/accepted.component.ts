@@ -17,7 +17,6 @@ export class AcceptedComponent implements OnInit {
   public sort = 'accepted_date DESC';
   public tag: number;
 
-  public order = 'answered_date DESC';
   public status = 'ACCEPTED';
   public tags: Tag[];
   public adult = 'false';
