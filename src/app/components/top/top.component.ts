@@ -38,7 +38,7 @@ export class TopComponent implements OnInit, OnDestroy {
           }else if (type === 'odpowiadane') {
             this.type = 'answer';
           } else if (type === 'komentowane') {
-            this.type = 'comments';
+            this.type = 'comment';
           } else {
             this.type = 'vote';
             this.router.navigate(['top'], {replaceUrl: true});
