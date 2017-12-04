@@ -76,6 +76,22 @@ const appRoutes: Routes = [
     canLoad: [ ModGuard, OnlyLoggedInUsersGuard ]
   },
   {
+    path: 'kontakt',
+    loadChildren: 'app/components/contact/contact.module#ContactModule'
+  },
+  {
+    path: 'pomoc',
+    loadChildren: 'app/components/help/help.module#HelpModule'
+  },
+  {
+    path: 'polityka',
+    loadChildren: 'app/components/cookie-policy/cookie-policy.module#CookiePolicyModule'
+  },
+  {
+    path: 'regulamin',
+    loadChildren: 'app/components/rules/rules.module#RulesModule'
+  },
+  {
     path: '**',
     redirectTo: '404'
   },
