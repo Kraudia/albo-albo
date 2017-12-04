@@ -6,3 +6,12 @@
 </div>
 
 <app-footer></app-footer>
+
+<div class="alert alert-warning alert-dismissible fade show fixed-bottom" role="alert" *ngIf="!cookies">
+  <div class="container">
+    <strong>Serwis korzysta z plików cookies</strong> i podobnych technologii w celach statystycznych oraz w celu dostosowania serwisu do indywidualnych potrzeb użytkowników. Dowiedz się więcej o naszej <a [routerLink]="['polityka']">Polityce Prywatności</a>.
+  </div>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>

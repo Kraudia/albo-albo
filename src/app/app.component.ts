@@ -11,6 +11,7 @@ import { ToastrService, ToastContainerDirective } from 'ngx-toastr';
 })
 export class AppComponent implements OnInit {
   @ViewChild(ToastContainerDirective) toastContainer: ToastContainerDirective;
+  public cookies = false;
 
   constructor(
     private authService: AuthService,
@@ -26,6 +27,15 @@ export class AppComponent implements OnInit {
     this.router.events.subscribe((event: any): void => {
       this.navigationInterceptor(event);
     });
+
+    if (localStorage.getItem('cookies')) {
+      this.cookies = true;
+    }
+  }
+
+  close() {
+    this.cookies = true;
+    localStorage.setItem('cookies', 'yes');
   }
 
   navigationInterceptor(event): void {
