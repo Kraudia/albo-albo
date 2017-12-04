@@ -40,7 +40,7 @@ export class AuthService {
   isMod() {
     if (this.user) {
       for (let i = 0; i < this.user.roles.length; i++) {
-        if (this.user.roles[i].name === 'MOD') {
+        if (this.user.roles[i] === 'MOD') {
           return true;
         }
       }

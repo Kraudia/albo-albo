@@ -14,7 +14,7 @@ export class ModGuard implements CanLoad {
     if (user) {
       const roles = user.roles;
       for (let i = 0; i < roles.length; i++) {
-        if (roles[i].name === 'MOD') {
+        if (roles[i] === 'MOD') {
           return true;
         }
       }

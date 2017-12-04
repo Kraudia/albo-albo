@@ -5,10 +5,7 @@ export interface User {
   'registeredDate': string;
   'loginDate': string;
   'birthDate': string;
-  'roles': {
-    'id': number;
-    'name': string;
-  }[];
+  'roles': string[];
   'active': boolean;
   'age': number;
   'avatar': string;
