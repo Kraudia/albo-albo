@@ -8,12 +8,12 @@
   </div>
 </div>
 
-<div class="row flex-column-reverse flex-md-row">
-  <div class="col">
+<div class="row d-flex">
+  <div class="col order-2 order-md-1">
     <app-scrollable-list [btnFirst]="btnFirst" [btnSecond]="btnSecond" [adult]="adult" [answered]="answered" [status]="status" [order]="sort" [tag]="tag"></app-scrollable-list>
   </div>
 
-  <div class="col-md-3 collapse show" id="collapseSidebar">
+  <div class="col-md-3 order-1 order-md-2 collapse show" id="collapseSidebar">
     <h3>Pytania oczekujące na akceptację</h3>
     <p class="p-info">Tutaj trafiają wszystkie pytania dodane przez użytkowników. Od was zależy, które z nich zostaną przeniesione do <a [routerLink]="['/najnowsze']">najnowszych</a>. Ostateczny wybór należy do moderacji.</p>
 

@@ -14,7 +14,7 @@
   </div>
 </div>
 
-<div class="row" *ngIf="stats">
+<div class="row mb-3" *ngIf="stats">
   <div class="col-6 text-center stats-icon stats-comments" [ngSwitch]="status">
     <span class="stats-number" *ngSwitchCase="'ACCEPTED'">{{ stats.comments.acceptedQuestions }}</span>
     <span class="stats-number" *ngSwitchCase="'PENDING'">{{ stats.comments.pendingQuestions }}</span>

@@ -52,7 +52,6 @@ export class LoginComponent implements OnInit {
             this.toastrService.error('Nie istnieje użytkownik o podanym loginie lub haśle.');
             this.isLoading = false;
             this.slimLoadingBarService.complete();
-            this.toastrService.error(error);
           });
     } else {
       this.errorMessage = 'Wypełnij oba pola.';
