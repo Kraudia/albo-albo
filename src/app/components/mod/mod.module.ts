@@ -6,6 +6,7 @@ import { LoadingModule } from 'ngx-loading';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { ModComponent } from './mod.component';
+import { ModPendingComponent } from './mod-pending/mod-pending.component';
 import { modRouter } from './mod-routing.module';
 import { QuestionService } from '../../services/question.service';
 import { CloudModule } from '../../shared/cloud/cloud.module';
@@ -14,6 +15,7 @@ import { ModDataTableComponent } from './mod-data-table/mod-data-table.component
 @NgModule({
   declarations: [
     ModComponent,
+    ModPendingComponent,
     ModDataTableComponent
   ],
   imports: [
