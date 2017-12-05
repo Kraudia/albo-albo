@@ -1,6 +1,7 @@
 import { Routes, RouterModule } from '@angular/router';
 import { ModComponent } from './mod.component';
 import { ModPendingComponent } from './mod-pending/mod-pending.component';
+import { ModReportedComponent } from './mod-reported/mod-reported.component';
 
 const routes: Routes = [
   {
@@ -10,6 +11,10 @@ const routes: Routes = [
   {
     path: 'oczekujace',
     component: ModPendingComponent
+  },
+  {
+    path: 'zgloszone',
+    component: ModReportedComponent
   }
 ];
 
