@@ -37,6 +37,17 @@ export class AuthService {
     return !this.currentUser;
   }
 
+  isAdmin() {
+    if (this.user) {
+      for (let i = 0; i < this.user.roles.length; i++) {
+        if (this.user.roles[i] === 'ADMIN') {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
   isMod() {
     if (this.user) {
       for (let i = 0; i < this.user.roles.length; i++) {

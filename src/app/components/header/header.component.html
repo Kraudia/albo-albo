@@ -21,9 +21,12 @@
       </ul>
       <form class="form-inline mt-2 mt-md-0">
         <ul class="navbar-nav mr-auto" *ngIf="authService.isLoggedIn() === true">
+          <li class="nav-item" *ngIf="authService.isAdmin()">
+            <a class="nav-link" [routerLink]="['administracja']" [routerLinkActive]="['active']">Administracja</a>
+          </li>
           <li class="nav-item" *ngIf="authService.isMod()">
-          <a class="nav-link" [routerLink]="['moderacja']" [routerLinkActive]="['active']">Moderacja</a>
-        </li>
+            <a class="nav-link" [routerLink]="['moderacja']" [routerLinkActive]="['active']">Moderacja</a>
+          </li>
           <li class="nav-item">
             <a class="nav-link" [routerLink]="['dodaj']" [routerLinkActive]="['active']">Dodaj pytanie</a>
           </li>

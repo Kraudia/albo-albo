@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 import { OnlyLoggedInUsersGuard } from './guards/only-logged-in-users.guard';
 import { OnlyNotLoggedInUsersGuard } from './guards/only-not-logged-in-users.guard';
@@ -10,9 +11,9 @@ import { CommentService } from './services/comment.service';
 import { QuestionService } from './services/question.service';
 import { RegisterService } from './services/register.service';
 import { StatsService } from './services/stats.service';
+import { AdminGuard } from './guards/admin.guard';
 import { ModGuard } from './guards/mod.guard';
 import { ModService } from './services/mod.service';
-import { ToastrService } from 'ngx-toastr';
 
 const appRoutes: Routes = [
   {
@@ -71,6 +72,11 @@ const appRoutes: Routes = [
     canLoad: [ OnlyLoggedInUsersGuard ]
   },
   {
+    path: 'administracja',
+    loadChildren: 'app/components/admin/admin.module#AdminModule',
+    canLoad: [ AdminGuard, ModGuard, OnlyLoggedInUsersGuard ]
+  },
+  {
     path: 'moderacja',
     loadChildren: 'app/components/mod/mod.module#ModModule',
     canLoad: [ ModGuard, OnlyLoggedInUsersGuard ]
@@ -111,6 +117,7 @@ const appRoutes: Routes = [
     RouterModule
   ],
   providers: [
+    AdminGuard,
     ModGuard,
     OnlyLoggedInUsersGuard,
     OnlyNotLoggedInUsersGuard,
