@@ -4,10 +4,10 @@ import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { Subscription } from 'rxjs/Subscription';
 import { ToastrService } from 'ngx-toastr';
 
-import { Question } from '../../../models/question';
-import { QuestionService } from '../../../services/question.service';
-import { ModService } from '../../../services/mod.service';
-import { Tag } from '../../../models/tag';
+import { Question } from '../../../../models/question';
+import { QuestionService } from '../../../../services/question.service';
+import { ModService } from '../../../../services/mod.service';
+import { Tag } from '../../../../models/tag';
 
 @Component({
   selector: 'app-mod-data-table',

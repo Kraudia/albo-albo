@@ -10,7 +10,7 @@ import { ModPendingComponent } from './mod-pending/mod-pending.component';
 import { modRouter } from './mod-routing.module';
 import { QuestionService } from '../../services/question.service';
 import { CloudModule } from '../../shared/cloud/cloud.module';
-import { ModDataTableComponent } from './mod-data-table/mod-data-table.component';
+import { ModDataTableComponent } from './mod-pending/mod-data-table/mod-data-table.component';
 import { ModReportedComponent } from './mod-reported/mod-reported.component';
 
 @NgModule({

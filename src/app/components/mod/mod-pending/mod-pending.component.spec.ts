@@ -12,7 +12,7 @@ import { AuthService } from '../../../services/auth.service';
 import { QuestionService } from '../../../services/question.service';
 import { ModService } from '../../../services/mod.service';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
-import { ModDataTableComponent } from '../mod-data-table/mod-data-table.component';
+import { ModDataTableComponent } from './mod-data-table/mod-data-table.component';
 
 describe('ModComponent', () => {
   let component: ModPendingComponent;

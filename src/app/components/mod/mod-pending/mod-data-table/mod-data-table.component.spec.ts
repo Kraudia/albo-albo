@@ -8,9 +8,9 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ToastrModule, ToastrService, } from 'ngx-toastr';
 
 import { ModDataTableComponent } from './mod-data-table.component';
-import { QuestionService } from '../../../services/question.service';
-import { AuthService } from '../../../services/auth.service';
-import { ModService } from '../../../services/mod.service';
+import { QuestionService } from '../../../../services/question.service';
+import { AuthService } from '../../../../services/auth.service';
+import { ModService } from '../../../../services/mod.service';
 
 describe('ModDataTableComponent', () => {
   let component: ModDataTableComponent;
