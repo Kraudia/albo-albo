@@ -7,19 +7,19 @@ import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ToastrModule, ToastrService, } from 'ngx-toastr';
 
-import { ModDataTableComponent } from './mod-data-table.component';
+import { ModPendingDataTableComponent } from './mod-pending-data-table.component';
 import { QuestionService } from '../../../../services/question.service';
 import { AuthService } from '../../../../services/auth.service';
 import { ModService } from '../../../../services/mod.service';
 
 describe('ModDataTableComponent', () => {
-  let component: ModDataTableComponent;
-  let fixture: ComponentFixture<ModDataTableComponent>;
+  let component: ModPendingDataTableComponent;
+  let fixture: ComponentFixture<ModPendingDataTableComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        ModDataTableComponent
+        ModPendingDataTableComponent
       ],
       imports: [
         HttpModule,
@@ -41,7 +41,7 @@ describe('ModDataTableComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ModDataTableComponent);
+    fixture = TestBed.createComponent(ModPendingDataTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

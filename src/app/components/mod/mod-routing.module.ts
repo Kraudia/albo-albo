@@ -1,6 +1,5 @@
 import { Routes, RouterModule } from '@angular/router';
 import { ModComponent } from './mod.component';
-import { ModPendingComponent } from './mod-pending/mod-pending.component';
 
 const routes: Routes = [
   {
@@ -9,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: 'oczekujace',
-    component: ModPendingComponent
+    loadChildren: 'app/components/mod/mod-pending/mod-pending.module#ModPendingModule'
   },
   {
     path: 'zgloszone',

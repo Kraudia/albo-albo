@@ -12,9 +12,9 @@ import { AuthService } from '../../../services/auth.service';
 import { QuestionService } from '../../../services/question.service';
 import { ModService } from '../../../services/mod.service';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
-import { ModDataTableComponent } from './mod-data-table/mod-data-table.component';
+import { ModPendingDataTableComponent } from './mod-pending-data-table/mod-pending-data-table.component';
 
-describe('ModComponent', () => {
+describe('ModPendingComponent', () => {
   let component: ModPendingComponent;
   let fixture: ComponentFixture<ModPendingComponent>;
 
@@ -22,7 +22,7 @@ describe('ModComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         ModPendingComponent,
-        ModDataTableComponent
+        ModPendingDataTableComponent
       ],
       imports: [
         HttpModule,
