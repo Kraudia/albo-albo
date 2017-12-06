@@ -27,8 +27,8 @@
           <li class="nav-item dropdown" *ngIf="authService.isMod()">
             <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Moderacja</a>
             <div class="dropdown-menu dropdown-menu-right">
-              <a class="dropdown-item" [routerLink]="['moderacja', 'oczekujace']">Oczekujące pytania</a>
-              <a class="dropdown-item" [routerLink]="['moderacja', 'zgloszone']">Zgłoszone pytania</a>
+              <a class="dropdown-item" [routerLink]="['moderacja', 'oczekujace']">Pytania oczekujące na akceptację</a>
+              <a class="dropdown-item" [routerLink]="['moderacja', 'zgloszone']">Zgłoszenia od użytkowników</a>
             </div>
           </li>
           <li class="nav-item">

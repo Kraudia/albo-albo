@@ -1,3 +1,12 @@
-<p>
-  mod-reported works!
-</p>
+<h2>Zgłoszenia od użytkowników</h2>
+
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['pytania']" [routerLinkActive]="['active']">Pytania</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['komentarze']" [routerLinkActive]="['active']">Komentarze</a>
+  </li>
+</ul>
+
+<router-outlet></router-outlet>

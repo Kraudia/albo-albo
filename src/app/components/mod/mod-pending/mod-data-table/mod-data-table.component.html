@@ -1,6 +1,5 @@
 <div style="height: 100%" infiniteScroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="throttle"  [infiniteScrollDisabled]="disableScroll" (scrolled)="onScrollDown()">
   <data-table
-    headerTitle="Pytania oczekujące na akceptację"
     [items]="questions"
     [itemCount]="questionCount"
     (reload)="reload($event)"

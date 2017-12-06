@@ -1,7 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 import { ModComponent } from './mod.component';
 import { ModPendingComponent } from './mod-pending/mod-pending.component';
-import { ModReportedComponent } from './mod-reported/mod-reported.component';
 
 const routes: Routes = [
   {
@@ -14,7 +13,7 @@ const routes: Routes = [
   },
   {
     path: 'zgloszone',
-    component: ModReportedComponent
+    loadChildren: 'app/components/mod/mod-reported/mod-reported.module#ModReportedModule'
   }
 ];
 

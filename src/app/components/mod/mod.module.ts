@@ -11,14 +11,12 @@ import { modRouter } from './mod-routing.module';
 import { QuestionService } from '../../services/question.service';
 import { CloudModule } from '../../shared/cloud/cloud.module';
 import { ModDataTableComponent } from './mod-pending/mod-data-table/mod-data-table.component';
-import { ModReportedComponent } from './mod-reported/mod-reported.component';
 
 @NgModule({
   declarations: [
     ModComponent,
     ModPendingComponent,
-    ModDataTableComponent,
-    ModReportedComponent
+    ModDataTableComponent
   ],
   imports: [
     CommonModule,
