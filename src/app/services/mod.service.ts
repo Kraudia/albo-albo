@@ -28,6 +28,15 @@ export class ModService {
       .catch(this.handleError);
   }
 
+  deleteReportedQuestion(id: number) {
+    const url = this.host + 'reports/questions/' + id;
+    const options = this.authService.getOptions();
+
+    return this.http.delete(url, options)
+      .map((res) => res.json())
+      .catch(this.handleError);
+  }
+
   accept(question: Question) {
     const url = this.host + 'questions/' + question.id + '/accept-question-commands';
     const options = this.authService.getOptions();

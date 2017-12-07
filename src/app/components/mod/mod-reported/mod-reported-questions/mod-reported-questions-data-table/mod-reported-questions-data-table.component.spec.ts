@@ -3,6 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpModule } from '@angular/http';
 import { DataTableModule } from 'angular-4-data-table-bootstrap-4';
 import { LoadingModule } from 'ngx-loading';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { ToastrService, ToastrModule } from 'ngx-toastr';
 
 import { AuthService } from '../../../../../services/auth.service';
@@ -28,6 +29,7 @@ describe('ModReportedQuestionsDataTableComponent', () => {
       providers: [
         AuthService,
         ModService,
+        SlimLoadingBarService,
         ToastrService
       ]
     })

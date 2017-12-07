@@ -1,14 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpModule } from '@angular/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { DataTableModule } from 'angular-4-data-table-bootstrap-4';
 import { LoadingModule } from 'ngx-loading';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { ToastrService, ToastrModule } from 'ngx-toastr';
 
 import { ModReportedQuestionsComponent } from './mod-reported-questions.component';
 import { AuthService } from '../../../../services/auth.service';
 import { ModService } from '../../../../services/mod.service';
 import { ModReportedQuestionsDataTableComponent } from './mod-reported-questions-data-table/mod-reported-questions-data-table.component';
-import { HttpModule } from '@angular/http';
 
 describe('ModReportedQuestionsComponent', () => {
   let component: ModReportedQuestionsComponent;
@@ -30,7 +31,8 @@ describe('ModReportedQuestionsComponent', () => {
       providers: [
         AuthService,
         ModService,
-        ToastrService
+        ToastrService,
+        SlimLoadingBarService
       ]
     })
     .compileComponents();
