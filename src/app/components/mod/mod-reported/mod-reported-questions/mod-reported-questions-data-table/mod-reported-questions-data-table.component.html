@@ -1,0 +1,120 @@
+<data-table
+  headerTitle="Pytania zgłoszone przez użytkowników"
+  [items]="questions"
+  [itemCount]="questionCount"
+  (reload)="reloadItems($event)"
+
+  [pagination]="false"
+  [indexColumn]="false"
+  [selectColumn]="false"
+  [multiSelect]="false"
+  [rowColors]="rowColors"
+>
+  <data-table-column property="id" header="Id" [sortable]="true" [width]="50">
+  </data-table-column>
+
+  <data-table-column property="question'" header="#" [width]="50" [sortable]="false" [visible]="false">
+    <ng-template #dataTableCell let-item="item">
+      <a class="btn btn-light btn-sm" [routerLink]="['/pytanie', item.question.id, item.question.shortLink]" aria-label="Przejdź do strony pytania">{{ item.question.id }}</a>
+    </ng-template>
+  </data-table-column>
+
+  <data-table-column property="reportedDate" header="Data zgłoszenia" [resizable]="true" [sortable]="true" [visible]="true">
+    <ng-template #dataTableCell let-item="item">
+              <span style="color: grey">
+              {{ item.reportedDate | date:'yyyy-MM-dd HH:mm' }}
+              </span>
+    </ng-template>
+  </data-table-column>
+
+
+  <data-table-column property="reason" header="Powód" [resizable]="true" [sortable]="true" [visible]="true">
+  </data-table-column>
+
+  <data-table-column property="question" header="Data utworzenia" [resizable]="true" [sortable]="false" [visible]="false">
+    <ng-template #dataTableCell let-item="item">
+              <span style="color: grey">
+              {{ item.question.createdDate | date:'yyyy-MM-dd HH:mm' }}
+              </span>
+    </ng-template>
+  </data-table-column>
+
+  <data-table-column property="question" header="Data akceptacji" [resizable]="true" [sortable]="false" [visible]="false">
+    <ng-template #dataTableCell let-item="item">
+              <span style="color: grey">
+              {{ item.question.acceptedDate | date:'yyyy-MM-dd HH:mm' }}
+              </span>
+    </ng-template>
+  </data-table-column>
+
+  <data-table-column property="question" header="Pytanie" [resizable]="true" [sortable]="false">
+    <ng-template #dataTableCell let-item="item">{{ item.question.value }}</ng-template>
+  </data-table-column>
+
+  <data-table-column property="question" header="Odpowiedź A" [resizable]="true" [sortable]="false">
+    <ng-template #dataTableCell let-item="item">{{ item.question.firstAnswer }}</ng-template>
+  </data-table-column>
+
+  <data-table-column  header="Odpowiedź B" [resizable]="true" [sortable]="false">
+    <ng-template #dataTableCell let-item="item">{{ item.question.secondAnswer }}</ng-template>
+  </data-table-column>
+
+  <data-table-column  header="+18" [width]="70" [sortable]="false">
+    <ng-template #dataTableCell let-item="item">
+      <span class="text-danger" *ngIf="item.question.adultRated">+18</span>
+    </ng-template>
+  </data-table-column>
+
+  <data-table-column header="Skrót" [resizable]="true" [sortable]="false" [visible]="false">
+    <ng-template #dataTableCell let-item="item">{{ item.question.shortLink }}</ng-template>
+  </data-table-column>
+
+  <data-table-column property="question" header="Status" [resizable]="true" [sortable]="false" [visible]="true">
+    <ng-template #dataTableCell let-item="item">
+      <ng-container [ngSwitch]="item.question.status">
+        <span class="text-success" *ngSwitchCase="'ACCEPTED'">Zatwierdzone</span>
+        <span class="text-warning" *ngSwitchCase="'PENDING'">Oczekujące</span>
+        <span class="text-danger" *ngSwitchCase="'REJECTED'">Odrzucone</span>
+        <span class="text-muted" *ngSwitchDefault>brak statusu</span>
+      </ng-container>
+    </ng-template>
+  </data-table-column>
+
+  <!--<data-table-column header="Działania" [resizable]="true">-->
+  <!--<ng-template #dataTableCell let-item="item">-->
+  <!--<button *ngIf="item.status === 'PENDING'" (click)="accept(item)" class="btn btn-sm btn-success"><i class="fa fa-check" aria-hidden="true"></i> <span class="d-none d-lg-inline-block">Zatwierdź</span></button>-->
+  <!--<button *ngIf="item.status === 'PENDING'" (click)="reject(item)" class="btn btn-sm btn-danger"><i class="fa fa-ban" aria-hidden="true"></i> <span class="d-none d-lg-inline-block">Odrzuć</span></button>-->
+  <!--</ng-template>-->
+  <!--</data-table-column>-->
+</data-table>
+
+<div class="card bg-white border-0" *ngIf="isLoading">
+  <div class="card-body text-center mt-2">
+    <ngx-loading [show]="isLoading"></ngx-loading>
+    <br />
+    Trwa pobieranie...
+  </div>
+</div>
+
+
+<!--<div class="modal fade" id="editTagsModal" tabindex="-1" role="dialog" aria-labelledby="editTagsModalLabel" aria-hidden="true">-->
+  <!--<div class="modal-dialog" role="document">-->
+    <!--<div class="modal-content">-->
+      <!--<div class="modal-header">-->
+        <!--<h5 class="modal-title" id="editTagsModalLabel"><span class="mb-2" *ngIf="selectedQuestion?.id"><strong>{{ selectedQuestion.id }}</strong>.</span> Edytuj tagi</h5>-->
+        <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+          <!--<span aria-hidden="true">&times;</span>-->
+        <!--</button>-->
+      <!--</div>-->
+      <!--<div class="modal-body">-->
+        <!--<p class="mb-2">Możesz wybrać maksymalnie trzy tagi.</p>-->
+
+        <!--<button *ngFor="let tag of tags" class="btn btn-sm btn-tag" [ngClass]="[isTagSelected(tag.id) ? 'btn-success' : 'btn-light']" (click)="selectTag(tag)">{{ tag.name }}</button>-->
+      <!--</div>-->
+      <!--<div class="modal-footer">-->
+        <!--<button type="button" class="btn btn-secondary" (click)="editTagsCancel()" data-dismiss="modal">Anuluj</button>-->
+        <!--<button type="button" class="btn btn-primary" (click)="editTagsDone()" data-dismiss="modal">Edytuj</button>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->

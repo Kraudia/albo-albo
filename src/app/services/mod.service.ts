@@ -8,6 +8,7 @@ import 'rxjs/add/operator/map';
 import { AuthService } from './auth.service';
 import { environment } from '../../environments/environment';
 import { Question } from '../models/question';
+import { ReportedQuestion } from '../models/reportedQuestion';
 
 @Injectable()
 export class ModService {
@@ -17,6 +18,15 @@ export class ModService {
     private http: Http,
     private authService: AuthService
   ) { }
+
+  getReportedQuestions(): Observable<ReportedQuestion[]> {
+    const url = this.host + 'reports/questions';
+    const options = this.authService.getOptions();
+
+    return this.http.get(url, options)
+      .map((res) => res.json())
+      .catch(this.handleError);
+  }
 
   accept(question: Question) {
     const url = this.host + 'questions/' + question.id + '/accept-question-commands';
