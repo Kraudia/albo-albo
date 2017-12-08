@@ -1,7 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { DataTableModule } from 'angular-4-data-table-bootstrap-4';
+import { InlineEditorModule } from '@qontu/ngx-inline-editor';
 import { LoadingModule } from 'ngx-loading';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { ToastrService, ToastrModule } from 'ngx-toastr';
@@ -24,7 +26,9 @@ describe('ModReportedQuestionsComponent', () => {
       imports: [
         HttpModule,
         DataTableModule,
+        FormsModule,
         RouterTestingModule,
+        InlineEditorModule,
         LoadingModule,
         ToastrModule.forRoot()
       ],

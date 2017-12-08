@@ -28,6 +28,35 @@ export class ModService {
       .catch(this.handleError);
   }
 
+  editReportedQuestion(id: number, value: string, firstAnswer: string, secondAnswer: string, status: string, adultRated: boolean, shortLink: string) {
+    const url = this.host + 'questions/' + id + '/edit-question-commands';
+    const options = this.authService.getOptions();
+
+    let json = {};
+    if (value) {
+      json['value'] = value;
+    }
+    if (firstAnswer) {
+      json['firstAnswer'] = firstAnswer;
+    }
+    if (secondAnswer) {
+      json['secondAnswer'] = secondAnswer;
+    }
+    if (status) {
+      json['status'] = status;
+    }
+    if (adultRated) {
+      json['adultRated'] = adultRated;
+    }
+    if (shortLink) {
+      json['shortLink'] = shortLink;
+    }
+
+    return this.http.patch(url,  JSON.stringify(json), options)
+      .map((res) => res.json())
+      .catch(this.handleError);
+  }
+
   deleteReportedQuestion(id: number) {
     const url = this.host + 'reports/questions/' + id;
     const options = this.authService.getOptions();

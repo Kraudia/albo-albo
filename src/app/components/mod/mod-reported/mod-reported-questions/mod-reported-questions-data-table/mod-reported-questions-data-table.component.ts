@@ -16,9 +16,39 @@ export class ModReportedQuestionsDataTableComponent implements OnInit, OnDestroy
   public questions: ReportedQuestion[] = [];
   public questionCount = 0;
   public isLoading = false;
-  public isDeletingReport = false;
+  public isDeleting = false;
+  public isEditing = false;
   private subscription: Subscription;
   private questionResource: DataTableResource<ReportedQuestion>;
+
+  public adultRatedOptions = {
+    data: [
+      { id: true, field: 'tak' },
+      { id: false, field: 'nie' }
+    ],
+    value: 'id',
+    text: 'field'
+  };
+
+  public statusOptions = {
+    data: [
+      { id: 'ACCEPTED', field: 'Zatwierdzone' },
+      { id: 'PENDING', field: 'Oczekujące' },
+      { id: 'REJECTED', field: 'Odrzucone' }
+    ],
+    value: 'id',
+    text: 'field'
+  };
+
+  public selectedQuestion: ReportedQuestion;
+  id: number;
+  value: string;
+  firstAnswer: string;
+  secondAnswer: string;
+  status: string;
+  adultRated: boolean;
+  shortLink: string;
+
 
   constructor(
     private modService: ModService,
@@ -49,21 +79,86 @@ export class ModReportedQuestionsDataTableComponent implements OnInit, OnDestroy
   }
 
   deleteReport(report: ReportedQuestion) {
-    this.isDeletingReport = true;
+    this.isDeleting = true;
     this.slimLoadingBarService.start();
     this.modService.deleteReportedQuestion(report.id).subscribe(res => {
         this.questions.splice(this.questions.indexOf(report), 1);
         this.questionResource = new DataTableResource(this.questions);
         this.questionResource.count().then(count => this.questionCount = count);
-        this.isDeletingReport = false;
+        this.isDeleting = false;
         this.slimLoadingBarService.complete();
       },
       error => {
         this.toastrService.error(error);
-        this.isDeletingReport = false;
+        this.isDeleting = false;
         this.slimLoadingBarService.complete();
       });
+  }
 
+  saveValue(report: ReportedQuestion, value) {
+    this.slimLoadingBarService.start();
+    this.modService.editReportedQuestion(report.question.id, value, null, null, null, null, null).subscribe(res => {
+        this.slimLoadingBarService.complete();
+      },
+      error => {
+        this.toastrService.error(error);
+        this.slimLoadingBarService.complete();
+      });
+  }
+
+  saveFirstAnswer(report: ReportedQuestion, firstAnswer) {
+    this.slimLoadingBarService.start();
+    this.modService.editReportedQuestion(report.question.id, null, firstAnswer, null, null, null, null).subscribe(res => {
+        this.slimLoadingBarService.complete();
+      },
+      error => {
+        this.toastrService.error(error);
+        this.slimLoadingBarService.complete();
+      });
+  }
+
+  saveSecondAnswer(report: ReportedQuestion, secondAnswer) {
+    this.slimLoadingBarService.start();
+    this.modService.editReportedQuestion(report.question.id, null, null, secondAnswer, null, null, null).subscribe(res => {
+        this.slimLoadingBarService.complete();
+      },
+      error => {
+        this.toastrService.error(error);
+        this.slimLoadingBarService.complete();
+      });
+  }
+
+  saveStatus(report: ReportedQuestion, status) {
+    this.slimLoadingBarService.start();
+    this.modService.editReportedQuestion(report.question.id, null, null, null, status, null, null).subscribe(res => {
+        this.slimLoadingBarService.complete();
+      },
+      error => {
+        this.toastrService.error(error);
+        this.slimLoadingBarService.complete();
+      });
+  }
+
+  saveAdultRated(report: ReportedQuestion, adultRated) {
+    this.slimLoadingBarService.start();
+    this.modService.editReportedQuestion(report.question.id, null, null, null, null, adultRated, null).subscribe(res => {
+        this.slimLoadingBarService.complete();
+      },
+      error => {
+        this.toastrService.error(error);
+        this.slimLoadingBarService.complete();
+      });
+  }
+
+  saveShortLink(report: ReportedQuestion, shortLink) {
+    this.slimLoadingBarService.start();
+    this.modService.editReportedQuestion(report.question.id, null, null, null, null, null, shortLink).subscribe(res => {
+        this.slimLoadingBarService.complete();
+      },
+      error => {
+        this.toastrService.error(error);
+        this.slimLoadingBarService.complete();
+      });
   }
 
   reloadItems(params) {

@@ -133,14 +133,22 @@ export class ModPendingDataTableComponent implements OnInit, OnChanges, OnDestro
     if (this.selectedQuestion.tags) {
       for (const tag of this.selectedQuestion.tags) {
         this.modService.deleteTag(this.selectedQuestion.id, tag.id)
-          .subscribe(() => {});
+          .subscribe(
+            res => {},
+            error => {
+              this.toastrService.error(error);
+            });
       }
     }
 
     if (this.selectedTags.length) {
       for (const tag of this.selectedTags) {
         this.modService.addTag(this.selectedQuestion.id, tag.id)
-          .subscribe(() => {});
+          .subscribe(
+            res => {},
+            error => {
+              this.toastrService.error(error);
+            });
       }
     }
 
@@ -160,24 +168,30 @@ export class ModPendingDataTableComponent implements OnInit, OnChanges, OnDestro
   }
 
   accept(question: Question) {
+    this.slimLoadingBarService.start();
     this.modService.accept(question)
       .subscribe(
         res => {
           question.status = 'ACCEPTED';
+          this.slimLoadingBarService.complete();
         },
       error => {
           this.toastrService.error(error);
+          this.slimLoadingBarService.complete();
       });
   }
 
   reject(question: Question) {
+    this.slimLoadingBarService.start();
     this.modService.reject(question)
       .subscribe(
         res => {
           question.status = 'REJECTED';
+          this.slimLoadingBarService.complete();
         },
         error => {
           this.toastrService.error(error);
+          this.slimLoadingBarService.complete();
         });
   }
 

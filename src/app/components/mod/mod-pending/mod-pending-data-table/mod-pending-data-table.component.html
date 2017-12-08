@@ -99,7 +99,7 @@
     <data-table-column header="Działania" [resizable]="true">
       <ng-template #dataTableCell let-item="item">
         <button *ngIf="item.status === 'PENDING'" (click)="accept(item)" class="btn btn-sm btn-success"><i class="fa fa-check" aria-hidden="true"></i> <span class="d-none d-lg-inline-block">Zatwierdź</span></button>
-        <button *ngIf="item.status === 'PENDING'" (click)="reject(item)" class="btn btn-sm btn-danger"><i class="fa fa-ban" aria-hidden="true"></i> <span class="d-none d-lg-inline-block">Odrzuć</span></button>
+        <button *ngIf="item.status === 'PENDING'" (click)="reject(item)" class="btn btn-sm btn-danger"><i class="fa fa-ban" aria-hidden="true"></i>  <span class="d-none d-lg-inline-block">Odrzuć</span></button>
       </ng-template>
     </data-table-column>
   </data-table>

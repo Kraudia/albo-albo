@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
     "@ng-bootstrap/ng-bootstrap": "^1.0.0-beta.5",
+    "@qontu/ngx-inline-editor": "^0.2.0-alpha.12",
     "angular-4-data-table-bootstrap-4": "^0.2.0",
     "angular2-moment": "^1.7.0",
     "bootstrap": "^4.0.0-beta",
