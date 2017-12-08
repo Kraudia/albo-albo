@@ -9,6 +9,7 @@ import { AuthService } from './auth.service';
 import { environment } from '../../environments/environment';
 import { Question } from '../models/question';
 import { ReportedQuestion } from '../models/reportedQuestion';
+import { ReportedComment } from '../models/reportedComment';
 
 @Injectable()
 export class ModService {
@@ -21,6 +22,15 @@ export class ModService {
 
   getReportedQuestions(): Observable<ReportedQuestion[]> {
     const url = this.host + 'reports/questions';
+    const options = this.authService.getOptions();
+
+    return this.http.get(url, options)
+      .map((res) => res.json())
+      .catch(this.handleError);
+  }
+
+  getReportedComments(): Observable<ReportedComment[]> {
+    const url = this.host + 'reports/comments';
     const options = this.authService.getOptions();
 
     return this.http.get(url, options)
@@ -57,8 +67,35 @@ export class ModService {
       .catch(this.handleError);
   }
 
+  editReportedComment(questionId: number, commentId: number,  value: string) {
+    const url = this.host + 'questions/' + questionId + '/comments/' + commentId + '/edit-comment-commands';
+    const options = this.authService.getOptions();
+
+    return this.http.patch(url,  JSON.stringify({ value }), options)
+      .map((res) => res.json())
+      .catch(this.handleError);
+  }
+
+  deleteComment(questionId: number, commentId: number) {
+    const url = this.host + 'questions/' + questionId + '/comments/' + commentId + '/edit-comment-commands';
+    const options = this.authService.getOptions();
+
+    return this.http.patch(url,  JSON.stringify({ visible: false }), options)
+      .map((res) => res.json())
+      .catch(this.handleError);
+  }
+
   deleteReportedQuestion(id: number) {
     const url = this.host + 'reports/questions/' + id;
+    const options = this.authService.getOptions();
+
+    return this.http.delete(url, options)
+      .map((res) => res.json())
+      .catch(this.handleError);
+  }
+
+  deleteReportedComment(id: number) {
+    const url = this.host + 'reports/comments/' + id;
     const options = this.authService.getOptions();
 
     return this.http.delete(url, options)

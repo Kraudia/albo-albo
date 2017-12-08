@@ -81,6 +81,25 @@ export class ModReportedQuestionsDataTableComponent implements OnInit, OnDestroy
       });
   }
 
+  deleteQuestion(report: ReportedQuestion) {
+    this.slimLoadingBarService.start();
+    this.modService.editReportedQuestion(report.question.id, null, null, null, 'REJECTED', null, null).subscribe(res => {
+        this.slimLoadingBarService.complete();
+        for (let i = 0; i < this.reportTable.items.length; i++) {
+          if (this.reportTable.items[i].question.id === report.question.id) {
+            this.reportTable.items[i].question.status = 'REJECTED';
+          }
+        }
+        this.deleteReport(report);
+      },
+      error => {
+        this.toastrService.error(error);
+        this.slimLoadingBarService.complete();
+        this.subscription.unsubscribe();
+        this.getQuestions();
+      });
+  }
+
   saveValue(report: ReportedQuestion, value) {
     this.slimLoadingBarService.start();
     for (let i = 0; i < this.reportTable.items.length; i++) {

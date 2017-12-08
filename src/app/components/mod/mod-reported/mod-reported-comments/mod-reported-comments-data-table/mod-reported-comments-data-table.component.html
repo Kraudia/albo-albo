@@ -1,3 +1,71 @@
-<p>
-  mod-reported-comments-data-table works!
-</p>
+<data-table *ngIf="!isLoading"
+            headerTitle="Komentarze zgłoszone przez użytkowników"
+            [items]="reports"
+            [itemCount]="reportCount"
+            (reload)="reloadItems($event)"
+
+            [pagination]="false"
+            [indexColumn]="false"
+            [selectColumn]="false"
+            [multiSelect]="false"
+            [rowColors]="rowColors"
+>
+  <data-table-column property="id" [sortable]="true" [width]="50" [visible]="true">
+  </data-table-column>
+
+  <data-table-column property="reportedDate" header="Data zgłoszenia" [resizable]="true" [sortable]="true" [visible]="true">
+    <ng-template #dataTableCell let-item="item">
+              <span style="color: grey">
+              {{ item.reportedDate | date:'yyyy-MM-dd HH:mm' }}
+              </span>
+    </ng-template>
+  </data-table-column>
+
+  <data-table-column property="question'" header="Pytanie" [sortable]="false" [resizable]="true" [visible]="true">
+    <ng-template #dataTableCell let-item="item">
+      <a class="btn btn-light btn-sm" [routerLink]="['/pytanie', item.question.id, item.question.shortLink]" aria-label="Przejdź do strony pytania">{{ item.question.id }}</a>
+    </ng-template>
+  </data-table-column>
+
+  <data-table-column property="comment'" header="Komentarz" [sortable]="false" [resizable]="true" [visible]="true">
+    <ng-template #dataTableCell let-item="item">{{ item.comment.id }}</ng-template>
+  </data-table-column>
+
+  <data-table-column property="reason" header="Powód" [resizable]="true" [sortable]="true" [visible]="true">
+  </data-table-column>
+
+  <data-table-column property="comment" header="Data utworzenia" [resizable]="true" [sortable]="false" [visible]="false">
+    <ng-template #dataTableCell let-item="item">
+              <span style="color: grey">
+              {{ item.comment.createdDate | date:'yyyy-MM-dd HH:mm' }}
+              </span>
+    </ng-template>
+  </data-table-column>
+
+  <data-table-column property="comment" header="Komentarz" [resizable]="true" [sortable]="false" [visible]="true">
+    <ng-template #dataTableCell let-item="item">
+      <inline-editor type="textarea" [(ngModel)]="item.comment.value" (onSave)="saveValue(item, $event)" [min]="2" [max]="150" (onError)="handleError($event)"></inline-editor>
+    </ng-template>
+  </data-table-column>
+
+  <data-table-column property="comment" header="Autor" [resizable]="true" [sortable]="false" [visible]="true">
+    <ng-template #dataTableCell let-item="item">
+      <a class="btn btn-light btn-sm" [routerLink]="['/profil', item.comment.userLogin]" aria-label="Przejdź do profilu autora">{{ item.comment.userLogin }}</a>
+    </ng-template>
+  </data-table-column>
+
+  <data-table-column header="Działania" [resizable]="true" [visible]="true">
+    <ng-template #dataTableCell let-item="item">
+      <button (click)="deleteComment(item)" class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> <span class="d-none d-lg-inline-block">Usuń komentarz</span></button>
+      <button (click)="deleteReport(item)" class="btn btn-sm btn-info"><i class="fa fa-check" aria-hidden="true"></i> <span class="d-none d-lg-inline-block">Usuń zgłoszenie</span></button>
+    </ng-template>
+  </data-table-column>
+</data-table>
+
+<div class="card bg-white border-0" *ngIf="isLoading">
+  <div class="card-body text-center mt-2">
+    <ngx-loading [show]="isLoading"></ngx-loading>
+    <br />
+    Trwa pobieranie...
+  </div>
+</div>

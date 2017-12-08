@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { DataTableModule } from 'angular-4-data-table-bootstrap-4';
+import { InlineEditorModule } from '@qontu/ngx-inline-editor';
+import { LoadingModule } from 'ngx-loading';
 
 import { ModReportedCommentsComponent } from './mod-reported-comments.component';
 import { modReportedCommentsRouter } from './mod-reported-comments-routing.module';
@@ -12,6 +16,10 @@ import { ModReportedCommentsDataTableComponent } from './mod-reported-comments-d
   ],
   imports: [
     CommonModule,
+    DataTableModule,
+    FormsModule,
+    LoadingModule,
+    InlineEditorModule,
     modReportedCommentsRouter
   ]
 })

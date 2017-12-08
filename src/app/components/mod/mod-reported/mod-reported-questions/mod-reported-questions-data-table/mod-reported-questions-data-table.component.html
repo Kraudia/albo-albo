@@ -84,7 +84,8 @@
 
   <data-table-column header="Działania" [resizable]="true" [visible]="true">
     <ng-template #dataTableCell let-item="item">
-      <button (click)="deleteReport(item)" class="btn btn-sm btn-danger"><i class="fa fa-ban" aria-hidden="true"></i> <span class="d-none d-lg-inline-block">Usuń zgłoszenie</span></button>
+      <button (click)="deleteQuestion(item)" class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> <span class="d-none d-lg-inline-block">Usuń pytanie</span></button>
+      <button (click)="deleteReport(item)" class="btn btn-sm btn-info"><i class="fa fa-check" aria-hidden="true"></i> <span class="d-none d-lg-inline-block">Usuń zgłoszenie</span></button>
     </ng-template>
   </data-table-column>
 </data-table>
