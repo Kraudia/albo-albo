@@ -1,7 +1,7 @@
 <data-table *ngIf="!isLoading"
   headerTitle="Pytania zgłoszone przez użytkowników"
-  [items]="questions"
-  [itemCount]="questionCount"
+  [items]="reports"
+  [itemCount]="reportCount"
   (reload)="reloadItems($event)"
 
   [pagination]="false"
@@ -48,19 +48,19 @@
 
   <data-table-column property="question" header="Pytanie" [resizable]="true" [sortable]="false">
     <ng-template #dataTableCell let-item="item">
-      <inline-editor type="textarea" [(ngModel)]="item.question.value" (onSave)="saveValue($event)" name="editableValue"></inline-editor>
+      <inline-editor type="textarea" [(ngModel)]="item.question.value" (onSave)="saveValue(item, $event)" [min]="2" [max]="150" (onError)="handleError($event)"></inline-editor>
     </ng-template>
   </data-table-column>
 
   <data-table-column property="question" header="Odpowiedź A" [resizable]="true" [sortable]="false">
     <ng-template #dataTableCell let-item="item">
-      <inline-editor type="textarea" [(ngModel)]="item.question.firstAnswer" (onSave)="saveFirstAnswer($event)" name="editableValue"></inline-editor>
+      <inline-editor type="textarea" [(ngModel)]="item.question.firstAnswer" (onSave)="saveFirstAnswer(item, $event)" [min]="2" [max]="150" (onError)="handleError($event)"></inline-editor>
     </ng-template>
   </data-table-column>
 
   <data-table-column  header="Odpowiedź B" [resizable]="true" [sortable]="false">
     <ng-template #dataTableCell let-item="item">
-      <inline-editor type="textarea" [(ngModel)]="item.question.secondAnswer" (onSave)="saveSecondAnswer($event)"></inline-editor>
+      <inline-editor type="textarea" [(ngModel)]="item.question.secondAnswer" (onSave)="saveSecondAnswer(item, $event)" [min]="2" [max]="150" (onError)="handleError($event)"></inline-editor>
     </ng-template>
   </data-table-column>
 
@@ -72,7 +72,7 @@
 
   <data-table-column header="Skrót" [resizable]="true" [sortable]="false" [visible]="true">
     <ng-template #dataTableCell let-item="item">
-      <inline-editor type="textarea" [(ngModel)]="item.question.shortLink" (onSave)="saveShortLink(item, $event)"></inline-editor>
+      <inline-editor type="textarea" [(ngModel)]="item.question.shortLink" (onSave)="saveShortLink(item, $event)" [min]="2" [max]="50" (onError)="handleError($event)"></inline-editor>
     </ng-template>
   </data-table-column>
 
@@ -84,7 +84,7 @@
 
   <data-table-column header="Działania" [resizable]="true" [visible]="true">
     <ng-template #dataTableCell let-item="item">
-      <button (click)="deleteReport(item)" class="btn btn-sm btn-danger"><i class="fa fa-ban" aria-hidden="true" *ngIf="!isDeleting"></i><i class="fa fa-refresh fa-spin fa-fw" *ngIf="isDeleting"></i> <span class="d-none d-lg-inline-block">Usuń zgłoszenie</span></button>
+      <button (click)="deleteReport(item)" class="btn btn-sm btn-danger"><i class="fa fa-ban" aria-hidden="true"></i> <span class="d-none d-lg-inline-block">Usuń zgłoszenie</span></button>
     </ng-template>
   </data-table-column>
 </data-table>

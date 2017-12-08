@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { DataTableResource } from 'angular-4-data-table-bootstrap-4';
+import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
+import { DataTable, DataTableResource } from 'angular-4-data-table-bootstrap-4';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { Subscription } from 'rxjs/Subscription';
 import { ToastrService } from 'ngx-toastr';
@@ -13,13 +13,12 @@ import { ModService } from '../../../../../services/mod.service';
   styleUrls: ['./mod-reported-questions-data-table.component.scss']
 })
 export class ModReportedQuestionsDataTableComponent implements OnInit, OnDestroy {
-  public questions: ReportedQuestion[] = [];
-  public questionCount = 0;
+  public reports: ReportedQuestion[] = [];
+  public reportCount = 0;
   public isLoading = false;
-  public isDeleting = false;
-  public isEditing = false;
   private subscription: Subscription;
-  private questionResource: DataTableResource<ReportedQuestion>;
+  private reportResource: DataTableResource<ReportedQuestion>;
+  @ViewChild(DataTable) reportTable: DataTable;
 
   public adultRatedOptions = {
     data: [
@@ -40,16 +39,6 @@ export class ModReportedQuestionsDataTableComponent implements OnInit, OnDestroy
     text: 'field'
   };
 
-  public selectedQuestion: ReportedQuestion;
-  id: number;
-  value: string;
-  firstAnswer: string;
-  secondAnswer: string;
-  status: string;
-  adultRated: boolean;
-  shortLink: string;
-
-
   constructor(
     private modService: ModService,
     private slimLoadingBarService: SlimLoadingBarService,
@@ -66,43 +55,47 @@ export class ModReportedQuestionsDataTableComponent implements OnInit, OnDestroy
     const subscription = this.modService.getReportedQuestions()
       .subscribe(
         response => {
-          this.questions = response;
-          this.questionResource = new DataTableResource(this.questions);
-          this.questionResource.count().then(count => this.questionCount = count);
+          this.reports = response;
+          this.reportResource = new DataTableResource(this.reports);
+          this.reportResource.count().then(count => this.reportCount = count);
           this.isLoading = false;
         },
-      error => {
+        error => {
           this.toastrService.error(error);
-        this.isLoading = false;
-      });
+          this.isLoading = false;
+        });
     this.subscription.add(subscription);
   }
 
   deleteReport(report: ReportedQuestion) {
-    this.isDeleting = true;
     this.slimLoadingBarService.start();
     this.modService.deleteReportedQuestion(report.id).subscribe(res => {
-        this.questions.splice(this.questions.indexOf(report), 1);
-        this.questionResource = new DataTableResource(this.questions);
-        this.questionResource.count().then(count => this.questionCount = count);
-        this.isDeleting = false;
+        this.reports.splice(this.reports.indexOf(report), 1);
+        this.reportResource = new DataTableResource(this.reports);
+        this.reportResource.count().then(count => this.reportCount = count);
         this.slimLoadingBarService.complete();
       },
       error => {
         this.toastrService.error(error);
-        this.isDeleting = false;
         this.slimLoadingBarService.complete();
       });
   }
 
   saveValue(report: ReportedQuestion, value) {
     this.slimLoadingBarService.start();
+    for (let i = 0; i < this.reportTable.items.length; i++) {
+      if (this.reportTable.items[i].question.id === report.question.id) {
+        this.reportTable.items[i].question.value = value;
+      }
+    }
     this.modService.editReportedQuestion(report.question.id, value, null, null, null, null, null).subscribe(res => {
         this.slimLoadingBarService.complete();
       },
       error => {
         this.toastrService.error(error);
         this.slimLoadingBarService.complete();
+        this.subscription.unsubscribe();
+        this.getQuestions();
       });
   }
 
@@ -110,10 +103,17 @@ export class ModReportedQuestionsDataTableComponent implements OnInit, OnDestroy
     this.slimLoadingBarService.start();
     this.modService.editReportedQuestion(report.question.id, null, firstAnswer, null, null, null, null).subscribe(res => {
         this.slimLoadingBarService.complete();
+        for (let i = 0; i < this.reportTable.items.length; i++) {
+          if (this.reportTable.items[i].question.id === report.question.id) {
+            this.reportTable.items[i].question.firstAnswer = firstAnswer;
+          }
+        }
       },
       error => {
         this.toastrService.error(error);
         this.slimLoadingBarService.complete();
+        this.subscription.unsubscribe();
+        this.getQuestions();
       });
   }
 
@@ -121,10 +121,17 @@ export class ModReportedQuestionsDataTableComponent implements OnInit, OnDestroy
     this.slimLoadingBarService.start();
     this.modService.editReportedQuestion(report.question.id, null, null, secondAnswer, null, null, null).subscribe(res => {
         this.slimLoadingBarService.complete();
+        for (let i = 0; i < this.reportTable.items.length; i++) {
+          if (this.reportTable.items[i].question.id === report.question.id) {
+            this.reportTable.items[i].question.secondAnswer = secondAnswer;
+          }
+        }
       },
       error => {
         this.toastrService.error(error);
         this.slimLoadingBarService.complete();
+        this.subscription.unsubscribe();
+        this.getQuestions();
       });
   }
 
@@ -132,10 +139,17 @@ export class ModReportedQuestionsDataTableComponent implements OnInit, OnDestroy
     this.slimLoadingBarService.start();
     this.modService.editReportedQuestion(report.question.id, null, null, null, status, null, null).subscribe(res => {
         this.slimLoadingBarService.complete();
+        for (let i = 0; i < this.reportTable.items.length; i++) {
+          if (this.reportTable.items[i].question.id === report.question.id) {
+            this.reportTable.items[i].question.status = status;
+          }
+        }
       },
       error => {
         this.toastrService.error(error);
         this.slimLoadingBarService.complete();
+        this.subscription.unsubscribe();
+        this.getQuestions();
       });
   }
 
@@ -143,10 +157,17 @@ export class ModReportedQuestionsDataTableComponent implements OnInit, OnDestroy
     this.slimLoadingBarService.start();
     this.modService.editReportedQuestion(report.question.id, null, null, null, null, adultRated, null).subscribe(res => {
         this.slimLoadingBarService.complete();
+        for (let i = 0; i < this.reportTable.items.length; i++) {
+          if (this.reportTable.items[i].question.id === report.question.id) {
+            this.reportTable.items[i].question.adultRated = adultRated;
+          }
+        }
       },
       error => {
         this.toastrService.error(error);
         this.slimLoadingBarService.complete();
+        this.subscription.unsubscribe();
+        this.getQuestions();
       });
   }
 
@@ -154,16 +175,27 @@ export class ModReportedQuestionsDataTableComponent implements OnInit, OnDestroy
     this.slimLoadingBarService.start();
     this.modService.editReportedQuestion(report.question.id, null, null, null, null, null, shortLink).subscribe(res => {
         this.slimLoadingBarService.complete();
+        for (let i = 0; i < this.reportTable.items.length; i++) {
+          if (this.reportTable.items[i].question.id === report.question.id) {
+            this.reportTable.items[i].question.shortLink = shortLink;
+          }
+        }
       },
       error => {
         this.toastrService.error(error);
         this.slimLoadingBarService.complete();
+        this.subscription.unsubscribe();
+        this.getQuestions();
       });
   }
 
+  handleError(value) {
+    this.toastrService.error('Długość powinna wynosić od 2 do 150 znaków.');
+  }
+
   reloadItems(params) {
-    if (this.questionResource) {
-      this.questionResource.query(params).then(questions => this.questions = questions);
+    if (this.reportResource) {
+      this.reportResource.query(params).then(reports => this.reports = reports);
     }
   }
 
