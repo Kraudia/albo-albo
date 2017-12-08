@@ -89,18 +89,21 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
       inputValue: [null, [
         Validators.required,
         Validators.minLength(2),
-        Validators.maxLength(150)
+        Validators.maxLength(150),
+        Validators.pattern('^[^\\s].+[^\\s]$')
       ]
       ],
       inputFirstAnswer: [null, [
         Validators.required,
         Validators.minLength(2),
-        Validators.maxLength(150)
+        Validators.maxLength(150),
+        Validators.pattern('^[^\\s].+[^\\s]$')
       ]],
       inputSecondAnswer: [null, [
         Validators.required,
         Validators.minLength(2),
-        Validators.maxLength(150)
+        Validators.maxLength(150),
+        Validators.pattern('^[^\\s].+[^\\s]$')
       ]]
     });
   }
@@ -163,7 +166,7 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
   }
 
   isFormValid() {
-    return this.validated;
+    return this.validated && this.addQuestionForm.valid;
   }
 
   getKeysOfObject(object: Object) {
