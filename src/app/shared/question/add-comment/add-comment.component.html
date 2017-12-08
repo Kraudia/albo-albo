@@ -1,6 +1,6 @@
 <div class="row mb-2">
   <div class="card-body" *ngIf="authService.isNotLoggedIn()">
-    No dobrze, chcesz sobie skomentować? W takim razie <a [routerLink]="['/logowanie']"><strong>zaloguj się</strong></a> lub <a [routerLink]="['/rejestracja']"><strong>zarejestruj się</strong></a>.
+    No dobrze, chcesz skomentować? W takim razie <a [routerLink]="['/logowanie']"><strong>zaloguj się</strong></a> lub <a [routerLink]="['/rejestracja']"><strong>zarejestruj się</strong></a>.
   </div>
 
   <div class="card-body" *ngIf="authService.isLoggedIn()">

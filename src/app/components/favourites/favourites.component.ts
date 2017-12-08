@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { Subscription } from 'rxjs/Subscription';
 
-import { FavouriteQuestion } from '../../models/favouriteQuestion';
+import { Question } from '../../models/question';
 import { QuestionService } from '../../services/question.service';
 import { Title } from '@angular/platform-browser';
 
@@ -14,7 +14,7 @@ import { Title } from '@angular/platform-browser';
 export class FavouritesComponent implements OnInit, OnDestroy {
   private subscription = new Subscription();
 
-  public questions: FavouriteQuestion[];
+  public questions: Question[];
   public isLoading = false;
 
   constructor(

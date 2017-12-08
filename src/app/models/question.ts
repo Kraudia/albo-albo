@@ -1,5 +1,6 @@
 export class Question {
   acceptedDate: string;
+  addedDate: string;
   adultRated: boolean;
   answeredDate: string;
   answerCount: number;
