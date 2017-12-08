@@ -5,9 +5,11 @@ import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
+import { environment } from '../../environments/environment';
+
 @Injectable()
 export class RegisterService {
-  private host = 'https://albo-albo.herokuapp.com/users';
+  private host = environment.API_URL;
 
   constructor(private http: Http) { }
 
@@ -16,29 +18,32 @@ export class RegisterService {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     });
-
+    const url = this.host + 'users';
     const options = new RequestOptions({ headers: headers });
 
-    return this.http.post(this.host, JSON.stringify({ login, email, password, birthDate }), options)
+    return this.http.post(url, JSON.stringify({ login, email, password, birthDate }), options)
       .map(this.extractData)
       .catch(this.handleError);
   }
 
   checkLogin(login: string) {
-    const url = `https://albo-albo.herokuapp.com/test/users?login=${login}`;
+    const url = this.host + `test/users?login=${login}`;
     return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);
   }
 
   checkEmail(email: string) {
-    const url = `https://albo-albo.herokuapp.com/test/users?email=${email}`;
+    const url = this.host + `test/users?email=${email}`;
     return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);
   }
 
   private extractData(res: Response) {
+    if (res.status === 204) {
+      return { };
+    }
     const body = res.json();
     return body.data || { };
   }

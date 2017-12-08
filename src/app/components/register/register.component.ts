@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { PasswordValidation } from './PasswordValidation';
 import { validationErrors } from './validationMessages';
 import { RegisterService } from '../../services/register.service';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -21,7 +22,21 @@ export class RegisterComponent implements OnInit {
   public registerForm: FormGroup;
   public validationMessages = validationErrors;
   public isLoading = false;
-  private isTaken  = false;
+
+  public isCheckingLogin = false;
+  public isCheckingEmail = false;
+  public isLoginTaken;
+  public isEmailTaken;
+
+  private isLoginChecked = false;
+  private isEmailChecked = false;
+  private isPasswordChecked = false;
+  private isConfirmPasswordChecked = false;
+  private isDateChecked = false;
+
+
+  private loginChangeObserver;
+  private emailChangeObserver;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -63,14 +78,12 @@ export class RegisterComponent implements OnInit {
       inputPassword: [null, [
         Validators.required,
         Validators.minLength(8),
-        Validators.maxLength(30),
-        Validators.pattern('^(([A-Za-z0-9]*[0-9][A-Za-z0-9]*[A-Z][A-Za-z0-9]*)|([A-Za-z0-9]*[A-Z][A-Za-z0-9]*[0-9][A-Za-z0-9]*))$')
+        Validators.maxLength(30)
       ]],
       inputConfirmPassword: [null, [
         Validators.required,
         Validators.minLength(8),
         Validators.maxLength(30),
-        Validators.pattern('^(([A-Za-z0-9]*[0-9][A-Za-z0-9]*[A-Z][A-Za-z0-9]*)|([A-Za-z0-9]*[A-Z][A-Za-z0-9]*[0-9][A-Za-z0-9]*))$'),
         PasswordValidation.MatchPassword
       ]],
       inputDate: [null, [
@@ -80,18 +93,109 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  displayFieldCss(field: string) {
-    return {
-      'is-invalid': this.validated && !this.isFieldValid(field),
-      'is-valid': this.validated && this.isFieldValid(field)
-    };
+  checkLogin(value) {
+    this.isLoginChecked = true;
+    this.isLoginTaken = null;
+    this.isCheckingLogin = true;
+    this.registerService.checkLogin(value).subscribe(
+      res => {
+        this.isCheckingLogin = false;
+        this.isLoginTaken = false;
+      },
+      error => {
+        this.isCheckingLogin = false;
+        this.isLoginTaken = true;
+        this.toastrService.error(error);
+      });
   }
 
-  displayCheckboxCss() {
-    return {
-      'text-danger': this.validated && !this.checked,
-      'text-success': this.validated && this.checked
-    };
+  checkEmail(value) {
+    this.isEmailChecked = true;
+    this.isEmailTaken = null;
+    this.isCheckingEmail = true;
+    this.registerService.checkEmail(value).subscribe(
+      res => {
+        this.isCheckingEmail = false;
+        this.isEmailTaken = false;
+      },
+      error => {
+        this.isCheckingEmail = false;
+        this.isEmailTaken = true;
+        this.toastrService.error(error);
+      });
+  }
+
+  onLoginChange(value: string) {
+    if (!this.loginChangeObserver) {
+      Observable.create(observer => {
+        this.loginChangeObserver = observer;
+      }).debounceTime(500)
+        .distinctUntilChanged()
+        .subscribe((value) => this.checkLogin(value));
+    }
+    this.loginChangeObserver.next(value);
+  }
+
+  onEmailChange(value: string) {
+    if (!this.emailChangeObserver) {
+      Observable.create(observer => {
+        this.emailChangeObserver = observer;
+      }).debounceTime(500)
+        .distinctUntilChanged()
+        .subscribe((value) => this.checkEmail(value));
+    }
+    this.emailChangeObserver.next(value);
+  }
+
+  onPasswordChange() {
+    this.isPasswordChecked = true;
+  }
+
+  onConfirmPasswordChange() {
+    this.isConfirmPasswordChecked = true;
+  }
+
+  onDateChange() {
+    this.isDateChecked = true;
+  }
+
+  displayFieldCss(field: string) {
+    if (field === 'inputLogin') {
+      return {
+        'is-invalid': (this.isLoginChecked || this.validated) && (!this.isFieldValid(field) || this.isLoginTaken),
+        'is-valid': (this.isLoginChecked || this.validated) && (this.isFieldValid(field) && !this.isLoginTaken)
+      };
+    } else if (field === 'inputEmail') {
+      return {
+        'is-invalid': (this.isEmailChecked || this.validated) && (!this.isFieldValid(field) || this.isEmailTaken),
+        'is-valid': (this.isEmailChecked || this.validated) && (this.isFieldValid(field) && !this.isEmailTaken)
+      };
+    } else if (field === 'checkbox') {
+      return {
+        'text-danger': this.validated && !this.checked,
+        'text-success': this.checked
+      };
+    } else if (field === 'inputPassword') {
+      return {
+        'is-invalid': (this.validated || this.isPasswordChecked) && !this.isFieldValid(field),
+        'is-valid': (this.validated || this.isPasswordChecked) && this.isFieldValid(field)
+      };
+    } else if (field === 'inputConfirmPassword') {
+      return {
+        'is-invalid': (this.validated || this.isConfirmPasswordChecked) && !this.isFieldValid(field),
+        'is-valid': (this.validated || this.isConfirmPasswordChecked) && this.isFieldValid(field)
+      };
+    } else if (field === 'inputDate') {
+      return {
+        'is-invalid': (this.validated || this.isDateChecked) && !this.isFieldValid(field),
+        'is-valid': (this.validated || this.isDateChecked) && this.isFieldValid(field)
+      };
+    } else {
+      return {
+        'is-invalid': (this.isEmailChecked || this.validated) && !this.isFieldValid(field),
+        'is-valid': (this.isEmailChecked || this.validated) && this.isFieldValid(field)
+      };
+    }
   }
 
   clickCheckbox() {
@@ -107,7 +211,7 @@ export class RegisterComponent implements OnInit {
   }
 
   isFormValid() {
-    return this.registerForm.valid;
+    return this.registerForm.valid && !this.isLoginTaken && !this.isEmailTaken && this.checked;
   }
 
   getKeysOfObject(object: Object) {
@@ -118,40 +222,9 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  validateLoginEmail() {
-    this.isTaken = false;
-    const loginControl = this.registerForm.get('inputLogin');
-    const emailControl = this.registerForm.get('inputEmail');
-    if (loginControl) {
-      const login = loginControl.value;
-      if (login) {
-        this.registerService.checkLogin(login).subscribe(
-          res => { },
-        err => {
-          this.isTaken = true;
-          this.registerForm.controls['inputLogin'].setErrors({'loginTaken': true});
-        });
-      }
-    }
-
-    if (emailControl) {
-      const email = emailControl.value;
-      if (email) {
-        this.registerService.checkEmail(email).subscribe(
-          res => { },
-          err => {
-            this.isTaken = true;
-            this.registerForm.controls['inputEmail'].setErrors({'emailTaken': true});
-          });
-      }
-    }
-  }
-
   validateForm() {
     this.validated = true;
-    this.validateLoginEmail();
-
-    if (this.registerForm.valid && this.checked && !this.isTaken) {
+    if (this.isFormValid()) {
       return true;
     } else {
       this.validateAllFormFields(this.registerForm);
@@ -200,5 +273,10 @@ export class RegisterComponent implements OnInit {
     this.registerForm.reset();
     this.validated = false;
     this.checked = false;
+    this.isLoginChecked = false;
+    this.isEmailChecked = false;
+    this.isPasswordChecked = false;
+    this.isConfirmPasswordChecked = false;
+    this.isDateChecked = false;
   }
 }
