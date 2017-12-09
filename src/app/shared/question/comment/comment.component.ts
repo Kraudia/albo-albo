@@ -28,7 +28,7 @@ export class CommentComponent implements OnDestroy {
 
   vote(value: number) {
 
-    const subscription = this.commentService.voteComment(this.idQuestion, this.comment.id, value).subscribe(
+    const subscription = this.commentService.voteComment(this.comment.id, value).subscribe(
       res => {
         this.comment.myRank = value;
         if (value === -1) {

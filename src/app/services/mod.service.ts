@@ -67,8 +67,8 @@ export class ModService {
       .catch(this.handleError);
   }
 
-  editReportedComment(questionId: number, commentId: number,  value: string) {
-    const url = this.host + 'questions/' + questionId + '/comments/' + commentId + '/edit-comment-commands';
+  editReportedComment(comment: number,  value: string) {
+    const url = this.host + 'comments/' + comment + '/edit-comment-commands';
     const options = this.authService.getOptions();
 
     return this.http.patch(url,  JSON.stringify({ value }), options)
@@ -76,8 +76,8 @@ export class ModService {
       .catch(this.handleError);
   }
 
-  deleteComment(questionId: number, commentId: number) {
-    const url = this.host + 'questions/' + questionId + '/comments/' + commentId + '/edit-comment-commands';
+  deleteComment(comment: number) {
+    const url = this.host + 'comments/' + comment + '/edit-comment-commands';
     const options = this.authService.getOptions();
 
     return this.http.patch(url,  JSON.stringify({ visible: false }), options)

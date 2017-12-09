@@ -18,8 +18,8 @@ export class CommentService {
     private authService: AuthService
   ) { }
 
-  getComments(idQuestion: number): Observable<Comment[]> {
-    const url = this.host + 'questions/' + idQuestion + '/comments';
+  getComments(question: number): Observable<Comment[]> {
+    const url = this.host + 'comments?question=' + question;
     const options = this.authService.getOptions();
 
     return this.http.get(url, options)
@@ -27,8 +27,8 @@ export class CommentService {
       .catch(this.handleError);
   }
 
-  getUserComments(login: string): Observable<Comment[]> {
-    const url = this.host + 'users/' + login + '/comments';
+  getUserComments(user: string): Observable<Comment[]> {
+    const url = this.host + 'comments?user=' + user;
     const options = this.authService.getOptions();
 
     return this.http.get(url, options)
@@ -36,8 +36,8 @@ export class CommentService {
       .catch(this.handleError);
   }
 
-  postComment(idQuestion: number, value: string) {
-    const url = this.host + 'questions/' + idQuestion + '/comments';
+  postComment(question: number, value: string) {
+    const url = this.host + 'comments?question=' + question;
     const options = this.authService.getOptions();
 
     return this.http.post(url, JSON.stringify({ value }), options)
@@ -45,8 +45,8 @@ export class CommentService {
       .catch(this.handleError);
   }
 
-  voteComment(idQuestion: number, idComment: number, value: number) {
-    const url = this.host + 'questions/' + idQuestion + '/comments/' + idComment + '/rank';
+  voteComment(comment: number, value: number) {
+    const url = this.host + 'comments/' + comment + '/rank';
     const options = this.authService.getOptions();
 
     return this.http.post(url, JSON.stringify({ value }), options)

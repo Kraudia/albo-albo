@@ -64,7 +64,7 @@ export class ModReportedCommentsDataTableComponent implements OnInit, OnDestroy 
 
   deleteComment(report: ReportedComment) {
     this.slimLoadingBarService.start();
-    this.modService.deleteComment(report.question.id, report.comment.id).subscribe(res => {
+    this.modService.deleteComment(report.comment.id).subscribe(res => {
         this.reports.splice(this.reports.indexOf(report), 1);
         this.reportResource = new DataTableResource(this.reports);
         this.reportResource.count().then(count => this.reportCount = count);
@@ -79,7 +79,7 @@ export class ModReportedCommentsDataTableComponent implements OnInit, OnDestroy 
 
   saveValue(report: ReportedComment, value) {
     this.slimLoadingBarService.start();
-    this.modService.editReportedComment(report.question.id, report.comment.id, value).subscribe(res => {
+    this.modService.editReportedComment(report.comment.id, value).subscribe(res => {
         this.slimLoadingBarService.complete();
         for (let i = 0; i < this.reportTable.items.length; i++) {
           if (this.reportTable.items[i].question.id === report.question.id && this.reportTable.items[i].comment.id === report.comment.id) {

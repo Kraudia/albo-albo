@@ -124,8 +124,8 @@ export class QuestionService {
       .catch(this.handleError);
   }
 
-  reportComment(question: number, comment: number, reason: string) {
-    const url = this.host + 'questions/' + question + '/comments/' + comment + '/report-comment-commands';
+  reportComment(comment: number, reason: string) {
+    const url = this.host + 'comments/' + comment + '/report-comment-commands';
     const options = this.authService.getOptions();
 
     return this.http.put(url, JSON.stringify({ reason }), options)

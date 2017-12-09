@@ -40,7 +40,7 @@ export class ReportButtonComponent implements OnInit {
 
     if (this.reason && this.comment) {
       this.slimLoadingBarService.start();
-      this.questionService.reportComment(this.question, this.comment, this.reason)
+      this.questionService.reportComment(this.comment, this.reason)
         .subscribe(
         res => {
           this.toastrService.success('Zgłoszenie zostało wysłane.');
