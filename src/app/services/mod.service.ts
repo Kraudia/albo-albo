@@ -67,20 +67,19 @@ export class ModService {
       .catch(this.handleError);
   }
 
-  editReportedComment(comment: number,  value: string) {
-    const url = this.host + 'comments/' + comment + '/edit-comment-commands';
+  editReportedComment(comment: number,  value: string, visible: boolean) {
+    const url = this.host + 'comments/' + comment;
     const options = this.authService.getOptions();
 
-    return this.http.patch(url,  JSON.stringify({ value }), options)
-      .map((res) => res.json())
-      .catch(this.handleError);
-  }
+    let json = {};
+    if (value) {
+      json['value'] = value;
+    }
+    if (visible) {
+      json['visible'] = visible;
+    }
 
-  deleteComment(comment: number) {
-    const url = this.host + 'comments/' + comment + '/edit-comment-commands';
-    const options = this.authService.getOptions();
-
-    return this.http.patch(url,  JSON.stringify({ visible: false }), options)
+    return this.http.patch(url,  JSON.stringify(json), options)
       .map((res) => res.json())
       .catch(this.handleError);
   }

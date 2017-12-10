@@ -9,7 +9,12 @@
   [selectColumn]="false"
   [multiSelect]="false"
   [rowColors]="rowColors"
+  [expandableRows]="true"
 >
+  <ng-template #dataTableExpand let-item="item">
+    {{ item | json }}
+  </ng-template>
+
   <data-table-column property="id" [sortable]="true" [width]="50" [visible]="false">
   </data-table-column>
 

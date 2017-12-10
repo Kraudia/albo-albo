@@ -9,7 +9,12 @@
             [selectColumn]="false"
             [multiSelect]="false"
             [rowColors]="rowColors"
+            [expandableRows]="true"
 >
+  <ng-template #dataTableExpand let-item="item">
+    {{ item | json }}
+  </ng-template>
+
   <data-table-column property="id" [sortable]="true" [width]="50" [visible]="true">
   </data-table-column>
 
@@ -21,9 +26,9 @@
     </ng-template>
   </data-table-column>
 
-  <data-table-column property="question'" header="Pytanie" [sortable]="false" [resizable]="true" [visible]="true">
+  <data-table-column property="comment'" header="Pytanie" [sortable]="false" [resizable]="true" [visible]="true">
     <ng-template #dataTableCell let-item="item">
-      <a class="btn btn-light btn-sm" [routerLink]="['/pytanie', item.question.id, item.question.shortLink]" aria-label="Przejdź do strony pytania">{{ item.question.id }}</a>
+      <a class="btn btn-light btn-sm" [routerLink]="['/pytanie', item.comment.question.id, item.comment.question.shortLink]" aria-label="Przejdź do strony pytania">{{ item.comment.question.id }}</a>
     </ng-template>
   </data-table-column>
 
@@ -45,12 +50,6 @@
   <data-table-column property="comment" header="Komentarz" [resizable]="true" [sortable]="false" [visible]="true">
     <ng-template #dataTableCell let-item="item">
       <inline-editor type="textarea" [(ngModel)]="item.comment.value" (onSave)="saveValue(item, $event)" [min]="2" [max]="150" (onError)="handleError($event)"></inline-editor>
-    </ng-template>
-  </data-table-column>
-
-  <data-table-column property="comment" header="Autor" [resizable]="true" [sortable]="false" [visible]="true">
-    <ng-template #dataTableCell let-item="item">
-      <a class="btn btn-light btn-sm" [routerLink]="['/profil', item.comment.userLogin]" aria-label="Przejdź do profilu autora">{{ item.comment.userLogin }}</a>
     </ng-template>
   </data-table-column>
 
