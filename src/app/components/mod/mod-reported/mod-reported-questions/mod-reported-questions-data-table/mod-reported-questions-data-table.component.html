@@ -12,7 +12,7 @@
   [expandableRows]="true"
 >
   <ng-template #dataTableExpand let-item="item">
-    {{ item | json }}
+    <pre>{{ item | json }}</pre>
   </ng-template>
 
   <data-table-column property="id" [sortable]="true" [width]="50" [visible]="false">

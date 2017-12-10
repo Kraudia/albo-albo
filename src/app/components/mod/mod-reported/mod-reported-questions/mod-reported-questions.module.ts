@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { DataTableModule } from 'angular-4-data-table-bootstrap-4';
 import { InlineEditorModule } from '@qontu/ngx-inline-editor';
 import { LoadingModule } from 'ngx-loading';
+import { PrettyJsonModule } from 'angular2-prettyjson';
 
 import { ModReportedQuestionsComponent } from './mod-reported-questions.component';
 import { modReportedQuestionsRouter } from './mod-reported-questions-routing.module';
@@ -20,7 +21,8 @@ import { ModReportedQuestionsDataTableComponent } from './mod-reported-questions
     FormsModule,
     LoadingModule,
     modReportedQuestionsRouter,
-    InlineEditorModule
+    InlineEditorModule,
+    PrettyJsonModule
   ]
 })
 export class ModReportedQuestionsModule { }
