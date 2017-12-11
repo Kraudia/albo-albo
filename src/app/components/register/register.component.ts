@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
   private checked: boolean;
   public registerForm: FormGroup;
   public validationMessages = validationErrors;
-  public isLoading = false;
+  public isSubmitting = false;
 
   public isCheckingLogin = false;
   public isCheckingEmail = false;
@@ -244,11 +244,11 @@ export class RegisterComponent implements OnInit {
   }
 
   register(login: string, email: string, password: string, birthDate: string) {
-    this.isLoading = true;
+    this.isSubmitting = true;
     this.validateForm();
 
     if (this.validateForm()) {
-      this.isLoading = true;
+      this.isSubmitting = true;
       this.slimLoadingBarService.start();
       this.registerService.register(login, email, password, birthDate)
           .subscribe(
@@ -256,16 +256,16 @@ export class RegisterComponent implements OnInit {
               this.router.navigate(['/logowanie']);
               const success = 'Żeby aktywować konto, kliknij w link potwierdzający, który wysłaliśmy na Twój adres email.';
               this.toastrService.success(success, 'Rejestracja się powiodła');
-              this.isLoading = false;
+              this.isSubmitting = false;
               this.slimLoadingBarService.complete();
             },
             error => {
-              this.isLoading = false;
+              this.isSubmitting = false;
               this.slimLoadingBarService.complete();
               this.toastrService.error(error);
             });
     } else {
-      this.isLoading = false;
+      this.isSubmitting = false;
     }
   }
 

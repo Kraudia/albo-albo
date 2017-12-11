@@ -10,6 +10,7 @@ export class VoteButtonComponent implements OnInit, OnChanges {
   @Input('myVote') myVote: number;
   @Input('plusCount') plusCount: number;
   @Input('minusCount') minusCount: number;
+  @Input('isVoting') isVoting: boolean;
   @Output('onVoted') onVoted = new EventEmitter<number>();
 
   public count: number;

@@ -83,7 +83,7 @@
           </div>
         </div>
 
-        <button class="btn btn-primary btn-block btn-register" type="button" (click)="register(inputLogin.value, inputEmail.value, inputPassword.value, inputDate.value)">Zarejestruj się <i class="fa fa-refresh fa-spin fa-fw" *ngIf="isLoading"></i></button>
+        <button class="btn btn-primary btn-block btn-register" type="button" (click)="register(inputLogin.value, inputEmail.value, inputPassword.value, inputDate.value)" [disabled]="isSubmitting">Zarejestruj się <i class="fa fa-refresh fa-spin fa-fw" *ngIf="isSubmitting"></i></button>
 
         <button class="btn btn-secondary btn-block btn-register" type="reset" (click)="reset()">Anuluj</button>
 

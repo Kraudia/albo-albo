@@ -1,7 +1,7 @@
-<button *ngIf="authService.isLoggedIn()" (click)="vote(-1)" type="button" class="btn btn-sm" [ngClass]="{ 'btn-vote': !myVote, 'btn-vote--disabled': myVote == 1, 'btn-vote--voted': myVote == -1 }" [disabled]="myVote"><i class="fa fa-minus" [ngClass]="{ 'text-muted': myVote == 1, 'text-danger': myVote == -1 || !myVote }" aria-hidden="true"></i></button>
+<button *ngIf="authService.isLoggedIn()" (click)="vote(-1)" type="button" class="btn btn-sm" [ngClass]="{ 'btn-vote': !myVote, 'btn-vote--disabled': myVote == 1, 'btn-vote--voted': myVote == -1 }" [disabled]="myVote || isVoting"><i class="fa fa-minus" [ngClass]="{ 'text-muted': myVote == 1, 'text-danger': myVote == -1 || !myVote }" aria-hidden="true"></i></button>
 
 <button *ngIf="sumShow" (click)="toggle()" type="button" class="btn btn-sm btn-vote"><span [ngClass]="{ 'text-success': sum > 0, 'text-danger': sum < 0 }" >{{ sum }}</span> ({{ count }})</button>
 
 <button *ngIf="!sumShow" (click)="toggle()" type="button" class="btn btn-sm btn-vote"><span class="text-danger" aria-hidden="true">-{{ minusCount }}</span> <span class="text-success" aria-hidden="true">+{{ plusCount }}</span></button>
 
-<button *ngIf="authService.isLoggedIn()" (click)="vote(1)" type="button" class="btn btn-sm" [ngClass]="{ 'btn-vote': !myVote, 'btn-vote--disabled': myVote == -1, 'btn-vote--voted': myVote == 1  }" [disabled]="myVote"><i class="fa fa-plus" [ngClass]="{ 'text-muted': myVote == -1, 'text-success': myVote == 1 || !myVote }" aria-hidden="true"></i></button>
+<button *ngIf="authService.isLoggedIn()" (click)="vote(1)" type="button" class="btn btn-sm" [ngClass]="{ 'btn-vote': !myVote, 'btn-vote--disabled': myVote == -1, 'btn-vote--voted': myVote == 1  }" [disabled]="myVote || isVoting"><i class="fa fa-plus" [ngClass]="{ 'text-muted': myVote == -1, 'text-success': myVote == 1 || !myVote }" aria-hidden="true"></i></button>

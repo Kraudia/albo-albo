@@ -67,7 +67,7 @@
 
         <button class="btn btn-secondary btn-block" type="button" (click)="reset()">Anuluj</button>
 
-        <button class="btn btn-primary btn-block btn-add" type="button" (click)="addQuestion(inputValue.value, inputFirstAnswer.value, inputSecondAnswer.value)">Dodaj pytanie</button>
+        <button class="btn btn-primary btn-block btn-add" [disabled]="isAdding" type="button" (click)="addQuestion(inputValue.value, inputFirstAnswer.value, inputSecondAnswer.value)"><i class="fa fa-refresh fa-spin fa-fw" aria-hidden="true" *ngIf="isAdding"></i> Dodaj pytanie</button>
 
         <p class="text-muted text-justify">Bądź Polakiem, pisz poprawną polszczyzną. Wszystkie pytania będą moderowane w celu uniknięcia duplikatów, wulgaryzmów lub przejawów lenistwa.</p>
 

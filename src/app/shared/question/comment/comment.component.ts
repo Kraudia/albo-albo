@@ -14,7 +14,7 @@ export class CommentComponent implements OnDestroy {
   @Input('idQuestion') idQuestion: number;
   @Input('comment') comment: Comment;
   private subscription = new Subscription();
-  private voteSum = true;
+  private isVoting: boolean;
 
   constructor(
     public authService: AuthService,
@@ -27,7 +27,7 @@ export class CommentComponent implements OnDestroy {
   }
 
   vote(value: number) {
-
+    this.isVoting = true;
     const subscription = this.commentService.voteComment(this.comment.id, value).subscribe(
       res => {
         this.comment.myRank = value;
@@ -36,8 +36,10 @@ export class CommentComponent implements OnDestroy {
         } else {
           this.comment.plusCount += 1;
         }
+        this.isVoting = false;
       },
       error => {
+        this.isVoting = false;
         this.toastrService.error(error);
       }
     );

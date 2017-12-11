@@ -44,9 +44,9 @@
       </div>
 
       <div class="col-lg-7 text-center">
-        <button *ngIf="!question.myFavourite && authService.isLoggedIn()" type="button" class="btn btn-sm btn-light" (click)="addToFavorites()"><i *ngIf="!isFavouriteLoading" class="fa fa-heart fa-fw" aria-hidden="true"></i><i *ngIf="isFavouriteLoading" class="fa fa-refresh fa-spin fa-fw" aria-hidden="true"></i> Dodaj do ulubionych</button>
+        <button *ngIf="!question.myFavourite && authService.isLoggedIn()" type="button" class="btn btn-sm btn-light" (click)="addToFavorites()" [disabled]="isFavouriteLoading"><i *ngIf="!isFavouriteLoading" class="fa fa-heart fa-fw" aria-hidden="true"></i><i *ngIf="isFavouriteLoading" class="fa fa-refresh fa-spin fa-fw" aria-hidden="true"></i> Dodaj do ulubionych</button>
 
-        <button *ngIf="question.myFavourite && authService.isLoggedIn()" type="button" class="btn btn-sm btn-light" (click)="removeFromFavorites()"><i *ngIf="!isFavouriteLoading" class="fa fa-heart fa-fw text-danger" aria-hidden="true"></i><i *ngIf="isFavouriteLoading" class="fa fa-refresh fa-spin fa-fw" aria-hidden="true"></i> Usuń z ulubionych</button>
+        <button *ngIf="question.myFavourite && authService.isLoggedIn()" type="button" class="btn btn-sm btn-light" (click)="removeFromFavorites()" [disabled]="isFavouriteLoading"><i *ngIf="!isFavouriteLoading" class="fa fa-heart fa-fw text-danger" aria-hidden="true"></i><i *ngIf="isFavouriteLoading" class="fa fa-refresh fa-spin fa-fw" aria-hidden="true"></i> Usuń z ulubionych</button>
 
         <app-report-button [question]="question.id"></app-report-button>
 
@@ -58,7 +58,7 @@
       </div>
 
       <div class="col-lg-2 text-center text-lg-right text-muted">
-        <app-vote-button [myVote]="question.myVote" [minusCount]="question.minusCount" [plusCount]="question.plusCount" (onVoted)="vote($event)"></app-vote-button>
+        <app-vote-button [myVote]="question.myVote" [isVoting]="isVoting" [minusCount]="question.minusCount" [plusCount]="question.plusCount" (onVoted)="vote($event)"></app-vote-button>
       </div>
     </div>
   </div>

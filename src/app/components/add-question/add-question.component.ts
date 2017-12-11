@@ -26,6 +26,7 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
   public value = '';
   public firstAnswer = '';
   public secondAnswer = '';
+  public isAdding: boolean;
 
   constructor(
     private elRef: ElementRef,
@@ -203,6 +204,7 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
   }
 
   addQuestion(value: string, firstAnswer: string, secondAnswer: string) {
+    this.isAdding = true;
     this.validateForm();
 
     if (this.validateForm()) {
@@ -211,11 +213,15 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
           res => {
             this.toastrService.success('Twoje pytanie zostało dodane do poczekalni.', 'Sukces');
             this.router.navigate(['/poczekalnia']);
+            this.isAdding = false;
           },
           error => {
             this.errorMessage = 'Twoje pytanie nie zostało dodane.';
             this.toastrService.error(error);
+            this.isAdding = false;
           });
+    } else {
+      this.isAdding = false;
     }
   }
 

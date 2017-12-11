@@ -15,6 +15,7 @@ export class AddCommentComponent implements OnInit {
   public commentValue = '';
   public isInvalid = false;
   public isValid = false;
+  public isSubmitting: boolean;
 
   constructor(
     public authService: AuthService,
@@ -26,6 +27,7 @@ export class AddCommentComponent implements OnInit {
   }
 
   comment(value: string) {
+    this.isSubmitting = true;
     const reg = new RegExp('^\\s+$');
     this.isInvalid = false;
     this.isValid = false;
@@ -38,12 +40,15 @@ export class AddCommentComponent implements OnInit {
             this.commentValue = '';
             this.refresh.emit();
             this.toastrService.success('Twój komentarz został opublikowany.', 'Sukces');
+            this.isSubmitting = false;
           },
         error => {
           this.toastrService.error(error);
+          this.isSubmitting = false;
         });
     } else {
       this.isInvalid = true;
+      this.isSubmitting = false;
     }
   }
 }

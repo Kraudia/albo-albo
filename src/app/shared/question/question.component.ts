@@ -66,7 +66,7 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
   public state = false;
   public stateFirst = 'unanswered';
   public stateSecond = 'unanswered';
-  private voteSum;
+  private isVoting: boolean;
 
   constructor(
     public authService: AuthService,
@@ -75,7 +75,6 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
     private elementRef: ElementRef,
     private toastrService: ToastrService
   ) {
-    this.voteSum = true;
   }
 
   ngOnInit() {
@@ -233,6 +232,7 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   vote(value: number) {
+    this.isVoting = true;
     const subscription = this.questionService.voteQuestion(this.question.id, value)
       .subscribe(
       res => {
@@ -242,8 +242,10 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
         } else {
           this.question.plusCount += 1;
         }
+        this.isVoting = false;
       },
       error => {
+        this.isVoting = false;
         this.toastrService.error(error);
       }
     );
