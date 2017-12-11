@@ -1,5 +1,5 @@
-import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
-import { DataTable, DataTableResource } from 'angular-4-data-table-bootstrap-4';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { DataTableResource } from 'angular-4-data-table-bootstrap-4';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { Subscription } from 'rxjs/Subscription';
 import { ToastrService } from 'ngx-toastr';
@@ -18,7 +18,6 @@ export class ModReportedQuestionsDataTableComponent implements OnInit, OnDestroy
   public isLoading = false;
   private subscription: Subscription;
   private reportResource: DataTableResource<ReportedQuestion>;
-  @ViewChild(DataTable) reportTable: DataTable;
 
   public adultRatedOptions = {
     data: [
@@ -50,6 +49,10 @@ export class ModReportedQuestionsDataTableComponent implements OnInit, OnDestroy
     this.getQuestions();
   }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
   getQuestions() {
     this.isLoading = true;
     const subscription = this.modService.getReportedQuestions()
@@ -68,143 +71,116 @@ export class ModReportedQuestionsDataTableComponent implements OnInit, OnDestroy
   }
 
   deleteReport(report: ReportedQuestion) {
+    report.isDeletingReport = true;
     this.slimLoadingBarService.start();
     this.modService.deleteReportedQuestion(report.id).subscribe(res => {
-        this.reports.splice(this.reports.indexOf(report), 1);
-        this.reportResource = new DataTableResource(this.reports);
-        this.reportResource.count().then(count => this.reportCount = count);
+        report.isDeletedReport = true;
+        report.isDeletingReport = false;
         this.slimLoadingBarService.complete();
       },
       error => {
         this.toastrService.error(error);
+        report.isDeletingReport = false;
         this.slimLoadingBarService.complete();
       });
   }
 
   deleteQuestion(report: ReportedQuestion) {
+    report.isDeletingQuestion = true;
     this.slimLoadingBarService.start();
     this.modService.editReportedQuestion(report.question.id, null, null, null, 'REJECTED', null, null).subscribe(res => {
+        report.question.status = 'REJECTED';
+        report.isDeletedReport = true;
+        report.isDeletingQuestion = false;
         this.slimLoadingBarService.complete();
-        for (let i = 0; i < this.reportTable.items.length; i++) {
-          if (this.reportTable.items[i].question.id === report.question.id) {
-            this.reportTable.items[i].question.status = 'REJECTED';
-          }
-        }
-        this.deleteReport(report);
       },
       error => {
         this.toastrService.error(error);
+        report.isDeletingQuestion = false;
         this.slimLoadingBarService.complete();
-        this.subscription.unsubscribe();
-        this.getQuestions();
       });
   }
 
   saveValue(report: ReportedQuestion, value) {
     this.slimLoadingBarService.start();
-    for (let i = 0; i < this.reportTable.items.length; i++) {
-      if (this.reportTable.items[i].question.id === report.question.id) {
-        this.reportTable.items[i].question.value = value;
-      }
-    }
-    this.modService.editReportedQuestion(report.question.id, value, null, null, null, null, null).subscribe(res => {
+    this.modService.editReportedQuestion(report.question.id, value, null, null, null, null, null).subscribe(
+      res => {
+        report.question.value = value;
+        report.isEdited = true;
         this.slimLoadingBarService.complete();
       },
       error => {
         this.toastrService.error(error);
         this.slimLoadingBarService.complete();
-        this.subscription.unsubscribe();
-        this.getQuestions();
       });
   }
 
   saveFirstAnswer(report: ReportedQuestion, firstAnswer) {
     this.slimLoadingBarService.start();
-    this.modService.editReportedQuestion(report.question.id, null, firstAnswer, null, null, null, null).subscribe(res => {
+    this.modService.editReportedQuestion(report.question.id, null, firstAnswer, null, null, null, null).subscribe(
+      res => {
+        report.question.firstAnswer = firstAnswer;
+        report.isEdited = true;
         this.slimLoadingBarService.complete();
-        for (let i = 0; i < this.reportTable.items.length; i++) {
-          if (this.reportTable.items[i].question.id === report.question.id) {
-            this.reportTable.items[i].question.firstAnswer = firstAnswer;
-          }
-        }
       },
       error => {
         this.toastrService.error(error);
         this.slimLoadingBarService.complete();
-        this.subscription.unsubscribe();
-        this.getQuestions();
       });
   }
 
   saveSecondAnswer(report: ReportedQuestion, secondAnswer) {
     this.slimLoadingBarService.start();
-    this.modService.editReportedQuestion(report.question.id, null, null, secondAnswer, null, null, null).subscribe(res => {
+    this.modService.editReportedQuestion(report.question.id, null, null, secondAnswer, null, null, null).subscribe(
+      res => {
+        report.question.secondAnswer = secondAnswer;
+        report.isEdited = true;
         this.slimLoadingBarService.complete();
-        for (let i = 0; i < this.reportTable.items.length; i++) {
-          if (this.reportTable.items[i].question.id === report.question.id) {
-            this.reportTable.items[i].question.secondAnswer = secondAnswer;
-          }
-        }
       },
       error => {
         this.toastrService.error(error);
         this.slimLoadingBarService.complete();
-        this.subscription.unsubscribe();
-        this.getQuestions();
       });
   }
 
   saveStatus(report: ReportedQuestion, status) {
     this.slimLoadingBarService.start();
-    this.modService.editReportedQuestion(report.question.id, null, null, null, status, null, null).subscribe(res => {
+    this.modService.editReportedQuestion(report.question.id, null, null, null, status, null, null).subscribe(
+      res => {
+        report.question.status = status;
+        report.isEdited = true;
         this.slimLoadingBarService.complete();
-        for (let i = 0; i < this.reportTable.items.length; i++) {
-          if (this.reportTable.items[i].question.id === report.question.id) {
-            this.reportTable.items[i].question.status = status;
-          }
-        }
       },
       error => {
         this.toastrService.error(error);
         this.slimLoadingBarService.complete();
-        this.subscription.unsubscribe();
-        this.getQuestions();
       });
   }
 
   saveAdultRated(report: ReportedQuestion, adultRated) {
     this.slimLoadingBarService.start();
     this.modService.editReportedQuestion(report.question.id, null, null, null, null, adultRated, null).subscribe(res => {
+        report.question.adultRated = adultRated;
+        report.isEdited = true;
         this.slimLoadingBarService.complete();
-        for (let i = 0; i < this.reportTable.items.length; i++) {
-          if (this.reportTable.items[i].question.id === report.question.id) {
-            this.reportTable.items[i].question.adultRated = adultRated;
-          }
-        }
       },
       error => {
         this.toastrService.error(error);
         this.slimLoadingBarService.complete();
-        this.subscription.unsubscribe();
-        this.getQuestions();
       });
   }
 
   saveShortLink(report: ReportedQuestion, shortLink) {
     this.slimLoadingBarService.start();
-    this.modService.editReportedQuestion(report.question.id, null, null, null, null, null, shortLink).subscribe(res => {
+    this.modService.editReportedQuestion(report.question.id, null, null, null, null, null, shortLink).subscribe(
+      res => {
+        report.question.shortLink = shortLink;
+        report.isEdited = true;
         this.slimLoadingBarService.complete();
-        for (let i = 0; i < this.reportTable.items.length; i++) {
-          if (this.reportTable.items[i].question.id === report.question.id) {
-            this.reportTable.items[i].question.shortLink = shortLink;
-          }
-        }
       },
       error => {
         this.toastrService.error(error);
         this.slimLoadingBarService.complete();
-        this.subscription.unsubscribe();
-        this.getQuestions();
       });
   }
 
@@ -218,7 +194,13 @@ export class ModReportedQuestionsDataTableComponent implements OnInit, OnDestroy
     }
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+  rowColors(report) {
+    if (report.isDeletedReport) {
+      return 'rgb(196, 241, 197)';
+    } else if (report.isDeletedQuestion) {
+      return 'rgb(255, 218, 234)';
+    } else if (report.isEdited) {
+      return 'rgb(202, 244, 249)'
+    }
   }
 }

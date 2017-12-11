@@ -13,4 +13,10 @@ export class ReportedQuestion {
   };
   reason: string;
   reportedDate: string;
+
+  isDeletingQuestion: boolean;
+  isDeletingReport: boolean;
+  isDeletedQuestion: boolean;
+  isDeletedReport: boolean;
+  isEdited: boolean;
 }

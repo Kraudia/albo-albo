@@ -168,28 +168,34 @@ export class ModPendingDataTableComponent implements OnInit, OnChanges, OnDestro
   }
 
   accept(question: Question) {
+    question.isAccepting = true;
     this.slimLoadingBarService.start();
     this.modService.accept(question)
       .subscribe(
         res => {
           question.status = 'ACCEPTED';
+          question.isAccepting = false;
           this.slimLoadingBarService.complete();
         },
-      error => {
+        error => {
+          question.isAccepting = false;
           this.toastrService.error(error);
           this.slimLoadingBarService.complete();
-      });
+        });
   }
 
   reject(question: Question) {
+    question.isRejecting = true;
     this.slimLoadingBarService.start();
     this.modService.reject(question)
       .subscribe(
         res => {
           question.status = 'REJECTED';
+          question.isRejecting = false;
           this.slimLoadingBarService.complete();
         },
         error => {
+          question.isRejecting = false;
           this.toastrService.error(error);
           this.slimLoadingBarService.complete();
         });

@@ -27,4 +27,7 @@ export class Question {
   userLogin: string;
   value: string;
   voteCount: number;
+
+  isAccepting: boolean;
+  isRejecting: boolean;
 }

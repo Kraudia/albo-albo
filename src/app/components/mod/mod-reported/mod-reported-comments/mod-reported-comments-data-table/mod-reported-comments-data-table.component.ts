@@ -1,5 +1,5 @@
-import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
-import { DataTable, DataTableResource } from 'angular-4-data-table-bootstrap-4';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { DataTableResource } from 'angular-4-data-table-bootstrap-4';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { Subscription } from 'rxjs/Subscription';
 import { ToastrService } from 'ngx-toastr';
@@ -18,7 +18,6 @@ export class ModReportedCommentsDataTableComponent implements OnInit, OnDestroy 
   public isLoading = false;
   private subscription: Subscription;
   private reportResource: DataTableResource<ReportedComment>;
-  @ViewChild(DataTable) reportTable: DataTable;
 
   constructor(
     private modService: ModService,
@@ -29,6 +28,10 @@ export class ModReportedCommentsDataTableComponent implements OnInit, OnDestroy 
   ngOnInit() {
     this.subscription = new Subscription();
     this.getQuestions();
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   getQuestions() {
@@ -49,14 +52,15 @@ export class ModReportedCommentsDataTableComponent implements OnInit, OnDestroy 
   }
 
   deleteReport(report: ReportedComment) {
+    report.isDeletingReport = true;
     this.slimLoadingBarService.start();
     this.modService.deleteReportedComment(report.id).subscribe(res => {
-        this.reports.splice(this.reports.indexOf(report), 1);
-        this.reportResource = new DataTableResource(this.reports);
-        this.reportResource.count().then(count => this.reportCount = count);
+        report.isDeletingReport = false;
+        report.isDeletedReport = true;
         this.slimLoadingBarService.complete();
       },
       error => {
+        report.isDeletingReport = false;
         this.toastrService.error(error);
         this.slimLoadingBarService.complete();
       });
@@ -64,14 +68,14 @@ export class ModReportedCommentsDataTableComponent implements OnInit, OnDestroy 
 
   deleteComment(report: ReportedComment) {
     this.slimLoadingBarService.start();
+    report.isDeletingComment = true;
     this.modService.editReportedComment(report.comment.id, null, false).subscribe(res => {
-        this.reports.splice(this.reports.indexOf(report), 1);
-        this.reportResource = new DataTableResource(this.reports);
-        this.reportResource.count().then(count => this.reportCount = count);
+        report.isDeletingComment = false;
+        report.isDeletedComment = true;
         this.slimLoadingBarService.complete();
-        this.deleteReport(report);
       },
       error => {
+        report.isDeletingComment = false;
         this.toastrService.error(error);
         this.slimLoadingBarService.complete();
       });
@@ -80,18 +84,13 @@ export class ModReportedCommentsDataTableComponent implements OnInit, OnDestroy 
   saveValue(report: ReportedComment, value) {
     this.slimLoadingBarService.start();
     this.modService.editReportedComment(report.comment.id, value, null).subscribe(res => {
+        report.comment.value = value;
+        report.isEdited = true;
         this.slimLoadingBarService.complete();
-        for (let i = 0; i < this.reportTable.items.length; i++) {
-          if (this.reportTable.items[i].comment.id === report.comment.id) {
-            this.reportTable.items[i].comment.value = value;
-          }
-        }
       },
       error => {
         this.toastrService.error(error);
         this.slimLoadingBarService.complete();
-        this.subscription.unsubscribe();
-        this.getQuestions();
       });
   }
 
@@ -105,7 +104,14 @@ export class ModReportedCommentsDataTableComponent implements OnInit, OnDestroy 
     }
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+  rowColors(report) {
+    if (report.isDeletedReport) {
+      return 'rgb(196, 241, 197)';
+    } else if (report.isDeletedComment) {
+      return 'rgb(255, 218, 234)';
+    } else if (report.isEdited) {
+      return 'rgb(202, 244, 249)'
+    }
   }
+
 }

@@ -20,4 +20,10 @@ export class ReportedComment {
   reason: string;
   reportedDate: string;
   user: User;
+
+  isDeletingComment: boolean;
+  isDeletingReport: boolean;
+  isDeletedComment: boolean;
+  isDeletedReport: boolean;
+  isEdited: boolean;
 }

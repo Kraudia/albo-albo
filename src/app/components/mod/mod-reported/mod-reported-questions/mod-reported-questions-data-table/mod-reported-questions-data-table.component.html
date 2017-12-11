@@ -89,8 +89,8 @@
 
   <data-table-column header="Działania" [resizable]="true" [visible]="true">
     <ng-template #dataTableCell let-item="item">
-      <button (click)="deleteQuestion(item)" class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> <span class="d-none d-lg-inline-block">Usuń pytanie</span></button>
-      <button (click)="deleteReport(item)" class="btn btn-sm btn-info"><i class="fa fa-check" aria-hidden="true"></i> <span class="d-none d-lg-inline-block">Usuń zgłoszenie</span></button>
+      <button (click)="deleteQuestion(item)" class="btn btn-sm" [class.btn-danger]="!item.isDeletedQuestion" [disabled]="item.isDeletedQuestion || item.isDeletingQuestion"><i class="fa fa-refresh fa-spin fa-fw" aria-hidden="true" *ngIf="item.isDeletingQuestion"></i> <i class="fa fa-trash" aria-hidden="true" *ngIf="!item.isDeletingQuestion"></i> <span class="d-none d-lg-inline-block" *ngIf="item.isDeletedQuestion">Usunięto pytanie</span><span class="d-none d-lg-inline-block" *ngIf="!item.isDeletedQuestion">Usuń pytanie</span></button>
+      <button (click)="deleteReport(item)" class="btn btn-sm" [class.btn-info]="!item.isDeletedReport" [disabled]="item.isDeletedReport || item.isDeletingReport"><i *ngIf="item.isDeletingReport" class="fa fa-refresh fa-spin fa-fw" aria-hidden="true"></i><i class="fa fa-check" aria-hidden="true" *ngIf="!item.isDeletingReport"></i> <span class="d-none d-lg-inline-block" *ngIf="item.isDeletedReport">Usunięto zgłoszenie</span><span class="d-none d-lg-inline-block" *ngIf="!item.isDeletedReport">Usuń zgłoszenie</span></button>
     </ng-template>
   </data-table-column>
 </data-table>
