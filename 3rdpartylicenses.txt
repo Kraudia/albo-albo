@@ -2,6 +2,10 @@ angular-4-data-table-bootstrap-4@0.2.0
 MIT
 MIT
 
+angular2-prettyjson@2.0.6
+ISC
+ISC
+
 ngx-clipboard@8.1.1
 MIT
 The MIT License (MIT)
