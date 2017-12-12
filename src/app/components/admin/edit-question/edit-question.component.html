@@ -1,3 +1,79 @@
-<p>
-  edit-question works!
-</p>
+<div class="row justify-content-md-center">
+  <div class="card bg-white border-0" *ngIf="isLoading">
+    <div class="card-body text-center mt-2">
+      <ngx-loading [show]="isLoading"></ngx-loading>
+      <br />
+      Trwa pobieranie...
+    </div>
+  </div>
+
+  <div class="col-lg-10" *ngIf="!isLoading">
+    <form id="needs-validation" novalidate>
+      <div class="container-fluid">
+        <h2>Edytuj pytanie</h2>
+
+        <div class="form-group row">
+          <label for="inputValue" class="col-md-2 col-form-label text-left">Pytanie</label>
+          <div class="col-md-10">
+           <input #inputValue id="inputValue" name="inputValue" type="text" class="form-control" required [(ngModel)]="value" />
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="inputFirstAnswer" class="col-md-2 col-form-label text-left">Odpowiedź A</label>
+          <div class="col-md-10">
+            <input #inputFirstAnswer id="inputFirstAnswer" name="inputFirstAnswer" type="text" class="form-control" required  [(ngModel)]="firstAnswer"/>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="inputSecondAnswer" class="col-md-2 col-form-label text-left">Odpowiedź B</label>
+          <div class="col-md-10">
+            <input #inputSecondAnswer id="inputSecondAnswer" name="inputSecondAnswer" type="text" class="form-control" required  [(ngModel)]="secondAnswer"/>
+          </div>
+        </div>
+
+        <div class="form-group row row-tags">
+          <label class="col-md-2 col-form-label text-left">Dodaj tagi (maksymalnie trzy):</label>
+          <div class="col-md-10">
+            <button *ngFor="let tag of tags" class="btn btn-sm btn-tag" [ngClass]="[isInUserTags(tag) ? 'btn-success' : 'btn-light']" (click)="selectTag(tag)">{{ tag.name }}</button>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label text-left">Status</label>
+          <div class="col-md-10">
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="inputStatus" id="inputStatus1" value="ACCEPTED" [(ngModel)]="status"> Zaakceptowane
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="inputStatus" id="inputStatus2" value="PENDING" [(ngModel)]="status"> Oczekujące
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="inputStatus" id="inputStatus3" value="REJECTED" [(ngModel)]="status"> Odrzucone
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="form-check">
+            <div class="col">
+              <label class="form-check-label" (change)="clickCheckbox()">
+                <input id="inputCheckbox" name="inputCheckbox" class="form-check-input" type="checkbox" [checked]="isChecked()">
+                Pytanie zawiera treść nieodpowiednią dla osób poniżej 18 roku życia.
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-block btn-edit" [disabled]="isEditing" type="button"><i class="fa fa-refresh fa-spin fa-fw" aria-hidden="true" *ngIf="isEditing"></i> Edytuj pytanie</button>
+      </div>
+    </form>
+  </div>
+</div>

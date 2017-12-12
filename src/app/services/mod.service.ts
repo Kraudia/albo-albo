@@ -55,7 +55,7 @@ export class ModService {
     if (status) {
       json['status'] = status;
     }
-    if (adultRated) {
+    if (adultRated || adultRated === false) {
       json['adultRated'] = adultRated;
     }
     if (shortLink) {
@@ -75,7 +75,7 @@ export class ModService {
     if (value) {
       json['value'] = value;
     }
-    if (visible) {
+    if (visible || visible === false) {
       json['visible'] = visible;
     }
 

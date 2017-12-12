@@ -7,7 +7,7 @@ const routes: Routes = [
     component: AdminComponent
   },
   {
-    path: 'edytuj',
+    path: 'edytuj/:id',
     loadChildren: 'app/components/admin/edit-question/edit-question.module#EditQuestionModule'
   },
   {

@@ -1,5 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
+import { LoadingModule } from 'ngx-loading';
 
+import { QuestionService } from '../../services/question.service';
 import { AdminComponent } from './admin.component';
 
 describe('AdminComponent', () => {
@@ -8,7 +13,18 @@ describe('AdminComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminComponent ]
+      declarations: [
+        AdminComponent
+      ],
+      imports: [
+        HttpModule,
+        FormsModule,
+        RouterTestingModule,
+        LoadingModule
+      ],
+      providers: [
+        QuestionService
+      ]
     })
     .compileComponents();
   }));

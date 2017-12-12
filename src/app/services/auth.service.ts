@@ -11,9 +11,8 @@ import { CurrentUser } from '../models/currentUser';
 export class AuthService {
   private host = 'https://albo-albo.herokuapp.com';
   private url = {
-    login: '/users/login-commands/',
+    login: '/users/login-commands',
     users: '/users',
-    stats: '/stats/',
     pass: '/users/change-password-commands'
   };
   private currentUser: CurrentUser;
