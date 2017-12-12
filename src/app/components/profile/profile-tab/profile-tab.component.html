@@ -27,6 +27,8 @@
 
               <div class="float-left text-md-right text-center small">
                 {{ comment.createdDate | amDateFormat: 'YYYY-MM-DD' }}
+
+                <span class="text-danger font-italic" *ngIf="!comment.visible">Komentarz usunięty</span>
               </div>
             </div>
           </div>

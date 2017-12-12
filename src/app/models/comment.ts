@@ -10,4 +10,5 @@ export interface Comment {
   userLogin: string;
   userId: number;
   question: Question;
+  visible: boolean;
 }

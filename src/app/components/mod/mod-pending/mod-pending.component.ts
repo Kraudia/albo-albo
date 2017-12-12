@@ -54,8 +54,8 @@ export class ModPendingComponent implements OnInit {
 
   sortBy(sort: string) {
     if (this.order === sort) {
-      if (sort === 'comments_count DESC') {
-        this.order = 'comments_count ASC';
+      if (sort === 'comment_count DESC') {
+        this.order = 'comment_count ASC';
       } else if (sort === 'answer_count DESC') {
         this.order = 'answer_count ASC';
       } else if (sort === 'vote_count DESC') {

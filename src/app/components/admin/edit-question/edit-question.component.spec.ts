@@ -3,7 +3,9 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { LoadingModule } from 'ngx-loading';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
+import { AuthService } from '../../../services/auth.service';
 import { QuestionService } from '../../../services/question.service';
 import { EditQuestionComponent } from './edit-question.component';
 
@@ -20,10 +22,13 @@ describe('EditQuestionComponent', () => {
         HttpModule,
         FormsModule,
         RouterTestingModule,
-        LoadingModule
+        LoadingModule,
+        ToastrModule.forRoot()
       ],
       providers: [
-        QuestionService
+        AuthService,
+        QuestionService,
+        ToastrService
       ]
     })
     .compileComponents();

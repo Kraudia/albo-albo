@@ -72,6 +72,7 @@ export class HistoryComponent implements OnInit, OnDestroy {
 
   sortBy(sort: string) {
     if (sort !== this.order) {
+      this.order = sort;
       this.subscription.unsubscribe();
       this.subscription = new Subscription();
       this.index = null;

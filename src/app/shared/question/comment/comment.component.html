@@ -5,13 +5,16 @@
   <div class="comment-content col-md-11 col-10">
     <h6 class="comment-meta d-inline"><a [routerLink]="['/profil', comment.userLogin]" aria-label="Przejdź do strony autora">{{ comment.userLogin }}</a> {{ comment.createdDate | amTimeAgo }} </h6><app-report-button [question]="idQuestion" [comment]="comment.id"></app-report-button>
 
-    <div class="float-right">
+    <div class="float-right" *ngIf="comment.visible">
       <app-vote-button [myVote]="comment.myRank" [isVoting]="isVoting" [minusCount]="comment.minusCount" [plusCount]="comment.plusCount" (onVoted)="vote($event)"></app-vote-button>
     </div>
 
     <div class="comment-body">
-      <p>
+      <p *ngIf="comment.visible">
         {{ comment.value }}
+      </p>
+      <p *ngIf="!comment.visible" class="font-italic small">
+        Komentarz został usunięty.
       </p>
     </div>
   </div>
