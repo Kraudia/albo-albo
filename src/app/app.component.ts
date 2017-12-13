@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AuthService } from './services/auth.service';
 import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { ToastrService, ToastContainerDirective } from 'ngx-toastr';
+
+import { AuthService } from './services/auth.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-root',
@@ -53,3 +55,4 @@ export class AppComponent implements OnInit {
     }
   }
 }
+moment.locale('pl');

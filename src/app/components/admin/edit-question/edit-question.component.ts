@@ -4,9 +4,11 @@ import { Title } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs/Subscription';
 
+import { ModService } from '../../../services/mod.service';
 import { QuestionService } from '../../../services/question.service';
 import { Question } from '../../../models/question';
 import { Tag } from '../../../models/tag';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 
 @Component({
   selector: 'app-edit-question',
@@ -18,11 +20,7 @@ export class EditQuestionComponent implements OnInit, OnDestroy {
   public isLoading: boolean;
 
   public question: Question;
-  public value: string;
-  public firstAnswer: string;
-  public secondAnswer: string;
-  public status: string;
-  public checked: boolean;
+  public editedQuestion: Question;
   public tags: {
     id: number,
     name: string
@@ -32,9 +30,11 @@ export class EditQuestionComponent implements OnInit, OnDestroy {
   private subscription = new Subscription();
 
   constructor(
+    private modService: ModService,
     private questionService: QuestionService,
     private route: ActivatedRoute,
     private titleService: Title,
+    private slimLoadingBarService: SlimLoadingBarService,
     private toastrService: ToastrService
   ) { }
 
@@ -66,16 +66,12 @@ export class EditQuestionComponent implements OnInit, OnDestroy {
       .subscribe(
         response => {
           this.question = response;
-          this.value = this.question.value;
-          this.firstAnswer = this.question.firstAnswer;
-          this.secondAnswer = this.question.secondAnswer;
-          this.status = this.question.status;
+          this.editedQuestion = Object.create(this.question);
           if (this.question.tags){
             for (const tag of this.question.tags) {
               this.userTags.push(tag.id);
             }
           }
-          this.checked = this.question.adultRated;
           this.isLoading = false;
         },
         error => {
@@ -83,6 +79,74 @@ export class EditQuestionComponent implements OnInit, OnDestroy {
           this.isLoading = false;
         });
     this.subscription.add(subscription);
+  }
+
+  edit() {
+    this.isEditing = true;
+    this.slimLoadingBarService.start();
+
+    let value, firstAnswer, secondAnswer, status, adultRated,shortLink;
+    if (this.question.value !== this.editedQuestion.value) {
+      value = this.editedQuestion.value;
+    }
+    if (this.question.firstAnswer !== this.editedQuestion.firstAnswer) {
+      firstAnswer = this.editedQuestion.firstAnswer;
+    }
+    if (this.question.secondAnswer !== this.editedQuestion.secondAnswer) {
+      secondAnswer = this.editedQuestion.secondAnswer;
+    }
+    if (this.question.status !== this.editedQuestion.status) {
+      status = this.editedQuestion.status;
+    }
+    if (this.question.adultRated !== this.editedQuestion.adultRated) {
+      adultRated = this.editedQuestion.adultRated;
+    }
+    if (this.question.shortLink !== this.editedQuestion.shortLink) {
+      shortLink = this.editedQuestion.shortLink;
+    }
+
+    this.editTags();
+    const subscription = this.modService.editReportedQuestion(this.question.id, value, firstAnswer, secondAnswer, status, adultRated, shortLink)
+      .subscribe(
+        response => {
+          this.question = response;
+          this.editedQuestion = Object.create(this.question);
+          this.slimLoadingBarService.complete();
+          this.isEditing = false;
+          this.toastrService.success('Pytanie zostało edytowane!');
+        },
+        error => {
+          this.slimLoadingBarService.complete();
+          this.toastrService.error(error);
+          this.isEditing = false;
+        });
+    this.subscription.add(subscription);
+  }
+
+  editTags() {
+    if (this.question.tags) {
+      for (const tag of this.question.tags) {
+        const subscription = this.modService.deleteTag(this.question.id, tag.id)
+          .subscribe(
+            res => {},
+            error => {
+              this.toastrService.error(error);
+            });
+        this.subscription.add(subscription);
+      }
+    }
+
+    if (this.userTags.length) {
+      for (const tag of this.userTags) {
+        const subscription = this.modService.addTag(this.question.id, tag)
+          .subscribe(
+            res => {},
+            error => {
+              this.toastrService.error(error);
+            });
+        this.subscription.add(subscription);
+      }
+    }
   }
 
   getTags() {
@@ -111,13 +175,5 @@ export class EditQuestionComponent implements OnInit, OnDestroy {
     } else if (this.userTags.length < 3) {
       this.userTags.push(tag.id);
     }
-  }
-
-  clickCheckbox() {
-    this.checked = !this.checked;
-  }
-
-  isChecked() {
-    return this.checked;
   }
 }

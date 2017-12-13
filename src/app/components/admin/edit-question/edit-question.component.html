@@ -15,21 +15,28 @@
         <div class="form-group row">
           <label for="inputValue" class="col-md-2 col-form-label text-left">Pytanie</label>
           <div class="col-md-10">
-           <input #inputValue id="inputValue" name="inputValue" type="text" class="form-control" required [(ngModel)]="value" />
+           <input #inputValue id="inputValue" name="inputValue" type="text" class="form-control" required [(ngModel)]="editedQuestion.value"  (ngModelChange)="editedQuestion.value = $event"/>
           </div>
         </div>
 
         <div class="form-group row">
           <label for="inputFirstAnswer" class="col-md-2 col-form-label text-left">Odpowiedź A</label>
           <div class="col-md-10">
-            <input #inputFirstAnswer id="inputFirstAnswer" name="inputFirstAnswer" type="text" class="form-control" required  [(ngModel)]="firstAnswer"/>
+            <input #inputFirstAnswer id="inputFirstAnswer" name="inputFirstAnswer" type="text" class="form-control" required [(ngModel)]="editedQuestion.firstAnswer" (ngModelChange)="editedQuestion.firstAnswer = $event"/>
           </div>
         </div>
 
         <div class="form-group row">
           <label for="inputSecondAnswer" class="col-md-2 col-form-label text-left">Odpowiedź B</label>
           <div class="col-md-10">
-            <input #inputSecondAnswer id="inputSecondAnswer" name="inputSecondAnswer" type="text" class="form-control" required  [(ngModel)]="secondAnswer"/>
+            <input #inputSecondAnswer id="inputSecondAnswer" name="inputSecondAnswer" type="text" class="form-control" required [(ngModel)]="editedQuestion.secondAnswer" (ngModelChange)="editedQuestion.secondAnswer = $event"/>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="inputShortLink" class="col-md-2 col-form-label text-left">Skrót</label>
+          <div class="col-md-10">
+            <input #inputSecondAnswer id="inputShortLink" name="inputShortLink" type="text" class="form-control" required [(ngModel)]="editedQuestion.shortLink" (ngModelChange)="editedQuestion.shortLink = $event"/>
           </div>
         </div>
 
@@ -45,17 +52,17 @@
           <div class="col-md-10">
             <div class="form-check form-check-inline">
               <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="inputStatus" id="inputStatus1" value="ACCEPTED" [(ngModel)]="status"> Zaakceptowane
+                <input class="form-check-input" type="radio" name="inputStatus" id="inputStatus1" value="ACCEPTED" [(ngModel)]="editedQuestion.status" (ngModelChange)="editedQuestion.status = $event"> Zaakceptowane
               </label>
             </div>
             <div class="form-check form-check-inline">
               <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="inputStatus" id="inputStatus2" value="PENDING" [(ngModel)]="status"> Oczekujące
+                <input class="form-check-input" type="radio" name="inputStatus" id="inputStatus2" value="PENDING" [(ngModel)]="editedQuestion.status" (ngModelChange)="editedQuestion.status = $event"> Oczekujące
               </label>
             </div>
             <div class="form-check form-check-inline">
               <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="inputStatus" id="inputStatus3" value="REJECTED" [(ngModel)]="status"> Odrzucone
+                <input class="form-check-input" type="radio" name="inputStatus" id="inputStatus3" value="REJECTED" [(ngModel)]="editedQuestion.status" (ngModelChange)="editedQuestion.status = $event"> Odrzucone
               </label>
             </div>
           </div>
@@ -65,14 +72,14 @@
           <div class="form-check">
             <div class="col">
               <label class="form-check-label" (change)="clickCheckbox()">
-                <input id="inputCheckbox" name="inputCheckbox" class="form-check-input" type="checkbox" [checked]="isChecked()">
+                <input id="inputCheckbox" name="inputCheckbox" class="form-check-input" type="checkbox" [(ngModel)]="editedQuestion.adultRated" (ngModelChange)="editedQuestion.adultRated = $event">
                 Pytanie zawiera treść nieodpowiednią dla osób poniżej 18 roku życia.
               </label>
             </div>
           </div>
         </div>
 
-        <button class="btn btn-primary btn-block btn-edit" [disabled]="isEditing" type="button"><i class="fa fa-refresh fa-spin fa-fw" aria-hidden="true" *ngIf="isEditing"></i> Edytuj pytanie</button>
+        <button class="btn btn-primary btn-block btn-edit" (click)="edit()" [disabled]="isEditing" type="button"><i class="fa fa-refresh fa-spin fa-fw" aria-hidden="true" *ngIf="isEditing"></i> Edytuj pytanie</button>
       </div>
     </form>
   </div>
