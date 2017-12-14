@@ -7,7 +7,7 @@
     </div>
   </div>
 
-  <div class="col-lg-10" *ngIf="!isLoading">
+  <div class="col-lg-10" *ngIf="!isLoading && editedQuestion">
     <form id="needs-validation" novalidate>
       <div class="container-fluid">
         <h2>Edytuj pytanie</h2>
@@ -36,7 +36,7 @@
         <div class="form-group row">
           <label for="inputShortLink" class="col-md-2 col-form-label text-left">Skrót</label>
           <div class="col-md-10">
-            <input #inputSecondAnswer id="inputShortLink" name="inputShortLink" type="text" class="form-control" required [(ngModel)]="editedQuestion.shortLink" (ngModelChange)="editedQuestion.shortLink = $event"/>
+            <input #inputSecondAnswer id="inputShortLink" name="inputShortLink" type="text" class="form-control" required [(ngModel)]="editedQuestion.shortLink" />
           </div>
         </div>
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs/Subscription';
@@ -26,6 +26,7 @@ export class EditQuestionComponent implements OnInit, OnDestroy {
     name: string
   }[];
   public userTags: number[] = [];
+  private oldTags: number[] = [];
 
   private subscription = new Subscription();
 
@@ -33,6 +34,7 @@ export class EditQuestionComponent implements OnInit, OnDestroy {
     private modService: ModService,
     private questionService: QuestionService,
     private route: ActivatedRoute,
+    private router: Router,
     private titleService: Title,
     private slimLoadingBarService: SlimLoadingBarService,
     private toastrService: ToastrService
@@ -72,6 +74,7 @@ export class EditQuestionComponent implements OnInit, OnDestroy {
               this.userTags.push(tag.id);
             }
           }
+          this.oldTags = this.userTags.slice();
           this.isLoading = false;
         },
         error => {
@@ -88,32 +91,31 @@ export class EditQuestionComponent implements OnInit, OnDestroy {
     let value, firstAnswer, secondAnswer, status, adultRated,shortLink;
     if (this.question.value !== this.editedQuestion.value) {
       value = this.editedQuestion.value;
+      this.question.value = value;
     }
     if (this.question.firstAnswer !== this.editedQuestion.firstAnswer) {
-      firstAnswer = this.editedQuestion.firstAnswer;
+      this.question.firstAnswer = firstAnswer = this.editedQuestion.firstAnswer;
     }
     if (this.question.secondAnswer !== this.editedQuestion.secondAnswer) {
-      secondAnswer = this.editedQuestion.secondAnswer;
+      this.question.secondAnswer = secondAnswer = this.editedQuestion.secondAnswer;
     }
     if (this.question.status !== this.editedQuestion.status) {
-      status = this.editedQuestion.status;
+      this.question.status = status = this.editedQuestion.status;
     }
     if (this.question.adultRated !== this.editedQuestion.adultRated) {
-      adultRated = this.editedQuestion.adultRated;
+      this.question.adultRated = adultRated = this.editedQuestion.adultRated;
     }
     if (this.question.shortLink !== this.editedQuestion.shortLink) {
-      shortLink = this.editedQuestion.shortLink;
+      this.question.shortLink = shortLink = this.editedQuestion.shortLink;
     }
 
-    this.editTags();
     const subscription = this.modService.editReportedQuestion(this.question.id, value, firstAnswer, secondAnswer, status, adultRated, shortLink)
       .subscribe(
         response => {
-          this.question = response;
-          this.editedQuestion = Object.create(this.question);
+          this.editTags();
           this.slimLoadingBarService.complete();
-          this.isEditing = false;
           this.toastrService.success('Pytanie zostało edytowane!');
+          this.isEditing = false;
         },
         error => {
           this.slimLoadingBarService.complete();
@@ -124,9 +126,13 @@ export class EditQuestionComponent implements OnInit, OnDestroy {
   }
 
   editTags() {
-    if (this.question.tags) {
-      for (const tag of this.question.tags) {
-        const subscription = this.modService.deleteTag(this.question.id, tag.id)
+    let deleted = this.oldTags.filter(tag => this.userTags.indexOf(tag) < 0);
+    let added = this.userTags.filter(tag => this.oldTags.indexOf(tag) < 0);
+    this.oldTags = this.userTags.slice();
+
+    if (deleted) {
+      for (const tag of deleted) {
+        const subscription = this.modService.deleteTag(this.question.id, tag)
           .subscribe(
             res => {},
             error => {
@@ -136,8 +142,8 @@ export class EditQuestionComponent implements OnInit, OnDestroy {
       }
     }
 
-    if (this.userTags.length) {
-      for (const tag of this.userTags) {
+    if (added) {
+      for (const tag of added) {
         const subscription = this.modService.addTag(this.question.id, tag)
           .subscribe(
             res => {},
@@ -147,6 +153,7 @@ export class EditQuestionComponent implements OnInit, OnDestroy {
         this.subscription.add(subscription);
       }
     }
+
   }
 
   getTags() {
