@@ -55,7 +55,7 @@ export class ModService {
     if (status) {
       json['status'] = status;
     }
-    if (adultRated || adultRated === false) {
+    if (adultRated || adultRated ) {
       json['adultRated'] = adultRated;
     }
     if (shortLink) {

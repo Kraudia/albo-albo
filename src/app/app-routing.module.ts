@@ -6,6 +6,7 @@ import { OnlyLoggedInUsersGuard } from './guards/only-logged-in-users.guard';
 import { OnlyNotLoggedInUsersGuard } from './guards/only-not-logged-in-users.guard';
 
 import { AddQuestionService } from './services/add-question.service';
+import { AdminService } from './services/admin.service';
 import { AuthService } from './services/auth.service';
 import { CommentService } from './services/comment.service';
 import { QuestionService } from './services/question.service';
@@ -122,6 +123,7 @@ const appRoutes: Routes = [
     OnlyLoggedInUsersGuard,
     OnlyNotLoggedInUsersGuard,
     AddQuestionService,
+    AdminService,
     AuthService,
     CommentService,
     ModService,

@@ -1,0 +1,64 @@
+<div style="height: 100%" infiniteScroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="throttle"  [infiniteScrollDisabled]="disableScroll" (scrolled)="onScrollDown()">
+  <data-table
+    [items]="actions"
+    [itemCount]="count"
+    (reload)="reload($event)"
+
+    [pagination]="false"
+    [indexColumn]="false"
+    [selectColumn]="false"
+    [multiSelect]="false"
+    [rowColors]="rowColors"
+    [expandableRows]="true"
+  >
+    <ng-template #dataTableExpand let-item="item">
+      <pre>{{ item | json }}</pre>
+    </ng-template>
+
+    <data-table-column property="id" header="id" [sortable]="true" [width]="50" [visible]="true">
+    </data-table-column>
+
+    <data-table-column property="actionDate" header="actionDate" [sortable]="true" [resizable]="true" [visible]="true">
+      <ng-template #dataTableCell let-item="item">
+                <span style="color: grey">
+                {{ item.actionDate | date:'yyyy-MM-dd HH:mm' }}
+                </span>
+      </ng-template>
+    </data-table-column>
+
+    <data-table-column property="userId" header="userId" [sortable]="true" [resizable]="true" [visible]="false">
+    </data-table-column>
+
+    <data-table-column property="userLogin" header="userLogin" [sortable]="true" [resizable]="true" [visible]="true">
+    </data-table-column>
+
+    <data-table-column property="path" header="path" [sortable]="true" [resizable]="true" [visible]="true">
+    </data-table-column>
+
+    <data-table-column property="name" header="name" [sortable]="true" [resizable]="true" [visible]="true">
+    </data-table-column>
+
+    <data-table-column property="objectId" header="objectId" [sortable]="true" [resizable]="true" [visible]="false">
+    </data-table-column>
+
+    <data-table-column property="status" header="status" [resizable]="true" [sortable]="true" [visible]="true">
+      <ng-template #dataTableCell let-item="item">
+        <span [class.text-success]="item.status === 'SUCCESS'" [class.text-info]="item.status === 'INFO'" [class.text-danger]="item.status === 'ERROR'">{{ item.status }}</span>
+      </ng-template>
+    </data-table-column>
+
+    <data-table-column property="info" header="info" [sortable]="true" [resizable]="true" [visible]="true">
+    </data-table-column>
+
+    <data-table-column property="points" header="points" [sortable]="true" [resizable]="true" [visible]="false">
+    </data-table-column>
+  </data-table>
+
+  <div class="card bg-white border-0" *ngIf="isLoading">
+    <div class="card-body text-center mt-2">
+      <ngx-loading [show]="isLoading"></ngx-loading>
+      <br />
+      Trwa pobieranie...
+    </div>
+  </div>
+</div>
