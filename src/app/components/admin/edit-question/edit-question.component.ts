@@ -1,14 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { Subscription } from 'rxjs/Subscription';
 
 import { ModService } from '../../../services/mod.service';
 import { QuestionService } from '../../../services/question.service';
 import { Question } from '../../../models/question';
 import { Tag } from '../../../models/tag';
-import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 
 @Component({
   selector: 'app-edit-question',
@@ -34,7 +34,6 @@ export class EditQuestionComponent implements OnInit, OnDestroy {
     private modService: ModService,
     private questionService: QuestionService,
     private route: ActivatedRoute,
-    private router: Router,
     private titleService: Title,
     private slimLoadingBarService: SlimLoadingBarService,
     private toastrService: ToastrService

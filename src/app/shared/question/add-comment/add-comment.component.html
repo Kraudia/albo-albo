@@ -15,7 +15,7 @@
         </small>
       </div>
 
-      <button type="button" class="btn btn-success float-right" (click)="comment(commentInput.value)">Dodaj komentarz</button>
+      <button type="button" class="btn btn-success float-right" (click)="comment(commentInput.value)" [disabled]="isSubmitting"><i class="fa fa-refresh fa-spin fa-fw" aria-hidden="true" *ngIf="isSubmitting"></i> Dodaj komentarz</button>
     </form>
   </div>
 </div>
