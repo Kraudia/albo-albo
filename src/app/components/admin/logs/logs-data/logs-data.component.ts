@@ -18,7 +18,7 @@ export class LogsDataComponent implements OnInit, OnChanges, OnDestroy {
   @Input('info') info: string;
   @Input('status') status: string;
   @Input('name') name: string;
-  @Input('id') id: number;
+  private id: number;
 
   public actions: Log[] = [];
   public count = 0;

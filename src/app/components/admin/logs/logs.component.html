@@ -1,2 +1,58 @@
 <h2>Logi serwera</h2>
-<app-logs-data></app-logs-data>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4 col-lg-3">
+      <div class="form-group row">
+        <div class="col-12">
+          <label for="infoInput" class="col-form-label text-left">info</label>
+          <input id="infoInput" name="infoInput" class="form-control" type="text" (change)="changeInfo($event)" [value]="info">
+          <small class="form-text text-muted">np. nazwy wyjątków</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-lg-3">
+      <div class="form-group row">
+        <div class="col-12">
+          <label for="inputName" class="col-form-label text-left">name</label>
+          <input id="inputName" name="inputName" class="form-control" type="text" (change)="changeName($event)" [value]="name">
+          <small class="form-text text-muted">jakie akcje nas interesują, np. ADD_COMMENT</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-lg-2">
+      <div class="form-group row">
+        <div class="col-12">
+          <label for="statusInput" class="col-form-label text-left">status</label>
+          <input id="statusInput" name="statusInput" class="form-control" type="text" (change)="changeStatus($event)" [value]="status">
+          <small class="form-text text-muted">SUCCESS, INFO lub ERROR</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-lg-2">
+      <div class="form-group row">
+        <div class="col-12">
+          <label for="userIdInput" class="col-form-label text-left">userId</label>
+          <input id="userIdInput" name="userIdInput" class="form-control" type="text" (change)="changeUserId($event)" [value]="userId">
+          <small class="form-text text-muted">którego uzytkownika mają dotyczyć akcje</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-lg-2">
+      <div class="form-group row">
+        <div class="col-12">
+          <label for="limitInput" class="col-form-label text-left">limit</label>
+          <input id="limitInput" name="limitInput"  class="form-control" type="number" (change)="changeLimit($event)" [value]="limit" max="100" min="1">
+          <small class="form-text text-muted">po ile wartości pobierać, domyślnie 50</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<app-logs-data [limit]="limit" [status]="status" [info]="info" [name]="name" [userId]="userId"></app-logs-data>
