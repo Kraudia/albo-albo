@@ -10,11 +10,11 @@ import { ModService } from '../../../../services/mod.service';
 import { Tag } from '../../../../models/tag';
 
 @Component({
-  selector: 'app-mod-pending-data-table',
-  templateUrl: 'mod-pending-data-table.component.html',
-  styleUrls: ['mod-pending-data-table.component.scss']
+  selector: 'app-pending-data',
+  templateUrl: 'pending-data.component.html',
+  styleUrls: ['pending-data.component.scss']
 })
-export class ModPendingDataTableComponent implements OnInit, OnChanges, OnDestroy {
+export class PendingDataComponent implements OnInit, OnChanges, OnDestroy {
   @Input('adult') adult: string;
   @Input('limit') limit: 10;
   @Input('order') order: string;

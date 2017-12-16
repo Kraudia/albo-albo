@@ -7,12 +7,12 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { CloudModule } from '../../../shared/cloud/cloud.module';
 import { modPendingRouter } from './mod-pending-routing.module';
 import { ModPendingComponent } from './mod-pending.component';
-import { ModPendingDataTableComponent } from './mod-pending-data-table/mod-pending-data-table.component';
+import { PendingDataComponent } from './pending-data/pending-data.component';
 
 @NgModule({
   declarations: [
     ModPendingComponent,
-    ModPendingDataTableComponent
+    PendingDataComponent
   ],
   imports: [
     CommonModule,
