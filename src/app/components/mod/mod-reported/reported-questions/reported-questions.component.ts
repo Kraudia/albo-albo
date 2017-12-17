@@ -4,15 +4,15 @@ import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { Subscription } from 'rxjs/Subscription';
 import { ToastrService } from 'ngx-toastr';
 
-import { ReportedQuestion } from '../../../../../models/reportedQuestion';
-import { ModService } from '../../../../../services/mod.service';
+import { ReportedQuestion } from '../../../../models/reportedQuestion';
+import { ModService } from '../../../../services/mod.service';
 
 @Component({
-  selector: 'app-mod-reported-questions-data-table',
-  templateUrl: './mod-reported-questions-data-table.component.html',
-  styleUrls: ['./mod-reported-questions-data-table.component.scss']
+  selector: 'app-reported-questions',
+  templateUrl: 'reported-questions.component.html',
+  styleUrls: ['reported-questions.component.scss']
 })
-export class ModReportedQuestionsDataTableComponent implements OnInit, OnDestroy {
+export class ReportedQuestionsComponent implements OnInit, OnDestroy {
   public reports: ReportedQuestion[] = [];
   public reportCount = 0;
   public isLoading = false;

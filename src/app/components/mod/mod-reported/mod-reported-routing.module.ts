@@ -14,11 +14,11 @@ const routes: Routes = [
       },
       {
         path: 'pytania',
-        loadChildren: 'app/components/mod/mod-reported/mod-reported-questions/mod-reported-questions.module#ModReportedQuestionsModule'
+        loadChildren: 'app/components/mod/mod-reported/reported-questions/reported-questions.module#ReportedQuestionsModule'
       },
       {
         path: 'komentarze',
-        loadChildren: 'app/components/mod/mod-reported/mod-reported-comments/mod-reported-comments.module#ModReportedCommentsModule'
+        loadChildren: 'app/components/mod/mod-reported/reported-comments/reported-comments.module#ReportedCommentsModule'
       }
     ]
   }

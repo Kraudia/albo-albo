@@ -6,23 +6,21 @@ import { InlineEditorModule } from '@qontu/ngx-inline-editor';
 import { LoadingModule } from 'ngx-loading';
 import { PrettyJsonModule } from 'angular2-prettyjson';
 
-import { ModReportedQuestionsComponent } from './mod-reported-questions.component';
-import { modReportedQuestionsRouter } from './mod-reported-questions-routing.module';
-import { ModReportedQuestionsDataTableComponent } from './mod-reported-questions-data-table/mod-reported-questions-data-table.component';
+import { reportedQuestionsRouter } from './reported-questions-routing.module';
+import { ReportedQuestionsComponent } from './reported-questions.component';
 
 @NgModule({
   declarations: [
-    ModReportedQuestionsComponent,
-    ModReportedQuestionsDataTableComponent
+    ReportedQuestionsComponent
   ],
   imports: [
     CommonModule,
     DataTableModule,
     FormsModule,
     LoadingModule,
-    modReportedQuestionsRouter,
+    reportedQuestionsRouter,
     InlineEditorModule,
     PrettyJsonModule
   ]
 })
-export class ModReportedQuestionsModule { }
+export class ReportedQuestionsModule { }

@@ -4,15 +4,15 @@ import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { Subscription } from 'rxjs/Subscription';
 import { ToastrService } from 'ngx-toastr';
 
-import { ReportedComment } from '../../../../../models/reportedComment';
-import { ModService } from '../../../../../services/mod.service';
+import { ReportedComment } from '../../../../models/reportedComment';
+import { ModService } from '../../../../services/mod.service';
 
 @Component({
   selector: 'app-mod-reported-comments-data-table',
-  templateUrl: './mod-reported-comments-data-table.component.html',
-  styleUrls: ['./mod-reported-comments-data-table.component.scss']
+  templateUrl: 'reported-comments.component.html',
+  styleUrls: ['reported-comments.component.scss']
 })
-export class ModReportedCommentsDataTableComponent implements OnInit, OnDestroy {
+export class ReportedCommentsComponent implements OnInit, OnDestroy {
   public reports: ReportedComment[] = [];
   public reportCount = 0;
   public isLoading = false;

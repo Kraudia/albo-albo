@@ -6,14 +6,12 @@ import { InlineEditorModule } from '@qontu/ngx-inline-editor';
 import { LoadingModule } from 'ngx-loading';
 import { PrettyJsonModule } from 'angular2-prettyjson';
 
-import { ModReportedCommentsComponent } from './mod-reported-comments.component';
-import { modReportedCommentsRouter } from './mod-reported-comments-routing.module';
-import { ModReportedCommentsDataTableComponent } from './mod-reported-comments-data-table/mod-reported-comments-data-table.component';
+import { ReportedCommentsComponent } from './reported-comments.component';
+import { reportedCommentsRouter } from './reported-comments-routing.module';
 
 @NgModule({
   declarations: [
-    ModReportedCommentsComponent,
-    ModReportedCommentsDataTableComponent
+    ReportedCommentsComponent
   ],
   imports: [
     CommonModule,
@@ -21,8 +19,8 @@ import { ModReportedCommentsDataTableComponent } from './mod-reported-comments-d
     FormsModule,
     LoadingModule,
     InlineEditorModule,
-    modReportedCommentsRouter,
+    reportedCommentsRouter,
     PrettyJsonModule
   ]
 })
-export class ModReportedCommentsModule { }
+export class ReportedCommentsModule { }
