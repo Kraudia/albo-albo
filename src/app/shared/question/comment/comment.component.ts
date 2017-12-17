@@ -28,14 +28,14 @@ export class CommentComponent implements OnDestroy {
 
   vote(value: number) {
     this.isVoting = true;
+    this.comment.myRank = value;
+    if (value === -1) {
+      this.comment.minusCount += 1;
+    } else {
+      this.comment.plusCount += 1;
+    }
     const subscription = this.commentService.voteComment(this.comment.id, value).subscribe(
       res => {
-        this.comment.myRank = value;
-        if (value === -1) {
-          this.comment.minusCount += 1;
-        } else {
-          this.comment.plusCount += 1;
-        }
         this.isVoting = false;
       },
       error => {

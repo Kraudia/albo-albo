@@ -233,15 +233,15 @@ export class QuestionComponent implements OnInit, OnChanges, OnDestroy {
 
   vote(value: number) {
     this.isVoting = true;
+    this.question.myVote = value;
+    if (value === -1) {
+      this.question.minusCount += 1;
+    } else {
+      this.question.plusCount += 1;
+    }
     const subscription = this.questionService.voteQuestion(this.question.id, value)
       .subscribe(
       res => {
-        this.question.myVote = value;
-        if (value === -1) {
-          this.question.minusCount += 1;
-        } else {
-          this.question.plusCount += 1;
-        }
         this.isVoting = false;
       },
       error => {

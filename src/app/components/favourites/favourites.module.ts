@@ -5,6 +5,7 @@ import { MomentModule } from 'angular2-moment';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 
+import { PipesModule } from '../../pipes/pipes.module';
 import { FavouritesComponent } from './favourites.component';
 import { favouritesRouter } from './favourites-routing.module';
 import { FavouriteQuestionComponent } from './favourite-question/favourite-question.component';
@@ -18,6 +19,7 @@ import { FavouriteQuestionComponent } from './favourite-question/favourite-quest
     CommonModule,
     MomentModule,
     NgbTooltipModule,
+    PipesModule,
     RouterModule,
     favouritesRouter,
     LoadingModule

@@ -22,7 +22,7 @@ export class VoteButtonComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnInit() {
-    this.sumShow = true;
+    this.sumShow = false;
     this.count = this.plusCount + this.minusCount;
     this.sum = this.plusCount - this.minusCount;
   }

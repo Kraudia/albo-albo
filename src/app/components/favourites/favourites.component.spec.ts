@@ -6,6 +6,7 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterTestingModule } from '@angular/router/testing';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 
+import { PipesModule } from '../../pipes/pipes.module';
 import { AuthService } from '../../services/auth.service';
 import { QuestionService } from '../../services/question.service';
 import { FavouritesComponent } from './favourites.component';
@@ -26,6 +27,7 @@ describe('FavouritesComponent', () => {
         LoadingModule,
         MomentModule,
         NgbTooltipModule,
+        PipesModule,
         RouterTestingModule
       ],
       providers: [
