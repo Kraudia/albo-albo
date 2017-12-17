@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ToastrService, ToastrModule } from 'ngx-toastr';
 
 import { VoteButtonComponent } from './vote-button.component';
 import { AuthService } from '../../services/auth.service';
@@ -10,9 +11,17 @@ describe('VoteButtonComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VoteButtonComponent ],
-      imports: [ HttpModule ],
-      providers: [ AuthService ]
+      declarations: [
+        VoteButtonComponent
+      ],
+      imports: [
+        HttpModule,
+        ToastrModule.forRoot()
+      ],
+      providers: [
+        AuthService,
+        ToastrService
+      ]
     })
     .compileComponents();
   }));

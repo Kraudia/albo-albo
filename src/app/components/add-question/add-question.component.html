@@ -9,7 +9,7 @@
           <label for="inputValue" class="col-md-2 col-form-label text-left">Pytanie</label>
           <div class="col-md-10">
             <emojify-holder (emojiAdded)="emojiAdded($event, 'value')" class="emojisDialogFirst">
-              <input #inputValue id="inputValue" type="text" class="form-control" [ngClass]="displayFieldCss('inputValue')" placeholder="Co wolisz" formControlName="inputValue" required emojiInput [emojiInputValue]="value" [(ngModel)]="value" />
+              <input #inputValue id="inputValue" type="text" class="form-control" [ngClass]="displayFieldCss('inputValue')" placeholder="Co wolisz" formControlName="inputValue" required emojiInput [emojiInputValue]="value" [(ngModel)]="value" spellcheck="true"/>
             </emojify-holder>
             <ng-container *ngIf="showFeedback()">
               <small class="invalid-feedback" *ngFor="let field of getKeysOfObject(addQuestionForm.get('inputValue').errors)">
@@ -23,7 +23,7 @@
           <label for="inputFirstAnswer" class="col-md-2 col-form-label text-left">Odpowiedź A</label>
           <div class="col-md-10">
             <emojify-holder (emojiAdded)="emojiAdded($event, 'firstAnswer')" class="emojisDialogSecond">
-              <input #inputFirstAnswer id="inputFirstAnswer" formControlName="inputFirstAnswer" type="text" class="form-control" [ngClass]="displayFieldCss('inputFirstAnswer')" placeholder="Odpowiedź po lewej" required  emojiInput [emojiInputValue]="firstAnswer" [(ngModel)]="firstAnswer" />
+              <input #inputFirstAnswer id="inputFirstAnswer" formControlName="inputFirstAnswer" type="text" class="form-control" [ngClass]="displayFieldCss('inputFirstAnswer')" placeholder="Odpowiedź po lewej" required  emojiInput [emojiInputValue]="firstAnswer" [(ngModel)]="firstAnswer" spellcheck="true"/>
             </emojify-holder>
             <ng-container *ngIf="showFeedback()">
               <small class="invalid-feedback">
@@ -37,7 +37,7 @@
           <label for="inputSecondAnswer" class="col-md-2 col-form-label text-left">Odpowiedź B</label>
           <div class="col-md-10">
             <emojify-holder (emojiAdded)="emojiAdded($event, 'secondAnswer')" class="emojisDialogLast">
-              <input #inputSecondAnswer id="inputSecondAnswer" formControlName="inputSecondAnswer" type="text" class="form-control" [ngClass]="displayFieldCss('inputSecondAnswer')" placeholder="Odpowiedź po prawej" required  emojiInput [emojiInputValue]="secondAnswer" [(ngModel)]="secondAnswer" />
+              <input #inputSecondAnswer id="inputSecondAnswer" formControlName="inputSecondAnswer" type="text" class="form-control" [ngClass]="displayFieldCss('inputSecondAnswer')" placeholder="Odpowiedź po prawej" required  emojiInput [emojiInputValue]="secondAnswer" [(ngModel)]="secondAnswer" spellcheck="true"/>
             </emojify-holder>
             <ng-container *ngIf="showFeedback()">
               <small class="invalid-feedback">

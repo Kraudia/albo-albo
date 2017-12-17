@@ -6,7 +6,7 @@
   <div class="card-body" *ngIf="authService.isLoggedIn()">
     <form id="needs-validation" novalidate>
       <div class="form-group row">
-        <textarea #commentInput rows="3" class="form-control" [class.is-valid]="isValid" [class.is-invalid]="isInvalid" placeholder="Napisz komentarz..." [(ngModel)]="commentValue" required [ngModelOptions]="{standalone: true}"></textarea>
+        <textarea #commentInput rows="3" class="form-control" [class.is-valid]="isValid" [class.is-invalid]="isInvalid" placeholder="Napisz komentarz..." [(ngModel)]="commentValue" required [ngModelOptions]="{standalone: true}" spellcheck="true"></textarea>
         <small class="invalid-feedback">
           Pole nie może być puste.
         </small>
