@@ -1,9 +1,13 @@
 .container-fluid {
   margin-top: 70px;
-  margin-bottom: 100px;
+  margin-bottom: 80px;
 
-  @media (min-width: 991px) {
-    margin-bottom: 80px;
+  @media (min-width: 699px) {
+    margin-bottom: 70px;
+  }
+
+  @media (min-width: 999px) {
+    margin-bottom: 50px;
   }
 }
 
