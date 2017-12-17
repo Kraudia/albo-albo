@@ -39,6 +39,7 @@ export class CommentService {
   postComment(question: number, value: string) {
     const url = this.host + 'comments?question=' + question;
     const options = this.authService.getOptions();
+    value = value.replace(/\s\s+/g, ' ');
 
     return this.http.post(url, JSON.stringify({ value }), options)
       .map(this.extractData)

@@ -20,6 +20,7 @@ export class AddQuestionService {
   postQuestion(value: string, firstAnswer: string, secondAnswer: string, tags: number[], adultRated: boolean) {
     const url = this.host + 'questions';
     const options = this.authService.getOptions();
+    value = value.replace(/\s\s+/g, ' ');
 
     return this.http.post(url, JSON.stringify({ value, firstAnswer, secondAnswer, tags, adultRated }), options)
       .map(this.extractData)

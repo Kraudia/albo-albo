@@ -33,8 +33,8 @@ export class LogsComponent implements OnInit {
     this.info = event.target.value;
   }
 
-  changeStatus(event) {
-    this.status = event.target.value;
+  clearStatus() {
+    this.status = '';
   }
 
   clearName() {

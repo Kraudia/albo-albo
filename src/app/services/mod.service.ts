@@ -44,18 +44,21 @@ export class ModService {
 
     let json = {};
     if (value) {
+      value = value.replace(/\s\s+/g, ' ');
       json['value'] = value;
     }
     if (firstAnswer) {
+      firstAnswer = firstAnswer.replace(/\s\s+/g, ' ');
       json['firstAnswer'] = firstAnswer;
     }
     if (secondAnswer) {
+      secondAnswer = secondAnswer.replace(/\s\s+/g, ' ');
       json['secondAnswer'] = secondAnswer;
     }
     if (status) {
       json['status'] = status;
     }
-    if (adultRated || adultRated ) {
+    if (adultRated || adultRated === false) {
       json['adultRated'] = adultRated;
     }
     if (shortLink) {
@@ -73,6 +76,7 @@ export class ModService {
 
     let json = {};
     if (value) {
+      value = value.replace(/\s\s+/g, ' ');
       json['value'] = value;
     }
     if (visible || visible === false) {
