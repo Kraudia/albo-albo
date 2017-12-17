@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { DataTableModule } from 'angular-4-data-table-bootstrap-4';
 import { LoadingModule } from 'ngx-loading';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
@@ -16,6 +17,7 @@ import { LogsDataComponent } from './logs-data/logs-data.component';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     InfiniteScrollModule,
     LoadingModule,
     DataTableModule,

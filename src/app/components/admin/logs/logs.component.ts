@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { nameOptions } from './nameOptions';
 
 @Component({
   selector: 'app-logs',
@@ -12,9 +13,12 @@ export class LogsComponent implements OnInit {
   public status = '';
   public name = '';
 
+  public nameOptions;
+
   constructor() { }
 
   ngOnInit() {
+    this.nameOptions = nameOptions;
   }
 
   changeLimit(event) {
@@ -33,7 +37,7 @@ export class LogsComponent implements OnInit {
     this.status = event.target.value;
   }
 
-  changeName(event) {
-    this.name = event.target.value;
+  clearName() {
+    this.name = '';
   }
 }

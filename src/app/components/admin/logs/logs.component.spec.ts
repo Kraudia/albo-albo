@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 import { DataTableModule } from 'angular-4-data-table-bootstrap-4';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { LoadingModule } from 'ngx-loading';
@@ -24,6 +25,7 @@ describe('LogsComponent', () => {
       ],
       imports: [
         HttpModule,
+        FormsModule,
         DataTableModule,
         InfiniteScrollModule,
         LoadingModule,

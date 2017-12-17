@@ -16,7 +16,10 @@
       <div class="form-group row">
         <div class="col-12">
           <label for="inputName" class="col-form-label text-left">name</label>
-          <input id="inputName" name="inputName" class="form-control" type="text" (change)="changeName($event)" [value]="name">
+          <select id="inputName" [(ngModel)]="name" class="form-control">
+            <option  value="" (click)="clearName()">wszystkie</option>
+            <option *ngFor="let nameOption of nameOptions">{{ nameOption }}</option>
+          </select>
           <small class="form-text text-muted">jakie akcje nas interesują, np. ADD_COMMENT</small>
         </div>
       </div>
@@ -26,7 +29,12 @@
       <div class="form-group row">
         <div class="col-12">
           <label for="statusInput" class="col-form-label text-left">status</label>
-          <input id="statusInput" name="statusInput" class="form-control" type="text" (change)="changeStatus($event)" [value]="status">
+          <select id="statusInput" [(ngModel)]="status" class="form-control">
+            <option  value="" (click)="clearStatus()">wszystkie</option>
+            <option  value="ERROR">ERROR</option>
+            <option  value="INFO">INFO</option>
+            <option  value="SUCCESS">SUCCESS</option>
+          </select>
           <small class="form-text text-muted">SUCCESS, INFO lub ERROR</small>
         </div>
       </div>
