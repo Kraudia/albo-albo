@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 import { VoteButtonComponent } from './vote-button.component';
 
@@ -12,11 +11,7 @@ import { VoteButtonComponent } from './vote-button.component';
     VoteButtonComponent
   ],
   imports: [
-    CommonModule,
-    ToastrModule.forRoot()
-  ],
-  providers: [
-    ToastrService
+    CommonModule
   ]
 })
 export class VoteButtonModule { }

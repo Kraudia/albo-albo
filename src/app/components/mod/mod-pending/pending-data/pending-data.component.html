@@ -10,7 +10,7 @@
     [multiSelect]="false"
     [rowColors]="rowColors"
   >
-    <data-table-column property="id" header="#" [sortable]="true" [width]="50">
+    <data-table-column property="id" header="Pytanie" [resizable]="true" [sortable]="true">
       <ng-template #dataTableCell let-item="item">
         <a class="btn btn-light btn-sm" [routerLink]="['/pytanie', item.id, item.shortLink]" aria-label="Przejdź do strony pytania">{{ item.id }}</a>
       </ng-template>
@@ -98,8 +98,10 @@
 
     <data-table-column header="Działania" [resizable]="true">
       <ng-template #dataTableCell let-item="item">
-        <button *ngIf="item.status === 'PENDING'" (click)="accept(item)" class="btn btn-sm" [class.btn-success]="!item.isAccepting" [disabled]="item.isAccepting"><i class="fa fa-refresh fa-spin fa-fw" aria-hidden="true" *ngIf="item.isAccepting"></i><i class="fa fa-check" aria-hidden="true" *ngIf="!item.isAccepting"></i> <span class="d-none d-lg-inline-block">Zatwierdź</span></button>
-        <button *ngIf="item.status === 'PENDING'" (click)="reject(item)" class="btn btn-sm" [class.btn-danger]="!item.isRejecting" [disabled]="item.isRejecting"><i class="fa fa-refresh fa-spin fa-fw" aria-hidden="true" *ngIf="item.isRejecting"></i><i class="fa fa-ban" aria-hidden="true" *ngIf="!item.isRejecting"></i> <span class="d-none d-lg-inline-block">Odrzuć</span></button>
+          <div class="btn-group-vertical" role="group" aria-label="Działania">
+          <button *ngIf="item.status === 'PENDING'" (click)="accept(item)" class="btn btn-sm" [class.btn-success]="!item.isAccepting" [disabled]="item.isAccepting"><i class="fa fa-refresh fa-spin fa-fw" aria-hidden="true" *ngIf="item.isAccepting"></i><i class="fa fa-check" aria-hidden="true" *ngIf="!item.isAccepting"></i> <span class="d-none d-lg-inline-block">Zatwierdź</span></button>
+          <button *ngIf="item.status === 'PENDING'" (click)="reject(item)" class="btn btn-sm" [class.btn-danger]="!item.isRejecting" [disabled]="item.isRejecting"><i class="fa fa-refresh fa-spin fa-fw" aria-hidden="true" *ngIf="item.isRejecting"></i><i class="fa fa-ban" aria-hidden="true" *ngIf="!item.isRejecting"></i> <span class="d-none d-lg-inline-block">Odrzuć</span></button>
+        </div>
       </ng-template>
     </data-table-column>
   </data-table>

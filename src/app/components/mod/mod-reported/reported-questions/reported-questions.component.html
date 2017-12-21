@@ -10,15 +10,16 @@
   [multiSelect]="false"
   [rowColors]="rowColors"
   [expandableRows]="true"
+  [translations]="translations"
 >
   <ng-template #dataTableExpand let-item="item">
     <pre>{{ item | json }}</pre>
   </ng-template>
 
-  <data-table-column property="id" [sortable]="true" [width]="50" [visible]="false">
+  <data-table-column property="id" header="Zgłoszenie" [sortable]="true" [resizable]="true" [visible]="false">
   </data-table-column>
 
-  <data-table-column property="question'" header="#" [width]="50" [sortable]="false" [visible]="true">
+  <data-table-column property="question'" header="Pytanie" [width]="70"  [resizable]="true" [sortable]="false" [visible]="true">
     <ng-template #dataTableCell let-item="item">
       <a class="btn btn-light btn-sm" [routerLink]="['/pytanie', item.question.id, item.question.shortLink]" aria-label="Przejdź do strony pytania">{{ item.question.id }}</a>
     </ng-template>
@@ -75,7 +76,7 @@
     </ng-template>
   </data-table-column>
 
-  <data-table-column header="Skrót" [resizable]="true" [sortable]="false" [visible]="true">
+  <data-table-column header="Skrót" [resizable]="true" [sortable]="false" [visible]="false">
     <ng-template #dataTableCell let-item="item">
       <inline-editor type="textarea" [(ngModel)]="item.question.shortLink" (onSave)="saveShortLink(item, $event)" [min]="2" [max]="50" (onError)="handleError($event)"></inline-editor>
     </ng-template>
@@ -89,8 +90,10 @@
 
   <data-table-column header="Działania" [resizable]="true" [visible]="true">
     <ng-template #dataTableCell let-item="item">
-      <button (click)="deleteQuestion(item)" class="btn btn-sm" [class.btn-danger]="!item.isDeletedQuestion" [disabled]="item.isDeletedQuestion || item.isDeletingQuestion"><i class="fa fa-refresh fa-spin fa-fw" aria-hidden="true" *ngIf="item.isDeletingQuestion"></i> <i class="fa fa-trash" aria-hidden="true" *ngIf="!item.isDeletingQuestion"></i> <span class="d-none d-lg-inline-block" *ngIf="item.isDeletedQuestion">Usunięto pytanie</span><span class="d-none d-lg-inline-block" *ngIf="!item.isDeletedQuestion">Usuń pytanie</span></button>
-      <button (click)="deleteReport(item)" class="btn btn-sm" [class.btn-info]="!item.isDeletedReport" [disabled]="item.isDeletedReport || item.isDeletingReport"><i *ngIf="item.isDeletingReport" class="fa fa-refresh fa-spin fa-fw" aria-hidden="true"></i><i class="fa fa-check" aria-hidden="true" *ngIf="!item.isDeletingReport"></i> <span class="d-none d-lg-inline-block" *ngIf="item.isDeletedReport">Usunięto zgłoszenie</span><span class="d-none d-lg-inline-block" *ngIf="!item.isDeletedReport">Usuń zgłoszenie</span></button>
+      <div class="btn-group-vertical" role="group" aria-label="Działania">
+        <button (click)="deleteQuestion(item)" class="btn btn-sm" [class.btn-danger]="!item.isDeletedQuestion" [disabled]="item.isDeletedQuestion || item.isDeletingQuestion"><i class="fa fa-refresh fa-spin fa-fw" aria-hidden="true" *ngIf="item.isDeletingQuestion"></i> <i class="fa fa-trash" aria-hidden="true" *ngIf="!item.isDeletingQuestion"></i> <span class="d-none d-lg-inline-block" *ngIf="item.isDeletedQuestion">Usunięto pytanie</span><span class="d-none d-lg-inline-block" *ngIf="!item.isDeletedQuestion">Usuń pytanie</span></button>
+        <button (click)="deleteReport(item)" class="btn btn-sm" [class.btn-info]="!item.isDeletedReport" [disabled]="item.isDeletedReport || item.isDeletingReport"><i *ngIf="item.isDeletingReport" class="fa fa-refresh fa-spin fa-fw" aria-hidden="true"></i><i class="fa fa-check" aria-hidden="true" *ngIf="!item.isDeletingReport"></i> <span class="d-none d-lg-inline-block" *ngIf="item.isDeletedReport">Usunięto zgłoszenie</span><span class="d-none d-lg-inline-block" *ngIf="!item.isDeletedReport">Usuń zgłoszenie</span></button>
+      </div>
     </ng-template>
   </data-table-column>
 </data-table>

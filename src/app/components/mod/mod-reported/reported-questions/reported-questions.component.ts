@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { DataTableResource } from 'angular-4-data-table-bootstrap-4';
+import { DataTableResource, DataTableTranslations } from 'angular-4-data-table-bootstrap-4';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { Subscription } from 'rxjs/Subscription';
 import { ToastrService } from 'ngx-toastr';
@@ -202,5 +202,9 @@ export class ReportedQuestionsComponent implements OnInit, OnDestroy {
     } else if (report.isEdited) {
       return 'rgb(202, 244, 249)'
     }
+  }
+
+  translations = <DataTableTranslations>{
+    expandColumn: 'Rozwiń wiersz'
   }
 }

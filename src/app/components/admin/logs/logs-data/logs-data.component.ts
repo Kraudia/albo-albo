@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, OnChanges, SimpleChange, OnDestroy } from '@angular/core';
-import { DataTableResource } from 'angular-4-data-table-bootstrap-4';
+import { DataTableResource, DataTableTranslations } from 'angular-4-data-table-bootstrap-4';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { Subscription } from 'rxjs/Subscription';
 import { ToastrService } from 'ngx-toastr';
@@ -112,5 +112,9 @@ export class LogsDataComponent implements OnInit, OnChanges, OnDestroy {
     } else if (action.status === 'INFO') {
       return 'rgb(227, 250, 252)';
     }
+  }
+
+  translations = <DataTableTranslations>{
+    expandColumn: 'Rozwiń wiersz'
   }
 }

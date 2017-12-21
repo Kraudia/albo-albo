@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { DataTableResource } from 'angular-4-data-table-bootstrap-4';
+import { DataTableResource, DataTableTranslations } from 'angular-4-data-table-bootstrap-4';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { Subscription } from 'rxjs/Subscription';
 import { ToastrService } from 'ngx-toastr';
@@ -114,4 +114,7 @@ export class ReportedCommentsComponent implements OnInit, OnDestroy {
     }
   }
 
+  translations = <DataTableTranslations>{
+    expandColumn: 'Rozwiń wiersz'
+  }
 }
