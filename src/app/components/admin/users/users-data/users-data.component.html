@@ -1,3 +1,70 @@
-<p>
-  users-data works!
-</p>
+<data-table
+  [items]="users"
+  [itemCount]="count"
+  (reload)="reload($event)"
+
+  [pagination]="false"
+  [indexColumn]="false"
+  [selectColumn]="false"
+  [multiSelect]="false"
+  [rowColors]="rowColors"
+>
+  <data-table-column property="id" header="Id" [sortable]="true" [width]="50" [visible]="false">
+  </data-table-column>
+
+  <data-table-column property="registeredDate" header="registeredDate" [sortable]="true" [resizable]="true" [visible]="true">
+    <ng-template #dataTableCell let-item="item">
+              <span style="color: grey">
+              {{ item.registeredDate | date:'yyyy-MM-dd HH:mm' }}
+              </span>
+    </ng-template>
+  </data-table-column>
+
+  <data-table-column property="bannedUntil" header="bannedUntil" [sortable]="true" [resizable]="true" [visible]="true">
+    <ng-template #dataTableCell let-item="item">
+              <span style="color: grey">
+              {{ item.bannedUntil | date:'yyyy-MM-dd HH:mm' }}
+              </span>
+    </ng-template>
+  </data-table-column>
+
+  <data-table-column property="loginDate" header="loginDate" [sortable]="true" [resizable]="true" [visible]="true">
+    <ng-template #dataTableCell let-item="item">
+              <span style="color: grey">
+              {{ item.loginDate | date:'yyyy-MM-dd HH:mm' }}
+              </span>
+    </ng-template>
+  </data-table-column>
+
+  <data-table-column property="login" header="login" [sortable]="true" [resizable]="true" [visible]="true">
+  </data-table-column>
+
+  <data-table-column property="isActive" header="isActive" [sortable]="true" [resizable]="true" [visible]="false">
+  </data-table-column>
+
+  <data-table-column property="birthDate" header="birthDate" [sortable]="true" [resizable]="true" [visible]="false">
+  </data-table-column>
+
+  <data-table-column property="points" header="points" [sortable]="true" [resizable]="true" [visible]="false">
+  </data-table-column>
+
+  <data-table-column property="isBanned" header="isBanned" [sortable]="true" [resizable]="true" [visible]="false">
+  </data-table-column>
+
+  <data-table-column property="email" header="email" [sortable]="true" [resizable]="true" [visible]="true">
+  </data-table-column>
+
+  <data-table-column property="age" header="age" [sortable]="true" [resizable]="true" [visible]="false">
+  </data-table-column>
+
+  <data-table-column property="roles" header="roles" [sortable]="true" [resizable]="true" [visible]="true">
+  </data-table-column>
+</data-table>
+
+<div class="card bg-white border-0" *ngIf="isLoading">
+  <div class="card-body text-center mt-2">
+    <ngx-loading [show]="isLoading"></ngx-loading>
+    <br />
+    Trwa pobieranie...
+  </div>
+</div>

@@ -44,7 +44,7 @@ export class AdminService {
       .catch(this.handleError);
   }
 
-  getAllUsers(active: boolean, banned: boolean, userLogin: string): Observable<User[]> {
+  getUsers(active: boolean, banned: boolean, userLogin: string): Observable<User[]> {
     let url = this.host + 'users?all=true';
     const options = this.authService.getOptions();
 

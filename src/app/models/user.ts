@@ -3,10 +3,13 @@ export interface User {
   'login': string;
   'email': string;
   'registeredDate': string;
+  'bannedUntil': string;
   'loginDate': string;
   'birthDate': string;
   'roles': string[];
-  'active': boolean;
+  'isBanned': boolean;
+  'isActive': boolean;
+  'points': number;
   'age': number;
   'avatar': string;
 }
