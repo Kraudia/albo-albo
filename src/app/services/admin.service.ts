@@ -8,6 +8,7 @@ import 'rxjs/add/operator/map';
 import { AuthService } from './auth.service';
 import { environment } from '../../environments/environment';
 import { Log } from '../models/log';
+import { User } from '../models/user';
 
 @Injectable()
 export class AdminService {
@@ -36,6 +37,25 @@ export class AdminService {
     }
     if (id) {
       url += `&id=${ id }`;
+    }
+
+    return this.http.get(url, options)
+      .map((res) => res.json())
+      .catch(this.handleError);
+  }
+
+  getAllUsers(active: boolean, banned: boolean, userLogin: string): Observable<User[]> {
+    let url = this.host + 'users?all=true';
+    const options = this.authService.getOptions();
+
+    if (active || active === false) {
+      url += `&active=${ active }`;
+    }
+    if (banned || banned === false) {
+      url += `&banned=${ banned }`;
+    }
+    if (userLogin) {
+      url += `&userLogin=${ userLogin }`;
     }
 
     return this.http.get(url, options)

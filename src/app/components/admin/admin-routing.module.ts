@@ -13,6 +13,10 @@ const routes: Routes = [
   {
     path: 'logi',
     loadChildren: 'app/components/admin/logs/logs.module#LogsModule'
+  },
+  {
+    path: 'uzytkownicy',
+    loadChildren: 'app/components/admin/users/users.module#UsersModule'
   }
 ];
 

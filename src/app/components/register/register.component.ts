@@ -254,7 +254,7 @@ export class RegisterComponent implements OnInit {
           .subscribe(
             res => {
               this.router.navigate(['/logowanie']);
-              const success = 'Żeby aktywować konto, kliknij w link potwierdzający, który wysłaliśmy na Twój adres email.';
+              const success = 'Żeby aktywować konto, kliknij w link potwierdzający, który wysłaliśmy na Twój adres email. E-mail nie dotarł? Sprawdź folder SPAM.';
               this.toastrService.success(success, 'Rejestracja się powiodła');
               this.isSubmitting = false;
               this.slimLoadingBarService.complete();
