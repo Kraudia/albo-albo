@@ -26,6 +26,9 @@ export class LogsDataComponent implements OnInit, OnChanges, OnDestroy {
   public scrollDistance = 0;
   public disableScroll;
   public isLoading = false;
+  public translations = <DataTableTranslations>{
+    expandColumn: 'Rozwiń wiersz'
+  };
 
   private subscription = new Subscription();
   private resource = new DataTableResource([]);
@@ -112,9 +115,5 @@ export class LogsDataComponent implements OnInit, OnChanges, OnDestroy {
     } else if (action.status === 'INFO') {
       return 'rgb(227, 250, 252)';
     }
-  }
-
-  translations = <DataTableTranslations>{
-    expandColumn: 'Rozwiń wiersz'
   }
 }

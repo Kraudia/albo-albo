@@ -23,12 +23,12 @@ export class VoteButtonComponent {
   vote(value: number) {
     if (this.authService.isLoggedIn()) {
       if (this.myVote) {
-        this.toastrService.error('Niestety można zagłosować tylko raz.', 'Głos już został udzielony')
+        this.toastrService.error('Niestety można zagłosować tylko raz.', 'Głos już został udzielony');
       } else {
         this.onVoted .emit(value);
       }
     } else {
-      this.toastrService.error('Musisz być zalogowany, aby móc zagłosować.', 'Zaloguj się')
+      this.toastrService.error('Musisz być zalogowany, aby móc zagłosować.', 'Zaloguj się');
     }
   }
 }

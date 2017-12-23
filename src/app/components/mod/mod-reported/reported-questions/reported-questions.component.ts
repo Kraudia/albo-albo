@@ -38,6 +38,10 @@ export class ReportedQuestionsComponent implements OnInit, OnDestroy {
     text: 'field'
   };
 
+  public translations = <DataTableTranslations>{
+    expandColumn: 'Rozwiń wiersz'
+  };
+
   constructor(
     private modService: ModService,
     private slimLoadingBarService: SlimLoadingBarService,
@@ -200,11 +204,7 @@ export class ReportedQuestionsComponent implements OnInit, OnDestroy {
     } else if (report.isDeletedQuestion) {
       return 'rgb(255, 218, 234)';
     } else if (report.isEdited) {
-      return 'rgb(202, 244, 249)'
+      return 'rgb(202, 244, 249)';
     }
-  }
-
-  translations = <DataTableTranslations>{
-    expandColumn: 'Rozwiń wiersz'
   }
 }

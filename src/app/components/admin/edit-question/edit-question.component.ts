@@ -68,7 +68,7 @@ export class EditQuestionComponent implements OnInit, OnDestroy {
         response => {
           this.question = response;
           this.editedQuestion = Object.create(this.question);
-          if (this.question.tags){
+          if (this.question.tags) {
             for (const tag of this.question.tags) {
               this.userTags.push(tag.id);
             }
@@ -87,7 +87,7 @@ export class EditQuestionComponent implements OnInit, OnDestroy {
     this.isEditing = true;
     this.slimLoadingBarService.start();
 
-    let value, firstAnswer, secondAnswer, status, adultRated,shortLink;
+    let value, firstAnswer, secondAnswer, status, adultRated, shortLink;
     if (this.question.value !== this.editedQuestion.value) {
       value = this.editedQuestion.value;
       this.question.value = value;
@@ -125,8 +125,8 @@ export class EditQuestionComponent implements OnInit, OnDestroy {
   }
 
   editTags() {
-    let deleted = this.oldTags.filter(tag => this.userTags.indexOf(tag) < 0);
-    let added = this.userTags.filter(tag => this.oldTags.indexOf(tag) < 0);
+    const deleted = this.oldTags.filter(tag => this.userTags.indexOf(tag) < 0);
+    const added = this.userTags.filter(tag => this.oldTags.indexOf(tag) < 0);
     this.oldTags = this.userTags.slice();
 
     if (deleted) {

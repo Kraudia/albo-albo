@@ -18,6 +18,9 @@ export class ReportedCommentsComponent implements OnInit, OnDestroy {
   public isLoading = false;
   private subscription: Subscription;
   private reportResource: DataTableResource<ReportedComment>;
+  public translations = <DataTableTranslations>{
+    expandColumn: 'Rozwiń wiersz'
+  };
 
   constructor(
     private modService: ModService,
@@ -110,11 +113,7 @@ export class ReportedCommentsComponent implements OnInit, OnDestroy {
     } else if (report.isDeletedComment) {
       return 'rgb(255, 218, 234)';
     } else if (report.isEdited) {
-      return 'rgb(202, 244, 249)'
+      return 'rgb(202, 244, 249)';
     }
-  }
-
-  translations = <DataTableTranslations>{
-    expandColumn: 'Rozwiń wiersz'
   }
 }

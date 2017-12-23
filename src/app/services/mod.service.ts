@@ -38,28 +38,28 @@ export class ModService {
       .catch(this.handleError);
   }
 
-  editReportedQuestion(id: number, value: string, firstAnswer: string, secondAnswer: string, status: string, adultRated: boolean, shortLink: string) {
+  editReportedQuestion(id: number, value: string, first: string, second: string, status: string, adult: boolean, shortLink: string) {
     const url = this.host + 'questions/' + id + '/edit-question-commands';
     const options = this.authService.getOptions();
 
-    let json = {};
+    const json = {};
     if (value) {
       value = value.replace(/\s\s+/g, ' ');
       json['value'] = value;
     }
-    if (firstAnswer) {
-      firstAnswer = firstAnswer.replace(/\s\s+/g, ' ');
-      json['firstAnswer'] = firstAnswer;
+    if (first) {
+      first = first.replace(/\s\s+/g, ' ');
+      json['firstAnswer'] = first;
     }
-    if (secondAnswer) {
-      secondAnswer = secondAnswer.replace(/\s\s+/g, ' ');
-      json['secondAnswer'] = secondAnswer;
+    if (second) {
+      second = second.replace(/\s\s+/g, ' ');
+      json['secondAnswer'] = second;
     }
     if (status) {
       json['status'] = status;
     }
-    if (adultRated || adultRated === false) {
-      json['adultRated'] = adultRated;
+    if (adult || adult === false) {
+      json['adultRated'] = adult;
     }
     if (shortLink) {
       json['shortLink'] = shortLink;
@@ -74,7 +74,7 @@ export class ModService {
     const url = this.host + 'comments/' + comment;
     const options = this.authService.getOptions();
 
-    let json = {};
+    const json = {};
     if (value) {
       value = value.replace(/\s\s+/g, ' ');
       json['value'] = value;

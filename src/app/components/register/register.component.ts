@@ -8,7 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { PasswordValidation } from './PasswordValidation';
 import { validationErrors } from './validationMessages';
 import { RegisterService } from '../../services/register.service';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 
 
 @Component({
@@ -131,7 +131,7 @@ export class RegisterComponent implements OnInit {
         this.loginChangeObserver = observer;
       }).debounceTime(500)
         .distinctUntilChanged()
-        .subscribe((value) => this.checkLogin(value));
+        .subscribe((login) => this.checkLogin(login));
     }
     this.loginChangeObserver.next(value);
   }
@@ -142,7 +142,7 @@ export class RegisterComponent implements OnInit {
         this.emailChangeObserver = observer;
       }).debounceTime(500)
         .distinctUntilChanged()
-        .subscribe((value) => this.checkEmail(value));
+        .subscribe((email) => this.checkEmail(email));
     }
     this.emailChangeObserver.next(value);
   }
@@ -254,7 +254,8 @@ export class RegisterComponent implements OnInit {
           .subscribe(
             res => {
               this.router.navigate(['/logowanie']);
-              const success = 'Żeby aktywować konto, kliknij w link potwierdzający, który wysłaliśmy na Twój adres email. E-mail nie dotarł? Sprawdź folder SPAM.';
+              let success = 'Żeby aktywować konto, kliknij w link potwierdzający, który wysłaliśmy na Twój adres email.';
+              success += ' E-mail nie dotarł? Sprawdź folder SPAM.';
               this.toastrService.success(success, 'Rejestracja się powiodła');
               this.isSubmitting = false;
               this.slimLoadingBarService.complete();
