@@ -68,13 +68,41 @@ export class UsersDataComponent implements OnInit, OnChanges, OnDestroy {
     this.subscription.add(subscription);
   }
 
+  changeMod(user: User, change: string) {
+    console.log(user.roles);
+    user.isModLoading = true;
+    this.slimLoadingBarService.start();
+    this.adminService.changeMod(user.login, change)
+      .subscribe(
+        res => {
+          if (change === 'add') {
+            user.roles.push('MOD');
+          } else  {
+            const index = user.roles.indexOf('MOD');
+            if (index > -1) {
+              user.roles.splice(index, 1);
+            }
+          }
+          console.log(user.roles);
+          user.isModLoading = false;
+          this.slimLoadingBarService.complete();
+        },
+        error => {
+          user.isModLoading = false;
+          this.toastrService.error(error);
+          this.slimLoadingBarService.complete();
+        });
+  }
+
   rowColors(action) {
-    if (action.status === 'SUCCESS') {
-      return 'rgb(196, 241, 197)';
-    } else if (action.status === 'ERROR') {
+    if (action.roles) {
+      if (action.roles.indexOf('ADMIN') !== -1) {
+        return 'rgb(196, 241, 197)';
+      } else if (action.roles.indexOf('MOD') !== -1) {
+        return 'rgb(227, 250, 252)';
+      }
+    } else {
       return 'rgb(255, 218, 234)';
-    } else if (action.status === 'INFO') {
-      return 'rgb(227, 250, 252)';
     }
   }
 }

@@ -12,4 +12,6 @@ export interface User {
   'points': number;
   'age': number;
   'avatar': string;
+
+  isModLoading: boolean;
 }

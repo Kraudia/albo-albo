@@ -60,16 +60,24 @@ export class AdminService {
       .catch(this.handleError);
   }
 
+  changeMod(login: string, change: string) {
+    const url = this.host + 'users/' + login + '/' + change + '-mod-role-commands';
+    const options = this.authService.getOptions();
+
+    return this.http.get(url, options)
+      .map((res) => res.json())
+      .catch(this.handleError);
+  }
+
   private handleError (error: Response | any) {
     let errMsg: string;
     if (error instanceof Response) {
       const body = error.json() || '';
       const err = body.error || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+      errMsg = body.message ?  body.message : `${error.status} - ${error.statusText || ''} ${err}`;
     } else {
       errMsg = error.message ? error.message : error.toString();
     }
-    console.error(errMsg);
     return Observable.throw(errMsg);
   }
 }

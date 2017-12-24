@@ -58,6 +58,16 @@
   </data-table-column>
 
   <data-table-column property="roles" header="roles" [sortable]="true" [resizable]="true" [visible]="true">
+    <ng-template #dataTableCell let-item="item">
+      <span *ngIf="item.roles">{{ item.roles.join(', ') }}</span>
+    </ng-template>
+  </data-table-column>
+
+  <data-table-column header="Działanie" [resizable]="true">
+    <ng-template #dataTableCell let-item="item">
+      <button *ngIf="item.roles && item.roles.indexOf('MOD') === -1" (click)="changeMod(item, 'add')" class="btn btn-sm btn-success" [disabled]="item.isModLoading"><i class="fa fa-refresh fa-spin fa-fw" aria-hidden="true" *ngIf="item.isModLoading"></i><i class="fa fa-user-plus" aria-hidden="true" *ngIf="!item.isModLoading"></i> <span class="d-none d-lg-inline-block">Daj rolę moderatora</span></button>
+      <button *ngIf="item.roles && item.roles.indexOf('MOD') != -1" (click)="changeMod(item, 'remove')" class="btn btn-sm btn-danger" [disabled]="item.isModLoading"><i class="fa fa-refresh fa-spin fa-fw" aria-hidden="true" *ngIf="item.isModLoading"></i><i class="fa fa-user-times" aria-hidden="true" *ngIf="!item.isModLoading"></i> <span class="d-none d-lg-inline-block">Odbierz rolę moderatora</span></button>
+    </ng-template>
   </data-table-column>
 </data-table>
 
