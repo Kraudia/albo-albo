@@ -15,7 +15,6 @@ import { User } from '../../../../models/user';
 export class UsersDataComponent implements OnInit, OnChanges, OnDestroy {
   @Input('active') active: boolean;
   @Input('banned') banned: boolean;
-  @Input('userLogin') userLogin: string;
 
   public users: User[] = [];
   public count = 0;
@@ -54,7 +53,7 @@ export class UsersDataComponent implements OnInit, OnChanges, OnDestroy {
 
   getUsers() {
     this.isLoading = true;
-    const subscription = this.adminService.getUsers(this.active, this.banned, this.userLogin)
+    const subscription = this.adminService.getUsers(this.active, this.banned)
       .subscribe(
         response => {
           this.users = response;

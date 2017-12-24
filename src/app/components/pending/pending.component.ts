@@ -21,7 +21,7 @@ export class PendingComponent implements OnInit {
   public status = 'PENDING';
   public tags: Tag[];
   public adult = 'false';
-  public answered: string;
+  public answered = '';
 
   constructor(
     public authService: AuthService,

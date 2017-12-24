@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
+  public banned = '';
+  public active = '';
 
   constructor() { }
 
   ngOnInit() {
   }
-
 }

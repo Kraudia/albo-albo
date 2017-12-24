@@ -1,3 +1,48 @@
 <h2>Użytkownicy</h2>
 
-<app-users-data></app-users-data>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <fieldset class="form-group d-block mt-3 small">
+        <legend class="col-form-legend legend">Bany</legend>
+        <div class="form-check  d-inline d-md-block">
+          <label class="form-check-label">
+            <input [(ngModel)]="banned" class="form-check-input" type="radio" name="bannedRadio" value="true"> wyświetl tylko tych użytkowników, którzy zostali zbanowani
+          </label>
+        </div>
+        <div class="form-check  d-inline d-md-block">
+          <label class="form-check-label">
+            <input [(ngModel)]="banned" class="form-check-input" type="radio" name="bannedRadio" value="false">  wyświetl tylko tych użytkowników, którzy <strong>nie</strong> zostali zbanowani
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <label class="form-check-label">
+            <input [(ngModel)]="banned" class="form-check-input" type="radio" name="bannedRadio" value="" checked> pokaż wszystkich
+          </label>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="col-md-6">
+      <fieldset class="form-group d-block mt-3 small">
+        <legend class="col-form-legend legend">Aktywność</legend>
+        <div class="form-check  d-inline d-md-block">
+          <label class="form-check-label">
+            <input [(ngModel)]="active" class="form-check-input" type="radio" name="activeRadio" value="true"> wyświetl tylko tych użytkowników, którzy potwierdzili rejestrację
+          </label>
+        </div>
+        <div class="form-check  d-inline d-md-block">
+          <label class="form-check-label">
+            <input [(ngModel)]="active" class="form-check-input" type="radio" name="activeRadio" value="false">  wyświetl tylko tych użytkowników, którzy <strong>nie</strong> potwierdzili jeszcze rejestracji
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <label class="form-check-label">
+            <input [(ngModel)]="active" class="form-check-input" type="radio" name="activeRadio" value="" checked> pokaż wszystkich
+          </label>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+</div>
+<app-users-data [active]="active" [banned]="banned"></app-users-data>

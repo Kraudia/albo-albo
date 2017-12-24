@@ -44,7 +44,7 @@ export class AdminService {
       .catch(this.handleError);
   }
 
-  getUsers(active: boolean, banned: boolean, userLogin: string): Observable<User[]> {
+  getUsers(active: boolean, banned: boolean): Observable<User[]> {
     let url = this.host + 'users?all=true';
     const options = this.authService.getOptions();
 
@@ -53,9 +53,6 @@ export class AdminService {
     }
     if (banned || banned === false) {
       url += `&banned=${ banned }`;
-    }
-    if (userLogin) {
-      url += `&userLogin=${ userLogin }`;
     }
 
     return this.http.get(url, options)
