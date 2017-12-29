@@ -79,8 +79,11 @@ export class QuestionService {
       .catch(this.handleError);
   }
 
-  getUserQuestions(login: string, status: string, index: string, limit: number) {
+  getUserQuestions(login: string, adult: string, status: string, index: string, limit: number) {
     let url = this.host + 'questions?user=' + login + '&order=created_date DESC';
+    if (adult) {
+      url += `&adult=${ adult }`;
+    }
     if (status) {
       url += `&status=${ status }`;
     }

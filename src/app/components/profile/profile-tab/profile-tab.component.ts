@@ -21,6 +21,7 @@ export class ProfileTabComponent implements OnInit, OnDestroy {
  public error;
   public login: string;
   public status: string;
+  public adult: string;
   private subscription = new Subscription();
   public questions: Question[];
   public comments: Comment[];
@@ -94,7 +95,8 @@ export class ProfileTabComponent implements OnInit, OnDestroy {
 
   getUserQuestions() {
     this.isLoading = true;
-    const subscription = this.questionService.getUserQuestions(this.login, this.status, this.index, this.limit)
+    this.adult = localStorage.getItem('isAdult');
+    const subscription = this.questionService.getUserQuestions(this.login, this.adult, this.status, this.index, this.limit)
       .subscribe(
         response => {
           this.questions = response;
@@ -117,7 +119,8 @@ export class ProfileTabComponent implements OnInit, OnDestroy {
     this.slimLoadingBarService.start();
     this.isLoading = true;
     this.disableScroll = true;
-    const subscription = this.questionService.getUserQuestions(this.login, this.status, this.index, this.limit)
+    this.adult = localStorage.getItem('isAdult');
+    const subscription = this.questionService.getUserQuestions(this.login, this.adult, this.status, this.index, this.limit)
       .subscribe(
         response => {
           response.shift();

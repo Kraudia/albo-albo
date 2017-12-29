@@ -210,4 +210,11 @@ export class AuthService {
     }
     return Observable.throw(errMsg);
   }
+
+  lockAdultOn() {
+    localStorage.setItem('isAdult', 'false');
+  }
+  lockAdultOff() {
+    localStorage.setItem('isAdult', 'true');
+  }
 }
