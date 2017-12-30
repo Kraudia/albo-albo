@@ -63,14 +63,14 @@
         </div>
 
         <div class="form-group row">
-          <label for="inputDate" class="col-sm-2 col-form-label text-left">Data urodzenia</label>
-          <div class="col-sm-10">
-            <input #inputDate id="inputDate" formControlName="inputDate" type="date" class="form-control" [ngClass]="displayFieldCss('inputDate')" placeholder="Data urodzenia" (input)="onDateChange()"  required />
-            <small class="invalid-feedback">
-              <span *ngFor="let field of getKeysOfObject(registerForm.get('inputDate').errors)">{{ validationMessages.inputDate[field] }}</span>
-            </small>
-          </div>
-        </div>
+          <div class="form-check">
+            <div class="col">
+            <label class="form-check-label" [ngClass]="displayFieldCss('checkbox')" (change)="clickAdult()">
+              <input class="form-check-input" type="checkbox" [checked]="isAdult()" id="isAdultCheckbox">
+              Oświadczam, że mam ukończone 18 lat oraz chcę widziec pytania mocno kontrowersyjne (np. o antykoncepcję, aborcje czy preferowany sposób śmeirci/morderstwa), w tym też pytania +18.
+            </label>
+            </div>
+          </div
 
         <div class="form-group row">
           <div class="form-check">
@@ -83,7 +83,7 @@
           </div>
         </div>
 
-        <button class="btn btn-primary btn-block btn-register" type="button" (click)="register(inputLogin.value, inputEmail.value, inputPassword.value, inputDate.value)" [disabled]="isSubmitting">Zarejestruj się <i class="fa fa-refresh fa-spin fa-fw" *ngIf="isSubmitting"></i></button>
+        <button class="btn btn-primary btn-block btn-register" type="button" (click)="register(inputLogin.value, inputEmail.value, inputPassword.value, adult)" [disabled]="isSubmitting">Zarejestruj się <i class="fa fa-refresh fa-spin fa-fw" *ngIf="isSubmitting"></i></button>
 
         <button class="btn btn-secondary btn-block btn-register" type="reset" (click)="reset()">Anuluj</button>
 
