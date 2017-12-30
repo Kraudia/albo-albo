@@ -63,9 +63,8 @@
     </div>
   </div>
 
-  <!-- BLOKADA -->
   <div class="col-12 col-md-8">
-    <h3>Blokada rodzicielska</h3>
+    <h3>Blokada pytań 18+</h3>
     <button type="submit" class="btn btn-primary btn-block" *ngIf="isAdult" (click)="lockAdultOn()">Włącz blokadę</button>
     <button type="submit" class="btn btn-primary btn-block" *ngIf="!isAdult" (click)="lockAdultOff()">Wyłącz blokadę</button>
     <div class="alert alert-dismissible alert-info" *ngIf="lockMessage">
