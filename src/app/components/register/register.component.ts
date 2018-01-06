@@ -9,7 +9,9 @@ import { PasswordValidation } from './PasswordValidation';
 import { validationErrors } from './validationMessages';
 import { RegisterService } from '../../services/register.service';
 import { Observable } from 'rxjs/Observable';
-
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-register',

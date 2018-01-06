@@ -75,7 +75,7 @@
         </div>
       </fieldset>
 
-    <h3 *ngIf="authService.isLoggedIn()">Historia</h3>
+    <h3 *ngIf="authService.isLoggedIn()">Historia najnowszych</h3>
     <app-simple-list *ngIf="authService.isLoggedIn()" [status]="status" [answered]="'true'" [order]="'answered_date DESC'" [adult]="adult"></app-simple-list>
 
     <h3>Statystyki</h3>
