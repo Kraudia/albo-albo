@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { nameOptions } from './nameOptions';
 
 @Component({
@@ -15,10 +16,18 @@ export class LogsComponent implements OnInit {
 
   public nameOptions;
 
-  constructor() { }
+  constructor(
+    private titleService: Title
+  ) { }
 
   ngOnInit() {
+    this.setTitle();
     this.nameOptions = nameOptions;
+  }
+
+  setTitle() {
+    const title = `Logi serwera - Panel administratora - Albo Albo`;
+    this.titleService.setTitle(title);
   }
 
   changeLimit(event) {

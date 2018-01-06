@@ -94,7 +94,7 @@ export class ReportedQuestionsComponent implements OnInit, OnDestroy {
     this.slimLoadingBarService.start();
     this.modService.editReportedQuestion(report.question.id, null, null, null, 'REJECTED', null, null).subscribe(res => {
         report.question.status = 'REJECTED';
-        report.isDeletedReport = true;
+        report.isDeletedQuestion = true;
         report.isDeletingQuestion = false;
         this.slimLoadingBarService.complete();
       },

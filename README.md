@@ -11,7 +11,12 @@ Aplikacja webowa umożliwiająca grę w pytania z serii “Co wolisz?”.
 
 ### Wymagania
 
-Potrzebujesz Node  w wersji 6.9.0 lub nowszej oraz NPM w wersji 3  lub nowszej.
+Potrzebujesz Node  w wersji 6.9.0 lub nowszej oraz NPM w wersji 3  lub nowszej. Możesz sprawdzić wersję w konsoli.
+
+```
+node -v
+npm -v
+```
 
 ### Instalacja
 
