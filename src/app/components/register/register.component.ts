@@ -68,14 +68,14 @@ export class RegisterComponent implements OnInit {
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(30),
-        Validators.pattern('[a-zA-Z0-9]+')
+        Validators.pattern('[A-Z\-a-z0-9_]+')
       ]
       ],
       inputEmail: [null, [
         Validators.required,
         Validators.minLength(7),
         Validators.maxLength(30),
-        Validators.pattern('^[A-Za-z!#$%&\'*+/=?^_`{|}~(),:;<>]{1}[A-Za-z0-9_!#$%&\'*+.-/=?^_`{|}~(),:;<>]+@((?:[\\w]+\\.)+)([a-zA-Z]{2,4})$')
+        Validators.pattern('^[A-Za-z!#$%&\'*+/=?^_`{|}~(),:;<>]{1}[A-Za-z\-0-9_!#$%&\'*+.-/=?^_`{|}~(),:;<>]+@((?:[\\w]+\\.)+)([a-zA-Z]{2,4})$')
       ]],
       inputPassword: [null, [
         Validators.required,

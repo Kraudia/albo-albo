@@ -24,6 +24,6 @@ export const validationErrors = {
   },
   inputDate: {
     required: 'To pole jest wymagane. ',
-    pattern: 'Wymagany poprawna data. '
+    pattern: 'Wymagana poprawna data. '
   }
 };
