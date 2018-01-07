@@ -80,7 +80,6 @@ export class AuthService {
   }
   headers.append('X-request-UUID', localStorage.getItem('uuid'));
   const options = new RequestOptions({ headers: headers });
-
   const url = this.host + this.url.login;
   return this.http.get(url, options)
     .map((res) => {
@@ -122,6 +121,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('isAdult');
     this.currentUser = null;
   }
 
