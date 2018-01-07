@@ -13,7 +13,7 @@ export class RegisterService {
 
   constructor(private http: Http) { }
 
-  register(login: string, email: string, password: string, birthDate: string) {
+  register(login: string, email: string, password: string, showAdult: boolean) {
     const headers: Headers = new Headers({
       'Content-Type': 'application/json',
       'Accept': 'application/json'
@@ -21,7 +21,19 @@ export class RegisterService {
     const url = this.host + 'users';
     const options = new RequestOptions({ headers: headers });
 
-    return this.http.post(url, JSON.stringify({ login, email, password, birthDate }), options)
+    return this.http.post(url, JSON.stringify({ login, email, password, showAdult }), options)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  afterRegister(adult: boolean) {
+    const url = this.host;
+    if (adult) {
+      const url = this.host + 'user/show-adult-commands';
+    } else {
+      const url = this.host + 'user/hide-adult-commands';
+    }
+    return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);
   }

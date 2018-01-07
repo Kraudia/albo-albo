@@ -34,7 +34,8 @@ export class RegisterComponent implements OnInit {
   private isEmailChecked = false;
   private isPasswordChecked = false;
   private isConfirmPasswordChecked = false;
-  private isDateChecked = false;
+  //private isDateChecked = false;
+  private adult = false;
 
 
   private loginChangeObserver;
@@ -87,10 +88,6 @@ export class RegisterComponent implements OnInit {
         Validators.minLength(8),
         Validators.maxLength(30),
         PasswordValidation.MatchPassword
-      ]],
-      inputDate: [null, [
-        Validators.required,
-        Validators.pattern('^((19[2-9][0-9])|(20[0-1][0-9])|(201[0-7]))-((0[1-9])|(1[0-2]))-(([0][1-9])|([1-2][0-9])|(3[0-1]))$')
       ]]
     });
   }
@@ -157,10 +154,6 @@ export class RegisterComponent implements OnInit {
     this.isConfirmPasswordChecked = true;
   }
 
-  onDateChange() {
-    this.isDateChecked = true;
-  }
-
   displayFieldCss(field: string) {
     if (field === 'inputLogin') {
       return {
@@ -187,17 +180,20 @@ export class RegisterComponent implements OnInit {
         'is-invalid': (this.validated || this.isConfirmPasswordChecked) && !this.isFieldValid(field),
         'is-valid': (this.validated || this.isConfirmPasswordChecked) && this.isFieldValid(field)
       };
-    } else if (field === 'inputDate') {
-      return {
-        'is-invalid': (this.validated || this.isDateChecked) && !this.isFieldValid(field),
-        'is-valid': (this.validated || this.isDateChecked) && this.isFieldValid(field)
-      };
     } else {
       return {
         'is-invalid': (this.isEmailChecked || this.validated) && !this.isFieldValid(field),
         'is-valid': (this.isEmailChecked || this.validated) && this.isFieldValid(field)
       };
     }
+  }
+
+  clickAdult() {
+    this.adult = !this.adult;
+  }
+
+  isAdult() {
+    return this.adult;
   }
 
   clickCheckbox() {
@@ -245,14 +241,15 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  register(login: string, email: string, password: string, birthDate: string) {
+  register(login: string, email: string, password: string, adult: boolean) {
     this.isSubmitting = true;
     this.validateForm();
+
 
     if (this.validateForm()) {
       this.isSubmitting = true;
       this.slimLoadingBarService.start();
-      this.registerService.register(login, email, password, birthDate)
+      this.registerService.register(login, email, password, adult)
           .subscribe(
             res => {
               this.router.navigate(['/logowanie']);
@@ -267,6 +264,7 @@ export class RegisterComponent implements OnInit {
               this.slimLoadingBarService.complete();
               this.toastrService.error(error);
             });
+      this.registerService.afterRegister(adult);
     } else {
       this.isSubmitting = false;
     }
@@ -280,6 +278,6 @@ export class RegisterComponent implements OnInit {
     this.isEmailChecked = false;
     this.isPasswordChecked = false;
     this.isConfirmPasswordChecked = false;
-    this.isDateChecked = false;
+    this.adult = false;
   }
 }

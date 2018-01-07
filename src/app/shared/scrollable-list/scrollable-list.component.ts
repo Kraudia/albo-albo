@@ -47,6 +47,7 @@ export class ScrollableListComponent implements OnChanges, OnDestroy {
 
   getQuestions() {
     this.isLoading = true;
+    this.adult = localStorage.getItem('isAdult');
     const subscription = this.questionService.getQuestions(this.adult, this.answered, this.index, this.limit, this.order, this.status, this.tag)
       .subscribe(
         response => {

@@ -22,6 +22,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
   public successMessage: string;
   public isLoading = false;
   private subscription = new Subscription();
+  public lockMessage: string;
+  public isAdult: boolean;
 
   constructor(
     private authService: AuthService,
@@ -34,6 +36,11 @@ export class SettingsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.setTitle();
     this.subscription = new Subscription();
+    if (localStorage.getItem('isAdult') === 'true') {
+      this.isAdult = true;
+    } else {
+      this.isAdult = false;
+    }
 
     const sub = this.authService.getUserInfo().subscribe(
       response => {
@@ -54,6 +61,28 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  lockAdultOn() {
+    this.authService.lockAdultOn();
+    this.lockMessage = "Blokada włączona!";
+    if (localStorage.getItem('isAdult') === 'true') {
+      this.isAdult = true;
+    } else {
+      this.isAdult = false;
+    }
+
+  }
+
+  lockAdultOff() {
+    this.authService.lockAdultOff();
+    this.lockMessage = "Blokada wyłączona!";
+    if (localStorage.getItem('isAdult') === 'true') {
+      this.isAdult = true;
+    } else {
+      this.isAdult = false;
+    }
+
   }
 
   changePassword(oldPassword: string, newPassword: string, repeatNewPassword: string) {

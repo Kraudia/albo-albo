@@ -17,9 +17,6 @@
 
           <dt class="col-5">Ostatnie logowanie</dt>
           <dd class="col-7">{{ user.loginDate | date }}</dd>
-
-          <dt class="col-5">Data urodzin</dt>
-          <dd class="col-7">{{ user.birthDate | date }}</dd>
         </dl>
       </div>
     </div>
@@ -60,6 +57,15 @@
           </li>
         </ul>
       </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-8">
+    <h3>Blokada pytań 18+</h3>
+    <button type="submit" class="btn btn-primary btn-block" *ngIf="isAdult" (click)="lockAdultOn()">Włącz blokadę</button>
+    <button type="submit" class="btn btn-primary btn-block" *ngIf="!isAdult" (click)="lockAdultOff()">Wyłącz blokadę</button>
+    <div class="alert alert-dismissible alert-info" *ngIf="lockMessage">
+      {{ lockMessage }}
     </div>
   </div>
 
