@@ -65,13 +65,13 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   lockAdultOn() {
     this.authService.lockAdultOn();
-    this.lockMessage = "Blokada włączona!";
+    this.lockMessage = 'Blokada włączona!';
     this.isAdult = false;
   }
 
   lockAdultOff() {
     this.authService.lockAdultOff();
-    this.lockMessage = "Blokada wyłączona!";
+    this.lockMessage = 'Blokada wyłączona!';
     this.isAdult = true;
   }
 

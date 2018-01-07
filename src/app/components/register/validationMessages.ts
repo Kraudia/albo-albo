@@ -21,9 +21,5 @@ export const validationErrors = {
     minlength: 'To pole musi zawierać minimum 8 znaków. ',
     maxlength: 'To pole musi zawierać nie więcej niż 30 znaków. ',
     matchPassword: 'Źle powtórzone hasło. '
-  },
-  inputDate: {
-    required: 'To pole jest wymagane. ',
-    pattern: 'Wymagana poprawna data. '
   }
 };

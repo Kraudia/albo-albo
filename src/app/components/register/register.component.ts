@@ -34,8 +34,7 @@ export class RegisterComponent implements OnInit {
   private isEmailChecked = false;
   private isPasswordChecked = false;
   private isConfirmPasswordChecked = false;
-  //private isDateChecked = false;
-  private adult = false;
+  public adult = false;
 
 
   private loginChangeObserver;
@@ -245,7 +244,6 @@ export class RegisterComponent implements OnInit {
     this.isSubmitting = true;
     this.validateForm();
 
-
     if (this.validateForm()) {
       this.isSubmitting = true;
       this.slimLoadingBarService.start();
@@ -264,7 +262,6 @@ export class RegisterComponent implements OnInit {
               this.slimLoadingBarService.complete();
               this.toastrService.error(error);
             });
-      this.registerService.afterRegister(adult);
     } else {
       this.isSubmitting = false;
     }

@@ -1,6 +1,6 @@
 <div class="row justify-content-md-center">
   <div class="col-lg-10">
-    <form id="needs-validation" [formGroup]="registerForm" novalidate (keyup.enter)="register(inputLogin.value, inputEmail.value, inputPassword.value, inputDate.value)">
+    <form id="needs-validation" [formGroup]="registerForm" novalidate (keyup.enter)="register(inputLogin.value, inputEmail.value, inputPassword.value, adult)">
       <div class="container"  [ngClass]="{'was-validated': isFormValid()}">
         <h1 class="text-center">Zarejestruj się</h1>
 
@@ -63,14 +63,13 @@
         </div>
 
         <div class="form-group row">
-          <div class="form-check">
-            <div class="col">
-            <label class="form-check-label" [ngClass]="displayFieldCss('checkbox')" (change)="clickAdult()">
-              <input class="form-check-input" type="checkbox" [checked]="isAdult()" id="isAdultCheckbox">
-              Oświadczam, że mam ukończone 18 lat oraz chcę widziec pytania mocno kontrowersyjne (np. o antykoncepcję, aborcje czy preferowany sposób śmeirci/morderstwa), w tym też pytania +18.
-            </label>
-            </div>
+          <div class="col">
+          <label class="form-check-label" (change)="clickAdult()">
+            <input class="form-check-input" type="checkbox" [checked]="isAdult()" id="isAdultCheckbox">
+            Oświadczam, że mam ukończone 18 lat oraz chcę widzieć pytania mocno kontrowersyjne lub zawierające treści nieodpowiednie dla osób niepełnoletnich.
+          </label>
           </div>
+        </div>
 
         <div class="form-group row">
           <div class="form-check">
@@ -97,6 +96,6 @@
           <a [routerLink]="['/logowanie']" class="btn btn-link" aria-label="Zaloguj się">Masz już konto? <strong>Zaloguj się</strong></a>
         </div>
       </div>
-      </div>
     </form>
+  </div>
 </div>

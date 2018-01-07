@@ -21,19 +21,13 @@ export class RegisterService {
     const url = this.host + 'users';
     const options = new RequestOptions({ headers: headers });
 
-    return this.http.post(url, JSON.stringify({ login, email, password, showAdult }), options)
-      .map(this.extractData)
-      .catch(this.handleError);
-  }
-
-  afterRegister(adult: boolean) {
-    const url = this.host;
-    if (adult) {
-      const url = this.host + 'user/show-adult-commands';
+    if (showAdult) {
+      localStorage.setItem('isAdult', 'true');
     } else {
-      const url = this.host + 'user/hide-adult-commands';
+      localStorage.setItem('isAdult', 'false');
     }
-    return this.http.get(url)
+
+    return this.http.post(url, JSON.stringify({ login, email, password, showAdult }), options)
       .map(this.extractData)
       .catch(this.handleError);
   }
