@@ -37,7 +37,7 @@
 
 
     <h3 *ngIf="authService.isLoggedIn()">Filtry</h3>
-      <fieldset class="form-group d-block small" *ngIf="authService.isLoggedIn()">
+      <fieldset class="form-group d-block small" *ngIf="authService.isLoggedIn() && isAdult === 'true'">
         <legend class="col-form-legend legend">Pytania zawierające treść nieodpowiednią dla osób niepełnoletnich:</legend>
         <div class="form-check d-inline-block d-md-block">
           <label class="form-check-label">
@@ -51,7 +51,7 @@
         </div>
         <div class="form-check form-check-inline">
           <label class="form-check-label">
-            <input [(ngModel)]="adult" class="form-check-input" type="radio" name="adultRatedRadio" value=""> pokaż wszystkie pytania
+            <input [(ngModel)]="adult" class="form-check-input" type="radio" name="adultRatedRadio" value="" checked> pokaż wszystkie pytania
           </label>
         </div>
       </fieldset>
@@ -65,7 +65,7 @@
         </div>
         <div class="form-check  d-inline d-md-block">
           <label class="form-check-label">
-            <input [(ngModel)]="answered" class="form-check-input" type="radio" name="answeredRadio" value="false"> pokaż tylko te pytania, na które nie udzielono odpowiedź
+            <input [(ngModel)]="answered" class="form-check-input" type="radio" name="answeredRadio" value="false"> pokaż tylko te pytania, na które nie udzielono odpowiedzi
           </label>
         </div>
         <div class="form-check form-check-inline">

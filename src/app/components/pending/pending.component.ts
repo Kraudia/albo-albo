@@ -20,7 +20,8 @@ export class PendingComponent implements OnInit {
   public order = 'answered_date DESC';
   public status = 'PENDING';
   public tags: Tag[];
-  public adult = 'false';
+  public adult = '';
+  public isAdult = 'false';
   public answered = '';
 
   constructor(
@@ -32,6 +33,10 @@ export class PendingComponent implements OnInit {
   ngOnInit() {
     this.setTitle();
     this.getTags();
+    this.isAdult = localStorage.getItem('isAdult');
+    if (this.isAdult !== 'true') {
+      this.adult = 'false';
+    }
   }
 
   setTitle() {

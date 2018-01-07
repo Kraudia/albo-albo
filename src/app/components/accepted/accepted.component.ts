@@ -19,7 +19,8 @@ export class AcceptedComponent implements OnInit {
 
   public status = 'ACCEPTED';
   public tags: Tag[];
-  public adult = 'false';
+  public adult = '';
+  public isAdult = 'false';
   public answered = '';
 
   constructor(
@@ -36,6 +37,10 @@ export class AcceptedComponent implements OnInit {
   setTitle() {
     const title = `Najnowsze pytania - Albo Albo`;
     this.titleService.setTitle(title);
+    this.isAdult = localStorage.getItem('isAdult');
+    if (this.isAdult !== 'true') {
+      this.adult = 'false';
+    }
   }
 
   getTags() {

@@ -61,15 +61,6 @@
   </div>
 
   <div class="col-12 col-md-8">
-    <h3>Blokada pytań 18+</h3>
-    <button type="submit" class="btn btn-primary btn-block" *ngIf="isAdult" (click)="lockAdultOn()">Włącz blokadę</button>
-    <button type="submit" class="btn btn-primary btn-block" *ngIf="!isAdult" (click)="lockAdultOff()">Wyłącz blokadę</button>
-    <div class="alert alert-dismissible alert-info" *ngIf="lockMessage">
-      {{ lockMessage }}
-    </div>
-  </div>
-
-  <div class="col-12 col-md-8">
     <h3>Zmiana hasła</h3>
 
     <form (keyup.enter)="changePassword(inputOldPassword.value, inputNewPassword.value, inputRepeatNewPassword.value)">
@@ -115,4 +106,18 @@
       <button type="button" class="btn btn-block btn-primary" (click)="changePassword(inputOldPassword.value, inputNewPassword.value, inputRepeatNewPassword.value) ">Zmień hasło <i class="fa fa-refresh fa-spin fa-fw" *ngIf="isLoading"></i></button>
     </form>
   </div>
+
+  <div class="col-12 col-md-4">
+    <h3>Blokada pytań 18+</h3>
+    <p class="mb-3">Jeśli masz włączoną blokadę, nie będziesz widział pytań mogących zawierać treści nieodpowiednie dla osób niepełnoletnich. </p>
+
+    <p>Takie pytania będą oznaczone czerwoną etykietą <span class="badge badge-danger">&#43;18</span>.</p>
+
+    <button type="submit" class="btn btn-primary btn-block" *ngIf="isAdult === true" (click)="lockAdultOn()">Włącz blokadę</button>
+
+    <button type="submit" class="btn btn-primary btn-block" *ngIf="isAdult === false" (click)="lockAdultOff()">Wyłącz blokadę</button>
+
+    <div class="text-info text-center mt-3" *ngIf="lockMessage">
+      {{ lockMessage }}
+    </div>
 </div>

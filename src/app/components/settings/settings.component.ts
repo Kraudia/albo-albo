@@ -66,23 +66,13 @@ export class SettingsComponent implements OnInit, OnDestroy {
   lockAdultOn() {
     this.authService.lockAdultOn();
     this.lockMessage = "Blokada włączona!";
-    if (localStorage.getItem('isAdult') === 'true') {
-      this.isAdult = true;
-    } else {
-      this.isAdult = false;
-    }
-
+    this.isAdult = false;
   }
 
   lockAdultOff() {
     this.authService.lockAdultOff();
     this.lockMessage = "Blokada wyłączona!";
-    if (localStorage.getItem('isAdult') === 'true') {
-      this.isAdult = true;
-    } else {
-      this.isAdult = false;
-    }
-
+    this.isAdult = true;
   }
 
   changePassword(oldPassword: string, newPassword: string, repeatNewPassword: string) {

@@ -95,7 +95,10 @@ export class ProfileTabComponent implements OnInit, OnDestroy {
 
   getUserQuestions() {
     this.isLoading = true;
-    this.adult = localStorage.getItem('isAdult');
+    const isAdult = localStorage.getItem('isAdult');
+    if (isAdult !== 'true') {
+      this.adult = 'false';
+    }
     const subscription = this.questionService.getUserQuestions(this.login, this.adult, this.status, this.index, this.limit)
       .subscribe(
         response => {
@@ -119,7 +122,6 @@ export class ProfileTabComponent implements OnInit, OnDestroy {
     this.slimLoadingBarService.start();
     this.isLoading = true;
     this.disableScroll = true;
-    this.adult = localStorage.getItem('isAdult');
     const subscription = this.questionService.getUserQuestions(this.login, this.adult, this.status, this.index, this.limit)
       .subscribe(
         response => {
