@@ -50,7 +50,7 @@ export class QuestionService {
       url += `&index=${ index }`;
     }
     if (limit) {
-      url += `&limit=${ limit }`;
+      url += `&quantity=${ limit }`;
     }
     if (order) {
       // order = (random|((created|accepted|answered)_date|(answer|vote|favourite|comments)_count) (ASC|DESC))
@@ -95,7 +95,7 @@ export class QuestionService {
       url += `&index=${ index }`;
     }
     if (limit) {
-      url += `&limit=${ limit }`;
+      url += `&quantity=${ limit }`;
     }
     const options = this.authService.getOptions();
 
