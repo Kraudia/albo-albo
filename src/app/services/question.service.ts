@@ -71,7 +71,11 @@ export class QuestionService {
   }
 
   getTopQuestions(type: string): Observable<Question[]> {
-    const url = this.host + 'top?type=' + type;
+    const isAdult = localStorage.getItem('isAdult');
+    let url = this.host + 'top?type=' + type;
+    if (isAdult !== 'true') {
+      url += '&adult=false';
+    }
     const options = this.authService.getOptions();
 
     return this.http.get(url, options)

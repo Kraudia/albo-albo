@@ -111,8 +111,6 @@
     <h3>Blokada pytań 18+</h3>
     <p class="mb-3">Jeśli masz włączoną blokadę, nie będziesz widział pytań mogących zawierać treści nieodpowiednie dla osób niepełnoletnich. </p>
 
-    <p>Takie pytania będą oznaczone czerwoną etykietą <span class="badge badge-danger">&#43;18</span>.</p>
-
     <button type="submit" class="btn btn-primary btn-block" *ngIf="isAdult === true" (click)="lockAdultOn()">Włącz blokadę</button>
 
     <button type="submit" class="btn btn-primary btn-block" *ngIf="isAdult === false" (click)="lockAdultOff()">Wyłącz blokadę</button>

@@ -64,7 +64,12 @@ export class RandomComponent implements OnInit, OnDestroy {
 
   getRandomQuestion() {
     this.isLoading = true;
-    const subscription = this.questionService.getQuestions('false', 'false', null, 1, 'random', null, null)
+    let adult;
+    const isAdult = localStorage.getItem('isAdult');
+    if (isAdult !== 'true') {
+      adult = 'false';
+    }
+    const subscription = this.questionService.getQuestions(adult, 'false', null, 1, 'random', null, null)
       .subscribe(
         response => {
           this.question = response.shift();
